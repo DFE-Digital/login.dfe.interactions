@@ -93,6 +93,14 @@ const addUserToService = async (userId, organisation, saOrganisation, currentSer
   externalIdentifiers.push({ key: 'saUserId', value: saUserId });
   externalIdentifiers.push({ key: 'saUserName', value: saUserName });
 
+  externalIdentifiers.push({ key: 'localAuthority', value: saOrganisation.localAuthority });
+  externalIdentifiers.push({ key: 'organisationName', value: saOrganisation.name});
+  externalIdentifiers.push({ key: 'orgStatusName', value: saOrganisation.statusName});
+  externalIdentifiers.push({ key: 'orgStatusCode', value: saOrganisation.statusCode});
+  Object.keys(saOrganisation.establishmentData).forEach((ek) => {
+    externalIdentifiers.push({ key: ek, value: saOrganisation.establishmentData[ek]});
+  })
+
   const servicesResult = await services.create(userId, currentServiceId, organisation.id, externalIdentifiers, correlationId);
   return servicesResult;
 };
