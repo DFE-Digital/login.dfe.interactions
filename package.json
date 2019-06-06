@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "engines": {
-    "node": "8.x.x"
+    "node": "10.x.x"
   },
   "scripts": {
     "start": "node src/index.js",
