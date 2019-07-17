@@ -6,12 +6,6 @@ const logger = require('./../../infrastructure/logger');
 const { sendRedirect, sendResult } = require('./../../infrastructure/utils');
 const osaApi = require('./../../infrastructure/osa');
 const oidc = require('./../../infrastructure/oidc');
-const NotificationClient = require('login.dfe.notifications.client');
-const config = require('./../../infrastructure/Config')();
-
-const notificationClient = new NotificationClient({
-  connectionString: config.notifications.connectionString,
-});
 
 const validateBody = (body, allowUserName) => {
   const validationMessages = {};
@@ -39,14 +33,8 @@ const validateBody = (body, allowUserName) => {
   };
 };
 
-const authenticateWithEmail = async (req, client, allowUserName) => {
+const authenticateWithEmail = async (req) => {
   const user = await Users.authenticate(req.body.username, req.body.password, req.id);
-  if (!user && allowUserName) {
-    const saUser = await osaApi.getSaUser(req.body.username, req.id);
-    if (saUser) {
-      await notificationClient.sendUnmigratedSaUser(saUser.email, saUser.firstName, saUser.lastName);
-    }
-  }
   return {
     user,
     legacyUser: false,
@@ -188,7 +176,7 @@ const post = async (req, res) => {
     let result;
 
     if (emailValidator.validate(req.body.username.trim())) {
-      result = await authenticateWithEmail(req, client, supportsUsernameLogin);
+      result = await authenticateWithEmail(req);
     } else {
       result = await authenticateWithUsername(req);
     }

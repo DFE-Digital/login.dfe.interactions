@@ -50,7 +50,6 @@ class InteractionComplete {
     sendResult(req, res, 'InteractionComplete/views/index', {
       destination: postbackDetails.destination,
       postbackData: postbackDetails.data,
-      noredirect: (Config.hostingEnvironment.env === 'dev').toString(),
     });
   }
 }
