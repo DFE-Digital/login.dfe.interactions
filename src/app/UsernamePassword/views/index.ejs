@@ -1,7 +1,7 @@
 
     <% if(locals.showDefaultMessage) { %>
         <div class="notification notification-information" tabindex="-1">
-            <h2>DfE Sign-in</h2>
+            <h2>Department for Education Sign-in</h2>
         </div>
     <%} else if(locals.header) { %>
         <div class="notification notification-information" tabindex="-1">
@@ -16,16 +16,16 @@
     <div class="grid-row">
         <div class="col-8">
             <h1 class="heading-xlarge">
-                DfE Sign-in
+                Department for Education Sign-in
             </h1>
         </div>
     </div>
     <div class="row">
         <div class="col-6">
             <% if (locals.useSelfRegister) { %>
-                <p>To access some specific education sector services you will need to <a href="<%= locals.urls.profile %>/register">create a DfE Sign-in account</a>.</p>
+                <p>DfE Sign-in allows you to access several important services in the education sector, such as COLLECT.</p>
             <% } else { %>
-            <p>DfE Sign-in is the new way to access some specific education sector services. To use DfE Sign-in you will need to <a href="<%=locals.urls.help%>/contact/create-account">create an account</a>.</p>
+                <p>DfE Sign-in is the new way to access some specific education sector services. To use DfE Sign-in you will need to <a href="<%=locals.urls.help%>/contact/create-account">create an account</a>.</p>
             <% } %>
             <form method="post" id="form-signin" class="form-signin">
                 <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
@@ -67,13 +67,22 @@
                             <span class="ball b-3"></span>
                         </span>
                     </button>
+                    <% if (locals.useSelfRegister) { %>
+                        <span><a class="button button-secondary" href="<%= locals.urls.profile %>/register" role="button">Create Account</a></span>
+                    <% } %>
                 </div>
             </form>
         </div>
     </div>
     <div class="row">
-        <div class="col-8">
-            <%- include('../../includes/helpdesk'); %>
-        </div>
+        <% if (!locals.useSelfRegister) { %>
+            <div class="col-8">
+                <%- include('../../includes/helpdesk'); %>
+            </div>
+        <%} else {%>
+            <div class="col-6"> 
+                <p><b class="bold-small">Need help? </b><a href="<%=locals.urls.help%>/contact">See our DfE Sign-in help guides</a></p>
+            </div>
+        <%}%>
     </div>
 
