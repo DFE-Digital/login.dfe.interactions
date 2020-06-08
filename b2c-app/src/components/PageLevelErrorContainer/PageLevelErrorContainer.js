@@ -43,7 +43,7 @@ class PageLevelErrorContainer extends React.Component {
         }
 
         //loop through mutated objects to run crazy logic and update the UI accordingly
-        for (let mutation of mutationsList) {            
+        for (let mutation of mutationsList) {
 
             //Determine if we will need to refresh the page level errors after the loop
             if (!refreshErrorsRequired &&
@@ -123,7 +123,7 @@ class PageLevelErrorContainer extends React.Component {
                 <div className="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabIndex="-1" data-module="govuk-error-summary">
                     <h2 className="govuk-error-summary__title" id="error-summary-title">
                         There is a problem
-                        </h2>
+                    </h2>
                     {errorSummary}
                     <div className="govuk-error-summary__body">
                         <ul id="errorSummaryItems" className="govuk-list govuk-error-summary__list">

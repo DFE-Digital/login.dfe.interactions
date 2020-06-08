@@ -25,7 +25,7 @@ import {
   Switch,
   Route
 } from "react-router-dom";
-// eslint-disable-next-line
+
 import { withRouter } from "react-router";
 
 class App extends React.Component {
