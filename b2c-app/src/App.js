@@ -52,20 +52,20 @@ class App extends React.Component {
     if (matchesPath(location, 'B2C_1A_signin_invitation') || hasSearchParam(location.search, 'p', 'B2C_1A_signin_invitation')) {
       return <Login />;
     }
+    if (matchesPath(location, 'B2C_1A_account_signup/api')) {
+      return <EmailSent action={ACTIONS.SIGNUP} />;
+    }
     if (matchesPath(location, '/signup')) {
       return <Signup />;
-    }
-    if (matchesPath(location, '/email-sent')) {
-      return <EmailSent action={ACTIONS.SIGNUP} />;
     }
     if (matchesPath(location, '/locked')) {
       return <AccountLocked />;
     }
+    if (matchesPath(location, 'B2C_1A_passwordreset/api')) {
+      return <EmailSent action={ACTIONS.RESET_PASSWORD} />;
+    }
     if (matchesPath(location, 'B2C_1A_passwordreset') || hasSearchParam(location.search, 'p', 'B2C_1A_passwordreset')) {
       return <ResetPassword />;
-    }
-    if (matchesPath(location, '/reset-password-email-sent')) {
-      return <EmailSent action={ACTIONS.RESET_PASSWORD} />;
     }
     if (matchesPath(location, '/enter-new-password')) {
       return <EnterNewPassword />;

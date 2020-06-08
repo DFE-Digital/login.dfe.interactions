@@ -9,7 +9,6 @@ import MainContainer from './MainContainer/MainContainer';
 import PageTitle from './PageTitle/PageTitle';
 import FooterNavigation from './FooterNavigation/FooterNavigation';
 import FooterLink from './FooterLink/FooterLink';
-import ResendActivationLink from  './ResendEmailLink/ResendEmailLink';
 import PasswordHelpContainer from './PasswordHelp/PasswordHelpContainer';
 import PasswordHelp from './PasswordHelp/PasswordHelp';
 import PageLevelErrorContainer from './PageLevelErrorContainer/PageLevelErrorContainer';
@@ -34,7 +33,6 @@ export default {
     PageTitle: PageTitle,
     FooterNavigation: FooterNavigation,
     FooterLink: FooterLink,
-    ResendActivationLink: ResendActivationLink,
     PasswordHelpContainer: PasswordHelpContainer,
     PasswordHelp: PasswordHelp,
     PageLevelErrorContainer: PageLevelErrorContainer,

@@ -5,13 +5,15 @@ class InputField extends React.Component {
     constructor(props) {
         super(props);
         this.defaultErrorMessage = `Enter your ${this.props.errorMessagePlaceholder}`;
+        //use additional text for id to avoid conflict with ids from B2C
+        this.elementUniqueId = `${this.props.inputId}Custom`;
         this.state = {
             [this.props.inputId]: null,
             errors: {
                 [this.props.inputId]: {
                     currentMessage: this.defaultErrorMessage,
                     visibleMessage: '',
-                    id: this.props.inputId
+                    id: this.elementUniqueId
                 }
             }
         };
@@ -87,7 +89,7 @@ class InputField extends React.Component {
             (
                 <input
                     className="govuk-input govuk-input--width-10"
-                    id={this.props.inputId}
+                    id={this.elementUniqueId}
                     name={this.props.inputId}
                     type={this.inputType}
                     spellCheck='false'
@@ -99,7 +101,7 @@ class InputField extends React.Component {
             (
                 <input
                     className="govuk-input govuk-input--width-10"
-                    id={this.props.inputId}
+                    id={this.elementUniqueId}
                     name={this.props.inputId}
                     type={this.inputType}
                     onChange={this.handleChange}
@@ -110,7 +112,7 @@ class InputField extends React.Component {
         return (
 
             <div className={`govuk-form-group ${this.props.showErrors && this.errors.visibleMessage.length > 0 ? "govuk-form-group--error" : ""}`}>
-                <label className="govuk-label" htmlFor={this.props.inputId}>
+                <label className="govuk-label" htmlFor={this.elementUniqueId}>
                     {this.props.inputLabel}
                 </label>
                 {inputErrorElement}

@@ -1,40 +1,57 @@
 import React from 'react';
 import components from '../components';
-import { getB2CLink } from '../helpers/urls';
+import { getInnerTextById } from '../helpers/dom';
 import { ACTIONS } from '../constants/actions';
 
-export default function EmailSent ( props ) {
-    return (
-        <div id="emailSent">
+class EmailSent extends React.Component {
 
-            <div className="govuk-width-container">
-                <components.Breadcrumbs />
+    componentDidMount() {
+        document.getElementById('api').style.display = 'none';
+        document.title = `We've sent you an email | National Careers Service`;
+    }
 
-                <div id="pageLevelErrorContainer"></div>
+    render() {
 
-                <main className="govuk-main-wrapper">
-                    <div className="govuk-grid-row">
-                        <div className="govuk-grid-column-two-thirds">
-                            <components.PageTitle size='xl' title="We've sent you an email"/>
-                            <components.B2C />
-                            <p className="govuk-body">Check your spam folder if you can't see it in a few minutes.</p>
-                            <components.ResendActivationLink action={props.action}/>
-                            <p className="govuk-body">This link expires in 24 hours.</p>
+        const contentFromB2C = getInnerTextById('successMessage');
 
-                            {/* show link to signup again if entered wrong address (only signup flow) */}
-                            {props.action === ACTIONS.SIGNUP && (
-                                <p className="govuk-body">
-                                    <a href={getB2CLink(ACTIONS.SIGNUP)} className="govuk-link">I entered the wrong email address</a>
-                                </p>
-                            )}
+        const resetPasswordLinkParagraph = [
+            "If you don't receive an email after this time you can ",
+            <components.Link action={ACTIONS.RESET_PASSWORD} text="resend password reset email" key="resetPassword" />,
+            "."
+        ];
+
+        const resendActivationLink = this.props.action === ACTIONS.RESET_PASSWORD ? resetPasswordLinkParagraph : null;
+
+        const signupLink = this.props.action === ACTIONS.SIGNUP ?
+            (
+                <components.Link action={ACTIONS.SIGNUP} text="I entered the wrong email address" key="signup" />
+            ) :
+            null;
+
+        return (
+            <div id="emailSent">
+
+                <div className="govuk-width-container">
+                    <components.Breadcrumbs />
+
+                    <main className="govuk-main-wrapper">
+                        <div className="govuk-grid-row">
+                            <div className="govuk-grid-column-two-thirds">
+                                <components.PageTitle size='xl' title="We've sent you an email" />
+                                <components.Paragraph text={contentFromB2C} />
+                                <components.Paragraph text="Check your spam folder if you can't see it in a few minutes." />
+                                <components.Paragraph text={resendActivationLink} />
+                                <components.Paragraph text="This link expires in 24 hours." />
+                                <components.Paragraph text={signupLink} />
+                            </div>
                         </div>
-                    </div>
-                </main>
+                    </main>
+
+                </div>
 
             </div>
-
-            <script src="__--b2cPath--__/b2c/assets/js-static/pages/emailSent.js"></script>
-
-        </div>
-    )
+        )
+    }
 }
+
+export default EmailSent;
