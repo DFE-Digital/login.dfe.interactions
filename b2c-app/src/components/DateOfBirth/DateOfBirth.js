@@ -10,8 +10,14 @@ class DateOfBirth extends React.Component {
             dobYear: null,
             errors: {
                 dob: {
-                    currentMessage: 'Enter date of birth',
-                    visibleMessage: '',
+                    current: {
+                        text: 'Enter date of birth',
+                        showSummaryText: false
+                    },
+                    visible: {
+                        text: '',
+                        showSummaryText: false
+                    },
                     id: 'dobFieldset'
                 }
             }
@@ -46,29 +52,29 @@ class DateOfBirth extends React.Component {
         let errors = this.state.errors;
 
         //clear errors
-        errors.dob.currentMessage = '';
+        errors.dob.current.text = '';
 
         if (!day && !month && !year) {
             isValid = false;
-            errors.dob.currentMessage = 'Enter date of birth';
+            errors.dob.current.text = 'Enter date of birth';
         }
-        else if( !day || !month || !year || year.length !== 4){
+        else if (!day || !month || !year || year.length !== 4) {
             isValid = false;
-            errors.dob.currentMessage = 'Enter a valid date of birth';
+            errors.dob.current.text = 'Enter a valid date of birth';
         }
         else {
             //get value for month ready to be used by Date functions
             month = month - 1;
-    
+
             //validate the date input
             var inputDate = new Date(year, month, day);
-    
+
             if (isNaN(inputDate.getTime()) ||
                 inputDate.getMonth() !== month //this one would mean user entered 29th of a month in a non leap year
             ) {
                 //failed validation, show an error and prevent submit
                 isValid = false;
-                errors.dob.currentMessage = 'Enter a valid date of birth';
+                errors.dob.current.text = 'Enter a valid date of birth';
             }
         }
 
@@ -81,17 +87,17 @@ class DateOfBirth extends React.Component {
 
         const { errors } = this.state;
 
-        const dobErrorElement = this.props.showErrors && errors.dob.visibleMessage.length > 0 ?
+        const dobErrorElement = this.props.showErrors && errors.dob.visible.text.length > 0 ?
             (
                 <span id="dobError" className="govuk-error-message">
                     <span className="govuk-visually-hidden">Error:</span>
-                    {errors.dob.visibleMessage}
+                    {errors.dob.visible.text}
                 </span>
             ) :
             null;
 
         return (
-            <div className={`govuk-form-group ${this.props.showErrors && errors.dob.visibleMessage.length > 0 ? "govuk-form-group--error" : ""}`}>
+            <div className={`govuk-form-group ${this.props.showErrors && errors.dob.visible.text.length > 0 ? "govuk-form-group--error" : ""}`}>
                 <fieldset className="govuk-fieldset" role="group" aria-describedby="date-of-birth-hint" id="dobFieldset">
                     <legend className="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <label className="govuk-label">

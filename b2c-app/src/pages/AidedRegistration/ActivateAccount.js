@@ -28,8 +28,9 @@ class ActivateAccount extends React.Component {
     handleSubmit(e) {
         e.preventDefault();
         //update error messages
-        this.state.errors.forEach( (error) => {
-            error.visibleMessage = error.currentMessage;
+        this.state.errors.forEach((error) => {
+            error.visible.text = error.current.text;
+            error.visible.showSummaryText = error.current.showSummaryText;
         });
         //do something to validate and decide if we submit or show errors
         if (this.state.password &&
@@ -47,7 +48,7 @@ class ActivateAccount extends React.Component {
         }
     }
 
-    setDataAndSubmit() {        
+    setDataAndSubmit() {
         //retrieve all elements we will need and set their values
         let b2cPassword = document.getElementById('newPassword');
         let b2cReenteredPassword = document.getElementById('reenterPassword');
@@ -57,19 +58,19 @@ class ActivateAccount extends React.Component {
         let b2cTermsAndConditions = document.getElementById('tncCheckbox_true');
         let b2cSubmitButton = document.getElementById('continue');
 
-        if(b2cPassword && b2cReenteredPassword &&
+        if (b2cPassword && b2cReenteredPassword &&
             b2cDobYear && b2cDobMonth && b2cDobYear &&
-            b2cTermsAndConditions && 
-            b2cSubmitButton){
-                b2cPassword.value = this.state.password;
-                b2cReenteredPassword.value = this.state.password;
-                b2cDobDay.value = this.state.day;
-                b2cDobMonth.value = this.state.month;
-                b2cDobYear.value = this.state.year;
-                b2cTermsAndConditions.checked = this.state.tsAndCsAccepted;
-                //submit B2C form
-                b2cSubmitButton.click();
-            }
+            b2cTermsAndConditions &&
+            b2cSubmitButton) {
+            b2cPassword.value = this.state.password;
+            b2cReenteredPassword.value = this.state.password;
+            b2cDobDay.value = this.state.day;
+            b2cDobMonth.value = this.state.month;
+            b2cDobYear.value = this.state.year;
+            b2cTermsAndConditions.checked = this.state.tsAndCsAccepted;
+            //submit B2C form
+            b2cSubmitButton.click();
+        }
     }
 
     render() {

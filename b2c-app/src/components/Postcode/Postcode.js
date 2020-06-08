@@ -8,8 +8,14 @@ class Postcode extends React.Component {
             postcode: null,
             errors: {
                 postcode: {
-                    currentMessage: 'Enter your postcode',
-                    visibleMessage: '',
+                    current: {
+                        text: 'Enter your postcode',
+                        showSummaryText: false
+                    },
+                    visible: {
+                        text: '',
+                        showSummaryText: false
+                    },
                     id: 'postcodeCustom'
                 }
             }
@@ -39,15 +45,15 @@ class Postcode extends React.Component {
         let errors = this.state.errors;
 
         //clear errors
-        errors.postcode.currentMessage = '';
+        errors.postcode.current.text = '';
 
         if (!postcode) {
             isValid = false;
-            errors.postcode.currentMessage = 'Enter your postcode';
+            errors.postcode.current.text = 'Enter your postcode';
         }
         else if (!postcode.match(/([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z]))))\s?[0-9][A-Za-z]{2})$/)) {
             isValid = false;
-            errors.postcode.currentMessage = 'Enter a valid postcode';
+            errors.postcode.current.text = 'Enter a valid postcode';
         }
 
         this.setState({ errors });
@@ -59,17 +65,17 @@ class Postcode extends React.Component {
 
         const { errors } = this.state;
 
-        const postcodeErrorElement = this.props.showErrors && errors.postcode.visibleMessage.length > 0 ?
+        const postcodeErrorElement = this.props.showErrors && errors.postcode.visible.text.length > 0 ?
             (
                 <span id="postcodeError" className="govuk-error-message">
                     <span className="govuk-visually-hidden">Error:</span>
-                    {errors.postcode.visibleMessage}
+                    {errors.postcode.visible.text}
                 </span>
             ) :
             null;
 
         return (
-            <div className={`govuk-form-group ${this.props.showErrors && errors.postcode.visibleMessage.length > 0 ? "govuk-form-group--error" : ""}`}>
+            <div className={`govuk-form-group ${this.props.showErrors && errors.postcode.visible.text.length > 0 ? "govuk-form-group--error" : ""}`}>
                 <label className="govuk-label" htmlFor="postcodeCustom">
                     Enter your postcode
                 </label>

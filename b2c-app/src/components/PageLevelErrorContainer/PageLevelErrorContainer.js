@@ -72,13 +72,13 @@ class PageLevelErrorContainer extends React.Component {
 
     showSummaryText() {
         return this.props.errorItems.some(item => {
-            return item.showSummaryText;
+            return item.visible.showSummaryText;
         });
     };
 
     hasErrorItems() {
         const hasErrors = this.props.errorItems.some(errorItem => {
-            return !!errorItem.visibleMessage;
+            return !!errorItem.visible.text;
         });
         return hasErrors;
     }
@@ -89,7 +89,7 @@ class PageLevelErrorContainer extends React.Component {
                 return error ?
                     (
                         <li key={error.id}>
-                            <a href={`#${error.id}`}>{error.visibleMessage}</a>
+                            <a href={`#${error.id}`}>{error.visible.text}</a>
                         </li>
                     ) :
                     null

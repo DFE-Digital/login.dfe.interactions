@@ -10,8 +10,14 @@ class TermsAndConditions extends React.Component {
             tsAndCsAccepted: false,
             errors: {
                 tsAndCs: {
-                    currentMessage: 'You must accept our Terms and Conditions',
-                    visibleMessage: '',
+                    current: {
+                        text: 'You must accept our Terms and Conditions',
+                        showSummaryText: false
+                    },
+                    visible: {
+                        text: '',
+                        showSummaryText: false
+                    },
                     id: 'tsAndCsCustom'
                 }
             }
@@ -40,11 +46,11 @@ class TermsAndConditions extends React.Component {
         let errors = this.state.errors;
 
         //clear errors
-        errors.tsAndCs.currentMessage = '';
+        errors.tsAndCs.current.text = '';
 
         if (!this.state.tsAndCsAccepted) {
             isValid = false;
-            errors.tsAndCs.currentMessage = 'You must accept our Terms and Conditions';
+            errors.tsAndCs.current.text = 'You must accept our Terms and Conditions';
         }
 
         this.setState({ errors });
@@ -56,11 +62,11 @@ class TermsAndConditions extends React.Component {
 
         const { errors } = this.state;
 
-        const tsAndCsErrorElement = this.props.showErrors && errors.tsAndCs.visibleMessage.length > 0 ?
+        const tsAndCsErrorElement = this.props.showErrors && errors.tsAndCs.visible.text.length > 0 ?
             (
                 <span id="tsAndCsError" className="govuk-error-message">
                     <span className="govuk-visually-hidden">Error:</span>
-                    {errors.tsAndCs.visibleMessage}
+                    {errors.tsAndCs.visible.text}
                 </span>
             ) :
             null;
@@ -69,10 +75,10 @@ class TermsAndConditions extends React.Component {
 
             <div>
                 <h1 className='govuk-heading-m'>Terms and conditions</h1>
-                <div className={`govuk-form-group ${this.props.showErrors && errors.tsAndCs.visibleMessage.length > 0 ? "govuk-form-group--error" : ""}`}>
+                <div className={`govuk-form-group ${this.props.showErrors && errors.tsAndCs.visible.text.length > 0 ? "govuk-form-group--error" : ""}`}>
                     {tsAndCsErrorElement}
                     <label className="block-label" htmlFor="tsAndCsCustom">
-                        <input id="tsAndCsCustom" name="tsAndCsAccepted" type="checkbox" value={true} aria-invalid="true" 
+                        <input id="tsAndCsCustom" name="tsAndCsAccepted" type="checkbox" value={true} aria-invalid="true"
                             checked={this.state.tsAndCsAccepted}
                             onChange={this.handleChange}
                             noValidate />

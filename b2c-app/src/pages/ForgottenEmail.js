@@ -30,7 +30,8 @@ class ForgottenEmail extends React.Component {
         e.preventDefault();
         //update error messages
         this.state.errors.forEach((error) => {
-            error.visibleMessage = error.currentMessage;
+            error.visible.text = error.current.text;
+            error.visible.showSummaryText = error.current.showSummaryText;
         });
         //do something to validate and decide if we submit or show errors
         if (this.state.firstName &&

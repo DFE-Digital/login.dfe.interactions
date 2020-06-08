@@ -67,7 +67,7 @@ class App extends React.Component {
     if (matchesPath(location, 'B2C_1A_passwordreset') || hasSearchParam(location.search, 'p', 'B2C_1A_passwordreset')) {
       return <ResetPassword />;
     }
-    if (matchesPath(location, '/enter-new-password')) {
+    if (matchesPath(location, 'B2C_1A_passwordResetConformation')) {
       return <EnterNewPassword />;
     }
     if (matchesPath(location, '/password-changed')) {
@@ -76,11 +76,11 @@ class App extends React.Component {
     //Results for forgotten email page
     if (matchesPath(location, 'B2C_1A_findEmail/api')) {
       //Success - account was found
-      if(domHasElementWithId('successMessage')){
+      if (domHasElementWithId('successMessage')) {
         return <AccountFound />;
       }
       //Error - account was not found
-      if(domHasElementWithId('errorMessage')){
+      if (domHasElementWithId('errorMessage')) {
         return <AccountNotFound />;
       }
     }
@@ -98,7 +98,7 @@ class App extends React.Component {
       return <ActivateAccount />;
     }
     //default
-    console.log('no matches, loading placeholder');    
+    console.log('no matches, loading placeholder');
     return <Placeholder />;
   }
 

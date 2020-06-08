@@ -11,8 +11,14 @@ class InputField extends React.Component {
             [this.props.inputId]: null,
             errors: {
                 [this.props.inputId]: {
-                    currentMessage: this.defaultErrorMessage,
-                    visibleMessage: '',
+                    current: {
+                        text: this.defaultErrorMessage,
+                        showSummaryText: false
+                    },
+                    visible: {
+                        text: '',
+                        showSummaryText: false
+                    },
                     id: this.elementUniqueId
                 }
             }
@@ -44,12 +50,12 @@ class InputField extends React.Component {
         let isValid = true;
 
         //clear errors
-        this.errors.currentMessage = '';
+        this.errors.current.text = '';
 
         //the only validation done by default is check that the input field is not empty
         if (!this.state[this.props.inputId]) {
             isValid = false;
-            this.errors.currentMessage = this.defaultErrorMessage;
+            this.errors.current.text = this.defaultErrorMessage;
         }
 
         if (this.inputType === 'email') {
@@ -57,7 +63,7 @@ class InputField extends React.Component {
             const pattern = /[A-Za-z0-9_\-\+\/{\t\n\r}#$%^\\&\[\]*=()|?'~`! :]+([.][A-Za-z0-9_\-\+\/{\t\n\r}#$%^\\&\[\]*=()|?'~`! :]+)*@[A-Za-z0-9\[\]:]+([.-][A-Za-z0-9\[\]:]+)*\.[A-Za-z0-9\[\]:]+([-.][A-Za-z0-9\[\]:]+)*/;
             if (!this.state[this.props.inputId].match(pattern)) {
                 isValid = false;
-                this.errors.currentMessage = `Invalid ${this.props.errorMessagePlaceholder}`;
+                this.errors.current.text = `Invalid ${this.props.errorMessagePlaceholder}`;
             }
         }
 
@@ -68,11 +74,11 @@ class InputField extends React.Component {
 
     render() {
 
-        const inputErrorElement = this.props.showErrors && this.errors.visibleMessage.length > 0 ?
+        const inputErrorElement = this.props.showErrors && this.errors.visible.text.length > 0 ?
             (
                 <span id="inputError" className="govuk-error-message">
                     <span className="govuk-visually-hidden">Error:</span>
-                    {this.errors.visibleMessage}
+                    {this.errors.visible.text}
                 </span>
             ) :
             null;
@@ -111,7 +117,7 @@ class InputField extends React.Component {
 
         return (
 
-            <div className={`govuk-form-group ${this.props.showErrors && this.errors.visibleMessage.length > 0 ? "govuk-form-group--error" : ""}`}>
+            <div className={`govuk-form-group ${this.props.showErrors && this.errors.visible.text.length > 0 ? "govuk-form-group--error" : ""}`}>
                 <label className="govuk-label" htmlFor={this.elementUniqueId}>
                     {this.props.inputLabel}
                 </label>
