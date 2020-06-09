@@ -97,7 +97,7 @@ class InputField extends React.Component {
         const inputField = this.inputType === 'email' ?
             (
                 <input
-                    className="govuk-input govuk-input--width-10"
+                    className="govuk-input govuk-!-width-one-half"
                     id={this.elementUniqueId}
                     name={this.props.inputId}
                     type={this.inputType}
@@ -109,7 +109,7 @@ class InputField extends React.Component {
             ) :
             (
                 <input
-                    className="govuk-input govuk-input--width-10"
+                    className="govuk-input govuk-!-width-one-half"
                     id={this.elementUniqueId}
                     name={this.props.inputId}
                     type={this.inputType}

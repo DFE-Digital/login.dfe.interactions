@@ -52,11 +52,12 @@ class App extends React.Component {
     if (matchesPath(location, 'B2C_1A_signin_invitation') || hasSearchParam(location.search, 'p', 'B2C_1A_signin_invitation')) {
       return <Login />;
     }
-    //Activation email sent
+    //Activation email sent after sign up
     if (matchesPath(location, 'B2C_1A_account_signup/api')) {
       return <EmailSent action={ACTIONS.SIGNUP} />;
     }
-    if (matchesPath(location, '/signup')) {
+    //Sign up page
+    if (matchesPath(location, 'B2C_1A_account_signup') || hasSearchParam(location.search, 'p', 'B2C_1A_account_signup')) {
       return <Signup />;
     }
     //Reset password email sent
