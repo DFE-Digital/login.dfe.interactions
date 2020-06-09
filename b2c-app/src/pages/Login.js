@@ -1,6 +1,7 @@
 import React from 'react';
 import components from '../components';
 import { ACTIONS } from '../constants/actions';
+import { onChange } from '../helpers/pageUpdatesHandler';
 
 class Login extends React.Component {
 
@@ -13,6 +14,7 @@ class Login extends React.Component {
             errors: []
         }
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.onChange = onChange.bind(this);
     }
 
     handleSubmit(e) {

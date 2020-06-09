@@ -1,5 +1,6 @@
 import React from 'react';
 import components from '../components';
+import { onChange } from '../helpers/pageUpdatesHandler';
 
 class EnterNewPassword extends React.Component {
 
@@ -11,6 +12,7 @@ class EnterNewPassword extends React.Component {
             errors: []
         }
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.onChange = onChange.bind(this);
     }
 
     handleSubmit(e) {
@@ -49,7 +51,12 @@ class EnterNewPassword extends React.Component {
 
     render() {
 
-        const formContent = <components.CreateNewPassword showErrors={this.state.showErrors} errors={this.state.errors} />;
+        const formContent =
+            <components.CreateNewPassword
+                onChange={this.onChange}
+                showErrors={this.state.showErrors}
+                errors={this.state.errors}
+            />;
 
         return (
             <div id="enterNewPassword">

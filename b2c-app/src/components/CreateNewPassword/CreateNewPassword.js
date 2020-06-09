@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { onChange, onError } from '../../helpers/pageUpdatesHandler';
+import { onError } from '../../helpers/pageUpdatesHandler';
 
 import components from '..';
 
@@ -38,7 +38,6 @@ class CreateNewPassword extends React.Component {
         };
         this.handleChange = this.handleChange.bind(this);
         this.onError = onError.bind(this);
-        this.onChange = onChange.bind(this);
 
         this.isValidPassword = this.isValidPassword.bind(this);
 
@@ -52,7 +51,7 @@ class CreateNewPassword extends React.Component {
         const { name, value } = e.target;
 
         this.setState({ [name]: value }, () => {
-            this.onChange({
+            this.props.onChange({
                 password: this.isValidPassword() ? this.state.newPassword : null
             });
         });

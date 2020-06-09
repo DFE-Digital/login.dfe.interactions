@@ -73,6 +73,7 @@ class ForgottenEmail extends React.Component {
             <components.InputField
                 inputId='firstName'
                 inputLabel='First name'
+                onChange={this.onChange}
                 errorMessagePlaceholder='first name'
                 showErrors={this.state.showErrors}
                 errors={this.state.errors}
@@ -81,13 +82,22 @@ class ForgottenEmail extends React.Component {
             <components.InputField
                 inputId='lastName'
                 inputLabel='Last name'
+                onChange={this.onChange}
                 errorMessagePlaceholder='last name'
                 showErrors={this.state.showErrors}
                 errors={this.state.errors}
                 key='inputLastName'
             />,
-            <components.DateOfBirth showErrors={this.state.showErrors} errors={this.state.errors} key='dob' />,
-            <components.Postcode showErrors={this.state.showErrors} errors={this.state.errors} key='postcode' />
+            <components.DateOfBirth
+                onChange={this.onChange}
+                showErrors={this.state.showErrors}
+                errors={this.state.errors}
+                key='dob' />,
+            <components.Postcode
+                onChange={this.onChange}
+                showErrors={this.state.showErrors}
+                errors={this.state.errors}
+                key='postcode' />
         ];
 
         return (

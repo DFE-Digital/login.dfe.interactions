@@ -1,5 +1,6 @@
 import React from 'react';
 import components from '../../components';
+import { onChange } from '../../helpers/pageUpdatesHandler';
 
 class ActivateAccount extends React.Component {
 
@@ -15,6 +16,7 @@ class ActivateAccount extends React.Component {
             errors: []
         }
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.onChange = onChange.bind(this);
     }
 
     handleSubmit(e) {
@@ -68,10 +70,22 @@ class ActivateAccount extends React.Component {
     render() {
 
         const formContent = [
-            <components.CreateNewPassword showErrors={this.state.showErrors} errors={this.state.errors} key="createNewPassword" />,
+            <components.CreateNewPassword
+                onChange={this.onChange}
+                showErrors={this.state.showErrors}
+                errors={this.state.errors}
+                key="createNewPassword" />,
             <components.Paragraph text='As an extra security check, enter your date of birth.' errors={this.state.errors} key="paragraph" />,
-            <components.DateOfBirth showErrors={this.state.showErrors} errors={this.state.errors} key="dob" />,
-            <components.TermsAndConditions showErrors={this.state.showErrors} errors={this.state.errors} key="tsAndCs" />
+            <components.DateOfBirth
+                onChange={this.onChange}
+                showErrors={this.state.showErrors}
+                errors={this.state.errors}
+                key="dob" />,
+            <components.TermsAndConditions
+                onChange={this.onChange}
+                showErrors={this.state.showErrors}
+                errors={this.state.errors}
+                key="tsAndCs" />
         ];
 
         return (

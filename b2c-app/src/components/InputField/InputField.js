@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { onChange, onError } from '../../helpers/pageUpdatesHandler';
+import { onError } from '../../helpers/pageUpdatesHandler';
 
 class InputField extends React.Component {
 
@@ -30,7 +30,6 @@ class InputField extends React.Component {
 
         this.handleChange = this.handleChange.bind(this);
         this.onError = onError.bind(this);
-        this.onChange = onChange.bind(this);
         this.isValidInput = this.isValidInput.bind(this);
 
         //initialise errors in parent component, which will contain a reference to them
@@ -44,7 +43,7 @@ class InputField extends React.Component {
         const { name, value } = e.target;
 
         this.setState({ [name]: value }, () => {
-            this.onChange({
+            this.props.onChange({
                 [this.props.inputId]: this.isValidInput() ? value : null
             });
         });

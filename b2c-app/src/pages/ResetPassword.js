@@ -1,6 +1,7 @@
 import React from 'react';
 import components from '../components';
 import { ACTIONS } from '../constants/actions';
+import { onChange } from '../helpers/pageUpdatesHandler';
 
 class ResetPassword extends React.Component {
 
@@ -12,6 +13,7 @@ class ResetPassword extends React.Component {
             errors: []
         }
         this.handleSubmit = this.handleSubmit.bind(this);
+        this.onChange = onChange.bind(this);
     }
 
     handleSubmit(e) {
@@ -61,6 +63,7 @@ class ResetPassword extends React.Component {
                 type='email'
                 inputId='email'
                 inputLabel='Email address'
+                onChange={this.onChange}
                 errorMessagePlaceholder='email address'
                 showErrors={this.state.showErrors}
                 errors={this.state.errors}
