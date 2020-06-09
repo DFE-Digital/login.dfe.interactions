@@ -1,6 +1,5 @@
 import React from 'react';
 import components from '../components';
-import { onChange, onError } from '../helpers/pageUpdatesHandler';
 
 class ForgottenEmail extends React.Component {
 
@@ -17,13 +16,6 @@ class ForgottenEmail extends React.Component {
             errors: []
         }
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.onError = onError.bind(this);
-        this.onChange = onChange.bind(this);
-    }
-
-    componentDidMount() {
-        document.getElementById('api').style.display = 'none';
-        document.title = 'Find your email address | National Careers Service';
     }
 
     handleSubmit(e) {
@@ -76,46 +68,37 @@ class ForgottenEmail extends React.Component {
     }
 
     render() {
+
+        const formContent = [
+            <components.InputField
+                inputId='firstName'
+                inputLabel='First name'
+                errorMessagePlaceholder='first name'
+                showErrors={this.state.showErrors}
+                errors={this.state.errors}
+                key='inputName'
+            />,
+            <components.InputField
+                inputId='lastName'
+                inputLabel='Last name'
+                errorMessagePlaceholder='last name'
+                showErrors={this.state.showErrors}
+                errors={this.state.errors}
+                key='inputLastName'
+            />,
+            <components.DateOfBirth showErrors={this.state.showErrors} errors={this.state.errors} key='dob' />,
+            <components.Postcode showErrors={this.state.showErrors} errors={this.state.errors} key='postcode' />
+        ];
+
         return (
             <div id="forgottenEmail">
-
-                <div className="govuk-width-container">
-                    <components.Breadcrumbs />
-
-                    <components.PageLevelErrorContainer errorItems={this.state.errors} />
-
-                    <main className="govuk-main-wrapper">
-                        <div className="govuk-grid-row">
-                            <div className="govuk-grid-column-two-thirds">
-                                <components.PageTitle size='xl' title="Find your email address" />
-
-                                <form id="activateAccountForm" onSubmit={this.handleSubmit} noValidate>
-                                    <components.InputField
-                                        inputId='firstName'
-                                        inputLabel='First name'
-                                        errorMessagePlaceholder='first name'
-                                        onChange={this.onChange}
-                                        onError={this.onError}
-                                        showErrors={this.state.showErrors}
-                                    />
-                                    <components.InputField
-                                        inputId='lastName'
-                                        inputLabel='Last name'
-                                        errorMessagePlaceholder='last name'
-                                        onChange={this.onChange}
-                                        onError={this.onError}
-                                        showErrors={this.state.showErrors}
-                                    />
-                                    <components.DateOfBirth onChange={this.onChange} onError={this.onError} showErrors={this.state.showErrors} />
-                                    <components.Postcode onChange={this.onChange} onError={this.onError} showErrors={this.state.showErrors} />
-                                    <button className="govuk-button" id="preSubmit" type="submit">Find email address</button>
-                                </form>
-                            </div>
-                        </div>
-                    </main>
-
-                </div>
-
+                <components.PageContainer
+                    pageTitle='Find your email address'
+                    formContent={formContent}
+                    submitButtonText='Find email address'
+                    submitHandler={this.handleSubmit}
+                    errors={this.state.errors}
+                />
             </div>
         )
     }

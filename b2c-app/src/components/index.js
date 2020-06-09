@@ -20,6 +20,7 @@ import Link from './Link/Link';
 import Paragraph from './Paragraph/Paragraph';
 import Postcode from './Postcode/Postcode';
 import InputField from './InputField/InputField';
+import PageContainer from './PageContainer/PageContainer';
 
 export default {
     Header: Header,
@@ -43,5 +44,6 @@ export default {
     Link: Link,
     Paragraph: Paragraph,
     Postcode: Postcode,
-    InputField: InputField
+    InputField: InputField,
+    PageContainer: PageContainer
 }

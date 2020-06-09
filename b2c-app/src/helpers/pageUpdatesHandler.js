@@ -1,10 +1,10 @@
 export function onError(errors) {
-    Object.keys(errors).forEach((key) => {
-        const found = this.state.errors.some(el => {
-            return el.id === errors[key].id;
+    Object.keys(this.state.errors).forEach((key) => {
+        const found = errors.some(el => {
+            return el.id === this.state.errors[key].id;
         });
-        if (!found){               
-            this.state.errors.push(errors[key]);
+        if (!found) {
+            errors.push(this.state.errors[key]);
         }
     });
 }

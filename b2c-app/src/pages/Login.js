@@ -1,7 +1,6 @@
 import React from 'react';
 import components from '../components';
 import { ACTIONS } from '../constants/actions';
-import { onChange, onError } from '../helpers/pageUpdatesHandler';
 
 class Login extends React.Component {
 
@@ -14,13 +13,6 @@ class Login extends React.Component {
             errors: []
         }
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.onError = onError.bind(this);
-        this.onChange = onChange.bind(this);
-    }
-
-    componentDidMount() {
-        document.getElementById('api').style.display = 'none';
-        document.title = 'Sign in to your account | National Careers Service';
     }
 
     handleSubmit(e) {
@@ -61,62 +53,50 @@ class Login extends React.Component {
 
         const cannotAccessAccountLink = <components.Link action={ACTIONS.RESET_PASSWORD} text="I cannot access my account" key="resetPassword" />;
 
+        const formContent = [
+            <components.InputField
+                type='email'
+                inputId='email'
+                inputLabel='Email address'
+                errorMessagePlaceholder='email address'
+                showErrors={this.state.showErrors}
+                errors={this.state.errors}
+                key='email'
+            />,
+            <components.InputField
+                type='password'
+                inputId='password'
+                inputLabel='Password'
+                errorMessagePlaceholder='password'
+                showErrors={this.state.showErrors}
+                errors={this.state.errors}
+                key='password'
+            />,
+            <components.Paragraph text={cannotAccessAccountLink} errors={this.state.errors} key='paragraph' />
+        ];
+
         const createNewAccountParagraph = [
             <components.Link action={ACTIONS.SIGNUP} text="Creating an account" key="signup" />,
             " allows you to access and save your skills health check reports."
         ];
 
+        const additionalColumnContent =
+            <div className="govuk-grid-column-one-half">
+                <components.PageTitle size='l' title='Create an account' key='columnTitle' />
+                <components.Paragraph text={createNewAccountParagraph} key='paragraph' />
+            </div>
+            ;
+
         return (
-
             <div id="login">
-
-                <div className="govuk-width-container">
-                    <components.Breadcrumbs />
-
-                    <components.PageLevelErrorContainer errorItems={this.state.errors} />
-
-                    <div className="govuk-width-container ">
-                        <main className="govuk-main-wrapper " id="main-content" role="main">
-                            <div className="govuk-grid-row">
-
-                                <div className="govuk-grid-column-one-half">
-                                    <components.PageTitle size='l' title='Sign in' />
-
-                                    <form id="loginForm" onSubmit={this.handleSubmit} noValidate>
-                                        <components.InputField
-                                            type='email'
-                                            inputId='email'
-                                            inputLabel='Email address'
-                                            errorMessagePlaceholder='email address'
-                                            onChange={this.onChange}
-                                            onError={this.onError}
-                                            showErrors={this.state.showErrors}
-                                        />
-                                        <components.InputField
-                                            type='password'
-                                            inputId='password'
-                                            inputLabel='Password'
-                                            errorMessagePlaceholder='password'
-                                            onChange={this.onChange}
-                                            onError={this.onError}
-                                            showErrors={this.state.showErrors}
-                                        />
-                                        <components.Paragraph text={cannotAccessAccountLink} />
-                                        <button className="govuk-button" id="preSubmit" type="submit">Sign in</button>
-                                    </form>
-                                </div>
-
-                                <div className="govuk-grid-column-one-half">
-                                    <components.PageTitle size='l' title='Create an account' />
-                                    <components.Paragraph text={createNewAccountParagraph} />
-                                </div>
-
-                            </div>
-                        </main>
-                    </div>
-
-                </div>
-
+                <components.PageContainer
+                    pageTitle='Sign in'
+                    formContent={formContent}
+                    submitButtonText='Sign in'
+                    submitHandler={this.handleSubmit}
+                    errors={this.state.errors}
+                    additionalColumn={additionalColumnContent}
+                />
             </div>
         )
     }

@@ -28,8 +28,6 @@ class AccountNotFound extends React.Component {
                 <div className="govuk-width-container">
                     <components.Breadcrumbs />
 
-                    <div id="pageLevelErrorContainer"></div>
-
                     <main className="govuk-main-wrapper">
                         <div className="govuk-grid-row">
                             <div className="govuk-grid-column-two-thirds">

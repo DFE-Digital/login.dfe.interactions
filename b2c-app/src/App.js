@@ -8,7 +8,6 @@ import { matchesPath, hasSearchParam } from './helpers/urls';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import EmailSent from './pages/EmailSent';
-import AccountLocked from './pages/AccountLocked';
 import AccountActivated from './pages/AccountActivated';
 import ResetPassword from './pages/ResetPassword';
 import ForgottenEmail from './pages/ForgottenEmail';
@@ -49,6 +48,7 @@ class App extends React.Component {
       console.log(e);
     }
 
+    //Login page
     if (matchesPath(location, 'B2C_1A_signin_invitation') || hasSearchParam(location.search, 'p', 'B2C_1A_signin_invitation')) {
       return <Login />;
     }
@@ -57,9 +57,6 @@ class App extends React.Component {
     }
     if (matchesPath(location, '/signup')) {
       return <Signup />;
-    }
-    if (matchesPath(location, '/locked')) {
-      return <AccountLocked />;
     }
     if (matchesPath(location, 'B2C_1A_passwordreset/api')) {
       return <EmailSent action={ACTIONS.RESET_PASSWORD} />;

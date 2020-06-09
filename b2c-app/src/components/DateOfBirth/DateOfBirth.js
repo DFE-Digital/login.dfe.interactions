@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { onChange, onError } from '../../helpers/pageUpdatesHandler';
+
 class DateOfBirth extends React.Component {
 
     constructor(props) {
@@ -23,10 +25,12 @@ class DateOfBirth extends React.Component {
             }
         };
         this.handleChange = this.handleChange.bind(this);
+        this.onError = onError.bind(this);
+        this.onChange = onChange.bind(this);
         this.isValidDob = this.isValidDob.bind(this);
 
         //initialise errors in parent component, which will contain a reference to them
-        props.onError(this.state.errors);
+        this.onError(this.props.errors);
     }
 
     handleChange(e) {
@@ -36,7 +40,7 @@ class DateOfBirth extends React.Component {
 
         this.setState({ [name]: value }, () => {
             let isValid = this.isValidDob();
-            this.props.onChange({
+            this.onChange({
                 day: isValid ? this.state.dobDay : null,
                 month: isValid ? this.state.dobMonth : null,
                 year: isValid ? this.state.dobYear : null

@@ -1,6 +1,5 @@
 import React from 'react';
 import components from '../../components';
-import { onChange, onError } from '../../helpers/pageUpdatesHandler';
 
 class ActivateAccount extends React.Component {
 
@@ -16,13 +15,6 @@ class ActivateAccount extends React.Component {
             errors: []
         }
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.onError = onError.bind(this);
-        this.onChange = onChange.bind(this);
-    }
-
-    componentDidMount() {
-        document.getElementById('api').style.display = 'none';
-        document.title = 'Activate your account | National Careers Service';
     }
 
     handleSubmit(e) {
@@ -75,32 +67,23 @@ class ActivateAccount extends React.Component {
 
     render() {
 
+        const formContent = [
+            <components.CreateNewPassword showErrors={this.state.showErrors} errors={this.state.errors} key="createNewPassword" />,
+            <components.Paragraph text='As an extra security check, enter your date of birth.' errors={this.state.errors} key="paragraph" />,
+            <components.DateOfBirth showErrors={this.state.showErrors} errors={this.state.errors} key="dob" />,
+            <components.TermsAndConditions showErrors={this.state.showErrors} errors={this.state.errors} key="tsAndCs" />
+        ];
+
         return (
             <div id="activateAccount">
-
-                <div className="govuk-width-container">
-                    <components.Breadcrumbs />
-
-                    <components.PageLevelErrorContainer errorItems={this.state.errors} summaryTextContent={<components.PasswordHelp />} />
-
-                    <main className="govuk-main-wrapper">
-                        <div className="govuk-grid-row">
-                            <div className="govuk-grid-column-two-thirds">
-                                <components.PageTitle size='xl' title="Activate your account" />
-
-                                <form id="activateAccountForm" onSubmit={this.handleSubmit} noValidate>
-                                    <components.CreateNewPassword onChange={this.onChange} onError={this.onError} showErrors={this.state.showErrors} />
-                                    <components.Paragraph text='As an extra security check, enter your date of birth.' />
-                                    <components.DateOfBirth onChange={this.onChange} onError={this.onError} showErrors={this.state.showErrors} />
-                                    <components.TermsAndConditions onChange={this.onChange} onError={this.onError} showErrors={this.state.showErrors} />
-                                    <button className="govuk-button" id="preSubmit" type="submit">Activate account</button>
-                                </form>
-                            </div>
-                        </div>
-                    </main>
-
-                </div>
-
+                <components.PageContainer
+                    pageTitle='Activate your account'
+                    formContent={formContent}
+                    submitButtonText='Activate account'
+                    submitHandler={this.handleSubmit}
+                    errors={this.state.errors}
+                    errorSummaryContent={<components.PasswordHelp />}
+                />
             </div>
         )
     }

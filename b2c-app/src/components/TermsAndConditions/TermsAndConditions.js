@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { onChange, onError } from '../../helpers/pageUpdatesHandler';
+
 import "./TermsAndConditions.scss";
 
 class TermsAndConditions extends React.Component {
@@ -23,10 +25,12 @@ class TermsAndConditions extends React.Component {
             }
         };
         this.handleChange = this.handleChange.bind(this);
+        this.onError = onError.bind(this);
+        this.onChange = onChange.bind(this);
         this.isValidTsAndCs = this.isValidTsAndCs.bind(this);
 
         //initialise errors in parent component, which will contain a reference to them
-        props.onError(this.state.errors);
+        this.onError(this.props.errors);
     }
 
     handleChange(e) {
@@ -35,7 +39,7 @@ class TermsAndConditions extends React.Component {
         this.setState({ [name]: checked }, () => {
             //validate and update value in any case
             this.isValidTsAndCs();
-            this.props.onChange({
+            this.onChange({
                 tsAndCsAccepted: checked
             });
         });

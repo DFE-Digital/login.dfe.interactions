@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { onChange, onError } from '../../helpers/pageUpdatesHandler';
+
 class Postcode extends React.Component {
 
     constructor(props) {
@@ -21,10 +23,12 @@ class Postcode extends React.Component {
             }
         };
         this.handleChange = this.handleChange.bind(this);
+        this.onError = onError.bind(this);
+        this.onChange = onChange.bind(this);
         this.isValidPostcode = this.isValidPostcode.bind(this);
 
         //initialise errors in parent component, which will contain a reference to them
-        props.onError(this.state.errors);
+        this.onError(this.props.errors);
     }
 
     handleChange(e) {
@@ -33,7 +37,7 @@ class Postcode extends React.Component {
         const { name, value } = e.target;
 
         this.setState({ [name]: value }, () => {
-            this.props.onChange({
+            this.onChange({
                 postcode: this.isValidPostcode() ? this.state.postcode : null
             });
         });

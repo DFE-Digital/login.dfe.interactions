@@ -1,6 +1,5 @@
 import React from 'react';
 import components from '../components';
-import { onChange, onError } from '../helpers/pageUpdatesHandler';
 
 class EnterNewPassword extends React.Component {
 
@@ -12,13 +11,6 @@ class EnterNewPassword extends React.Component {
             errors: []
         }
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.onError = onError.bind(this);
-        this.onChange = onChange.bind(this);
-    }
-
-    componentDidMount() {
-        document.getElementById('api').style.display = 'none';
-        document.title = 'Reset your password | National Careers Service';
     }
 
     handleSubmit(e) {
@@ -56,30 +48,19 @@ class EnterNewPassword extends React.Component {
     }
 
     render() {
+
+        const formContent = <components.CreateNewPassword showErrors={this.state.showErrors} errors={this.state.errors} />;
+
         return (
             <div id="enterNewPassword">
-
-                <div className="govuk-width-container">
-                    <components.Breadcrumbs />
-
-                    <components.PageLevelErrorContainer errorItems={this.state.errors} summaryTextContent={<components.PasswordHelp />} />
-
-                    <main className="govuk-main-wrapper">
-                        <div className="govuk-grid-row">
-                            <div className="govuk-grid-column-two-thirds">
-                                <components.PageTitle size='xl' title="Reset your password" />
-
-                                <form id="resetPasswordForm" onSubmit={this.handleSubmit} noValidate>
-                                    <components.CreateNewPassword onChange={this.onChange} onError={this.onError} showErrors={this.state.showErrors} />
-                                    <button className="govuk-button" id="preSubmit" type="submit">Reset password</button>
-                                </form>
-
-                            </div>
-                        </div>
-                    </main>
-
-                </div>
-
+                <components.PageContainer
+                    pageTitle='Reset your password'
+                    formContent={formContent}
+                    submitButtonText='Reset password'
+                    submitHandler={this.handleSubmit}
+                    errors={this.state.errors}
+                    errorSummaryContent={<components.PasswordHelp />}
+                />
             </div>
         )
     }

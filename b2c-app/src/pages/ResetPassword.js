@@ -1,7 +1,6 @@
 import React from 'react';
 import components from '../components';
 import { ACTIONS } from '../constants/actions';
-import { onChange, onError } from '../helpers/pageUpdatesHandler';
 
 class ResetPassword extends React.Component {
 
@@ -13,13 +12,6 @@ class ResetPassword extends React.Component {
             errors: []
         }
         this.handleSubmit = this.handleSubmit.bind(this);
-        this.onError = onError.bind(this);
-        this.onChange = onChange.bind(this);
-    }
-
-    componentDidMount() {
-        document.getElementById('api').style.display = 'none';
-        document.title = 'Access your account | National Careers Service';
     }
 
     handleSubmit(e) {
@@ -57,42 +49,36 @@ class ResetPassword extends React.Component {
 
         const cannotRememberEmailLink = <components.Link action={ACTIONS.FIND_EMAIL} text="Can't remember your email address?" key="forgotenEmail" />;
 
+        const aboveFormContent = [
+            <components.Paragraph text="You can reset your password if you've forgotten it." key='paragraph1' />,
+            <components.Paragraph text="If you cannot remember your email address you can also retrieve it here." key='paragraph2' />,
+            <h3 className="govuk-heading-m" key='heading'>Reset your password</h3>,
+            <components.Paragraph text="To reset your password we need to send an email to the address registered to your account." key='paragraph3' />
+        ];
+
+        const formContent =
+            <components.InputField
+                type='email'
+                inputId='email'
+                inputLabel='Email address'
+                errorMessagePlaceholder='email address'
+                showErrors={this.state.showErrors}
+                errors={this.state.errors}
+            />;
+
+        const belowFormContent = <components.Paragraph text={cannotRememberEmailLink} />;
+
         return (
-            <div id="resetPassword">
-
-                <div className="govuk-width-container">
-                    <components.Breadcrumbs />
-
-                    <components.PageLevelErrorContainer errorItems={this.state.errors} />
-
-                    <main className="govuk-main-wrapper">
-                        <div className="govuk-grid-row">
-                            <div className="govuk-grid-column-two-thirds">
-                                <components.PageTitle size='xl' title="Access your account" />
-                                <components.Paragraph text="You can reset your password if you've forgotten it." />
-                                <components.Paragraph text="If you cannot remember your email address you can also retrieve it here." />
-                                <h3 className="govuk-heading-m">Reset your password</h3>
-                                <components.Paragraph text="To reset your password we need to send an email to the address registered to your account." />
-
-                                <form id="resetPasswordForm" onSubmit={this.handleSubmit} noValidate>
-                                    <components.InputField
-                                        type='email'
-                                        inputId='email'
-                                        inputLabel='Email address'
-                                        errorMessagePlaceholder='email address'
-                                        onChange={this.onChange}
-                                        onError={this.onError}
-                                        showErrors={this.state.showErrors}
-                                    />
-                                    <button className="govuk-button" id="preSubmit" type="submit">Send email</button>
-                                </form>
-                                <components.Paragraph text={cannotRememberEmailLink} />
-                            </div>
-                        </div>
-                    </main>
-
-                </div>
-
+            <div id="activateAccount">
+                <components.PageContainer
+                    pageTitle='Access your account'
+                    aboveFormContent={aboveFormContent}
+                    formContent={formContent}
+                    belowFormContent={belowFormContent}
+                    submitButtonText='Send email'
+                    submitHandler={this.handleSubmit}
+                    errors={this.state.errors}
+                />
             </div>
         )
     }
