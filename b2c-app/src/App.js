@@ -52,23 +52,28 @@ class App extends React.Component {
     if (matchesPath(location, 'B2C_1A_signin_invitation') || hasSearchParam(location.search, 'p', 'B2C_1A_signin_invitation')) {
       return <Login />;
     }
+    //Activation email sent
     if (matchesPath(location, 'B2C_1A_account_signup/api')) {
       return <EmailSent action={ACTIONS.SIGNUP} />;
     }
     if (matchesPath(location, '/signup')) {
       return <Signup />;
     }
+    //Reset password email sent
     if (matchesPath(location, 'B2C_1A_passwordreset/api')) {
       return <EmailSent action={ACTIONS.RESET_PASSWORD} />;
     }
+    //Request email to reset your password
     if (matchesPath(location, 'B2C_1A_passwordreset') || hasSearchParam(location.search, 'p', 'B2C_1A_passwordreset')) {
       return <ResetPassword />;
     }
+    //Password has been changed
+    if (matchesPath(location, '/B2C_1A_passwordResetConformation/api')) {
+      return <PasswordChanged />;
+    }
+    //Enter new password page
     if (matchesPath(location, 'B2C_1A_passwordResetConformation')) {
       return <EnterNewPassword />;
-    }
-    if (matchesPath(location, '/password-changed')) {
-      return <PasswordChanged />;
     }
     //Results for forgotten email page
     if (matchesPath(location, 'B2C_1A_findEmail/api')) {

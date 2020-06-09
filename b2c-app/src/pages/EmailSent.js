@@ -28,27 +28,21 @@ class EmailSent extends React.Component {
             ) :
             null;
 
+        const content = [
+            <components.Paragraph text={contentFromB2C} key='paragraph1' />,
+            <components.Paragraph text="Check your spam folder if you can't see it in a few minutes." key='paragraph2' />,
+            <components.Paragraph text={resendActivationLink} key='paragraph3' />,
+            <components.Paragraph text="This link expires in 24 hours." key='paragraph4' />,
+            <components.Paragraph text={signupLink} key='paragraph5' />
+        ];
+
         return (
+
             <div id="emailSent">
-
-                <div className="govuk-width-container">
-                    <components.Breadcrumbs />
-
-                    <main className="govuk-main-wrapper">
-                        <div className="govuk-grid-row">
-                            <div className="govuk-grid-column-two-thirds">
-                                <components.PageTitle size='xl' title="We've sent you an email" />
-                                <components.Paragraph text={contentFromB2C} />
-                                <components.Paragraph text="Check your spam folder if you can't see it in a few minutes." />
-                                <components.Paragraph text={resendActivationLink} />
-                                <components.Paragraph text="This link expires in 24 hours." />
-                                <components.Paragraph text={signupLink} />
-                            </div>
-                        </div>
-                    </main>
-
-                </div>
-
+                <components.PageContainer
+                    pageTitle="We've sent you an email"
+                    aboveFormContent={content}
+                />
             </div>
         )
     }

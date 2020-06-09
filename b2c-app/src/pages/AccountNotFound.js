@@ -22,25 +22,19 @@ class AccountNotFound extends React.Component {
             "."
         ];
 
+        const content = [
+            <components.Paragraph text={resetPasswordParagraph} key='paragraph1' />,
+            <components.Paragraph text={`If you think you could have more than one account, call 0800 100 900. We'll confirm your details and delete any accounts you do not need.`} key='paragraph2' />,
+            <components.Paragraph text={createNewAccountParagraph} key='paragraph3' />
+        ];
+
         return (
+
             <div id="accountNotFound">
-
-                <div className="govuk-width-container">
-                    <components.Breadcrumbs />
-
-                    <main className="govuk-main-wrapper">
-                        <div className="govuk-grid-row">
-                            <div className="govuk-grid-column-two-thirds">
-                                <components.PageTitle size='xl' title='We have not been able to find your account' />
-                                <components.Paragraph text={resetPasswordParagraph} />
-                                <components.Paragraph text={`If you think you could have more than one account, call 0800 100 900. We'll confirm your details and delete any accounts you do not need.`} />
-                                <components.Paragraph text={createNewAccountParagraph} />
-                            </div>
-                        </div>
-                    </main>
-
-                </div>
-
+                <components.PageContainer
+                    pageTitle="We have not been able to find your account"
+                    aboveFormContent={content}
+                />
             </div>
         )
     }

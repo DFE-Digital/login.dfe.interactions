@@ -14,25 +14,19 @@ class AccountFound extends React.Component {
 
         const contentFromB2C = getInnerTextById('foundEmailMessageWithEmail');
 
+        const content = [
+            <components.Paragraph text={contentFromB2C} key='paragraph1' />,
+            <components.Paragraph text={`You'll need to use this email address to sign in to your account.`} key='paragraph2' />,
+            <components.ButtonLink action={ACTIONS.LOGIN} text='Sign in to your account' key='link' />
+        ];
+
         return (
+
             <div id="accountFound">
-
-                <div className="govuk-width-container">
-                    <components.Breadcrumbs />
-
-                    <main className="govuk-main-wrapper">
-                        <div className="govuk-grid-row">
-                            <div className="govuk-grid-column-two-thirds">
-                                <components.PageTitle size='xl' title='We&apos;ve found your email address' />
-                                <components.Paragraph text={contentFromB2C} />
-                                <components.Paragraph text={`You'll need to use this email address to sign in to your account.`} />
-                                <components.ButtonLink action={ACTIONS.LOGIN} text='Sign in to your account' />
-                            </div>
-                        </div>
-                    </main>
-
-                </div>
-
+                <components.PageContainer
+                    pageTitle="We've found your email address"
+                    aboveFormContent={content}
+                />
             </div>
         )
     }
