@@ -77,9 +77,13 @@ class PageLevelErrorContainer extends React.Component {
     };
 
     hasErrorItems() {
-        const hasErrors = this.props.errorItems.some(errorItem => {
+        let hasErrors = this.props.errorItems.some(errorItem => {
             return !!errorItem.visible.text;
         });
+        //also check if there are B2C errors and they are visible
+        if (!hasErrors) {
+            hasErrors = this.props.showB2CErrors && this.state.b2cErrors.length > 0;
+        }
         return hasErrors;
     }
 
@@ -96,7 +100,7 @@ class PageLevelErrorContainer extends React.Component {
             }) :
             null;
 
-        const b2cErrorItems = this.state.b2cErrors ?
+        const b2cErrorItems = this.props.showB2CErrors && this.state.b2cErrors ?
             this.state.b2cErrors.map(error => {
                 return error ?
                     (
@@ -116,7 +120,7 @@ class PageLevelErrorContainer extends React.Component {
             ) :
             null;
 
-        const containerClassName = `pageLevelErrorContainer ${this.state.b2cErrors.length > 0 || this.hasErrorItems() ? "show" : "hide"}`;
+        const containerClassName = `pageLevelErrorContainer ${this.hasErrorItems() ? "show" : "hide"}`;
 
         return (
             <div className={containerClassName}>

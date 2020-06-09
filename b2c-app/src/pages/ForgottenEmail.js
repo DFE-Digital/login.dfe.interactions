@@ -14,6 +14,7 @@ class ForgottenEmail extends React.Component {
             year: null,
             postcode: null,
             showErrors: false,
+            showB2CErrors: true,
             errors: []
         }
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -34,7 +35,9 @@ class ForgottenEmail extends React.Component {
             this.state.month &&
             this.state.year &&
             this.state.postcode) {
+            //hide our validation errors and prepare to show B2C ones (in case there are any)
             this.setState({ showErrors: false });
+            this.setState({ showB2CErrors: true });
             //everything is valid, set data and submit B2C form
             this.setDataAndSubmit();
         }
@@ -110,6 +113,7 @@ class ForgottenEmail extends React.Component {
                     submitButtonText='Find email address'
                     submitHandler={this.handleSubmit}
                     errors={this.state.errors}
+                    showB2CErrors={this.state.showB2CErrors}
                 />
             </div>
         )

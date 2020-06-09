@@ -11,6 +11,7 @@ class Login extends React.Component {
             email: null,
             password: null,
             showErrors: false,
+            showB2CErrors: true,
             errors: []
         }
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -27,7 +28,9 @@ class Login extends React.Component {
         //do something to validate and decide if we submit or show errors
         if (this.state.email &&
             this.state.password) {
+            //hide our validation errors and prepare to show B2C ones (in case there are any)
             this.setState({ showErrors: false });
+            this.setState({ showB2CErrors: true });
             //everything is valid, set data and submit B2C form
             this.setDataAndSubmit();
         }
@@ -99,6 +102,7 @@ class Login extends React.Component {
                     submitButtonText='Sign in'
                     submitHandler={this.handleSubmit}
                     errors={this.state.errors}
+                    showB2CErrors={this.state.showB2CErrors}
                     additionalColumn={additionalColumnContent}
                     errorSummaryContent={<components.Paragraph text="Your sign in details are incorrect" />}
                 />

@@ -13,6 +13,7 @@ class ActivateAccount extends React.Component {
             year: null,
             tsAndCsAccepted: false,
             showErrors: false,
+            showB2CErrors: true,
             errors: []
         }
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -32,7 +33,9 @@ class ActivateAccount extends React.Component {
             this.state.month &&
             this.state.year &&
             this.state.tsAndCsAccepted) {
+            //hide our validation errors and prepare to show B2C ones (in case there are any)
             this.setState({ showErrors: false });
+            this.setState({ showB2CErrors: true });
             //everything is valid, set data and submit B2C form
             this.setDataAndSubmit();
         }
@@ -96,6 +99,7 @@ class ActivateAccount extends React.Component {
                     submitButtonText='Activate account'
                     submitHandler={this.handleSubmit}
                     errors={this.state.errors}
+                    showB2CErrors={this.state.showB2CErrors}
                     errorSummaryContent={<components.PasswordHelp />}
                 />
             </div>

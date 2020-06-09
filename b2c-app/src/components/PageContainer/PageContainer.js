@@ -30,7 +30,11 @@ class PageContainer extends React.Component {
 
         const pageLevelContainer = this.props.errors ?
             (
-                <components.PageLevelErrorContainer errorItems={this.props.errors} summaryTextContent={this.props.errorSummaryContent} />
+                <components.PageLevelErrorContainer
+                    errorItems={this.props.errors}
+                    summaryTextContent={this.props.errorSummaryContent}
+                    showB2CErrors={this.props.showB2CErrors}
+                />
             ) :
             null;
 

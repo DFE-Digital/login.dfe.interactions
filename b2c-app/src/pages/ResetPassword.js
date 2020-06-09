@@ -10,6 +10,7 @@ class ResetPassword extends React.Component {
         this.state = {
             email: null,
             showErrors: false,
+            showB2CErrors: true,
             errors: []
         }
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -25,7 +26,9 @@ class ResetPassword extends React.Component {
         });
         //do something to validate and decide if we submit or show errors
         if (this.state.email) {
+            //hide our validation errors and prepare to show B2C ones (in case there are any)
             this.setState({ showErrors: false });
+            this.setState({ showB2CErrors: true });
             //everything is valid, set data and submit B2C form
             this.setDataAndSubmit();
         }
@@ -81,6 +84,7 @@ class ResetPassword extends React.Component {
                     submitButtonText='Send email'
                     submitHandler={this.handleSubmit}
                     errors={this.state.errors}
+                    showB2CErrors={this.state.showB2CErrors}
                 />
             </div>
         )

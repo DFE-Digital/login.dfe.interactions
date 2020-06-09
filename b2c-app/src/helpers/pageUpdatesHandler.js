@@ -10,6 +10,9 @@ export function onError(errors) {
 }
 
 export function onChange(valuesToSet) {
+    //after changes, hide B2C errors until next submit
+    this.setState({ showB2CErrors: false });
+    //set input values in state
     Object.keys(valuesToSet).forEach((key) => {
         this.setState({ [key]: valuesToSet[key] });
     });
