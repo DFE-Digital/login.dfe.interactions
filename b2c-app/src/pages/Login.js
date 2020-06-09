@@ -22,7 +22,7 @@ class Login extends React.Component {
         //update error messages
         this.state.errors.forEach((error) => {
             error.visible.text = error.current.text;
-            error.visible.showSummaryText = error.current.showSummaryText;
+            error.visible.showSummaryText = true;
         });
         //do something to validate and decide if we submit or show errors
         if (this.state.email &&
@@ -60,6 +60,7 @@ class Login extends React.Component {
                 type='email'
                 inputId='email'
                 inputLabel='Email address'
+                onChange={this.onChange}
                 errorMessagePlaceholder='email address'
                 showErrors={this.state.showErrors}
                 errors={this.state.errors}
@@ -69,6 +70,7 @@ class Login extends React.Component {
                 type='password'
                 inputId='password'
                 inputLabel='Password'
+                onChange={this.onChange}
                 errorMessagePlaceholder='password'
                 showErrors={this.state.showErrors}
                 errors={this.state.errors}
@@ -98,6 +100,7 @@ class Login extends React.Component {
                     submitHandler={this.handleSubmit}
                     errors={this.state.errors}
                     additionalColumn={additionalColumnContent}
+                    errorSummaryContent={<components.Paragraph text="Your sign in details are incorrect" />}
                 />
             </div>
         )

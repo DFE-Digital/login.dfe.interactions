@@ -1,13 +1,12 @@
 import React from 'react';
 import components from '..';
-import { onChange, onError } from '../../helpers/pageUpdatesHandler';
+import { onError } from '../../helpers/pageUpdatesHandler';
 
 class PageContainer extends React.Component {
 
     constructor(props) {
         super(props);
         this.onError = onError.bind(this);
-        this.onChange = onChange.bind(this);
     }
 
     componentDidMount() {
