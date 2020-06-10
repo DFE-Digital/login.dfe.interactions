@@ -10,7 +10,6 @@ class PageContainer extends React.Component {
     }
 
     componentDidMount() {
-        document.getElementById('api').style.display = 'none';
         document.title = `${this.props.pageTitle} | National Careers Service`;
     }
 

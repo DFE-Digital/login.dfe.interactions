@@ -22,6 +22,8 @@ class Signup extends React.Component {
 
     handleSubmit(e) {
         e.preventDefault();
+        //hide B2C errors and only show again if we are going to submit the form to B2C
+        this.setState({ showB2CErrors: false });
         //update error messages
         this.state.errors.forEach((error) => {
             error.visible.text = error.current.text;
