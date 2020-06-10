@@ -13,28 +13,45 @@ class EmailSent extends React.Component {
     render() {
 
         const contentFromB2C = getInnerTextById('successMessage');
+        const contentFromB2CParagraph = <components.Paragraph text={contentFromB2C} key='paragraph1' />;
 
-        const resetPasswordLinkParagraph = [
+        const accountRequiredParagraph = <components.Paragraph text='You will only receive this email if you have an account.' key='paragraph2' />;
+
+        const checkSpamFolderParagraph = <components.Paragraph text="Check your spam folder if you can't see it in a few minutes." key='paragraph3' />;
+
+        const resendActivationLink = [
             "If you don't receive an email after this time you can ",
             <components.Link action={ACTIONS.RESET_PASSWORD} text="resend password reset email" key="resetPassword" />,
             "."
         ];
+        const resendActivationLinkParagraph = <components.Paragraph text={resendActivationLink} key='paragraph4' />;
 
-        const resendActivationLink = this.props.action === ACTIONS.RESET_PASSWORD ? resetPasswordLinkParagraph : null;
+        const linkExpiresParagraph = <components.Paragraph text="This link expires in 24 hours." key='paragraph5' />;
 
-        const signupLink = this.props.action === ACTIONS.SIGNUP ?
-            (
-                <components.Link action={ACTIONS.SIGNUP} text="I entered the wrong email address" key="signup" />
-            ) :
-            null;
+        const signupLink = <components.Link action={ACTIONS.SIGNUP} text="I entered the wrong email address" />;
+        const signupLinkParagraph = <components.Paragraph text={signupLink} key='paragraph6' />;
 
-        const content = [
-            <components.Paragraph text={contentFromB2C} key='paragraph1' />,
-            <components.Paragraph text="Check your spam folder if you can't see it in a few minutes." key='paragraph2' />,
-            <components.Paragraph text={resendActivationLink} key='paragraph3' />,
-            <components.Paragraph text="This link expires in 24 hours." key='paragraph4' />,
-            <components.Paragraph text={signupLink} key='paragraph5' />
-        ];
+
+
+        let content;
+
+        if (this.props.action === ACTIONS.SIGNUP) {
+            content = [
+                contentFromB2CParagraph,
+                checkSpamFolderParagraph,
+                linkExpiresParagraph,
+                signupLinkParagraph
+            ];
+        }
+        else if (this.props.action === ACTIONS.RESET_PASSWORD) {
+            content = [
+                contentFromB2CParagraph,
+                accountRequiredParagraph,
+                checkSpamFolderParagraph,
+                resendActivationLinkParagraph,
+                linkExpiresParagraph
+            ];
+        }
 
         return (
 
