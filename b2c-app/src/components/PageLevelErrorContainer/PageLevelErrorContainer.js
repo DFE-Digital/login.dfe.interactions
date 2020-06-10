@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link, animateScroll } from "react-scroll";
 
 class PageLevelErrorContainer extends React.Component {
 
@@ -96,7 +97,14 @@ class PageLevelErrorContainer extends React.Component {
                 return error ?
                     (
                         <li key={error.id}>
-                            <a href={`#${error.id}`}>{error.visible.text}</a>
+                            <Link
+                                href='#'
+                                to={error.id}
+                                spy={false}
+                                smooth={true}
+                                offset={-80}
+                                duration={500}
+                            >{error.visible.text}</Link>
                         </li>
                     ) :
                     null
@@ -124,6 +132,11 @@ class PageLevelErrorContainer extends React.Component {
             null;
 
         const containerClassName = `pageLevelErrorContainer ${this.hasErrorItems() || this.hasB2CErrorItems() ? "show" : "hide"}`;
+
+        //scroll to top of the page if there are errors
+        if (this.hasErrorItems() || this.hasB2CErrorItems()) {
+            animateScroll.scrollToTop({ duration: 500 });
+        }
 
         return (
             <div className={containerClassName}>
