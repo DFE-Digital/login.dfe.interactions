@@ -76,6 +76,7 @@ class CreateNewPassword extends React.Component {
         else if (password.length < 8 || password.length > 16) {
             isValid = false;
             errors.newPassword.current.text = 'Enter between 8 and 16 characters';
+            errors.newPassword.current.showSummaryText = true;
         }
         //run validation as it has been set up in B2C (default values as suggested here: https://msdn.microsoft.com/en-us/library/azure/jj943764.aspx )
         // eslint-disable-next-line
