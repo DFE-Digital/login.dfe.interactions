@@ -32,22 +32,6 @@ class App extends React.Component {
   getComponentByLocation() {
     const { location } = this.props;
 
-    console.log('Current location object:');
-    console.log(location);
-
-    try {
-      if (document) {
-        console.log('API element from B2C:');
-        console.log(document.getElementById('api'));
-      }
-      else {
-        console.log('Document still not available');
-      }
-    }
-    catch (e) {
-      console.log(e);
-    }
-
     //Login page
     if (matchesPath(location, 'B2C_1A_signin_invitation') || hasSearchParam(location.search, 'p', 'B2C_1A_signin_invitation')) {
       return <Login />;
@@ -101,15 +85,12 @@ class App extends React.Component {
       return <ActivateAccount />;
     }
     //default
-    console.log('no matches, loading placeholder');
     return <Placeholder />;
   }
 
   render() {
 
     let component = this.getComponentByLocation();
-    console.log('We are going to render the component:');
-    console.log(component);
 
     return (
       <div className="App" id="app">
