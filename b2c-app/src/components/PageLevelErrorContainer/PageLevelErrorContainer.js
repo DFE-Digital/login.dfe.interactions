@@ -41,6 +41,8 @@ class PageLevelErrorContainer extends React.Component {
 
                 //set them in the state
                 this.setState({ b2cErrors: Array.from(errors) });
+                //scroll to the top of the page to show the errors
+                animateScroll.scrollToTop({ duration: 500 });
             }
         }
 
@@ -132,11 +134,6 @@ class PageLevelErrorContainer extends React.Component {
             null;
 
         const containerClassName = `pageLevelErrorContainer ${this.hasErrorItems() || this.hasB2CErrorItems() ? "show" : "hide"}`;
-
-        //scroll to top of the page if there are errors
-        if (this.hasErrorItems() || this.hasB2CErrorItems()) {
-            animateScroll.scrollToTop({ duration: 500 });
-        }
 
         return (
             <div className={containerClassName}>

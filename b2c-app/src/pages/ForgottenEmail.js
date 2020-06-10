@@ -1,4 +1,6 @@
 import React from 'react';
+import { animateScroll } from "react-scroll";
+
 import components from '../components';
 import { onChange } from '../helpers/pageUpdatesHandler';
 
@@ -46,6 +48,8 @@ class ForgottenEmail extends React.Component {
         else {
             //show errors in each component
             this.setState({ showErrors: true });
+            //scroll to the top of the page to show the errors
+            animateScroll.scrollToTop({ duration: 500 });
         }
     }
 
