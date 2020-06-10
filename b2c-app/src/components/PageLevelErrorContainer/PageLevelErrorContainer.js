@@ -10,6 +10,7 @@ class PageLevelErrorContainer extends React.Component {
         this.showSummaryText = this.showSummaryText.bind(this);
         this.pageLevelErrorCallback = this.pageLevelErrorCallback.bind(this);
         this.hasErrorItems = this.hasErrorItems.bind(this);
+        this.hasB2CErrorItems = this.hasB2CErrorItems.bind(this);
     }
 
     pageLevelErrorCallback(mutationsList, observer) {
@@ -71,20 +72,22 @@ class PageLevelErrorContainer extends React.Component {
     }
 
     showSummaryText() {
-        return this.props.errorItems.some(item => {
-            return item.visible.showSummaryText;
-        });
-    };
+        //show error summary if there are errors (not considering B2C errors as they don't show/hide summary text)
+        return this.hasErrorItems() &&
+            this.props.errorItems.some(item => {
+                return item.visible.showSummaryText;
+            });
+    }
 
     hasErrorItems() {
         let hasErrors = this.props.errorItems.some(errorItem => {
             return !!errorItem.visible.text;
         });
-        //also check if there are B2C errors and they are visible
-        if (!hasErrors) {
-            hasErrors = this.props.showB2CErrors && this.state.b2cErrors.length > 0;
-        }
         return hasErrors;
+    }
+
+    hasB2CErrorItems() {
+        return this.props.showB2CErrors && this.state.b2cErrors.length > 0;
     }
 
     render() {
@@ -105,7 +108,7 @@ class PageLevelErrorContainer extends React.Component {
                 return error ?
                     (
                         <li key={error}>
-                            <a href="#pageLevelErrorContainer">{error}</a>
+                            <p>{error}</p>
                         </li>
                     ) :
                     null
@@ -120,7 +123,7 @@ class PageLevelErrorContainer extends React.Component {
             ) :
             null;
 
-        const containerClassName = `pageLevelErrorContainer ${this.hasErrorItems() ? "show" : "hide"}`;
+        const containerClassName = `pageLevelErrorContainer ${this.hasErrorItems() || this.hasB2CErrorItems() ? "show" : "hide"}`;
 
         return (
             <div className={containerClassName}>
