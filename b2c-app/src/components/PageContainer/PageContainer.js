@@ -15,28 +15,28 @@ class PageContainer extends React.Component {
 
     render() {
 
-        const pageLevelErrorContainer = this.props.pageConfig && this.props.pageConfig.errors ?
-            (
+        let pageLevelErrorContainer;
+        if (this.props.pageConfig && this.props.pageConfig.errors) {
+            pageLevelErrorContainer =
                 <components.PageLevelErrorContainer
                     errorItems={this.props.pageConfig.errors}
                     summaryTextContent={this.props.pageConfig.errorSummaryContent}
                     showB2CErrors={this.props.pageConfig.showB2CErrors}
                 />
-            ) :
-            null;
+        }
 
         const pageColumns = this.props.columns.map(
             column => {
                 const formContainerClass = this.props.columns.length === 1 ? 'govuk-grid-column-two-thirds' : 'govuk-grid-column-one-half';
                 const formContainerHeaderSize = this.props.columns.length === 1 ? 'xl' : 'l';
-                const formContent = column.formContent ?
-                    (
+                let formContent;
+                if (column.formContent) {
+                    formContent =
                         <form id="customForm" onSubmit={column.submitHandler} noValidate>
                             {column.formContent}
                             <button className="govuk-button" id="preSubmit" type="submit">{column.submitButtonText}</button>
                         </form>
-                    ) :
-                    null;
+                }
 
                 return (
                     <div className={formContainerClass} key={column.header}>

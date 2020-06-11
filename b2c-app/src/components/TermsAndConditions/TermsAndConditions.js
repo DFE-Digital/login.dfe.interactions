@@ -65,14 +65,14 @@ class TermsAndConditions extends React.Component {
 
         const { errors } = this.state;
 
-        const tsAndCsErrorElement = this.props.showErrors && errors.tsAndCs.visible.text.length > 0 ?
-            (
+        let tsAndCsErrorElement;
+        if (this.props.showErrors && errors.tsAndCs.visible.text.length > 0) {
+            tsAndCsErrorElement =
                 <span id="tsAndCsError" className="govuk-error-message">
                     <span className="govuk-visually-hidden">Error:</span>
                     {errors.tsAndCs.visible.text}
                 </span>
-            ) :
-            null;
+        }
 
         return (
 

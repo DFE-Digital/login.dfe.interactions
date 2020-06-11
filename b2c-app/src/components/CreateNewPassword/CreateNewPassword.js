@@ -104,23 +104,22 @@ class CreateNewPassword extends React.Component {
 
         const { errors } = this.state;
 
-        const newPasswordErrorElement = this.props.showErrors && errors.newPassword.visible.text.length > 0 ?
-            (
+        let newPasswordErrorElement;
+        if (this.props.showErrors && errors.newPassword.visible.text.length > 0) {
+            newPasswordErrorElement =
                 <span id="newPasswordError" className="govuk-error-message">
                     <span className="govuk-visually-hidden">Error:</span>
                     {errors.newPassword.visible.text}
                 </span>
-            ) :
-            null;
+        }
 
-        const reenteredPasswordErrorElement = this.props.showErrors && errors.reenteredPassword.visible.text.length > 0 ?
-            (
+        let reenteredPasswordErrorElement;
+        if (this.props.showErrors && errors.reenteredPassword.visible.text.length > 0)
+            reenteredPasswordErrorElement =
                 <span id="reenteredPasswordError" className="govuk-error-message">
                     <span className="govuk-visually-hidden">Error:</span>
                     {errors.reenteredPassword.visible.text}
                 </span>
-            ) :
-            null;
 
         return (
 

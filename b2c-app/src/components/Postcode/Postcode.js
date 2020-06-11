@@ -68,14 +68,14 @@ class Postcode extends React.Component {
 
         const { errors } = this.state;
 
-        const postcodeErrorElement = this.props.showErrors && errors.postcode.visible.text.length > 0 ?
-            (
+        let postcodeErrorElement;
+        if (this.props.showErrors && errors.postcode.visible.text.length > 0) {
+            postcodeErrorElement =
                 <span id="postcodeError" className="govuk-error-message">
                     <span className="govuk-visually-hidden">Error:</span>
                     {errors.postcode.visible.text}
                 </span>
-            ) :
-            null;
+        }
 
         return (
             <div className={`govuk-form-group ${this.props.showErrors && errors.postcode.visible.text.length > 0 ? "govuk-form-group--error" : ""}`}>

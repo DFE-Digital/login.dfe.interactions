@@ -77,25 +77,25 @@ class InputField extends React.Component {
 
     render() {
 
-        const inputErrorElement = this.props.showErrors && this.errors.visible.text.length > 0 ?
-            (
+        let inputErrorElement;
+        if (this.props.showErrors && this.errors.visible.text.length > 0)
+            inputErrorElement =
                 <span id="inputError" className="govuk-error-message">
                     <span className="govuk-visually-hidden">Error:</span>
                     {this.errors.visible.text}
                 </span>
-            ) :
-            null;
 
-        const inputHint = this.props.hint ?
-            (
+        let inputHint;
+        if (this.props.hint) {
+            inputHint =
                 <span id={`${this.props.inputId}-hint`} className="govuk-hint">
                     {this.props.hint}
                 </span>
-            ) :
-            null;
+        }
 
-        const inputField = this.inputType === 'email' ?
-            (
+        let inputField;
+        if (this.inputType === 'email') {
+            inputField =
                 <input
                     className="govuk-input govuk-!-width-one-half"
                     id={this.elementUniqueId}
@@ -106,8 +106,9 @@ class InputField extends React.Component {
                     onChange={this.handleChange}
                     noValidate
                 />
-            ) :
-            (
+        }
+        else {
+            inputField =
                 <input
                     className="govuk-input govuk-!-width-one-half"
                     id={this.elementUniqueId}
@@ -116,7 +117,7 @@ class InputField extends React.Component {
                     onChange={this.handleChange}
                     noValidate
                 />
-            )
+        }
 
         return (
 

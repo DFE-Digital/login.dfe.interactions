@@ -88,14 +88,14 @@ class DateOfBirth extends React.Component {
 
         const { errors } = this.state;
 
-        const dobErrorElement = this.props.showErrors && errors.dob.visible.text.length > 0 ?
-            (
+        let dobErrorElement;
+        if (this.props.showErrors && errors.dob.visible.text.length > 0) {
+            dobErrorElement =
                 <span id="dobError" className="govuk-error-message">
                     <span className="govuk-visually-hidden">Error:</span>
                     {errors.dob.visible.text}
                 </span>
-            ) :
-            null;
+        }
 
         return (
             <div className={`govuk-form-group ${this.props.showErrors && errors.dob.visible.text.length > 0 ? "govuk-form-group--error" : ""}`}>

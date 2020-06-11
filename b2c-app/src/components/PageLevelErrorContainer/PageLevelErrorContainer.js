@@ -94,10 +94,11 @@ class PageLevelErrorContainer extends React.Component {
     }
 
     render() {
-        const errorItems = this.props.errorItems ?
-            this.props.errorItems.map(error => {
-                return error ?
-                    (
+        let errorItems;
+        if (this.props.errorItems) {
+            errorItems = this.props.errorItems.map(error => {
+                if (error) {
+                    return (
                         <li key={error.id}>
                             <Link
                                 href='#'
@@ -105,33 +106,37 @@ class PageLevelErrorContainer extends React.Component {
                                 spy={false}
                                 smooth={true}
                                 offset={-80}
-                                duration={500}
-                            >{error.visible.text}</Link>
+                                duration={500}>
+                                {error.visible.text}
+                            </Link>
                         </li>
-                    ) :
-                    null
-            }) :
-            null;
+                    )
+                }
+                return null;
+            });
+        }
 
-        const b2cErrorItems = this.props.showB2CErrors && this.state.b2cErrors ?
-            this.state.b2cErrors.map(error => {
-                return error ?
-                    (
+        let b2cErrorItems;
+        if (this.props.showB2CErrors && this.state.b2cErrors) {
+            b2cErrorItems = this.state.b2cErrors.map(error => {
+                if (error) {
+                    return (
                         <li key={error}>
                             <p>{error}</p>
                         </li>
-                    ) :
-                    null
-            }) :
-            null;
+                    )
+                }
+                return null;
+            });
+        }
 
-        const errorSummary = this.props.summaryTextContent && this.showSummaryText() ?
-            (
+        let errorSummary;
+        if (this.props.summaryTextContent && this.showSummaryText()) {
+            errorSummary =
                 <div id="errorSummaryText">
                     {this.props.summaryTextContent}
                 </div>
-            ) :
-            null;
+        }
 
         const containerClassName = `pageLevelErrorContainer ${this.hasErrorItems() || this.hasB2CErrorItems() ? "show" : "hide"}`;
 
