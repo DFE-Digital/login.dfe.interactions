@@ -12,7 +12,7 @@ class PasswordChanged extends React.Component {
 
         const content = [
             <components.Paragraph key='paragraph'>Use your new details to sign in and access your information.</components.Paragraph>,
-            <components.ButtonLink action={ACTIONS.LOGIN} text='Sign in to your account' key='link' />
+            <components.ButtonLink action={ACTIONS.LOGIN} key='link'>Sign in to your account</components.ButtonLink>
         ];
 
         const columns = [
