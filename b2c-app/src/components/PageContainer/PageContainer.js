@@ -39,7 +39,7 @@ class PageContainer extends React.Component {
                     null;
 
                 return (
-                    <div className={formContainerClass} key={column.pageTitle}>
+                    <div className={formContainerClass} key={column.header}>
                         <components.PageTitle size={formContainerHeaderSize} title={column.header} />
                         {column.aboveFormContent}
                         {formContent}
