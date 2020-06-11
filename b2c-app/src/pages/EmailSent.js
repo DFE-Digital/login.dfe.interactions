@@ -29,7 +29,7 @@ class EmailSent extends React.Component {
         const resendActivationLinkParagraph =
             <components.Paragraph key='paragraph4'>
                 If you don't receive an email after this time you can&nbsp;
-                <components.Link action={ACTIONS.RESET_PASSWORD} text="resend password reset email" key="resetPassword" />
+                <components.Link action={ACTIONS.RESET_PASSWORD}>resend password reset email</components.Link>
                 .
             </ components.Paragraph>
 
@@ -40,7 +40,7 @@ class EmailSent extends React.Component {
 
         const signupLinkParagraph =
             <components.Paragraph key='paragraph6'>
-                <components.Link action={ACTIONS.SIGNUP} text="I entered the wrong email address" />
+                <components.Link action={ACTIONS.SIGNUP}>I entered the wrong email address</components.Link>
             </components.Paragraph>
 
 

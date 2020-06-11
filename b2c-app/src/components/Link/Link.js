@@ -5,7 +5,7 @@ function Link(props) {
 
     return (
         <a href={getB2CLink(props.action)} className="govuk-link">
-            {props.text}
+            {props.children}
         </a>
     )
 }

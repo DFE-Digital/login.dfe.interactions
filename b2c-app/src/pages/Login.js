@@ -87,7 +87,7 @@ class Login extends React.Component {
                 key='password'
             />,
             <components.Paragraph errors={this.state.errors} key='paragraph'>
-                <components.Link action={ACTIONS.RESET_PASSWORD} text="I cannot access my account" key="resetPassword" />
+                <components.Link action={ACTIONS.RESET_PASSWORD}>I cannot access my account</components.Link>
             </components.Paragraph>
         ];
 
@@ -96,7 +96,7 @@ class Login extends React.Component {
          */
         const additionalColumnContent =
             <components.Paragraph key='paragraph'>
-                <components.Link action={ACTIONS.SIGNUP} text="Creating an account" key="signup" />
+                <components.Link action={ACTIONS.SIGNUP}>Creating an account</components.Link>
                 &nbsp;allows you to access and save your skills health check reports.
             </components.Paragraph>
 

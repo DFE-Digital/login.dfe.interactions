@@ -84,7 +84,7 @@ class ResetPassword extends React.Component {
 
         const belowFormContent =
             <components.Paragraph>
-                <components.Link action={ACTIONS.FIND_EMAIL} text="Can't remember your email address?" key="forgotenEmail" />
+                <components.Link action={ACTIONS.FIND_EMAIL}>Can't remember your email address?</components.Link>
             </components.Paragraph>
 
         const columns = [

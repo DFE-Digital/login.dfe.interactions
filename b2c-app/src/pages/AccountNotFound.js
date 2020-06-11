@@ -12,7 +12,7 @@ class AccountNotFound extends React.Component {
 
         const content = [
             <components.Paragraph key='paragraph1'>
-                <components.Link action={ACTIONS.RESET_PASSWORD} text="Try again" key="retry" />
+                <components.Link action={ACTIONS.RESET_PASSWORD}>Try again</components.Link>
                 &nbsp;with other details you may have used when you created your account.
             </components.Paragraph>,
             <components.Paragraph key='paragraph2'>
@@ -20,7 +20,7 @@ class AccountNotFound extends React.Component {
             </components.Paragraph>,
             <components.Paragraph key='paragraph3'>
                 If you're unable to recover your registered email address, you'll have to&nbsp;
-                <components.Link action={ACTIONS.SIGNUP} text="create a new account" key="signup" />
+                <components.Link action={ACTIONS.SIGNUP}>create a new account</components.Link>
                 .
             </components.Paragraph>
         ];
