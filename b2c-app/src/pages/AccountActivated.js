@@ -11,7 +11,7 @@ class AccountActivated extends React.Component {
         };
 
         const content = [
-            <components.Paragraph text='You can start using your account to access your information.' key='paragraph' />,
+            <components.Paragraph key='paragraph'>You can start using your account to access your information.</components.Paragraph>,
             <components.ButtonLink action={ACTIONS.LOGIN} text='Sign in to your account' key='link' />
         ];
 

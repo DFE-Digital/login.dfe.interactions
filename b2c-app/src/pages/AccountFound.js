@@ -14,8 +14,8 @@ class AccountFound extends React.Component {
         const contentFromB2C = getInnerTextById('foundEmailMessageWithEmail');
 
         const content = [
-            <components.Paragraph text={contentFromB2C} key='paragraph1' />,
-            <components.Paragraph text={`You'll need to use this email address to sign in to your account.`} key='paragraph2' />,
+            <components.Paragraph key='paragraph1'>{contentFromB2C}</components.Paragraph>,
+            <components.Paragraph key='paragraph2'>You'll need to use this email address to sign in to your account.</components.Paragraph>,
             <components.ButtonLink action={ACTIONS.LOGIN} text='Sign in to your account' key='link' />
         ];
 

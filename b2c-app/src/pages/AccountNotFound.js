@@ -10,21 +10,19 @@ class AccountNotFound extends React.Component {
             title: "We have not been able to find your account"
         };
 
-        const resetPasswordParagraph = [
-            <components.Link action={ACTIONS.RESET_PASSWORD} text="Try again" key="retry" />,
-            " with other details you may have used when you created your account."
-        ];
-
-        const createNewAccountParagraph = [
-            "If you're unable to recover your registered email address, you'll have to ",
-            <components.Link action={ACTIONS.SIGNUP} text="create a new account" key="signup" />,
-            "."
-        ];
-
         const content = [
-            <components.Paragraph text={resetPasswordParagraph} key='paragraph1' />,
-            <components.Paragraph text={`If you think you could have more than one account, call 0800 100 900. We'll confirm your details and delete any accounts you do not need.`} key='paragraph2' />,
-            <components.Paragraph text={createNewAccountParagraph} key='paragraph3' />
+            <components.Paragraph key='paragraph1'>
+                <components.Link action={ACTIONS.RESET_PASSWORD} text="Try again" key="retry" />
+                &nbsp;with other details you may have used when you created your account.
+            </components.Paragraph>,
+            <components.Paragraph key='paragraph2'>
+                If you think you could have more than one account, call 0800 100 900. We'll confirm your details and delete any accounts you do not need.
+            </components.Paragraph>,
+            <components.Paragraph key='paragraph3'>
+                If you're unable to recover your registered email address, you'll have to&nbsp;
+                <components.Link action={ACTIONS.SIGNUP} text="create a new account" key="signup" />
+                .
+            </components.Paragraph>
         ];
 
         const columns = [

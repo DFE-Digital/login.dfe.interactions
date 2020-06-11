@@ -65,8 +65,6 @@ class Login extends React.Component {
         /**
          * Column 1 in Login page
          */
-        const cannotAccessAccountLink = <components.Link action={ACTIONS.RESET_PASSWORD} text="I cannot access my account" key="resetPassword" />;
-
         const formContent = [
             <components.InputField
                 type='email'
@@ -88,18 +86,19 @@ class Login extends React.Component {
                 errors={this.state.errors}
                 key='password'
             />,
-            <components.Paragraph text={cannotAccessAccountLink} errors={this.state.errors} key='paragraph' />
+            <components.Paragraph errors={this.state.errors} key='paragraph'>
+                <components.Link action={ACTIONS.RESET_PASSWORD} text="I cannot access my account" key="resetPassword" />
+            </components.Paragraph>
         ];
 
         /**
          * Column 2 in Login page
          */
-        const createNewAccountParagraph = [
-            <components.Link action={ACTIONS.SIGNUP} text="Creating an account" key="signup" />,
-            " allows you to access and save your skills health check reports."
-        ];
-
-        const additionalColumnContent = <components.Paragraph text={createNewAccountParagraph} key='paragraph' />;
+        const additionalColumnContent =
+            <components.Paragraph key='paragraph'>
+                <components.Link action={ACTIONS.SIGNUP} text="Creating an account" key="signup" />
+                &nbsp;allows you to access and save your skills health check reports.
+            </components.Paragraph>
 
         /**
          * Page configuration
@@ -108,7 +107,7 @@ class Login extends React.Component {
             title: "Sign in",
             errors: this.state.errors,
             showB2CErrors: this.state.showB2CErrors,
-            errorSummaryContent: <components.Paragraph text="Your sign in details are incorrect" />
+            errorSummaryContent: <components.Paragraph>Your sign in details are incorrect</components.Paragraph>
         };
 
         /**

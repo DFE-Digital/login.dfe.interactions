@@ -1,18 +1,13 @@
 import React from 'react';
 import { getB2CLink } from '../../helpers/urls';
 
-class Link extends React.Component {
+function Link(props) {
 
-    render() {
-
-        return (
-
-            <a href={getB2CLink(this.props.action)} className="govuk-link">
-                {this.props.text}
-            </a>
-
-        )
-    }
+    return (
+        <a href={getB2CLink(props.action)} className="govuk-link">
+            {props.text}
+        </a>
+    )
 }
 
 export default Link;

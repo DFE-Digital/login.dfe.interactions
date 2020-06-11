@@ -11,25 +11,37 @@ class EmailSent extends React.Component {
             title: "We've sent you an email"
         };
 
-        const contentFromB2C = getInnerTextById('successMessage');
-        const contentFromB2CParagraph = <components.Paragraph text={contentFromB2C} key='paragraph1' />;
+        const contentFromB2CParagraph =
+            <components.Paragraph key='paragraph1'>
+                {getInnerTextById('successMessage')}
+            </components.Paragraph>
 
-        const accountRequiredParagraph = <components.Paragraph text='You will only receive this email if you have an account.' key='paragraph2' />;
+        const accountRequiredParagraph =
+            <components.Paragraph key='paragraph2'>
+                You will only receive this email if you have an account.
+            </components.Paragraph>
 
-        const checkSpamFolderParagraph = <components.Paragraph text="Check your spam folder if you can't see it in a few minutes." key='paragraph3' />;
+        const checkSpamFolderParagraph =
+            <components.Paragraph key='paragraph3'>
+                Check your spam folder if you can't see it in a few minutes.
+            </components.Paragraph>
 
-        const resendActivationLink = [
-            "If you don't receive an email after this time you can ",
-            <components.Link action={ACTIONS.RESET_PASSWORD} text="resend password reset email" key="resetPassword" />,
-            "."
-        ];
-        const resendActivationLinkParagraph = <components.Paragraph text={resendActivationLink} key='paragraph4' />;
+        const resendActivationLinkParagraph =
+            <components.Paragraph key='paragraph4'>
+                If you don't receive an email after this time you can&nbsp;
+                <components.Link action={ACTIONS.RESET_PASSWORD} text="resend password reset email" key="resetPassword" />
+                .
+            </ components.Paragraph>
 
-        const linkExpiresParagraph = <components.Paragraph text="This link expires in 24 hours." key='paragraph5' />;
+        const linkExpiresParagraph =
+            <components.Paragraph key='paragraph5'>
+                This link expires in 24 hours.
+            </components.Paragraph>
 
-        const signupLink = <components.Link action={ACTIONS.SIGNUP} text="I entered the wrong email address" />;
-        const signupLinkParagraph = <components.Paragraph text={signupLink} key='paragraph6' />;
-
+        const signupLinkParagraph =
+            <components.Paragraph key='paragraph6'>
+                <components.Link action={ACTIONS.SIGNUP} text="I entered the wrong email address" />
+            </components.Paragraph>
 
 
         let content;

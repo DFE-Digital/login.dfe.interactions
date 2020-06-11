@@ -1,15 +1,10 @@
 import React from 'react';
 
-class Paragraph extends React.Component {
+function Paragraph(props) {
 
-    render() {
-
-        return (
-
-            <p className="govuk-body">{this.props.text}</p>
-
-        )
-    }
+    return (
+        <p className="govuk-body">{props.children}</p>
+    )
 }
 
 export default Paragraph;

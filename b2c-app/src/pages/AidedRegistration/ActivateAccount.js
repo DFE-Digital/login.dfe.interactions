@@ -88,7 +88,9 @@ class ActivateAccount extends React.Component {
                 showErrors={this.state.showErrors}
                 errors={this.state.errors}
                 key="createNewPassword" />,
-            <components.Paragraph text='As an extra security check, enter your date of birth.' errors={this.state.errors} key="paragraph" />,
+            <components.Paragraph errors={this.state.errors} key="paragraph">
+                As an extra security check, enter your date of birth.
+            </components.Paragraph>,
             <components.DateOfBirth
                 onChange={this.onChange}
                 showErrors={this.state.showErrors}

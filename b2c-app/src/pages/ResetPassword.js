@@ -64,13 +64,11 @@ class ResetPassword extends React.Component {
             showB2CErrors: this.state.showB2CErrors
         };
 
-        const cannotRememberEmailLink = <components.Link action={ACTIONS.FIND_EMAIL} text="Can't remember your email address?" key="forgotenEmail" />;
-
         const aboveFormContent = [
-            <components.Paragraph text="You can reset your password if you've forgotten it." key='paragraph1' />,
-            <components.Paragraph text="If you cannot remember your email address you can also retrieve it here." key='paragraph2' />,
+            <components.Paragraph key='paragraph1'>You can reset your password if you've forgotten it.</components.Paragraph>,
+            <components.Paragraph key='paragraph2'>If you cannot remember your email address you can also retrieve it here.</components.Paragraph>,
             <h3 className="govuk-heading-m" key='heading'>Reset your password</h3>,
-            <components.Paragraph text="To reset your password we need to send an email to the address registered to your account." key='paragraph3' />
+            <components.Paragraph key='paragraph3'>To reset your password we need to send an email to the address registered to your account.</components.Paragraph>
         ];
 
         const formContent =
@@ -84,7 +82,10 @@ class ResetPassword extends React.Component {
                 errors={this.state.errors}
             />;
 
-        const belowFormContent = <components.Paragraph text={cannotRememberEmailLink} />;
+        const belowFormContent =
+            <components.Paragraph>
+                <components.Link action={ACTIONS.FIND_EMAIL} text="Can't remember your email address?" key="forgotenEmail" />
+            </components.Paragraph>
 
         const columns = [
             {
