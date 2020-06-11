@@ -5,12 +5,11 @@ import { getInnerTextById } from '../helpers/dom';
 
 class AccountFound extends React.Component {
 
-    componentDidMount() {
-        document.getElementById('api').style.display = 'none';
-        document.title = "We've found your email address | National Careers Service";
-    }
-
     render() {
+
+        const pageConfig = {
+            title: "We've found your email address"
+        };
 
         const contentFromB2C = getInnerTextById('foundEmailMessageWithEmail');
 
@@ -20,13 +19,17 @@ class AccountFound extends React.Component {
             <components.ButtonLink action={ACTIONS.LOGIN} text='Sign in to your account' key='link' />
         ];
 
+        const columns = [
+            {
+                header: pageConfig.title,
+                aboveFormContent: content
+            }
+        ];
+
         return (
 
             <div id="accountFound">
-                <components.PageContainer
-                    pageTitle="We've found your email address"
-                    aboveFormContent={content}
-                />
+                <components.PageContainer pageConfig={pageConfig} columns={columns} />
             </div>
         )
     }

@@ -5,12 +5,11 @@ import { ACTIONS } from '../constants/actions';
 
 class EmailSent extends React.Component {
 
-    componentDidMount() {
-        document.getElementById('api').style.display = 'none';
-        document.title = `We've sent you an email | National Careers Service`;
-    }
-
     render() {
+
+        const pageConfig = {
+            title: "We've sent you an email"
+        };
 
         const contentFromB2C = getInnerTextById('successMessage');
         const contentFromB2CParagraph = <components.Paragraph text={contentFromB2C} key='paragraph1' />;
@@ -53,13 +52,17 @@ class EmailSent extends React.Component {
             ];
         }
 
+        const columns = [
+            {
+                header: pageConfig.title,
+                aboveFormContent: content
+            }
+        ];
+
         return (
 
             <div id="emailSent">
-                <components.PageContainer
-                    pageTitle="We've sent you an email"
-                    aboveFormContent={content}
-                />
+                <components.PageContainer pageConfig={pageConfig} columns={columns} />
             </div>
         )
     }

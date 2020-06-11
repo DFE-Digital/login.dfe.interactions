@@ -6,18 +6,25 @@ class AccountActivated extends React.Component {
 
     render() {
 
+        const pageConfig = {
+            title: "We've activated your account"
+        };
+
         const content = [
             <components.Paragraph text='You can start using your account to access your information.' key='paragraph' />,
             <components.ButtonLink action={ACTIONS.LOGIN} text='Sign in to your account' key='link' />
         ];
 
-        return (
+        const columns = [
+            {
+                header: pageConfig.title,
+                aboveFormContent: content
+            }
+        ];
 
+        return (
             <div id="accountActivated">
-                <components.PageContainer
-                    pageTitle="We've activated your account"
-                    aboveFormContent={content}
-                />
+                <components.PageContainer pageConfig={pageConfig} columns={columns} />
             </div>
         )
     }

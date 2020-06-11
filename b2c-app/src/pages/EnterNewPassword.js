@@ -60,6 +60,13 @@ class EnterNewPassword extends React.Component {
 
     render() {
 
+        const pageConfig = {
+            title: "Reset your password",
+            errors: this.state.errors,
+            showB2CErrors: this.state.showB2CErrors,
+            errorSummaryContent: <components.PasswordHelp />
+        };
+
         const formContent =
             <components.CreateNewPassword
                 onChange={this.onChange}
@@ -67,17 +74,18 @@ class EnterNewPassword extends React.Component {
                 errors={this.state.errors}
             />;
 
+        const columns = [
+            {
+                header: pageConfig.title,
+                formContent: formContent,
+                submitButtonText: 'Reset password',
+                submitHandler: this.handleSubmit
+            }
+        ];
+
         return (
             <div id="enterNewPassword">
-                <components.PageContainer
-                    pageTitle='Reset your password'
-                    formContent={formContent}
-                    submitButtonText='Reset password'
-                    submitHandler={this.handleSubmit}
-                    errors={this.state.errors}
-                    showB2CErrors={this.state.showB2CErrors}
-                    errorSummaryContent={<components.PasswordHelp />}
-                />
+                <components.PageContainer pageConfig={pageConfig} columns={columns} />
             </div>
         )
     }

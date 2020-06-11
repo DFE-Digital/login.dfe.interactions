@@ -79,6 +79,13 @@ class Signup extends React.Component {
 
     render() {
 
+        const pageConfig = {
+            title: "Create an account",
+            errors: this.state.errors,
+            showB2CErrors: this.state.showB2CErrors,
+            errorSummaryContent: <components.PasswordHelp />
+        };
+
         const formContent = [
             <components.InputField
                 inputId='firstName'
@@ -121,17 +128,18 @@ class Signup extends React.Component {
                 key="tsAndCs" />
         ];
 
+        const columns = [
+            {
+                header: pageConfig.title,
+                formContent: formContent,
+                submitButtonText: 'Create an account',
+                submitHandler: this.handleSubmit
+            }
+        ];
+
         return (
             <div id="activateAccount">
-                <components.PageContainer
-                    pageTitle='Create an account'
-                    formContent={formContent}
-                    submitButtonText='Create an account'
-                    submitHandler={this.handleSubmit}
-                    errors={this.state.errors}
-                    showB2CErrors={this.state.showB2CErrors}
-                    errorSummaryContent={<components.PasswordHelp />}
-                />
+                <components.PageContainer pageConfig={pageConfig} columns={columns} />
             </div>
         )
     }

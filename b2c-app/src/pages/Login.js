@@ -62,6 +62,9 @@ class Login extends React.Component {
 
     render() {
 
+        /**
+         * Column 1 in Login page
+         */
         const cannotAccessAccountLink = <components.Link action={ACTIONS.RESET_PASSWORD} text="I cannot access my account" key="resetPassword" />;
 
         const formContent = [
@@ -88,30 +91,45 @@ class Login extends React.Component {
             <components.Paragraph text={cannotAccessAccountLink} errors={this.state.errors} key='paragraph' />
         ];
 
+        /**
+         * Column 2 in Login page
+         */
         const createNewAccountParagraph = [
             <components.Link action={ACTIONS.SIGNUP} text="Creating an account" key="signup" />,
             " allows you to access and save your skills health check reports."
         ];
 
-        const additionalColumnContent =
-            <div className="govuk-grid-column-one-half">
-                <components.PageTitle size='l' title='Create an account' key='columnTitle' />
-                <components.Paragraph text={createNewAccountParagraph} key='paragraph' />
-            </div>
-            ;
+        const additionalColumnContent = <components.Paragraph text={createNewAccountParagraph} key='paragraph' />;
+
+        /**
+         * Page configuration
+         */
+        const pageConfig = {
+            title: "Sign in",
+            errors: this.state.errors,
+            showB2CErrors: this.state.showB2CErrors,
+            errorSummaryContent: <components.Paragraph text="Your sign in details are incorrect" />
+        };
+
+        /**
+         * Column object to pass to page container
+         */
+        const columns = [
+            {
+                header: pageConfig.title,
+                formContent: formContent,
+                submitButtonText: 'Sign in',
+                submitHandler: this.handleSubmit
+            },
+            {
+                header: 'Create an account',
+                aboveFormContent: additionalColumnContent
+            }
+        ];
 
         return (
             <div id="login">
-                <components.PageContainer
-                    pageTitle='Sign in'
-                    formContent={formContent}
-                    submitButtonText='Sign in'
-                    submitHandler={this.handleSubmit}
-                    errors={this.state.errors}
-                    showB2CErrors={this.state.showB2CErrors}
-                    additionalColumn={additionalColumnContent}
-                    errorSummaryContent={<components.Paragraph text="Your sign in details are incorrect" />}
-                />
+                <components.PageContainer pageConfig={pageConfig} columns={columns} />
             </div>
         )
     }

@@ -78,6 +78,13 @@ class ActivateAccount extends React.Component {
 
     render() {
 
+        const pageConfig = {
+            title: "Activate your account",
+            errors: this.state.errors,
+            showB2CErrors: this.state.showB2CErrors,
+            errorSummaryContent: <components.PasswordHelp />
+        };
+
         const formContent = [
             <components.CreateNewPassword
                 onChange={this.onChange}
@@ -97,17 +104,18 @@ class ActivateAccount extends React.Component {
                 key="tsAndCs" />
         ];
 
+        const columns = [
+            {
+                header: pageConfig.title,
+                formContent: formContent,
+                submitButtonText: 'Activate account',
+                submitHandler: this.handleSubmit
+            }
+        ];
+
         return (
             <div id="activateAccount">
-                <components.PageContainer
-                    pageTitle='Activate your account'
-                    formContent={formContent}
-                    submitButtonText='Activate account'
-                    submitHandler={this.handleSubmit}
-                    errors={this.state.errors}
-                    showB2CErrors={this.state.showB2CErrors}
-                    errorSummaryContent={<components.PasswordHelp />}
-                />
+                <components.PageContainer pageConfig={pageConfig} columns={columns} />
             </div>
         )
     }

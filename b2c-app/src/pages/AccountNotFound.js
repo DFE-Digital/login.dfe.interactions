@@ -4,12 +4,11 @@ import { ACTIONS } from '../constants/actions';
 
 class AccountNotFound extends React.Component {
 
-    componentDidMount() {
-        document.getElementById('api').style.display = 'none';
-        document.title = 'We have not been able to find your account | National Careers Service';
-    }
-
     render() {
+
+        const pageConfig = {
+            title: "We have not been able to find your account"
+        };
 
         const resetPasswordParagraph = [
             <components.Link action={ACTIONS.RESET_PASSWORD} text="Try again" key="retry" />,
@@ -28,13 +27,17 @@ class AccountNotFound extends React.Component {
             <components.Paragraph text={createNewAccountParagraph} key='paragraph3' />
         ];
 
+        const columns = [
+            {
+                header: pageConfig.title,
+                aboveFormContent: content
+            }
+        ];
+
         return (
 
             <div id="accountNotFound">
-                <components.PageContainer
-                    pageTitle="We have not been able to find your account"
-                    aboveFormContent={content}
-                />
+                <components.PageContainer pageConfig={pageConfig} columns={columns} />
             </div>
         )
     }

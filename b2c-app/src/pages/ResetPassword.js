@@ -58,6 +58,12 @@ class ResetPassword extends React.Component {
 
     render() {
 
+        const pageConfig = {
+            title: "Access your account",
+            errors: this.state.errors,
+            showB2CErrors: this.state.showB2CErrors
+        };
+
         const cannotRememberEmailLink = <components.Link action={ACTIONS.FIND_EMAIL} text="Can't remember your email address?" key="forgotenEmail" />;
 
         const aboveFormContent = [
@@ -80,18 +86,20 @@ class ResetPassword extends React.Component {
 
         const belowFormContent = <components.Paragraph text={cannotRememberEmailLink} />;
 
+        const columns = [
+            {
+                header: pageConfig.title,
+                aboveFormContent: aboveFormContent,
+                formContent: formContent,
+                belowFormContent: belowFormContent,
+                submitButtonText: 'Send email',
+                submitHandler: this.handleSubmit
+            }
+        ];
+
         return (
-            <div id="activateAccount">
-                <components.PageContainer
-                    pageTitle='Access your account'
-                    aboveFormContent={aboveFormContent}
-                    formContent={formContent}
-                    belowFormContent={belowFormContent}
-                    submitButtonText='Send email'
-                    submitHandler={this.handleSubmit}
-                    errors={this.state.errors}
-                    showB2CErrors={this.state.showB2CErrors}
-                />
+            <div id="resetPassword">
+                <components.PageContainer pageConfig={pageConfig} columns={columns} />
             </div>
         )
     }
