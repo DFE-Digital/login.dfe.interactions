@@ -101,7 +101,7 @@ class Login extends React.Component {
          * Page configuration
          */
         const pageConfig = {
-            title: "Sign in",
+            title: "Sign in to your account",
             errors: this.state.errors,
             showB2CErrors: this.state.showB2CErrors,
             errorSummaryContent: <components.Paragraph>Your sign in details are incorrect</components.Paragraph>
@@ -112,7 +112,7 @@ class Login extends React.Component {
          */
         const columns = [
             {
-                header: pageConfig.title,
+                header: 'Sign in',
                 formContent: formContent,
                 submitButtonText: 'Sign in',
                 submitHandler: this.handleSubmit
