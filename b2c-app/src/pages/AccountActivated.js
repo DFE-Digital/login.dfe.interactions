@@ -1,33 +1,35 @@
 import React from 'react';
 import components from '../components';
-import { getB2CLink } from '../helpers/urls';
 import { ACTIONS } from '../constants/actions';
 
-export default function AccountActivated() {
-    return (
-        <div id="accountActivated">
+class AccountActivated extends React.Component {
 
-            <div className="govuk-width-container">
-                <components.Breadcrumbs />
+    render() {
 
-                <div id="pageLevelErrorContainer"></div>
+        const pageConfig = {
+            title: "We've activated your account"
+        };
 
-                <main className="govuk-main-wrapper">
-                    <div className="govuk-grid-row">
-                        <div className="govuk-grid-column-two-thirds">
-                            <components.PageTitle size='xl' title="We've activated your account"/>
-                            <components.B2C />
-                            <a href={getB2CLink(ACTIONS.LOGIN)} role="button" draggable="false" className="govuk-button govuk-button--start" data-module="govuk-button">
-                                Sign in to your account
-                            </a>
-                        </div>
-                    </div>
-                </main>
-
+        const content =
+            <div>
+                <components.Paragraph>You can start using your account to access your information.</components.Paragraph>
+                <components.ButtonLink action={ACTIONS.LOGIN}>Sign in to your account</components.ButtonLink>
             </div>
 
-            <script src="__--b2cPath--__/b2c/assets/js-static/pages/accountActivated.js"></script>
+        const columns = [
+            {
+                header: pageConfig.title,
+                aboveFormContent: content
+            }
+        ];
 
-        </div>
-    )
+        return (
+            <div id="accountActivated">
+                <components.PageContainer pageConfig={pageConfig} columns={columns} />
+            </div>
+        )
+    }
+
 }
+
+export default AccountActivated;

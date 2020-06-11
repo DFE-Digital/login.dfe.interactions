@@ -1,12 +1,17 @@
 import { ACTIONS } from '../constants/actions';
 
-export function getB2CLink (action) {        
+export function getB2CLink(action) {
 
-    const clientId = '488c321f-10e4-48f2-b9c2-261e2add2f8d'; 
+    const clientId = '488c321f-10e4-48f2-b9c2-261e2add2f8d';
+
+    //Find out values for redirect URI and B2C tenant to be added to the resulting link URL
+    let queryParams = (new URL(document.location)).searchParams;
+    let redirectURI = queryParams.get("redirect_uri") || 'https://jwt.ms';
+    let b2cTenant = window.location.host.slice(0, window.location.host.indexOf('.'));
 
     let actionURL;
 
-    switch(action){
+    switch (action) {
         case ACTIONS.SIGNUP:
             actionURL = 'B2C_1A_account_signup';
             break;
@@ -25,10 +30,18 @@ export function getB2CLink (action) {
             break;
     }
 
-    let absolutePath = `https://__b2c-tenant__.b2clogin.com/__b2c-tenant__.onmicrosoft.com/oauth2/v2.0/` +
-        `authorize?p=${actionURL}&client_id=${clientId}&nonce=defaultNonce` + 
-        `&redirect_uri=__redirect-uri__&scope=openid&response_type=id_token&prompt=login`;
+    let absolutePath = `https://${b2cTenant}.b2clogin.com/${b2cTenant}.onmicrosoft.com/oauth2/v2.0/` +
+        `authorize?p=${actionURL}&client_id=${clientId}&nonce=defaultNonce` +
+        `&redirect_uri=${redirectURI}&scope=openid&response_type=id_token&prompt=login`;
 
     return absolutePath;
 
+}
+
+export function matchesPath(location, path) {
+    return location.pathname.search(path) !== -1;
+}
+
+export function hasSearchParam(search, param, value) {
+    return new URLSearchParams(search).get(param) === value;
 }

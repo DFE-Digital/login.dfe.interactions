@@ -11,9 +11,7 @@ fs.readFile(indexFile, 'utf8', (err, data) => {
         console.error('Something went wrong:', err);
     }
 
-    let newFile = data.replace(/(\r\n)*<script.*?\/script>(\r\n)*/g, '');
-    newFile = newFile.replace(/client-script/g, 'script');
-    newFile = newFile.replace(/rel="stylesheet"/g, 'rel="stylesheet" data-preload="true"');
+    let newFile = data.replace(/rel="stylesheet"/g, 'rel="stylesheet" data-preload="true"');
 
     fs.writeFile(filename, newFile, (err) => {
         console.log(err);

@@ -2,10 +2,12 @@ import React from 'react';
 
 import { ACTIONS } from './constants/actions';
 
+import { domHasElementWithId } from './helpers/dom';
+import { matchesPath, hasSearchParam } from './helpers/urls';
+
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import EmailSent from './pages/EmailSent';
-import AccountLocked from './pages/AccountLocked';
 import AccountActivated from './pages/AccountActivated';
 import ResetPassword from './pages/ResetPassword';
 import ForgottenEmail from './pages/ForgottenEmail';
@@ -23,66 +25,94 @@ import {
   Route
 } from "react-router-dom";
 
-function App() {
-  return (
-    <div className="App" id="app">
+import { withRouter } from "react-router";
 
-      {/* header */}
-      <components.Header />
+class App extends React.Component {
 
-      {/* routing */}
-      <div id="routes">
-        <Switch>
-          <Route exact path="/">
-            <Placeholder />
-          </Route>
-          <Route path="/signup">
-            <Signup />
-          </Route>
-          <Route path="/login">
-            <Login />
-          </Route>
-          <Route path="/email-sent"
-            render = { () => <EmailSent action={ACTIONS.SIGNUP} />}
-            />
-          <Route path="/locked">
-            <AccountLocked />
-          </Route>
-          <Route path="/activated">
-            <AccountActivated />
-          </Route>
-          <Route path="/reset-password">
-            <ResetPassword />
-          </Route>
-          <Route path="/reset-password-email-sent"
-            render = { () => <EmailSent action={ACTIONS.RESET_PASSWORD} />}
-            />
-          <Route path="/enter-new-password">
-            <EnterNewPassword />
-          </Route>
-          <Route path="/password-changed">
-            <PasswordChanged />
-          </Route>
-          <Route path="/forgotten-email">
-            <ForgottenEmail />
-          </Route>
-          <Route path="/account-not-found">
-            <AccountNotFound />
-          </Route>
-          <Route path="/account-found">
-            <AccountFound />
-          </Route>
-          <Route path="/aided-registration-activate-account">
-            <ActivateAccount />
-          </Route>
-        </Switch>
+  getComponentByLocation() {
+    const { location } = this.props;
+
+    //Login page
+    if (matchesPath(location, 'B2C_1A_signin_invitation') || hasSearchParam(location.search, 'p', 'B2C_1A_signin_invitation')) {
+      return <Login />;
+    }
+    //Activation email sent after sign up
+    if (matchesPath(location, 'B2C_1A_account_signup/api')) {
+      return <EmailSent action={ACTIONS.SIGNUP} />;
+    }
+    //Sign up page
+    if (matchesPath(location, 'B2C_1A_account_signup') || hasSearchParam(location.search, 'p', 'B2C_1A_account_signup')) {
+      return <Signup />;
+    }
+    //Reset password email sent
+    if (matchesPath(location, 'B2C_1A_passwordreset/api')) {
+      return <EmailSent action={ACTIONS.RESET_PASSWORD} />;
+    }
+    //Request email to reset your password
+    if (matchesPath(location, 'B2C_1A_passwordreset') || hasSearchParam(location.search, 'p', 'B2C_1A_passwordreset')) {
+      return <ResetPassword />;
+    }
+    //Password has been changed
+    if (matchesPath(location, '/B2C_1A_passwordResetConformation/api')) {
+      return <PasswordChanged />;
+    }
+    //Enter new password page
+    if (matchesPath(location, 'B2C_1A_passwordResetConformation')) {
+      return <EnterNewPassword />;
+    }
+    //Results for forgotten email page
+    if (matchesPath(location, 'B2C_1A_findEmail/api')) {
+      //Success - account was found
+      if (domHasElementWithId('successMessage')) {
+        return <AccountFound />;
+      }
+      //Error - account was not found
+      if (domHasElementWithId('errorMessage')) {
+        return <AccountNotFound />;
+      }
+    }
+    //Forgotten email
+    if (matchesPath(location, 'B2C_1A_findEmail') || hasSearchParam(location.search, 'p', 'B2C_1A_findEmail')) {
+      return <ForgottenEmail />;
+    }
+    //Account activated from Self Registration and Aided Registration
+    if (matchesPath(location, 'B2C_1A_signup_confirmation') ||
+      matchesPath(location, 'B2C_1A_signup_invitation/api')) {
+      return <AccountActivated />;
+    }
+    //Activate account from Aided Registration
+    if (matchesPath(location, 'B2C_1A_signup_invitation')) {
+      return <ActivateAccount />;
+    }
+    //default
+    return <Placeholder />;
+  }
+
+  render() {
+
+    let component = this.getComponentByLocation();
+
+    return (
+      <div className="App" id="app">
+
+        {/* header */}
+        <components.Header />
+
+        {/* routing */}
+        <div id="routes">
+          <Switch>
+            <Route path="/">
+              {component}
+            </Route>
+          </Switch>
+        </div>
+
+        {/* footer */}
+        <components.Footer />
+
       </div>
-
-      {/* footer */}
-      <components.Footer />
-
-    </div>
-  );
+    )
+  }
 }
 
-export default App;
+export default withRouter(App);

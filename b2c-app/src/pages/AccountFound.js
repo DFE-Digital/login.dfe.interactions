@@ -1,33 +1,39 @@
 import React from 'react';
 import components from '../components';
-import { getB2CLink } from '../helpers/urls';
 import { ACTIONS } from '../constants/actions';
+import { getInnerTextById } from '../helpers/dom';
 
-export default function AccountFound() {
-    return (
-        <div id="accountFound">
+class AccountFound extends React.Component {
 
-            <div className="govuk-width-container">
-                <components.Breadcrumbs />
+    render() {
 
-                <div id="pageLevelErrorContainer"></div>
+        const pageConfig = {
+            title: "We've found your email address"
+        };
 
-                <main className="govuk-main-wrapper">
-                    <div className="govuk-grid-row">
-                        <div className="govuk-grid-column-two-thirds">
-                            <components.PageTitle size='xl' title='We&apos;ve found your email address'/>
-                            <components.B2C />
-                            <a href={getB2CLink(ACTIONS.LOGIN)} role="button" draggable="false" className="govuk-button govuk-button--start" data-module="govuk-button">
-                                Sign in to your account
-                            </a>
-                        </div>
-                    </div>
-                </main>
+        const contentFromB2C = getInnerTextById('foundEmailMessageWithEmail');
 
+        const content =
+            <div>
+                <components.Paragraph>{contentFromB2C}</components.Paragraph>
+                <components.Paragraph>You'll need to use this email address to sign in to your account.</components.Paragraph>
+                <components.ButtonLink action={ACTIONS.LOGIN}>Sign in to your account</components.ButtonLink>
             </div>
 
-            <script src="__--b2cPath--__/b2c/assets/js-static/pages/accountFound.js"></script>
+        const columns = [
+            {
+                header: pageConfig.title,
+                aboveFormContent: content
+            }
+        ];
 
-        </div>
-    )
+        return (
+
+            <div id="accountFound">
+                <components.PageContainer pageConfig={pageConfig} columns={columns} />
+            </div>
+        )
+    }
 }
+
+export default AccountFound;

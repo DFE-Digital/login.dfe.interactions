@@ -1,40 +1,85 @@
 import React from 'react';
 import components from '../components';
-import { getB2CLink } from '../helpers/urls';
+import { getInnerTextById } from '../helpers/dom';
 import { ACTIONS } from '../constants/actions';
 
-export default function EmailSent ( props ) {
-    return (
-        <div id="emailSent">
+class EmailSent extends React.Component {
 
-            <div className="govuk-width-container">
-                <components.Breadcrumbs />
+    render() {
 
-                <div id="pageLevelErrorContainer"></div>
+        const pageConfig = {
+            title: "We've sent you an email"
+        };
 
-                <main className="govuk-main-wrapper">
-                    <div className="govuk-grid-row">
-                        <div className="govuk-grid-column-two-thirds">
-                            <components.PageTitle size='xl' title="We've sent you an email"/>
-                            <components.B2C />
-                            <p className="govuk-body">Check your spam folder if you can't see it in a few minutes.</p>
-                            <components.ResendActivationLink action={props.action}/>
-                            <p className="govuk-body">This link expires in 24 hours.</p>
+        const contentFromB2CParagraph =
+            <components.Paragraph>
+                {getInnerTextById('successMessage')}
+            </components.Paragraph>
 
-                            {/* show link to signup again if entered wrong address (only signup flow) */}
-                            {props.action === ACTIONS.SIGNUP && (
-                                <p className="govuk-body">
-                                    <a href={getB2CLink(ACTIONS.SIGNUP)} className="govuk-link">I entered the wrong email address</a>
-                                </p>
-                            )}
-                        </div>
-                    </div>
-                </main>
+        const accountRequiredParagraph =
+            <components.Paragraph>
+                You will only receive this email if you have an account.
+            </components.Paragraph>
 
+        const checkSpamFolderParagraph =
+            <components.Paragraph>
+                Check your spam folder if you can't see it in a few minutes.
+            </components.Paragraph>
+
+        const resendActivationLinkParagraph =
+            <components.Paragraph>
+                If you don't receive an email after this time you can&nbsp;
+                <components.Link action={ACTIONS.RESET_PASSWORD}>resend password reset email</components.Link>
+                .
+            </ components.Paragraph>
+
+        const linkExpiresParagraph =
+            <components.Paragraph>
+                This link expires in 24 hours.
+            </components.Paragraph>
+
+        const signupLinkParagraph =
+            <components.Paragraph>
+                <components.Link action={ACTIONS.SIGNUP}>I entered the wrong email address</components.Link>
+            </components.Paragraph>
+
+
+        let content;
+
+        if (this.props.action === ACTIONS.SIGNUP) {
+            content =
+                <div>
+                    {contentFromB2CParagraph}
+                    {checkSpamFolderParagraph}
+                    {linkExpiresParagraph}
+                    {signupLinkParagraph}
+                </div>
+        }
+        else if (this.props.action === ACTIONS.RESET_PASSWORD) {
+            content =
+                <div>
+                    {contentFromB2CParagraph}
+                    {accountRequiredParagraph}
+                    {checkSpamFolderParagraph}
+                    {resendActivationLinkParagraph}
+                    {linkExpiresParagraph}
+                </div>
+        }
+
+        const columns = [
+            {
+                header: pageConfig.title,
+                aboveFormContent: content
+            }
+        ];
+
+        return (
+
+            <div id="emailSent">
+                <components.PageContainer pageConfig={pageConfig} columns={columns} />
             </div>
-
-            <script src="__--b2cPath--__/b2c/assets/js-static/pages/emailSent.js"></script>
-
-        </div>
-    )
+        )
+    }
 }
+
+export default EmailSent;
