@@ -63,7 +63,7 @@ class InputField extends React.Component {
 
         else if (this.inputType === 'email') {
             // eslint-disable-next-line
-            const pattern = /[A-Za-z0-9_\-\+\/{\t\n\r}#$%^\\&\[\]*=()|?'~`! :]+([.][A-Za-z0-9_\-\+\/{\t\n\r}#$%^\\&\[\]*=()|?'~`! :]+)*@[A-Za-z0-9\[\]:]+([.-][A-Za-z0-9\[\]:]+)*\.[A-Za-z0-9\[\]:]+([-.][A-Za-z0-9\[\]:]+)*/;
+            const pattern = /^[a-zA-Z0-9.!#$%&amp;'^_`{}~+-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
             if (!this.state[this.props.inputId].match(pattern)) {
                 isValid = false;
                 this.errors.current.text = `Invalid ${this.props.errorMessagePlaceholder}`;
