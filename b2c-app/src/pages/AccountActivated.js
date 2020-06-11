@@ -10,10 +10,11 @@ class AccountActivated extends React.Component {
             title: "We've activated your account"
         };
 
-        const content = [
-            <components.Paragraph key='paragraph'>You can start using your account to access your information.</components.Paragraph>,
-            <components.ButtonLink action={ACTIONS.LOGIN} key='link'>Sign in to your account</components.ButtonLink>
-        ];
+        const content =
+            <div>
+                <components.Paragraph>You can start using your account to access your information.</components.Paragraph>
+                <components.ButtonLink action={ACTIONS.LOGIN}>Sign in to your account</components.ButtonLink>
+            </div>
 
         const columns = [
             {

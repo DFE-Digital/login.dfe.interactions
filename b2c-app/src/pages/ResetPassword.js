@@ -64,12 +64,13 @@ class ResetPassword extends React.Component {
             showB2CErrors: this.state.showB2CErrors
         };
 
-        const aboveFormContent = [
-            <components.Paragraph key='paragraph1'>You can reset your password if you've forgotten it.</components.Paragraph>,
-            <components.Paragraph key='paragraph2'>If you cannot remember your email address you can also retrieve it here.</components.Paragraph>,
-            <h3 className="govuk-heading-m" key='heading'>Reset your password</h3>,
-            <components.Paragraph key='paragraph3'>To reset your password we need to send an email to the address registered to your account.</components.Paragraph>
-        ];
+        const aboveFormContent =
+            <div>
+                <components.Paragraph>You can reset your password if you've forgotten it.</components.Paragraph>
+                <components.Paragraph>If you cannot remember your email address you can also retrieve it here.</components.Paragraph>
+                <h3 className="govuk-heading-m" key='heading'>Reset your password</h3>
+                <components.Paragraph>To reset your password we need to send an email to the address registered to your account.</components.Paragraph>
+            </div>
 
         const formContent =
             <components.InputField

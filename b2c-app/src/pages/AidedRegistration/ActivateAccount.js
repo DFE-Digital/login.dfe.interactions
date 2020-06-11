@@ -82,26 +82,24 @@ class ActivateAccount extends React.Component {
             errorSummaryContent: <components.PasswordHelp />
         };
 
-        const formContent = [
-            <components.CreateNewPassword
-                onChange={this.onChange}
-                showErrors={this.state.showErrors}
-                errors={this.state.errors}
-                key="createNewPassword" />,
-            <components.Paragraph errors={this.state.errors} key="paragraph">
-                As an extra security check, enter your date of birth.
-            </components.Paragraph>,
-            <components.DateOfBirth
-                onChange={this.onChange}
-                showErrors={this.state.showErrors}
-                errors={this.state.errors}
-                key="dob" />,
-            <components.TermsAndConditions
-                onChange={this.onChange}
-                showErrors={this.state.showErrors}
-                errors={this.state.errors}
-                key="tsAndCs" />
-        ];
+        const formContent =
+            <div>
+                <components.CreateNewPassword
+                    onChange={this.onChange}
+                    showErrors={this.state.showErrors}
+                    errors={this.state.errors} />
+                <components.Paragraph errors={this.state.errors}>
+                    As an extra security check, enter your date of birth.
+                </components.Paragraph>
+                <components.DateOfBirth
+                    onChange={this.onChange}
+                    showErrors={this.state.showErrors}
+                    errors={this.state.errors} />
+                <components.TermsAndConditions
+                    onChange={this.onChange}
+                    showErrors={this.state.showErrors}
+                    errors={this.state.errors} />
+            </div>
 
         const columns = [
             {

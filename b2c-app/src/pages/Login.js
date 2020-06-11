@@ -65,31 +65,28 @@ class Login extends React.Component {
         /**
          * Column 1 in Login page
          */
-        const formContent = [
-            <components.InputField
-                type='email'
-                inputId='email'
-                inputLabel='Email address'
-                onChange={this.onChange}
-                errorMessagePlaceholder='email address'
-                showErrors={this.state.showErrors}
-                errors={this.state.errors}
-                key='email'
-            />,
-            <components.InputField
-                type='password'
-                inputId='password'
-                inputLabel='Password'
-                onChange={this.onChange}
-                errorMessagePlaceholder='password'
-                showErrors={this.state.showErrors}
-                errors={this.state.errors}
-                key='password'
-            />,
-            <components.Paragraph errors={this.state.errors} key='paragraph'>
-                <components.Link action={ACTIONS.RESET_PASSWORD}>I cannot access my account</components.Link>
-            </components.Paragraph>
-        ];
+        const formContent =
+            <div>
+                <components.InputField
+                    type='email'
+                    inputId='email'
+                    inputLabel='Email address'
+                    onChange={this.onChange}
+                    errorMessagePlaceholder='email address'
+                    showErrors={this.state.showErrors}
+                    errors={this.state.errors} />
+                <components.InputField
+                    type='password'
+                    inputId='password'
+                    inputLabel='Password'
+                    onChange={this.onChange}
+                    errorMessagePlaceholder='password'
+                    showErrors={this.state.showErrors}
+                    errors={this.state.errors} />
+                <components.Paragraph errors={this.state.errors}>
+                    <components.Link action={ACTIONS.RESET_PASSWORD}>I cannot access my account</components.Link>
+                </components.Paragraph>
+            </div>
 
         /**
          * Column 2 in Login page

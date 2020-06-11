@@ -83,36 +83,31 @@ class ForgottenEmail extends React.Component {
             showB2CErrors: this.state.showB2CErrors
         };
 
-        const formContent = [
-            <components.InputField
-                inputId='firstName'
-                inputLabel='First name'
-                onChange={this.onChange}
-                errorMessagePlaceholder='first name'
-                showErrors={this.state.showErrors}
-                errors={this.state.errors}
-                key='inputName'
-            />,
-            <components.InputField
-                inputId='lastName'
-                inputLabel='Last name'
-                onChange={this.onChange}
-                errorMessagePlaceholder='last name'
-                showErrors={this.state.showErrors}
-                errors={this.state.errors}
-                key='inputLastName'
-            />,
-            <components.DateOfBirth
-                onChange={this.onChange}
-                showErrors={this.state.showErrors}
-                errors={this.state.errors}
-                key='dob' />,
-            <components.Postcode
-                onChange={this.onChange}
-                showErrors={this.state.showErrors}
-                errors={this.state.errors}
-                key='postcode' />
-        ];
+        const formContent =
+            <div>
+                <components.InputField
+                    inputId='firstName'
+                    inputLabel='First name'
+                    onChange={this.onChange}
+                    errorMessagePlaceholder='first name'
+                    showErrors={this.state.showErrors}
+                    errors={this.state.errors} />
+                <components.InputField
+                    inputId='lastName'
+                    inputLabel='Last name'
+                    onChange={this.onChange}
+                    errorMessagePlaceholder='last name'
+                    showErrors={this.state.showErrors}
+                    errors={this.state.errors} />
+                <components.DateOfBirth
+                    onChange={this.onChange}
+                    showErrors={this.state.showErrors}
+                    errors={this.state.errors} />
+                <components.Postcode
+                    onChange={this.onChange}
+                    showErrors={this.state.showErrors}
+                    errors={this.state.errors} />
+            </div>
 
         const columns = [
             {

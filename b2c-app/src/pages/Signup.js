@@ -86,47 +86,40 @@ class Signup extends React.Component {
             errorSummaryContent: <components.PasswordHelp />
         };
 
-        const formContent = [
-            <components.InputField
-                inputId='firstName'
-                inputLabel='First name'
-                onChange={this.onChange}
-                errorMessagePlaceholder='first name'
-                showErrors={this.state.showErrors}
-                errors={this.state.errors}
-                key='inputName'
-            />,
-            <components.InputField
-                inputId='lastName'
-                inputLabel='Last name'
-                onChange={this.onChange}
-                errorMessagePlaceholder='last name'
-                showErrors={this.state.showErrors}
-                errors={this.state.errors}
-                key='inputLastName'
-            />,
-            <components.InputField
-                type='email'
-                inputId='email'
-                inputLabel='Email address'
-                hint="You'll need this to sign in to your account"
-                onChange={this.onChange}
-                errorMessagePlaceholder='email address'
-                showErrors={this.state.showErrors}
-                errors={this.state.errors}
-                key='email'
-            />,
-            <components.CreateNewPassword
-                onChange={this.onChange}
-                showErrors={this.state.showErrors}
-                errors={this.state.errors}
-                key="createNewPassword" />,
-            <components.TermsAndConditions
-                onChange={this.onChange}
-                showErrors={this.state.showErrors}
-                errors={this.state.errors}
-                key="tsAndCs" />
-        ];
+        const formContent =
+            <div>
+                <components.InputField
+                    inputId='firstName'
+                    inputLabel='First name'
+                    onChange={this.onChange}
+                    errorMessagePlaceholder='first name'
+                    showErrors={this.state.showErrors}
+                    errors={this.state.errors} />
+                <components.InputField
+                    inputId='lastName'
+                    inputLabel='Last name'
+                    onChange={this.onChange}
+                    errorMessagePlaceholder='last name'
+                    showErrors={this.state.showErrors}
+                    errors={this.state.errors} />
+                <components.InputField
+                    type='email'
+                    inputId='email'
+                    inputLabel='Email address'
+                    hint="You'll need this to sign in to your account"
+                    onChange={this.onChange}
+                    errorMessagePlaceholder='email address'
+                    showErrors={this.state.showErrors}
+                    errors={this.state.errors} />
+                <components.CreateNewPassword
+                    onChange={this.onChange}
+                    showErrors={this.state.showErrors}
+                    errors={this.state.errors} />
+                <components.TermsAndConditions
+                    onChange={this.onChange}
+                    showErrors={this.state.showErrors}
+                    errors={this.state.errors} />
+            </div>
 
         const columns = [
             {

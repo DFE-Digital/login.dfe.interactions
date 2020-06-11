@@ -12,34 +12,34 @@ class EmailSent extends React.Component {
         };
 
         const contentFromB2CParagraph =
-            <components.Paragraph key='paragraph1'>
+            <components.Paragraph>
                 {getInnerTextById('successMessage')}
             </components.Paragraph>
 
         const accountRequiredParagraph =
-            <components.Paragraph key='paragraph2'>
+            <components.Paragraph>
                 You will only receive this email if you have an account.
             </components.Paragraph>
 
         const checkSpamFolderParagraph =
-            <components.Paragraph key='paragraph3'>
+            <components.Paragraph>
                 Check your spam folder if you can't see it in a few minutes.
             </components.Paragraph>
 
         const resendActivationLinkParagraph =
-            <components.Paragraph key='paragraph4'>
+            <components.Paragraph>
                 If you don't receive an email after this time you can&nbsp;
                 <components.Link action={ACTIONS.RESET_PASSWORD}>resend password reset email</components.Link>
                 .
             </ components.Paragraph>
 
         const linkExpiresParagraph =
-            <components.Paragraph key='paragraph5'>
+            <components.Paragraph>
                 This link expires in 24 hours.
             </components.Paragraph>
 
         const signupLinkParagraph =
-            <components.Paragraph key='paragraph6'>
+            <components.Paragraph>
                 <components.Link action={ACTIONS.SIGNUP}>I entered the wrong email address</components.Link>
             </components.Paragraph>
 
@@ -47,21 +47,23 @@ class EmailSent extends React.Component {
         let content;
 
         if (this.props.action === ACTIONS.SIGNUP) {
-            content = [
-                contentFromB2CParagraph,
-                checkSpamFolderParagraph,
-                linkExpiresParagraph,
-                signupLinkParagraph
-            ];
+            content =
+                <div>
+                    {contentFromB2CParagraph}
+                    {checkSpamFolderParagraph}
+                    {linkExpiresParagraph}
+                    {signupLinkParagraph}
+                </div>
         }
         else if (this.props.action === ACTIONS.RESET_PASSWORD) {
-            content = [
-                contentFromB2CParagraph,
-                accountRequiredParagraph,
-                checkSpamFolderParagraph,
-                resendActivationLinkParagraph,
-                linkExpiresParagraph
-            ];
+            content =
+                <div>
+                    {contentFromB2CParagraph}
+                    {accountRequiredParagraph}
+                    {checkSpamFolderParagraph}
+                    {resendActivationLinkParagraph}
+                    {linkExpiresParagraph}
+                </div>
         }
 
         const columns = [
