@@ -40,9 +40,7 @@ class DateOfBirth extends React.Component {
         this.setState({ [name]: value }, () => {
             let isValid = this.isValidDob();
             this.props.onChange({
-                day: isValid ? this.state.dobDay : null,
-                month: isValid ? this.state.dobMonth : null,
-                year: isValid ? this.state.dobYear : null
+                dob: isValid && this.inputDate ? this.inputDate : null
             });
         });
     }
@@ -70,10 +68,10 @@ class DateOfBirth extends React.Component {
             month = month - 1;
 
             //validate the date input
-            var inputDate = new Date(year, month, day);
+            this.inputDate = new Date(year, month, day);
 
-            if (isNaN(inputDate.getTime()) ||
-                inputDate.getMonth() !== month //this one would mean user entered 29th of a month in a non leap year
+            if (isNaN(this.inputDate.getTime()) ||
+                this.inputDate.getMonth() !== month //this one would mean user entered 29th of a month in a non leap year
             ) {
                 //failed validation, show an error and prevent submit
                 isValid = false;

@@ -10,9 +10,7 @@ class ActivateAccount extends React.Component {
         super(props);
         this.state = {
             password: null,
-            day: null,
-            month: null,
-            year: null,
+            dob: null,
             tsAndCsAccepted: false,
             showErrors: false,
             showB2CErrors: true,
@@ -33,9 +31,7 @@ class ActivateAccount extends React.Component {
         });
         //do something to validate and decide if we submit or show errors
         if (this.state.password &&
-            this.state.day &&
-            this.state.month &&
-            this.state.year &&
+            this.state.dob &&
             this.state.tsAndCsAccepted) {
             //hide our validation errors and prepare to show B2C ones (in case there are any)
             this.setState({ showErrors: false });
@@ -65,11 +61,12 @@ class ActivateAccount extends React.Component {
             b2cDobYear && b2cDobMonth && b2cDobYear &&
             b2cTermsAndConditions &&
             b2cSubmitButton) {
+
             b2cPassword.value = this.state.password;
             b2cReenteredPassword.value = this.state.password;
-            b2cDobDay.value = this.state.day;
-            b2cDobMonth.value = this.state.month;
-            b2cDobYear.value = this.state.year;
+            b2cDobDay.value = this.state.dob.getDate();
+            b2cDobMonth.value = this.state.dob.getMonth() + 1;
+            b2cDobYear.value = this.state.dob.getFullYear();
             b2cTermsAndConditions.checked = this.state.tsAndCsAccepted;
             //submit B2C form
             b2cSubmitButton.click();

@@ -11,9 +11,7 @@ class ForgottenEmail extends React.Component {
         this.state = {
             firstName: null,
             lastName: null,
-            day: null,
-            month: null,
-            year: null,
+            dob: null,
             postcode: null,
             showErrors: false,
             showB2CErrors: true,
@@ -35,9 +33,7 @@ class ForgottenEmail extends React.Component {
         //do something to validate and decide if we submit or show errors
         if (this.state.firstName &&
             this.state.lastName &&
-            this.state.day &&
-            this.state.month &&
-            this.state.year &&
+            this.state.dob &&
             this.state.postcode) {
             //hide our validation errors and prepare to show B2C ones (in case there are any)
             this.setState({ showErrors: false });
@@ -67,11 +63,12 @@ class ForgottenEmail extends React.Component {
             b2cDobYear && b2cDobMonth && b2cDobYear &&
             b2cPostcode &&
             b2cSubmitButton) {
+
             b2cFirstName.value = this.state.firstName;
             b2cLastName.value = this.state.lastName;
-            b2cDobDay.value = this.state.day;
-            b2cDobMonth.value = this.state.month;
-            b2cDobYear.value = this.state.year;
+            b2cDobDay.value = this.state.dob.getDate();
+            b2cDobMonth.value = this.state.dob.getMonth() + 1;
+            b2cDobYear.value = this.state.dob.getFullYear();
             b2cPostcode.value = this.state.postcode;
             //submit B2C form
             b2cSubmitButton.click();
