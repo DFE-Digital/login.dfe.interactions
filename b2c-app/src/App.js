@@ -33,6 +33,9 @@ class App extends React.Component {
   getComponentByLocation() {
     const { location } = this.props;
 
+    const ERROR_MESSAGE = 'errorMessage';
+    const SUCCESS_MESSAGE = 'successMessage';
+
     //Login page
     if (matchesPath(location, 'B2C_1A_signin_invitation') || hasSearchParam(location.search, 'p', 'B2C_1A_signin_invitation')) {
       return <Login />;
@@ -60,7 +63,7 @@ class App extends React.Component {
     //Enter new password page
     if (matchesPath(location, 'B2C_1A_passwordResetConformation')) {
       //Error - link has expired
-      if (domHasElementWithId('errorMessage')) {
+      if (domHasElementWithId(ERROR_MESSAGE)) {
         return <ExpiredLink action={ACTIONS.RESET_PASSWORD} />;
       }
       return <EnterNewPassword />;
@@ -68,11 +71,11 @@ class App extends React.Component {
     //Results for forgotten email page
     if (matchesPath(location, 'B2C_1A_findEmail/api')) {
       //Success - account was found
-      if (domHasElementWithId('successMessage')) {
+      if (domHasElementWithId(SUCCESS_MESSAGE)) {
         return <AccountFound />;
       }
       //Error - account was not found
-      if (domHasElementWithId('errorMessage')) {
+      if (domHasElementWithId(ERROR_MESSAGE)) {
         return <AccountNotFound />;
       }
     }
@@ -83,7 +86,7 @@ class App extends React.Component {
     //Account activated from Self Registration
     if (matchesPath(location, 'B2C_1A_signup_confirmation')) {
       //Error - link has expired
-      if (domHasElementWithId('errorMessage')) {
+      if (domHasElementWithId(ERROR_MESSAGE)) {
         return <ExpiredLink action={ACTIONS.SIGNUP} />;
       }
       return <AccountActivated />;
@@ -95,7 +98,7 @@ class App extends React.Component {
     //Activate account from Aided Registration
     if (matchesPath(location, 'B2C_1A_signup_invitation')) {
       //Error - link has expired
-      if (domHasElementWithId('errorMessage')) {
+      if (domHasElementWithId(ERROR_MESSAGE)) {
         return <ExpiredLink action={ACTIONS.SIGNUP} />;
       }
       return <ActivateAccount />;
