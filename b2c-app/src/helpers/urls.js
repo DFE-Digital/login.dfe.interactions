@@ -24,6 +24,10 @@ export function getB2CLink(action) {
         case ACTIONS.FIND_EMAIL:
             actionURL = 'B2C_1A_findEmail';
             break;
+        case ACTIONS.RESEND_ACTIVATION_EMAIL:
+            //TODO this parameter will need to be updated to final value (when B2C-100 is done)
+            actionURL = 'B2C_1A_resendEmail';
+            break;
         default:
             //point to login page by default
             actionURL = 'B2C_1A_signin_invitation';

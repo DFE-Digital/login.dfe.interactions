@@ -17,6 +17,7 @@ import PasswordChanged from './pages/PasswordChanged';
 import Placeholder from './pages/Placeholder';
 import EnterNewPassword from './pages/EnterNewPassword';
 import ActivateAccount from './pages/AidedRegistration/ActivateAccount';
+import ExpiredLink from './pages/ExpiredLink';
 
 import components from './components';
 
@@ -58,6 +59,10 @@ class App extends React.Component {
     }
     //Enter new password page
     if (matchesPath(location, 'B2C_1A_passwordResetConformation')) {
+      //Error - link has expired
+      if (domHasElementWithId('errorMessage')) {
+        return <ExpiredLink action={ACTIONS.RESET_PASSWORD} />;
+      }
       return <EnterNewPassword />;
     }
     //Results for forgotten email page
@@ -75,13 +80,24 @@ class App extends React.Component {
     if (matchesPath(location, 'B2C_1A_findEmail') || hasSearchParam(location.search, 'p', 'B2C_1A_findEmail')) {
       return <ForgottenEmail />;
     }
-    //Account activated from Self Registration and Aided Registration
-    if (matchesPath(location, 'B2C_1A_signup_confirmation') ||
-      matchesPath(location, 'B2C_1A_signup_invitation/api')) {
+    //Account activated from Self Registration
+    if (matchesPath(location, 'B2C_1A_signup_confirmation')) {
+      //Error - link has expired
+      if (domHasElementWithId('errorMessage')) {
+        return <ExpiredLink action={ACTIONS.SIGNUP} />;
+      }
+      return <AccountActivated />;
+    }
+    //Account activated from Aided Registration
+    if (matchesPath(location, 'B2C_1A_signup_invitation/api')) {
       return <AccountActivated />;
     }
     //Activate account from Aided Registration
     if (matchesPath(location, 'B2C_1A_signup_invitation')) {
+      //Error - link has expired
+      if (domHasElementWithId('errorMessage')) {
+        return <ExpiredLink action={ACTIONS.SIGNUP} />;
+      }
       return <ActivateAccount />;
     }
     //default
