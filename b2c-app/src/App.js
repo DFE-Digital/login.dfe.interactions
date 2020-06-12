@@ -1,6 +1,7 @@
 import React from 'react';
 
 import { ACTIONS } from './constants/actions';
+import { POLICIES } from './constants/policies';
 
 import { domHasElementWithId } from './helpers/dom';
 import { matchesPath, hasSearchParam } from './helpers/urls';
@@ -17,6 +18,7 @@ import PasswordChanged from './pages/PasswordChanged';
 import Placeholder from './pages/Placeholder';
 import EnterNewPassword from './pages/EnterNewPassword';
 import ActivateAccount from './pages/AidedRegistration/ActivateAccount';
+import ExpiredLink from './pages/ExpiredLink';
 
 import components from './components';
 
@@ -32,56 +34,75 @@ class App extends React.Component {
   getComponentByLocation() {
     const { location } = this.props;
 
+    //Ids in B2C dom that we will be looking for
+    const ERROR_MESSAGE = 'errorMessage';
+    const SUCCESS_MESSAGE = 'successMessage';
+
     //Login page
-    if (matchesPath(location, 'B2C_1A_signin_invitation') || hasSearchParam(location.search, 'p', 'B2C_1A_signin_invitation')) {
+    if (matchesPath(location, POLICIES.SIGNIN_INVITATION) || hasSearchParam(location.search, 'p', POLICIES.SIGNIN_INVITATION)) {
       return <Login />;
     }
     //Activation email sent after sign up
-    if (matchesPath(location, 'B2C_1A_account_signup/api')) {
+    if (matchesPath(location, `${POLICIES.ACCOUNT_SIGNUP}/api`)) {
       return <EmailSent action={ACTIONS.SIGNUP} />;
     }
     //Sign up page
-    if (matchesPath(location, 'B2C_1A_account_signup') || hasSearchParam(location.search, 'p', 'B2C_1A_account_signup')) {
+    if (matchesPath(location, POLICIES.ACCOUNT_SIGNUP) || hasSearchParam(location.search, 'p', POLICIES.ACCOUNT_SIGNUP)) {
       return <Signup />;
     }
     //Reset password email sent
-    if (matchesPath(location, 'B2C_1A_passwordreset/api')) {
+    if (matchesPath(location, `${POLICIES.PASSWORD_RESET}/api`)) {
       return <EmailSent action={ACTIONS.RESET_PASSWORD} />;
     }
     //Request email to reset your password
-    if (matchesPath(location, 'B2C_1A_passwordreset') || hasSearchParam(location.search, 'p', 'B2C_1A_passwordreset')) {
+    if (matchesPath(location, POLICIES.PASSWORD_RESET) || hasSearchParam(location.search, 'p', POLICIES.PASSWORD_RESET)) {
       return <ResetPassword />;
     }
     //Password has been changed
-    if (matchesPath(location, '/B2C_1A_passwordResetConformation/api')) {
+    if (matchesPath(location, `${POLICIES.PASSWORD_RESET_CONFIRMATION}/api`)) {
       return <PasswordChanged />;
     }
     //Enter new password page
-    if (matchesPath(location, 'B2C_1A_passwordResetConformation')) {
+    if (matchesPath(location, POLICIES.PASSWORD_RESET_CONFIRMATION)) {
+      //Error - link has expired
+      if (domHasElementWithId(ERROR_MESSAGE)) {
+        return <ExpiredLink action={ACTIONS.RESET_PASSWORD} />;
+      }
       return <EnterNewPassword />;
     }
     //Results for forgotten email page
-    if (matchesPath(location, 'B2C_1A_findEmail/api')) {
+    if (matchesPath(location, `${POLICIES.FIND_EMAIL}/api`)) {
       //Success - account was found
-      if (domHasElementWithId('successMessage')) {
+      if (domHasElementWithId(SUCCESS_MESSAGE)) {
         return <AccountFound />;
       }
       //Error - account was not found
-      if (domHasElementWithId('errorMessage')) {
+      if (domHasElementWithId(ERROR_MESSAGE)) {
         return <AccountNotFound />;
       }
     }
     //Forgotten email
-    if (matchesPath(location, 'B2C_1A_findEmail') || hasSearchParam(location.search, 'p', 'B2C_1A_findEmail')) {
+    if (matchesPath(location, POLICIES.FIND_EMAIL) || hasSearchParam(location.search, 'p', POLICIES.FIND_EMAIL)) {
       return <ForgottenEmail />;
     }
-    //Account activated from Self Registration and Aided Registration
-    if (matchesPath(location, 'B2C_1A_signup_confirmation') ||
-      matchesPath(location, 'B2C_1A_signup_invitation/api')) {
+    //Account activated from Self Registration
+    if (matchesPath(location, POLICIES.SIGNUP_CONFIRMATION)) {
+      //Error - link has expired
+      if (domHasElementWithId(ERROR_MESSAGE)) {
+        return <ExpiredLink action={ACTIONS.SIGNUP} />;
+      }
+      return <AccountActivated />;
+    }
+    //Account activated from Aided Registration
+    if (matchesPath(location, `${POLICIES.SIGNUP_INVITATION}/api`)) {
       return <AccountActivated />;
     }
     //Activate account from Aided Registration
-    if (matchesPath(location, 'B2C_1A_signup_invitation')) {
+    if (matchesPath(location, POLICIES.SIGNUP_INVITATION)) {
+      //Error - link has expired
+      if (domHasElementWithId(ERROR_MESSAGE)) {
+        return <ExpiredLink action={ACTIONS.SIGNUP} />;
+      }
       return <ActivateAccount />;
     }
     //default
