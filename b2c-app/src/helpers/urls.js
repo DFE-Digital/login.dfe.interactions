@@ -1,4 +1,5 @@
 import { ACTIONS } from '../constants/actions';
+import { POLICIES } from '../constants/policies';
 
 export function getB2CLink(action) {
 
@@ -13,16 +14,16 @@ export function getB2CLink(action) {
 
     switch (action) {
         case ACTIONS.SIGNUP:
-            actionURL = 'B2C_1A_account_signup';
+            actionURL = POLICIES.ACCOUNT_SIGNUP;
             break;
         case ACTIONS.LOGIN:
-            actionURL = 'B2C_1A_signin_invitation';
+            actionURL = POLICIES.SIGNIN_INVITATION;
             break;
         case ACTIONS.RESET_PASSWORD:
-            actionURL = 'B2C_1A_passwordreset';
+            actionURL = POLICIES.PASSWORD_RESET;
             break;
         case ACTIONS.FIND_EMAIL:
-            actionURL = 'B2C_1A_findEmail';
+            actionURL = POLICIES.FIND_EMAIL;
             break;
         case ACTIONS.RESEND_ACTIVATION_EMAIL:
             //TODO this parameter will need to be updated to final value (when B2C-100 is done)
@@ -30,7 +31,7 @@ export function getB2CLink(action) {
             break;
         default:
             //point to login page by default
-            actionURL = 'B2C_1A_signin_invitation';
+            actionURL = POLICIES.SIGNIN_INVITATION;
             break;
     }
 
