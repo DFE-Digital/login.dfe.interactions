@@ -44,7 +44,7 @@ export function getB2CLink(action) {
 }
 
 export function matchesPath(location, path) {
-    return location.pathname.search(path) !== -1;
+    return location.pathname.search(`${path}/`) !== -1;
 }
 
 export function hasSearchParam(search, param, value) {
