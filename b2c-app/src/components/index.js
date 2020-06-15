@@ -19,12 +19,14 @@ import Paragraph from './Paragraph/Paragraph';
 import Postcode from './Postcode/Postcode';
 import InputField from './InputField/InputField';
 import PageContainer from './PageContainer/PageContainer';
+import MenuToggle from './MenuToggle/MenuToggle';
 
 export default {
     Header: Header,
     Footer: Footer,
     HeaderTitle: HeaderTitle,
     PageNavigation: PageNavigation,
+    MenuToggle: MenuToggle,
     NavigationLink: NavigationLink,
     Breadcrumbs: Breadcrumbs,
     PageTitle: PageTitle,

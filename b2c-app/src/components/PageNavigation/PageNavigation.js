@@ -1,8 +1,14 @@
-import React from 'react'
+import React from 'react';
+import classNames from 'classnames';
 
 import components from '../../components';
 
 function PageNavigation(props) {
+
+    const navigationClasses = classNames({
+        'govuk-header__navigation': true,
+        'govuk-header__navigation--open': props.expanded
+    });
 
     //build array of components with actual config
     const navItemComponents = props.children.map(
@@ -13,7 +19,7 @@ function PageNavigation(props) {
 
     return (
         <nav>
-            <ul id="navigation" className="govuk-header__navigation " aria-label="Top Level Navigation">
+            <ul id={props.navigationId} className={navigationClasses} aria-label="Top Level Navigation">
                 {navItemComponents}
             </ul>
         </nav>
