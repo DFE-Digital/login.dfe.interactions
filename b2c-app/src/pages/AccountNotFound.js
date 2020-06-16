@@ -7,7 +7,7 @@ class AccountNotFound extends React.Component {
     render() {
 
         const pageConfig = {
-            title: "We have not been able to find your account"
+            title: "Unable to find your account"
         };
 
         const content =
