@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './Header.scss'
+
 import components from '../../components';
 
 import headerData from '../../data/headerData.json';
@@ -25,7 +27,7 @@ class Header extends React.Component {
 
         return (
             <header className="govuk-header " role="banner" data-module="govuk-header">
-                <div className="govuk-header__container govuk-width-container">
+                <div className="govuk-header__container govuk-width-container ncs-custom">
                     <components.HeaderTitle title={headerData.title} />
                     <components.MenuToggle
                         toggleFunction={this.menuToggle}
