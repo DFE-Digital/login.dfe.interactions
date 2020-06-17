@@ -1,6 +1,7 @@
 import React from 'react';
 import components from '../components';
 import { ACTIONS } from '../constants/actions';
+import { LINK_TYPES } from '../constants/linkTypes';
 
 class ExpiredLink extends React.Component {
 
@@ -20,7 +21,7 @@ class ExpiredLink extends React.Component {
                 </components.Paragraph>
 
             requestAgainLink =
-                <components.ButtonLink action={ACTIONS.RESET_PASSWORD}>Resend password reset email</components.ButtonLink>
+                <components.Link type={LINK_TYPES.BUTTON} action={ACTIONS.RESET_PASSWORD}>Resend password reset email</components.Link>
 
         }
         else if (this.props.action === ACTIONS.SIGNUP) {
@@ -31,7 +32,7 @@ class ExpiredLink extends React.Component {
 
             //TODO split this into two versions if self registration and aided registration have different pages to resend email
             requestAgainLink =
-                <components.ButtonLink action={ACTIONS.RESEND_ACTIVATION_EMAIL}>Resend activation email</components.ButtonLink>
+                <components.Link type={LINK_TYPES.BUTTON} action={ACTIONS.RESEND_ACTIVATION_EMAIL}>Resend activation email</components.Link>
         }
 
 

@@ -13,7 +13,6 @@ import PageLevelErrorContainer from './PageLevelErrorContainer/PageLevelErrorCon
 import CreateNewPassword from './CreateNewPassword/CreateNewPassword';
 import DateOfBirth from './DateOfBirth/DateOfBirth';
 import TermsAndConditions from './TermsAndConditions/TermsAndConditions';
-import ButtonLink from './ButtonLink/ButtonLink';
 import Link from './Link/Link';
 import Paragraph from './Paragraph/Paragraph';
 import Postcode from './Postcode/Postcode';
@@ -38,7 +37,6 @@ export default {
     CreateNewPassword: CreateNewPassword,
     DateOfBirth: DateOfBirth,
     TermsAndConditions: TermsAndConditions,
-    ButtonLink: ButtonLink,
     Link: Link,
     Paragraph: Paragraph,
     Postcode: Postcode,
