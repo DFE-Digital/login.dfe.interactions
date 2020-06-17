@@ -1,13 +1,73 @@
 import { ACTIONS } from '../constants/actions';
 import { POLICIES } from '../constants/policies';
 
-export function getB2CLink(action) {
+import Dexie from 'dexie';
 
-    const clientId = '488c321f-10e4-48f2-b9c2-261e2add2f8d';
+const CLIENT_ID = {
+    queryParamsId: 'client_id',
+    storedId: 'clientId'
+}
 
-    //Find out values for redirect URI and B2C tenant to be added to the resulting link URL
+const REDIRECT_URI = {
+    queryParamsId: 'redirect_uri',
+    storedId: 'redirectURI'
+}
+
+//initialise database
+const db = new Dexie('B2C_query_params');
+//create stores for client id and redirect uri
+db.version(1).stores({
+    [CLIENT_ID.storedId]: `,${CLIENT_ID.storedId}`,
+    [REDIRECT_URI.storedId]: `,${REDIRECT_URI.storedId}`
+});
+
+//function to store values in the DB, always reusing item in index 0, not storing more values
+function storeParam(key, value) {
+    db[key].put({ [key]: value }, 0);
+}
+
+//function to retrieve values from the DB, always getting index 0
+async function retrieveParam(key) {
+    return db[key].get(0);
+}
+
+async function getB2CParameters() {
+
     let queryParams = (new URL(document.location)).searchParams;
-    let redirectURI = queryParams.get("redirect_uri") || 'https://jwt.ms';
+
+    let retrievedClientId = queryParams.get(CLIENT_ID.queryParamsId);
+    let retrievedRedirectURI = queryParams.get(REDIRECT_URI.queryParamsId);
+
+    //if value is in query params, store it
+    if (retrievedClientId) {
+        storeParam(CLIENT_ID.storedId, retrievedClientId);
+    }
+    //otherwise get it from indexedDB
+    else {
+        retrievedClientId = await retrieveParam(CLIENT_ID.storedId,);
+    }
+
+    //if value is in query params, store it
+    if (retrievedRedirectURI) {
+        storeParam(REDIRECT_URI.storedId, retrievedRedirectURI);
+    }
+    //otherwise get it from indexedDB
+    else {
+        retrievedRedirectURI = await retrieveParam(REDIRECT_URI.storedId);
+    }
+
+    const b2cParams = {
+        clientId: retrievedClientId,
+        redirectURI: retrievedRedirectURI
+    };
+
+    return b2cParams;
+}
+
+export async function getB2CLink(action) {
+
+    const { clientId, redirectURI } = await getB2CParameters();
+
     let b2cTenant = window.location.host.slice(0, window.location.host.indexOf('.'));
 
     let actionURL;
