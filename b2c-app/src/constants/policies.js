@@ -5,5 +5,6 @@ export const POLICIES = {
     PASSWORD_RESET_CONFIRMATION: 'B2C_1A_passwordResetConformation',
     FIND_EMAIL: 'B2C_1A_findEmail',
     SIGNUP_CONFIRMATION: 'B2C_1A_signup_confirmation',
-    SIGNUP_INVITATION: 'B2C_1A_signup_invitation'
+    SIGNUP_INVITATION: 'B2C_1A_signup_invitation',
+    CHANGE_EMAIL: 'B2C_1A_changeemail'
 };

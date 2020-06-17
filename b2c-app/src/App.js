@@ -105,6 +105,14 @@ class App extends React.Component {
       }
       return <ActivateAccount />;
     }
+    //Change email address
+    if (matchesPath(location, POLICIES.CHANGE_EMAIL)) {
+      //Error - link has expired
+      if (domHasElementWithId(ERROR_MESSAGE)) {
+        return <ExpiredLink action={ACTIONS.SIGNUP} />;
+      }
+      return <AccountActivated />;
+    }
     //default
     return <Placeholder />;
   }
