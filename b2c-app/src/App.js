@@ -19,6 +19,7 @@ import Placeholder from './pages/Placeholder';
 import EnterNewPassword from './pages/EnterNewPassword';
 import ActivateAccount from './pages/AidedRegistration/ActivateAccount';
 import ExpiredLink from './pages/ExpiredLink';
+import ExpiredLinkWithResendEmail from './pages/ExpiredLinkWithResendEmail';
 
 import components from './components';
 
@@ -104,6 +105,14 @@ class App extends React.Component {
         return <ExpiredLink action={ACTIONS.SIGNUP} />;
       }
       return <ActivateAccount />;
+    }
+    //Change email address
+    if (matchesPath(location, POLICIES.CHANGE_EMAIL)) {
+      //Error - link has expired
+      if (domHasElementWithId(ERROR_MESSAGE)) {
+        return <ExpiredLinkWithResendEmail />;
+      }
+      return <AccountActivated />;
     }
     //default
     return <Placeholder />;
