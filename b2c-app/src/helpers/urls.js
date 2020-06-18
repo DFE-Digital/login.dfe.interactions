@@ -16,14 +16,14 @@ const REDIRECT_URI = {
 //initialise database
 const db = new Dexie('B2C_query_params');
 //create stores for client id and redirect uri
-db.version(1).stores({
-    [CLIENT_ID.storedId]: `,${CLIENT_ID.storedId}`,
-    [REDIRECT_URI.storedId]: `,${REDIRECT_URI.storedId}`
+db.version(2).stores({
+    [CLIENT_ID.storedId]: '',
+    [REDIRECT_URI.storedId]: ''
 });
 
 //function to store values in the DB, always reusing item in index 0, not storing more values
 function storeParam(key, value) {
-    db[key].put({ [key]: value }, 0);
+    db[key].put(value, 0);
 }
 
 //function to retrieve values from the DB, always getting index 0
@@ -44,7 +44,7 @@ async function getB2CParameters() {
     }
     //otherwise get it from indexedDB
     else {
-        retrievedClientId = await retrieveParam(CLIENT_ID.storedId,);
+        retrievedClientId = await retrieveParam(CLIENT_ID.storedId);
     }
 
     //if value is in query params, store it
