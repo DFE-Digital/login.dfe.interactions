@@ -89,9 +89,7 @@ class EmailSent extends React.Component {
         const resendChangeEmailParagraph =
             <components.Paragraph>
                 If you don't receive an email after this time you can&nbsp;
-                <a href="/#" className="govuk-link"
-                    onClick={this.resendEmail}
-                >resend the activation email</a>
+                <components.Link type={LINK_TYPES.API_CALL} onClick={this.resendEmail}>resend the activation email</components.Link>
                 .
             </ components.Paragraph >
 
