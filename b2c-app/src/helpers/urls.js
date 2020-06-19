@@ -1,64 +1,13 @@
 import { ACTIONS } from '../constants/actions';
 import { POLICIES } from '../constants/policies';
-
-import Dexie from 'dexie';
-
-const CLIENT_ID = {
-    queryParamsId: 'client_id',
-    storedId: 'clientId'
-}
-
-const REDIRECT_URI = {
-    queryParamsId: 'redirect_uri',
-    storedId: 'redirectURI'
-}
-
-//initialise database
-const db = new Dexie('B2C_query_params');
-//create stores for client id and redirect uri
-db.version(2).stores({
-    [CLIENT_ID.storedId]: '',
-    [REDIRECT_URI.storedId]: ''
-});
-
-//function to store values in the DB, always reusing item in index 0, not storing more values
-function storeParam(key, value) {
-    db[key].put(value, 0);
-}
-
-//function to retrieve values from the DB, always getting index 0
-async function retrieveParam(key) {
-    return db[key].get(0);
-}
+import { QUERY_PARAMS } from '../constants/queryParams';
+import QueryParamsService from '../services/QueryParamsService';
 
 async function getB2CParameters() {
 
-    let queryParams = (new URL(document.location)).searchParams;
-
-    let retrievedClientId = queryParams.get(CLIENT_ID.queryParamsId);
-    let retrievedRedirectURI = queryParams.get(REDIRECT_URI.queryParamsId);
-
-    //if value is in query params, store it
-    if (retrievedClientId) {
-        storeParam(CLIENT_ID.storedId, retrievedClientId);
-    }
-    //otherwise get it from indexedDB
-    else {
-        retrievedClientId = await retrieveParam(CLIENT_ID.storedId);
-    }
-
-    //if value is in query params, store it
-    if (retrievedRedirectURI) {
-        storeParam(REDIRECT_URI.storedId, retrievedRedirectURI);
-    }
-    //otherwise get it from indexedDB
-    else {
-        retrievedRedirectURI = await retrieveParam(REDIRECT_URI.storedId);
-    }
-
     const b2cParams = {
-        clientId: retrievedClientId,
-        redirectURI: retrievedRedirectURI
+        clientId: await QueryParamsService.getQueryParam(QUERY_PARAMS.CLIENT_ID),
+        redirectURI: await QueryParamsService.getQueryParam(QUERY_PARAMS.REDIRECT_URI)
     };
 
     return b2cParams;

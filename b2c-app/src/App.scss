@@ -3,9 +3,12 @@ $govuk-fonts-path: "/b2c/assets/static/media/";
 
 @import '../node_modules/govuk-frontend/govuk/all';
 
-#api {
+#api,
+#simplemodal-overlay,
+#simplemodal-container {
   display: none;
 }
+
 
 .show {
   display: block;

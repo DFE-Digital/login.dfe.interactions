@@ -50,15 +50,19 @@ class PageContainer extends React.Component {
         );
 
         return (
-            <div className="govuk-width-container">
-                <components.Breadcrumbs />
-                {pageLevelErrorContainer}
-                <main className="govuk-main-wrapper" >
-                    <div className="govuk-grid-row">
-                        {pageColumns}
-                    </div>
-                </main>
+            <div>
+                <components.Spinner showSpinner={this.props.pageConfig.showSpinner} text={this.props.pageConfig.spinnerText} />
+                <div className="govuk-width-container">
+                    <components.Breadcrumbs />
+                    {pageLevelErrorContainer}
+                    <main className="govuk-main-wrapper" >
+                        <div className="govuk-grid-row">
+                            {pageColumns}
+                        </div>
+                    </main>
+                </div>
             </div>
+
         )
     }
 }
