@@ -24,7 +24,7 @@ function Link(props) {
     else if (props.type === LINK_TYPES.API_CALL) {
         output =
             <a href="/#" className="govuk-link" onClick={props.onClick}>
-                resend the activation email
+                {props.children}
             </a>
     }
     else {
