@@ -97,7 +97,8 @@ class PageLevelErrorContainer extends React.Component {
         let errorItems;
         if (this.props.errorItems) {
             errorItems = this.props.errorItems.map(error => {
-                if (error) {
+                //render links if there is an id that the link will take user to
+                if (error.id) {
                     return (
                         <li key={error.id}>
                             <Link
@@ -112,7 +113,14 @@ class PageLevelErrorContainer extends React.Component {
                         </li>
                     )
                 }
-                return null;
+                //if there is no id then render as a normal paragraph
+                else {
+                    return (
+                        <li key={error.visible.text}>
+                            <p>{error.visible.text}</p>
+                        </li>
+                    )
+                }
             });
         }
 

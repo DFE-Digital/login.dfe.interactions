@@ -1,5 +1,7 @@
 import React from 'react';
 
+import QueryParamsService from './services/QueryParamsService';
+
 import { ACTIONS } from './constants/actions';
 import { POLICIES } from './constants/policies';
 
@@ -31,6 +33,11 @@ import {
 import { withRouter } from "react-router";
 
 class App extends React.Component {
+
+  componentWillMount() {
+    //retrieve query param values and store for later use
+    QueryParamsService.init();
+  }
 
   getComponentByLocation() {
     const { location } = this.props;
@@ -105,6 +112,10 @@ class App extends React.Component {
         return <ExpiredLink action={ACTIONS.SIGNUP} />;
       }
       return <ActivateAccount />;
+    }
+    //Change email address - email sent from expired link page
+    if (matchesPath(location, `${POLICIES.CHANGE_EMAIL}/api`)) {
+      return <EmailSent action={ACTIONS.CHANGE_EMAIL} />;
     }
     //Change email address
     if (matchesPath(location, POLICIES.CHANGE_EMAIL)) {

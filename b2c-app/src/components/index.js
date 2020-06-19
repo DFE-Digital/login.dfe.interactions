@@ -19,6 +19,7 @@ import Postcode from './Postcode/Postcode';
 import InputField from './InputField/InputField';
 import PageContainer from './PageContainer/PageContainer';
 import MenuToggle from './MenuToggle/MenuToggle';
+import Spinner from './Spinner/Spinner';
 
 export default {
     Header: Header,
@@ -41,5 +42,6 @@ export default {
     Paragraph: Paragraph,
     Postcode: Postcode,
     InputField: InputField,
-    PageContainer: PageContainer
+    PageContainer: PageContainer,
+    Spinner: Spinner
 }
