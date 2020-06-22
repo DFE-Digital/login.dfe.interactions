@@ -11,7 +11,7 @@ fs.readFile(indexFile, 'utf8', (err, data) => {
     }
 
     let newFile = data.replace(/rel="stylesheet"/g, 'rel="stylesheet" data-preload="true"');
-    newFile = newFile.replace(/\/__--b2cPath--__/g, process.env.B2C_PATH);
+    //newFile = newFile.replace(/\/__--b2cPath--__/g, process.env.B2C_PATH);
 
     fs.writeFile(filename, newFile, (err) => {
         if (err) {
