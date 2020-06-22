@@ -11,6 +11,7 @@ class ChangeEmailService {
 
         //get token from query params or indexedDB
         const token = await QueryParamsService.getQueryParam(QUERY_PARAMS.ID_TOKEN_HINT);
+        //TODO handle scenario with invalid token
         const decodedToken = decode(token);
 
         if (decodedToken.newEmail && decodedToken.email) {
@@ -27,6 +28,7 @@ class ChangeEmailService {
 
         if (payload) {
             try {
+                //TODO ask Steve wy the calls are different and decide what we have to do
                 let response = await fetch(API_URLS.CHANGE_EMAIL, {
                     method: 'POST',
                     body: JSON.stringify(payload)

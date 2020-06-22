@@ -34,7 +34,7 @@ import { withRouter } from "react-router";
 
 class App extends React.Component {
 
-  componentWillMount() {
+  componentDidMount() {
     //retrieve query param values and store for later use
     QueryParamsService.init();
   }
