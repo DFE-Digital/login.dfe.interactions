@@ -7,6 +7,10 @@ import QueryParamsService from '../services/QueryParamsService';
 
 class ChangeEmailService {
 
+    async dummyFunction() {
+        console.log('something');
+    }
+
     getChangeEmailPayloadFromToken() {
 
         return new Promise((resolve, reject) => {
