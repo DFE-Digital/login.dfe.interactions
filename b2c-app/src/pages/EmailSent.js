@@ -27,21 +27,18 @@ class EmailSent extends React.Component {
             }
         };
 
-        this.setState({ errors: [newError] });
-        this.setState({ showErrors: true });
+        this.setState({ errors: [newError], showErrors: true });
     }
 
     clearPageLevelError() {
-        this.setState({ errors: [] });
-        this.setState({ showErrors: false });
+        this.setState({ errors: [], showErrors: false });
     }
 
     resendEmail(e) {
         e.preventDefault();
 
         //start spinner
-        this.setState({ spinnerText: 'Sending activation email. Please wait.' })
-        this.setState({ showSpinner: true });
+        this.setState({ spinnerText: 'Sending activation email. Please wait.', showSpinner: true })
 
         //make call to API to resend email
         ChangeEmailService.callResendEmail().then(
