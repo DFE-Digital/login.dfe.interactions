@@ -1,7 +1,6 @@
 import decode from 'jwt-decode';
 
 import { QUERY_PARAMS } from '../constants/queryParams';
-import { API_URLS } from '../constants/ApiUrls';
 import QueryParamsService from '../services/QueryParamsService';
 
 
