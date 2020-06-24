@@ -7,9 +7,9 @@ const logger = require('./../../infrastructure/logger');
 const {sendRedirect, sendResult} = require('./../../infrastructure/utils');
 const osaApi = require('./../../infrastructure/osa');
 const oidc = require('./../../infrastructure/oidc');
-const config = require('./../../infrastructure/Config');
+const Config = require('./../../infrastructure/Config')();
 
-const key = config.crypto.key || 'CRYPTO KEY';
+const key = Config.crypto.key || 'CRYPTO KEY';
 
 const validateBody = (body, allowUserName) => {
     const validationMessages = {};
@@ -141,7 +141,7 @@ const handleValidLegacyUser = (req, res, user, client) => {
 };
 
 const encrypt = (value) => {
-  if (value) {
+    if (!value) {
     return null;
   }
   return CryptoJS.AES.encrypt(value, key).toString();

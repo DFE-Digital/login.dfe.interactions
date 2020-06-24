@@ -1,3 +1,5 @@
+const CryptoJS = require('crypto-js');
+
 jest.mock('login.dfe.audit.winston-sequelize-transport');
 jest.mock('./../../src/infrastructure/logger', () => ({}));
 jest.mock('./../../src/infrastructure/Config', () => jest.fn().mockImplementation(() => ({
@@ -5,7 +7,7 @@ jest.mock('./../../src/infrastructure/Config', () => jest.fn().mockImplementatio
   },
   osaApi: {
     type: 'static',
-  },
+  }
 })));
 jest.mock('./../../src/infrastructure/oidc', () => ({
   getInteractionById: jest.fn(),
@@ -24,6 +26,9 @@ jest.mock('./../../src/infrastructure/Config', () => {
       applications: {
         type: 'static',
       },
+      crypto:{
+        key:'test-key'
+      }
     };
   });
 });
@@ -219,9 +224,10 @@ describe('When user submits username/password', () => {
 
     it('then it should process interaction complete for userid', async () => {
       await postHandler(req, res);
-
+      const decrypted = CryptoJS.AES.decrypt(interactionCompleteProcess.mock.calls[0][1].uid , 'test-key');
+      const result = decrypted.toString(CryptoJS.enc.Utf8);
       expect(interactionCompleteProcess.mock.calls[0][1]).not.toBeNull();
-      expect(interactionCompleteProcess.mock.calls[0][1].uid).toBe('user1');
+      expect(result).toBe('user1');
     });
 
     it('then it should process interaction complete for usernamepassword type', async () => {
