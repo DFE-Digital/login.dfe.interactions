@@ -58,6 +58,9 @@ export function matchesPath(location, path) {
 
 export function hasSearchParam(search, param, value) {
     if (search) {
-        return new URLSearchParams(search).get(param).toUpperCase() === value.toUpperCase();
+        let paramFound = new URLSearchParams(search).get(param);
+        if (paramFound && value) {
+            return paramFound.toUpperCase() === value.toUpperCase();
+        }
     }
 }
