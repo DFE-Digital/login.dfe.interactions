@@ -142,9 +142,9 @@ const handleValidLegacyUser = (req, res, user, client) => {
 
 const encrypt = (value) => {
     if (!value) {
-    return null;
-  }
-  return CryptoJS.AES.encrypt(value, key).toString();
+        return null;
+    }
+    return CryptoJS.AES.encrypt(value, key).toString();
 };
 
 const handleValidSigninUser = (req, res, user) => {
