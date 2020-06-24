@@ -6,7 +6,7 @@ $govuk-fonts-path: "/b2c/assets/static/media/";
 #api,
 #simplemodal-overlay,
 #simplemodal-container {
-  display: none;
+  display: none !important;
 }
 
 

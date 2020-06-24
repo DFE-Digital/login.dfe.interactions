@@ -40,13 +40,22 @@ class QueryParamsService {
     }
 
     //function to retrieve values from the DB, always getting index 0
-    async retrieveParam(key) {
+    retrieveParam(key) {
         return this.db[key].get(0);
     }
 
-    async getQueryParam(id) {
-        this.queryParams[id] = this.queryParams[id] || await this.retrieveParam(id);
-        return this.queryParams[id];
+    getQueryParam(id) {
+        return new Promise((resolve, reject) => {
+            if (!this.queryParams[id]) {
+                return this.retrieveParam(id).then(
+                    (value) => {
+                        this.queryParams[id] = value;
+                        resolve(this.queryParams[id]);
+                    }
+                );
+            }
+            resolve(this.queryParams[id]);
+        });
     }
 
 }

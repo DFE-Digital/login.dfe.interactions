@@ -1,54 +1,79 @@
 import decode from 'jwt-decode';
 
 import { QUERY_PARAMS } from '../constants/queryParams';
-import { API_URLS } from '../constants/ApiUrls';
 import QueryParamsService from '../services/QueryParamsService';
 
 
 class ChangeEmailService {
 
-    async getChangeEmailPayloadFromToken() {
+    getChangeEmailPayloadFromToken() {
 
-        //get token from query params or indexedDB
-        const token = await QueryParamsService.getQueryParam(QUERY_PARAMS.ID_TOKEN_HINT);
-        const decodedToken = decode(token);
+        return new Promise((resolve, reject) => {
+            //get token from query params or indexedDB
+            QueryParamsService.getQueryParam(QUERY_PARAMS.ID_TOKEN_HINT).then(
+                (token) => {
+                    if (token) {
+                        try {
+                            const decodedToken = decode(token);
 
-        if (decodedToken.newEmail && decodedToken.email) {
-            return {
-                NewEmail: decodedToken.newEmail,
-                CurrentEmail: decodedToken.email,
-                isResend: true
-            }
-        }
+                            if (decodedToken.newEmail && decodedToken.email) {
+                                resolve({
+                                    NewEmail: decodedToken.newEmail,
+                                    CurrentEmail: decodedToken.email,
+                                    isResend: true
+                                });
+                            }
+                            else {
+                                reject({ userMessage: 'Unable to get the user details from the current token.' });
+                            }
+                        }
+                        catch (e) {
+                            reject({ userMessage: 'Unable to get the user details from the current token.' });
+                        }
+
+                    }
+                    else {
+                        reject({ userMessage: 'Unable to get the details to resend the activation email.' });
+                    }
+                }
+            );
+        });
     }
 
-    async callResendEmail() {
-        let payload = await this.getChangeEmailPayloadFromToken();
-
-        if (payload) {
-            try {
-                let response = await fetch(API_URLS.CHANGE_EMAIL, {
-                    method: 'POST',
-                    body: JSON.stringify(payload)
-                });
-
-                if (response.ok) {
-                    return await response.json();
+    callResendEmail() {
+        return new Promise((resolve, reject) => {
+            this.getChangeEmailPayloadFromToken().then(
+                (payload) => {
+                    fetch(window.API_URLS.CHANGE_EMAIL, {
+                        method: 'POST',
+                        body: JSON.stringify(payload)
+                    }).then(
+                        async (response) => {
+                            if (response.ok) {
+                                resolve(await response.json());
+                            }
+                            else {
+                                //reject if request failed, but still sending back response if present as it can contain error message
+                                let errorResponse;
+                                try {
+                                    errorResponse = await response.json();
+                                }
+                                finally {
+                                    reject(errorResponse);
+                                }
+                            }
+                        },
+                        (error) => {
+                            reject({ userMessage: 'The activation email could not be sent.' });
+                        }
+                    );
+                },
+                (error) => {
+                    reject(error);
                 }
-                else {
-                    //reject if request failed, but still sending back response as it contains error message
-                    return response.json().then(Promise.reject.bind(Promise));
-                }
-            }
-            catch (error) {
-                this.showPageLevelError('Unable to send the request.');
-            }
-        }
-        else {
-            this.showPageLevelError('Unable to get the details to resend the activation email.');
-        }
+            );
+        });
     }
-
 }
 
 export default new ChangeEmailService();

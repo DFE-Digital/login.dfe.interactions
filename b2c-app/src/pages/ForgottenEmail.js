@@ -36,8 +36,7 @@ class ForgottenEmail extends React.Component {
             this.state.dob &&
             this.state.postcode) {
             //hide our validation errors and prepare to show B2C ones (in case there are any)
-            this.setState({ showErrors: false });
-            this.setState({ showB2CErrors: true });
+            this.setState({ showErrors: false, showB2CErrors: true });
             //everything is valid, set data and submit B2C form
             this.setDataAndSubmit();
         }
