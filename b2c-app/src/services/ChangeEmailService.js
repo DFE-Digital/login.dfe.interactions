@@ -54,8 +54,14 @@ class ChangeEmailService {
                                 resolve(await response.json());
                             }
                             else {
-                                //reject if request failed, but still sending back response as it contains error message
-                                reject(await response.json());
+                                //reject if request failed, but still sending back response if present as it can contain error message
+                                let errorResponse;
+                                try {
+                                    errorResponse = await response.json();
+                                }
+                                finally {
+                                    reject(errorResponse);
+                                }
                             }
                         },
                         (error) => {

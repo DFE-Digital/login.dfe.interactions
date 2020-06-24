@@ -47,7 +47,7 @@ class EmailSent extends React.Component {
                 this.clearPageLevelError();
             },
             (error) => {
-                if (error.userMessage) {
+                if (error && error.userMessage) {
                     this.showPageLevelError(error.userMessage);
                 }
                 else {
