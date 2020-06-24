@@ -45,7 +45,7 @@ class ChangeEmailService {
         return new Promise((resolve, reject) => {
             this.getChangeEmailPayloadFromToken().then(
                 (payload) => {
-                    fetch(API_URLS.CHANGE_EMAIL, {
+                    fetch(window.API_URLS.CHANGE_EMAIL, {
                         method: 'POST',
                         body: JSON.stringify(payload)
                     }).then(
