@@ -49,18 +49,20 @@ class ChangeEmailService {
                         body: JSON.stringify(payload)
                     }).then(
                         async (response) => {
-                            if (response.ok) {
-                                resolve(await response.json());
+                            let parsedResponse;
+                            try {
+                                parsedResponse = await response.json();
+                                if (response.ok) {
+                                    resolve(parsedResponse);
+                                }
+                                else {
+                                    //reject if request failed, but still sending back response if parsed as it could contain error message from B2C
+                                    reject(parsedResponse);
+                                }
                             }
-                            else {
-                                //reject if request failed, but still sending back response if present as it can contain error message
-                                let errorResponse;
-                                try {
-                                    errorResponse = await response.json();
-                                }
-                                finally {
-                                    reject(errorResponse);
-                                }
+                            catch (e) {
+                                //unable to parse response, reject with error
+                                reject(e);
                             }
                         },
                         (error) => {
