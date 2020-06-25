@@ -18,7 +18,7 @@ class B2CErrorParserService {
         ];
 
         let match = B2CErrorTransformations.find((transformation) => {
-            return error.trim().replace(/(\s)+/g, ' ') === transformation.text;
+            return `${error}`.trim().replace(/(\s)+/g, ' ') === transformation.text;
         });
 
         if (match) {

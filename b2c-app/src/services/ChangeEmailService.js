@@ -22,8 +22,7 @@ class ChangeEmailService {
                                     CurrentEmail: decodedToken.email,
                                     isResend: true
                                 });
-                            }
-                            else {
+                            } else {
                                 reject({ userMessage: 'Unable to get the user details from the current token.' });
                             }
                         }
@@ -31,8 +30,7 @@ class ChangeEmailService {
                             reject({ userMessage: 'Unable to get the user details from the current token.' });
                         }
 
-                    }
-                    else {
+                    } else {
                         reject({ userMessage: 'Unable to get the details to resend the activation email.' });
                     }
                 }
@@ -54,8 +52,7 @@ class ChangeEmailService {
                                 parsedResponse = await response.json();
                                 if (response.ok) {
                                     resolve(parsedResponse);
-                                }
-                                else {
+                                } else {
                                     //reject if request failed, but still sending back response if parsed as it could contain error message from B2C
                                     reject(parsedResponse);
                                 }
