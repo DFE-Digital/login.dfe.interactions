@@ -95,21 +95,29 @@ class App extends React.Component {
     }
     //Account activated from Self Registration
     if (matchesPath(location, POLICIES.SIGNUP_CONFIRMATION)) {
+      //Success - go to email sent page (from resend activation email)
+      if (domHasElementWithId(SUCCESS_MESSAGE)) {
+        return <EmailSent action={ACTIONS.SIGNUP} />;
+      }
       //Error - link has expired
-      if (domHasElementWithId(ERROR_MESSAGE)) {
-        return <ExpiredLink action={ACTIONS.SIGNUP} />;
+      else if (domHasElementWithId(ERROR_MESSAGE)) {
+        return <ExpiredLinkWithResendEmail action={ACTIONS.SIGNUP} />;
       }
       return <AccountActivated />;
     }
-    //Account activated from Aided Registration
+    //Account activated/Email sent from Aided Registration
     if (matchesPath(location, `${POLICIES.SIGNUP_INVITATION}/api`)) {
+      //Success - go to email sent page (from resend activation email)
+      if (domHasElementWithId(SUCCESS_MESSAGE)) {
+        return <EmailSent action={ACTIONS.SIGNUP} />;
+      }
       return <AccountActivated />;
     }
     //Activate account from Aided Registration
     if (matchesPath(location, POLICIES.SIGNUP_INVITATION)) {
       //Error - link has expired
       if (domHasElementWithId(ERROR_MESSAGE)) {
-        return <ExpiredLink action={ACTIONS.SIGNUP} />;
+        return <ExpiredLinkWithResendEmail action={ACTIONS.SIGNUP} />;
       }
       return <ActivateAccount />;
     }
@@ -121,7 +129,7 @@ class App extends React.Component {
     if (matchesPath(location, POLICIES.CHANGE_EMAIL)) {
       //Error - link has expired
       if (domHasElementWithId(ERROR_MESSAGE)) {
-        return <ExpiredLinkWithResendEmail />;
+        return <ExpiredLinkWithResendEmail action={ACTIONS.CHANGE_EMAIL} />;
       }
       return <AccountActivated />;
     }
