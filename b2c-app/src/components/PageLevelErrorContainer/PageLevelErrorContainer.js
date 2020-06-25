@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, animateScroll } from "react-scroll";
+import B2CErrorParserService from '../../services/B2CErrorParserService';
 
 class PageLevelErrorContainer extends React.Component {
 
@@ -26,15 +27,15 @@ class PageLevelErrorContainer extends React.Component {
             let pageErrors = document.getElementsByClassName('error pageLevel');
 
             // find out how many of these errors are visible
-            let numVisibleItems = Array.from(pageErrors).filter(function (item) {
+            let numVisibleItems = Array.from(pageErrors).filter((item) => {
                 return item.style.display !== 'none';
             }).length;
 
             // add the visible errors if there are any
             if (numVisibleItems > 0) {
-                let errors = Array.from(pageErrors).reduce(function (result, error) {
+                let errors = Array.from(pageErrors).reduce((result, error) => {
                     if (error.style.display !== 'none') {
-                        result.push(error.innerText);
+                        result.push(B2CErrorParserService.parseB2CErrors(error.innerText));
                     }
                     return result;
                 }, []);
@@ -130,7 +131,7 @@ class PageLevelErrorContainer extends React.Component {
                 if (error) {
                     return (
                         <li key={error}>
-                            <p>{error}</p>
+                            {error}
                         </li>
                     )
                 }
