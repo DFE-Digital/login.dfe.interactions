@@ -14,6 +14,7 @@ class ExpiredLink extends React.Component {
         let linkExpiredParagraph;
         let requestAgainLink;
 
+        //we keep the logic to check different actions passed in, in case we have to reuse this page for different flows again
         if (this.props.action === ACTIONS.RESET_PASSWORD) {
             linkExpiredParagraph =
                 <components.Paragraph>
@@ -22,19 +23,7 @@ class ExpiredLink extends React.Component {
 
             requestAgainLink =
                 <components.Link type={LINK_TYPES.BUTTON} action={ACTIONS.RESET_PASSWORD}>Resend password reset email</components.Link>
-
         }
-        else if (this.props.action === ACTIONS.SIGNUP) {
-            linkExpiredParagraph =
-                <components.Paragraph>
-                    The link in your account activation email has expired.
-                </components.Paragraph>
-
-            //TODO split this into two versions if self registration and aided registration have different pages to resend email
-            requestAgainLink =
-                <components.Link type={LINK_TYPES.BUTTON} action={ACTIONS.RESEND_ACTIVATION_EMAIL}>Resend activation email</components.Link>
-        }
-
 
         const content =
             <div>
