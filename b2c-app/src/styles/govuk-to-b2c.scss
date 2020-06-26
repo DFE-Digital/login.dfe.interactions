@@ -1,10 +1,6 @@
-
-$govuk-images-path: "/b2c/images/";
-$govuk-fonts-path: "/b2c/assets/static/media/";
-
-@import '../node_modules/govuk-frontend/govuk/all';
-
-
+/*
+Styles for B2C form, extending govuk styles
+*/
 
 //LISTS
 
@@ -47,6 +43,10 @@ label {
     &.highlightError {
         @extend .govuk-input--error;
     }
+}
+
+.govuk-hint {
+    margin-bottom: 5px !important;
 }
 
 
@@ -126,12 +126,18 @@ button {
 
 //ERRORS
 
+.govuk-error-summary {
+    margin-bottom: 0;
+}
+
+.govuk-error-summary__list p{
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
 .error.itemLevel {
     @extend .govuk-error-message;
-
-    p {
-        margin: 0;
-    }
+    margin: 0;
 }
 
 .error.pageLevel, .govuk-error-summary__body {

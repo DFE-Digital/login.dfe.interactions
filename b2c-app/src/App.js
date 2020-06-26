@@ -1,10 +1,27 @@
 import React from 'react';
-//import './App.scss';
+
+import QueryParamsService from './services/QueryParamsService';
+
+import { ACTIONS } from './constants/actions';
+import { POLICIES } from './constants/policies';
+
+import { domHasElementWithId } from './helpers/dom';
+import { matchesPath, hasSearchParam } from './helpers/urls';
+
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import EmailSent from './pages/EmailSent';
-import LockedAccount from './pages/LockedAccount';
 import AccountActivated from './pages/AccountActivated';
+import ResetPassword from './pages/ResetPassword';
+import ForgottenEmail from './pages/ForgottenEmail';
+import AccountNotFound from './pages/AccountNotFound';
+import AccountFound from './pages/AccountFound';
+import PasswordChanged from './pages/PasswordChanged';
+import Placeholder from './pages/Placeholder';
+import EnterNewPassword from './pages/EnterNewPassword';
+import ActivateAccount from './pages/AidedRegistration/ActivateAccount';
+import ExpiredLink from './pages/ExpiredLink';
+import ExpiredLinkWithResendEmail from './pages/ExpiredLinkWithResendEmail';
 
 import components from './components';
 
@@ -13,103 +30,109 @@ import {
   Route
 } from "react-router-dom";
 
-export default class App extends React.Component {
+import { withRouter } from "react-router";
 
-  constructor(props) {
-    super(props);
-    this.handleLoad = () =>  {
-      console.log('loaded'); 
-      console.log(document.getElementsByClassName('error pageLevel'));
-    }
+class App extends React.Component {
+
+  componentDidMount() {
+    //retrieve query param values and store for later use
+    QueryParamsService.init();
   }
 
-  shouldComponentUpdate() {
-    return false;
-  };
+  getComponentByLocation() {
+    const { location } = this.props;
 
-  componentDidMount(){
-    window.addEventListener('load', this.handleLoad);
+    //Ids in B2C dom that we will be looking for
+    const ERROR_MESSAGE = 'errorMessage';
+    const SUCCESS_MESSAGE = 'successMessage';
 
-    // manipulate the DOM so that we can find all page level errors and put them in the same place, potentially
-    // outside the B2C container
-    this._govUkPageErrorElement = document.createElement('div');
-    this._govUkPageErrorElement.innerHTML = `
-      <div class="govuk-error-summary" aria-labelledby="error-summary-title" role="alert" tabindex="-1" data-module="govuk-error-summary">
-        <h2 class="govuk-error-summary__title" id="error-summary-title">
-          There is a problem
-        </h2>
-        <div class="govuk-error-summary__body">
-          <ul id="errorSummaryItems" class="govuk-list govuk-error-summary__list">
-            
-          </ul>
-        </div>
-      </div>
-      `;
-
-    //get all page level error elements
-    this._pageErrors = document.getElementsByClassName('error pageLevel');
-
-    //find out how many of these errors are visible
-    // let numVisibleItems = Array.from(this._pageErrors).filter(function(item){
-    //   return item.offsetParent !== null;
-    // }).length;
-
-    //only add the error summary if there is at least one error visible
-    // if(numVisibleItems > 0){
-
-      this._pageLevelErrorContainer = document.getElementById('pageLevelErrorContainer');
-
-      if(this._pageLevelErrorContainer){
-        this._pageLevelErrorContainer.appendChild(this._govUkPageErrorElement);
-        //get the error summary items container
-        this._pageLevelErrorItemsContainer = document.getElementById("errorSummaryItems");
-        Array.from(this._pageErrors).forEach( (errorItem) => {   
-          //and add each page level error as list items
-          let listItem = document.createElement("LI");
-          let paragraph = document.createElement("P");
-          paragraph.appendChild(errorItem);
-          listItem.appendChild(paragraph);
-          this._pageLevelErrorItemsContainer.appendChild(listItem);
-        });
+    //Login page
+    if (matchesPath(location, POLICIES.SIGNIN_INVITATION) || hasSearchParam(location.search, 'p', POLICIES.SIGNIN_INVITATION)) {
+      return <Login />;
+    }
+    //Activation email sent after sign up
+    if (matchesPath(location, `${POLICIES.ACCOUNT_SIGNUP}/api`)) {
+      return <EmailSent action={ACTIONS.SIGNUP} />;
+    }
+    //Sign up page
+    if (matchesPath(location, POLICIES.ACCOUNT_SIGNUP) || hasSearchParam(location.search, 'p', POLICIES.ACCOUNT_SIGNUP)) {
+      return <Signup />;
+    }
+    //Reset password email sent
+    if (matchesPath(location, `${POLICIES.PASSWORD_RESET}/api`)) {
+      return <EmailSent action={ACTIONS.RESET_PASSWORD} />;
+    }
+    //Request email to reset your password
+    if (matchesPath(location, POLICIES.PASSWORD_RESET) || hasSearchParam(location.search, 'p', POLICIES.PASSWORD_RESET)) {
+      return <ResetPassword />;
+    }
+    //Password has been changed
+    if (matchesPath(location, `${POLICIES.PASSWORD_RESET_CONFIRMATION}/api`)) {
+      return <PasswordChanged />;
+    }
+    //Enter new password page
+    if (matchesPath(location, POLICIES.PASSWORD_RESET_CONFIRMATION)) {
+      //Error - link has expired
+      if (domHasElementWithId(ERROR_MESSAGE)) {
+        return <ExpiredLink action={ACTIONS.RESET_PASSWORD} />;
       }
-    // }
-
-    // manipulate the DOM so that we can include the password help item
-    this._passWordHelp = document.createElement('div');
-    /*eslint-disable */
-    this._passWordHelp.innerHTML = `
-        <details class="govuk-details govuk-!-margin-top-3" data-module="govuk-details">
-          <summary class="govuk-details__summary">
-              <span class="govuk-details__summary-text">
-              Help choosing a valid password
-              </span>
-          </summary>
-          <div class="govuk-details__text">
-              <p>Your password must be between 8 and 16 characters and contain 3 out of 4 of the following:</p>
-              <ul class="govuk-list govuk-list--bullet">
-                  <li>lowercase characters</li>
-                  <li>uppercase characters</li>
-                  <li>digits (0-9)</li>
-                  <li>one or more of the following symbols: @ # $ % ^ & * - _ + = [ ] { } | \ : ' , ? / \` ~ " ( ) ; . </li>
-              </ul>
-          </div>
-        </details>
-      `;
-      /*eslint-enable */
-
-    //Add password help
-    this._passwordElement = document.getElementById('newPassword');
-    if(this._passwordElement){
-      this._passwordElement.parentNode.insertBefore(this._passWordHelp, this._passwordElement.nextSibling);
+      return <EnterNewPassword />;
     }
-
-  }
-
-  componentWillUnmount() { 
-    window.removeEventListener('load', this.handleLoad)  
+    //Results for forgotten email page
+    if (matchesPath(location, `${POLICIES.FIND_EMAIL}/api`)) {
+      //Success - account was found
+      if (domHasElementWithId(SUCCESS_MESSAGE)) {
+        return <AccountFound />;
+      }
+      //Error - account was not found
+      if (domHasElementWithId(ERROR_MESSAGE)) {
+        return <AccountNotFound />;
+      }
+    }
+    //Forgotten email
+    if (matchesPath(location, POLICIES.FIND_EMAIL) || hasSearchParam(location.search, 'p', POLICIES.FIND_EMAIL)) {
+      return <ForgottenEmail />;
+    }
+    //Account activated from Self Registration
+    if (matchesPath(location, POLICIES.SIGNUP_CONFIRMATION)) {
+      //Error - link has expired
+      if (domHasElementWithId(ERROR_MESSAGE)) {
+        return <ExpiredLink action={ACTIONS.SIGNUP} />;
+      }
+      return <AccountActivated />;
+    }
+    //Account activated from Aided Registration
+    if (matchesPath(location, `${POLICIES.SIGNUP_INVITATION}/api`)) {
+      return <AccountActivated />;
+    }
+    //Activate account from Aided Registration
+    if (matchesPath(location, POLICIES.SIGNUP_INVITATION)) {
+      //Error - link has expired
+      if (domHasElementWithId(ERROR_MESSAGE)) {
+        return <ExpiredLink action={ACTIONS.SIGNUP} />;
+      }
+      return <ActivateAccount />;
+    }
+    //Change email address - email sent from expired link page
+    if (matchesPath(location, `${POLICIES.CHANGE_EMAIL}/api`)) {
+      return <EmailSent action={ACTIONS.CHANGE_EMAIL} />;
+    }
+    //Change email address
+    if (matchesPath(location, POLICIES.CHANGE_EMAIL)) {
+      //Error - link has expired
+      if (domHasElementWithId(ERROR_MESSAGE)) {
+        return <ExpiredLinkWithResendEmail />;
+      }
+      return <AccountActivated />;
+    }
+    //default
+    return <Placeholder />;
   }
 
   render() {
+
+    let component = this.getComponentByLocation();
+
     return (
       <div className="App" id="app">
 
@@ -119,36 +142,8 @@ export default class App extends React.Component {
         {/* routing */}
         <div id="routes">
           <Switch>
-            <Route exact path="/">
-              <header className="App-header">
-                <img src="/b2c/images/logo.svg" className="App-logo" alt="logo" />
-                <p>
-                  Edit <code>src/App.js</code> and save to reloadssss.
-                  </p>
-                <a
-                  className="App-link"
-                  href="https://reactjs.org"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  Learn React
-                  </a>
-              </header>
-            </Route>
-            <Route path="/signup">
-              <Signup />
-            </Route>
-            <Route path="/login">
-              <Login />
-            </Route>
-            <Route path="/emailsent">
-              <EmailSent />
-            </Route>
-            <Route path="/locked">
-              <LockedAccount />
-            </Route>
-            <Route path="/activated">
-              <AccountActivated />
+            <Route path="/">
+              {component}
             </Route>
           </Switch>
         </div>
@@ -157,7 +152,8 @@ export default class App extends React.Component {
         <components.Footer />
 
       </div>
-    );
+    )
   }
-
 }
+
+export default withRouter(App);

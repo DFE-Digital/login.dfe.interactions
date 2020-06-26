@@ -5,6 +5,7 @@ import App from './App';
 const path = require('path');
 const fs = require('fs');
 const cors = require('cors');
+const url = require('url');
 
 const express = require('express');
 const router = express.Router({ mergeParams: true });
@@ -13,7 +14,10 @@ const React = require('react');
 const ReactDOMServer = require('react-dom/server');
 import { StaticRouter } from 'react-router-dom';
 
-function getComponent(route) {
+function getComponent(req) {
+
+    let route = req.url;
+
     return new Promise((resolve, reject) => {
         let html;
         let context = {};
@@ -30,7 +34,13 @@ function getComponent(route) {
     });
 }
 
-function getHTML(app) {
+function getHTML(app, req) {
+
+    let reqURL = url.format({
+        protocol: req.protocol,
+        host: req.get('host')
+    });
+
     return new Promise((resolve, reject) => {
         const indexFile = path.resolve(`${process.cwd()}/b2c-app/build/index.html`);
         fs.readFile(indexFile, 'utf8', (err, data) => {
@@ -39,7 +49,14 @@ function getHTML(app) {
                 reject('Oops, better luck next time!');
             }
 
-            resolve(data.replace('<div id="root"></div>', `<div id="root">${app}</div>`));
+            //replace b2cPath placeholder, used to have absolute paths to static assets in index.html
+            data = data.replace(/\/__--b2cPath--__/g, reqURL);
+            //replace API urls that are set as global variables in index.html (window.API_URLS)
+            data = data.replace(/__--changeEmailAPI--__/g, process.env.B2C_CHANGE_EMAIL_ENDPOINT);
+            //embed react app in the root element
+            data = data.replace('<div id="root"></div>', `<div id="root">${app}</div>`)
+
+            resolve(data);
         });
     });
 }
@@ -49,9 +66,9 @@ module.exports = (csrf) => {
     router.use('/images', cors(), express.static(`${process.cwd()}/b2c-app/static-assets`));
 
     router.get('*', cors(), csrf, (req, res) => {
-        getComponent(req.url)
+        getComponent(req)
             .then((comp) => {
-                return getHTML(comp);
+                return getHTML(comp, req);
             })
             .then((html) => {
                 res.status(200).send(html).end();
