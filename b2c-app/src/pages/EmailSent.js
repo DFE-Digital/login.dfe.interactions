@@ -17,6 +17,7 @@ class EmailSent extends React.Component {
         }
         this.resendEmail = this.resendEmail.bind(this);
         this.showPageLevelError = this.showPageLevelError.bind(this);
+        this.clearPageLevelError = this.clearPageLevelError.bind(this);
     }
 
     showPageLevelError(errorMessage) {
@@ -26,32 +27,41 @@ class EmailSent extends React.Component {
             }
         };
 
-        this.setState({ errors: [newError] });
-        this.setState({ showErrors: true });
+        this.setState({ errors: [newError], showErrors: true });
     }
 
-    async resendEmail(e) {
+    clearPageLevelError() {
+        this.setState({ errors: [], showErrors: false });
+    }
+
+    resendEmail(e) {
         e.preventDefault();
 
         //start spinner
-        this.setState({ spinnerText: 'Sending activation email. Please wait.' })
-        this.setState({ showSpinner: true });
+        this.setState({ spinnerText: 'Sending activation email. Please wait.', showSpinner: true })
 
         //make call to API to resend email
-        try {
-            await ChangeEmailService.callResendEmail();
-            //no need to do anything if successful
-        }
-        catch (error) {
-            if (error.userMessage) {
-                this.showPageLevelError(error.userMessage);
-            }
-        }
-        finally {
-            //stop spinner
-            this.setState({ showSpinner: false });
-        }
+        ChangeEmailService.callResendEmail().then(
+            () => {
+                //clear error messages if there were any from previous calls
+                this.clearPageLevelError();
+            },
+            (error) => {
+                if (error && error.userMessage) {
+                    this.showPageLevelError(error.userMessage);
+                }
+                else {
+                    this.showPageLevelError('The activation email could not be sent.');
+                }
+            })
+            .finally(
+                () => {
+                    //stop spinner
+                    this.setState({ showSpinner: false });
+                }
+            );
     }
+
 
     render() {
 

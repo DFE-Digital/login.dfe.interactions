@@ -53,9 +53,14 @@ export async function getB2CLink(action) {
 }
 
 export function matchesPath(location, path) {
-    return location.pathname.search(`${path}/`) !== -1;
+    return location.pathname.toUpperCase().search(`${path.toUpperCase()}/`) !== -1;
 }
 
 export function hasSearchParam(search, param, value) {
-    return new URLSearchParams(search).get(param) === value;
+    if (search) {
+        let paramFound = new URLSearchParams(search).get(param);
+        if (paramFound && value) {
+            return paramFound.toUpperCase() === value.toUpperCase();
+        }
+    }
 }
