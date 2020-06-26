@@ -45,6 +45,7 @@ class App extends React.Component {
     //Ids in B2C dom that we will be looking for
     const ERROR_MESSAGE = 'errorMessage';
     const SUCCESS_MESSAGE = 'successMessage';
+    const CONFIRMATION_MESSAGE = 'confirmationMessage';
 
     //Login page
     if (matchesPath(location, POLICIES.SIGNIN_INVITATION) || hasSearchParam(location.search, 'p', POLICIES.SIGNIN_INVITATION)) {
@@ -111,7 +112,9 @@ class App extends React.Component {
       if (domHasElementWithId(SUCCESS_MESSAGE)) {
         return <EmailSent action={ACTIONS.SIGNUP} />;
       }
-      return <AccountActivated />;
+      if (domHasElementWithId(CONFIRMATION_MESSAGE)) {
+        return <AccountActivated />;
+      }
     }
     //Activate account from Aided Registration
     if (matchesPath(location, POLICIES.SIGNUP_INVITATION)) {
