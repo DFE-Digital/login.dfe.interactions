@@ -10,12 +10,16 @@ function PageNavigation(props) {
         'govuk-header__navigation--open': props.expanded
     });
 
-    //build array of components with actual config
-    const navItemComponents = props.children.map(
-        navItem => {
-            return <components.NavigationLink title={navItem.title} link={navItem.link} key={navItem.title + navItem.link} />
-        }
-    );
+    let navItemComponents;
+
+    if (props.children) {
+        //build array of components with actual config
+        navItemComponents = props.children.map(
+            navItem => {
+                return <components.NavigationLink title={navItem.title} link={navItem.link} key={navItem.title + navItem.link} />
+            }
+        );
+    }
 
     return (
         <nav>

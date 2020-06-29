@@ -15,7 +15,7 @@ it('renders correctly', () => {
     expect(tree).toMatchSnapshot();
 });
 
-it('should change state.menuExpanded when calling menuToggle function', () => {
+it('should change state to expand menu when clicking menuToggle', () => {
     const wrapper = mount(<components.Header />);
     expect(wrapper.state().menuExpanded).toBe(false);
     wrapper.find('#menuToggle').simulate('click');

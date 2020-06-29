@@ -1,0 +1,141 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly with menu collapsed 1`] = `
+<nav>
+  <ul
+    aria-label="Top Level Navigation"
+    className="govuk-header__navigation"
+  >
+    <li
+      className="govuk-header__navigation-item"
+    >
+      <a
+        className="govuk-header__link"
+        href="https://nationalcareers.service.gov.uk/job-profiles"
+      >
+        Explore careers
+      </a>
+    </li>
+    <li
+      className="govuk-header__navigation-item"
+    >
+      <a
+        className="govuk-header__link"
+        href="https://nationalcareers.service.gov.uk/skills-health-check"
+      >
+        Skills assessment
+      </a>
+    </li>
+    <li
+      className="govuk-header__navigation-item"
+    >
+      <a
+        className="govuk-header__link"
+        href="https://nationalcareers.service.gov.uk/course-directory"
+      >
+        Find a course
+      </a>
+    </li>
+    <li
+      className="govuk-header__navigation-item"
+    >
+      <a
+        className="govuk-header__link"
+        href="https://nationalcareers.service.gov.uk/contact-us"
+      >
+        Contact us
+      </a>
+    </li>
+    <li
+      className="govuk-header__navigation-item"
+    >
+      <a
+        className="govuk-header__link"
+        href="https://nationalcareers.service.gov.uk/about-us"
+      >
+        About us
+      </a>
+    </li>
+    <li
+      className="govuk-header__navigation-item"
+    >
+      <a
+        className="govuk-header__link"
+        href="https://nationalcareers.service.gov.uk/get-a-job"
+      >
+        Help to get a job
+      </a>
+    </li>
+  </ul>
+</nav>
+`;
+
+exports[`renders correctly with menu expanded 1`] = `
+<nav>
+  <ul
+    aria-label="Top Level Navigation"
+    className="govuk-header__navigation govuk-header__navigation--open"
+  >
+    <li
+      className="govuk-header__navigation-item"
+    >
+      <a
+        className="govuk-header__link"
+        href="https://nationalcareers.service.gov.uk/job-profiles"
+      >
+        Explore careers
+      </a>
+    </li>
+    <li
+      className="govuk-header__navigation-item"
+    >
+      <a
+        className="govuk-header__link"
+        href="https://nationalcareers.service.gov.uk/skills-health-check"
+      >
+        Skills assessment
+      </a>
+    </li>
+    <li
+      className="govuk-header__navigation-item"
+    >
+      <a
+        className="govuk-header__link"
+        href="https://nationalcareers.service.gov.uk/course-directory"
+      >
+        Find a course
+      </a>
+    </li>
+    <li
+      className="govuk-header__navigation-item"
+    >
+      <a
+        className="govuk-header__link"
+        href="https://nationalcareers.service.gov.uk/contact-us"
+      >
+        Contact us
+      </a>
+    </li>
+    <li
+      className="govuk-header__navigation-item"
+    >
+      <a
+        className="govuk-header__link"
+        href="https://nationalcareers.service.gov.uk/about-us"
+      >
+        About us
+      </a>
+    </li>
+    <li
+      className="govuk-header__navigation-item"
+    >
+      <a
+        className="govuk-header__link"
+        href="https://nationalcareers.service.gov.uk/get-a-job"
+      >
+        Help to get a job
+      </a>
+    </li>
+  </ul>
+</nav>
+`;
