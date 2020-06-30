@@ -8,7 +8,9 @@ function Link(props) {
 
     useEffect(() => {
         async function getLink() {
-            setLink(await getB2CLink(props.action));
+            try {
+                setLink(await getB2CLink(props.action));
+            } catch (e) { }
         }
         getLink();
     });
