@@ -10,7 +10,8 @@ class PageContainer extends React.Component {
     }
 
     componentDidMount() {
-        document.title = `${this.props.pageConfig.title} | National Careers Service`;
+        const title = (this.props.pageConfig && this.props.pageConfig.title) || '';
+        document.title = `${title} | National Careers Service`;
     }
 
     render() {
@@ -25,7 +26,7 @@ class PageContainer extends React.Component {
                 />
         }
 
-        const pageColumns = this.props.columns.map(
+        const pageColumns = this.props.columns && this.props.columns.map(
             column => {
                 const formContainerClass = this.props.columns.length === 1 ? 'govuk-grid-column-two-thirds' : 'govuk-grid-column-one-half';
                 const formContainerHeaderSize = this.props.columns.length === 1 ? 'xl' : 'l';
@@ -49,9 +50,16 @@ class PageContainer extends React.Component {
             }
         );
 
+        let showSpinner;
+        let spinnerText;
+        if (this.props.pageConfig) {
+            showSpinner = this.props.pageConfig.showSpinner;
+            spinnerText = this.props.pageConfig.spinnerText;
+        }
+
         return (
             <div>
-                <components.Spinner showSpinner={this.props.pageConfig.showSpinner} text={this.props.pageConfig.spinnerText} />
+                <components.Spinner showSpinner={showSpinner} text={spinnerText} />
                 <div className="govuk-width-container">
                     <components.Breadcrumbs />
                     {pageLevelErrorContainer}

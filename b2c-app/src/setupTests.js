@@ -9,3 +9,5 @@ import Adapter from 'enzyme-adapter-react-16';
 configure({ adapter: new Adapter() });
 
 import 'fake-indexeddb/auto';
+
+import 'mutationobserver-shim';
