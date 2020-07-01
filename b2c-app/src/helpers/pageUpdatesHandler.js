@@ -1,10 +1,14 @@
+import { isArguments, isArray } from "lodash";
+
 export function onError(errors) {
     Object.keys(this.state.errors).forEach((key) => {
-        const found = errors.some(el => {
-            return el.id === this.state.errors[key].id;
-        });
-        if (!found) {
-            errors.push(this.state.errors[key]);
+        if (errors && isArray(errors)) {
+            const found = errors.some(el => {
+                return el.id === this.state.errors[key].id;
+            });
+            if (!found) {
+                errors.push(this.state.errors[key]);
+            }
         }
     });
 }

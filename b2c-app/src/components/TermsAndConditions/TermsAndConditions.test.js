@@ -1,0 +1,61 @@
+import React from 'react';
+import { shallow, mount } from 'enzyme';
+import renderer from 'react-test-renderer';
+
+import components from '..';
+
+it('renders without crashing', () => {
+    shallow(<components.TermsAndConditions />);
+});
+
+it('renders correctly without props passed in', () => {
+    const tree = renderer
+        .create(<components.TermsAndConditions />)
+        .toJSON();
+    expect(tree).toMatchSnapshot();
+});
+
+it('calls validation, sets errors and calls onChange callback', () => {
+
+    const mockOnChangeCallback = jest.fn();
+
+    const wrapper = mount(<components.TermsAndConditions showErrors={true} onChange={mockOnChangeCallback} />);
+    const tsAndCsCheckbox = wrapper.find('#tsAndCsCustom');
+    const validationSpy = jest.spyOn(wrapper.instance(), 'isValidTsAndCs');
+    let changeEvent = {
+        target:
+        {
+            name: 'tsAndCsAccepted',
+            checked: true
+        }
+    };
+
+
+    //default values set
+    expect(wrapper.state().tsAndCsAccepted).toBe(false);
+    expect(wrapper.state().errors.tsAndCs.current.text).toEqual('You must accept our Terms and Conditions');
+
+    //simulate checking Ts & Cs
+    tsAndCsCheckbox.simulate('change', changeEvent);
+    //validation called
+    expect(validationSpy).toHaveBeenCalled();
+    //state value has been updated
+    expect(wrapper.state().tsAndCsAccepted).toBe(true);
+    //check error message is empty
+    expect(wrapper.state().errors.tsAndCs.current.text).toEqual('');
+    //callback function passed in has been called
+    expect(mockOnChangeCallback.mock.calls.length).toBe(1);
+
+    //simulate unchecking Ts & Cs
+    changeEvent.target.checked = false;
+    tsAndCsCheckbox.simulate('change', changeEvent);
+    //validation called
+    expect(validationSpy).toHaveBeenCalled();
+    //state value has been updated
+    expect(wrapper.state().tsAndCsAccepted).toBe(false);
+    //callback function passed in has been called
+    expect(mockOnChangeCallback.mock.calls.length).toBe(2);
+    //check error message is empty
+    expect(wrapper.state().errors.tsAndCs.current.text).toEqual('You must accept our Terms and Conditions');
+
+});
