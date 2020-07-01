@@ -85,7 +85,7 @@ class CreateNewPassword extends React.Component {
             errors.newPassword.current.text = 'Invalid password';
             errors.newPassword.current.showSummaryText = true;
         }
-        else if (reenteredPassword === '') {
+        else if (!reenteredPassword || reenteredPassword === '') {
             isValid = false;
             errors.reenteredPassword.current.text = 'Re-enter your password';
         }
