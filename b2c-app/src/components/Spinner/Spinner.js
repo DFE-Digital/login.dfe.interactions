@@ -17,6 +17,9 @@ class Spinner extends React.Component {
     //which means we need to show or hide our own spinner
     b2cSpinnerCallback(mutationsList) {
 
+        console.log('mutation!!!');
+
+
         for (let mutation of mutationsList) {
             //show spinner if B2C has added simplemodal-overlay element
             mutation.addedNodes.forEach((node) => {

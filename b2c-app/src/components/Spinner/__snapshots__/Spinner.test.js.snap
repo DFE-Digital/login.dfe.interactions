@@ -1,0 +1,56 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`is shown while B2C shows its spinner 1`] = `null`;
+
+exports[`is shown while B2C shows its spinner 2`] = `
+<div
+  aria-live="assertive"
+  className="spinner-container"
+  role="alert"
+>
+  <div
+    className="spinner"
+  />
+  <p
+    className="govuk-body"
+  >
+    Please wait while we process your information.
+  </p>
+</div>
+`;
+
+exports[`is shown while B2C shows its spinner 3`] = `null`;
+
+exports[`renders correctly with custom text 1`] = `
+<div
+  aria-live="assertive"
+  className="spinner-container"
+  role="alert"
+>
+  <div
+    className="spinner"
+  />
+  <p
+    className="govuk-body"
+  >
+    custom spinner text
+  </p>
+</div>
+`;
+
+exports[`renders correctly with default text 1`] = `
+<div
+  aria-live="assertive"
+  className="spinner-container"
+  role="alert"
+>
+  <div
+    className="spinner"
+  />
+  <p
+    className="govuk-body"
+  >
+    Please wait while we process your information.
+  </p>
+</div>
+`;
