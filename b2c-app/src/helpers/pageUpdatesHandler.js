@@ -1,8 +1,6 @@
-import { isArguments, isArray } from "lodash";
-
 export function onError(errors) {
     Object.keys(this.state.errors).forEach((key) => {
-        if (errors && isArray(errors)) {
+        if (errors && Array.isArray(errors)) {
             const found = errors.some(el => {
                 return el.id === this.state.errors[key].id;
             });
