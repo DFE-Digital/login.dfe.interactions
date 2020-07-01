@@ -86,6 +86,9 @@
   "jest": {
     "testEnvironment": "node",
     "collectCoverage": false,
-    "clearMocks": true
+    "clearMocks": true,
+    "modulePathIgnorePatterns": [
+      "<rootDir>/b2c-app/"
+    ]
   }
 }
