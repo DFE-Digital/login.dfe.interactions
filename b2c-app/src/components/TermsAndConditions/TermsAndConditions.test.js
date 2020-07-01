@@ -15,6 +15,20 @@ it('renders correctly without props passed in', () => {
     expect(tree).toMatchSnapshot();
 });
 
+it('renders correctly with errors', () => {
+    const tree = renderer.create(<components.TermsAndConditions showErrors={true} />);
+    tree.root.instance.setState({
+        errors: {
+            tsAndCs: {
+                visible: {
+                    text: 'this is a test'
+                }
+            }
+        }
+    });
+    expect(tree.toJSON()).toMatchSnapshot()
+});
+
 it('calls validation, sets errors and calls onChange callback', () => {
 
     const mockOnChangeCallback = jest.fn();
@@ -44,7 +58,7 @@ it('calls validation, sets errors and calls onChange callback', () => {
     //check error message is empty
     expect(wrapper.state().errors.tsAndCs.current.text).toEqual('');
     //callback function passed in has been called
-    expect(mockOnChangeCallback.mock.calls.length).toBe(1);
+    expect(mockOnChangeCallback).toHaveBeenCalledWith({ tsAndCsAccepted: true });
 
     //simulate unchecking Ts & Cs
     changeEvent.target.checked = false;
@@ -54,7 +68,7 @@ it('calls validation, sets errors and calls onChange callback', () => {
     //state value has been updated
     expect(wrapper.state().tsAndCsAccepted).toBe(false);
     //callback function passed in has been called
-    expect(mockOnChangeCallback.mock.calls.length).toBe(2);
+    expect(mockOnChangeCallback).toHaveBeenCalledWith({ tsAndCsAccepted: false });
     //check error message is empty
     expect(wrapper.state().errors.tsAndCs.current.text).toEqual('You must accept our Terms and Conditions');
 
