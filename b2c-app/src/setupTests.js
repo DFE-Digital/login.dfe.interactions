@@ -10,4 +10,5 @@ configure({ adapter: new Adapter() });
 
 import 'fake-indexeddb/auto';
 
-import 'mutationobserver-shim';
+import MutationObserver from 'mutation-observer';
+global.MutationObserver = MutationObserver;
