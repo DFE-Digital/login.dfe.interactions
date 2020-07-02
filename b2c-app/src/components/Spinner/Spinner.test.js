@@ -66,6 +66,31 @@ describe('when B2C is showing or hiding its own spinner', () => {
         expect(wrapper.state().showB2CSpinner).toBe(false);
     });
 
+    it('does not change the state of the spinner when mutation does not meet required id', () => {
+        //prepare mutation data to simulate adding an element that is not the B2C spinner (should be ignored)
+        const node = {
+            id: 'non-b2c-node'
+        };
+        const mutations = [
+            {
+                addedNodes: [node],
+                removedNodes: [node]
+            }
+        ];
+        const mutationList = mutations[Symbol.iterator]();
+
+        //Mount spinner
+        const wrapper = mount(<components.Spinner />);
+
+        //spinner not visible initially
+        expect(wrapper.state().showB2CSpinner).toBe(false);
+
+        //call mutation callback
+        wrapper.instance().b2cSpinnerCallback(mutationList);
+        //check showB2CSpinner stays set to false
+        expect(wrapper.state().showB2CSpinner).toBe(false);
+    });
+
     it('shows our spinner while showB2CSpinner is true', () => {
         const tree = renderer.create(<components.Spinner />);
 
