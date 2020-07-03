@@ -70,7 +70,11 @@ class InputField extends React.Component {
             }
         }
 
-        this.setState({ errors: this.errors });
+        this.setState({
+            errors: {
+                [this.props.inputId]: this.errors
+            }
+        });
 
         return isValid;
     }
