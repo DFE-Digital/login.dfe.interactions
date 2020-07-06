@@ -105,6 +105,30 @@ it('calls validation, sets errors and calls onChange callback', () => {
     //onChange callback function passed in has been called with date object
     expect(mockOnChangeCallback).toHaveBeenCalledWith({ dob: new Date(testYear, testMonth - 1, testDay) });
 
+    //simulate entering year that means age is below 13
+    yearChangeEvent.target.value = '2019';
+    yearInput.simulate('change', yearChangeEvent);
+    //validation called
+    expect(validationSpy).toHaveBeenCalled();
+    //state value has been updated
+    expect(wrapper.state().dobYear).toEqual('2019');
+    //check error message is set as date is still not complete
+    expect(wrapper.state().errors.dob.current.text).toEqual('Enter a valid date of birth');
+    //onChange callback function passed in has been called with null
+    expect(mockOnChangeCallback).toHaveBeenCalledWith({ dob: null });
+
+    //simulate entering year that means age is above 65
+    yearChangeEvent.target.value = '1950';
+    yearInput.simulate('change', yearChangeEvent);
+    //validation called
+    expect(validationSpy).toHaveBeenCalled();
+    //state value has been updated
+    expect(wrapper.state().dobYear).toEqual('1950');
+    //check error message is set as date is still not complete
+    expect(wrapper.state().errors.dob.current.text).toEqual('Enter a valid date of birth');
+    //onChange callback function passed in has been called with null
+    expect(mockOnChangeCallback).toHaveBeenCalledWith({ dob: null });
+
     //simulate deleting part of the year
     yearChangeEvent.target.value = '200';
     yearInput.simulate('change', yearChangeEvent);

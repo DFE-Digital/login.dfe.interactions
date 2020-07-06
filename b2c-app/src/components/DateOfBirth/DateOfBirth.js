@@ -45,6 +45,17 @@ class DateOfBirth extends React.Component {
         });
     }
 
+    calculateAge(dob) {
+        let currentDate = new Date();
+        let years = (currentDate.getFullYear() - dob.getFullYear());
+
+        if (currentDate.getMonth() < dob.getMonth() ||
+            (currentDate.getMonth() === dob.getMonth() && currentDate.getDate() < dob.getDate())) {
+            years--;
+        }
+        return years;
+    }
+
     isValidDob() {
         let isValid = true;
         let day = this.state.dobDay;
@@ -70,9 +81,11 @@ class DateOfBirth extends React.Component {
             //validate the date input
             this.inputDate = new Date(year, month, day);
 
+            let age = this.calculateAge(this.inputDate);
+
             if (isNaN(this.inputDate.getTime()) ||
-                this.inputDate.getMonth() !== month //this one would mean user entered 29th of a month in a non leap year
-            ) {
+                this.inputDate.getMonth() !== month || //this one would mean user entered 29th of a month in a non leap year
+                age < 13 || age > 65) {
                 //failed validation, show an error and prevent submit
                 isValid = false;
                 errors.dob.current.text = 'Enter a valid date of birth';

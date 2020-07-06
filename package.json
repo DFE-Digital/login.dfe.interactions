@@ -99,7 +99,7 @@
         "testEnvironment": "jsdom",
         "rootDir": "<rootDir>/b2c-app/",
         "setupFilesAfterEnv": [
-          "<rootDir>/test/setupTests.js"
+          "<rootDir>/src/setupTests.js"
         ],
         "moduleNameMapper": {
           "\\.(css|scss)$": "<rootDir>/test/styleMock.js"
