@@ -44,7 +44,13 @@ class ChangeEmailService {
                 (payload) => {
                     fetch(window.API_URLS.CHANGE_EMAIL, {
                         method: 'POST',
-                        body: JSON.stringify(payload)
+                        body: JSON.stringify(payload),
+                        headers: {
+                            "Content-Type": "application/json",
+                            "api_sec_uid": window.API_SEC.uid,
+                            "api_sec_expiry": window.API_SEC.expiry,
+                            "api_sec_signature": window.API_SEC.signature
+                        }
                     }).then(
                         async (response) => {
                             let parsedResponse;
