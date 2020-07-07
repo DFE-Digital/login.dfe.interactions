@@ -62,33 +62,25 @@ const action = async (req, res) => {
 
   //based on security params added in headers, verify signature
   if (!isValidRequest(req.headers)) {
-    res.writeHead(403);
-    res.write("Change email call did not pass security checks");
-    res.end();
+    res.status(403).send("Change email call did not pass security checks").end();
     return;
   }
 
   //based on security params added in headers, verify request is not expired
   if (isExpiredRequest(req.headers.api_sec_expiry)) {
-    res.writeHead(500);
-    res.write("Change email endpoint not called, verification details expired");
-    res.end();
+    res.status(500).send("Change email endpoint not called, verification details expired").end();
     return;
   }
 
   //make sure we have a URL from env config to redirect the request to
   if (!securedEndpointUrl) {
-    res.writeHead(404);
-    res.write("Change email endpoint not configured properly");
-    res.end();
+    res.status(404).send("Change email endpoint not configured properly").end();
     return;
   }
 
   //check this uid hasn't been used too many times
   if (countRequest(req.headers) > 5) {
-    res.writeHead(500);
-    res.write("Change email endpoint called too many times");
-    res.end();
+    res.status(500).send("Change email endpoint called too many times").end();
     return;
   }
 
@@ -107,11 +99,11 @@ const action = async (req, res) => {
       proxiedRes.setEncoding('utf8');
 
       // set http status code based on proxied response
-      res.writeHead(proxiedRes.statusCode);
+      res.status(proxiedRes.statusCode);
 
       // wait for data
       proxiedRes.on('data', chunk => {
-        res.write(chunk);
+        res.send(chunk);
       });
 
       proxiedRes.on('close', () => {
@@ -128,8 +120,7 @@ const action = async (req, res) => {
     .on('error', e => {
       try {
         // attempt to set error message and http status
-        res.writeHead(500);
-        res.write(e.message);
+        res.status(500).send(e.message);
       } catch (e) {
         //no need to do anything else
       }
