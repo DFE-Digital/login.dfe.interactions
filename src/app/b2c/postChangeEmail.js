@@ -10,7 +10,7 @@ let counter = [];
 //remove all expired items from the counter every 5 seconds
 setInterval(() => {
   counter = counter.filter((item) => {
-    return isExpiredRequest(item.headers.api_sec_expiry)
+    return !isExpiredRequest(item.headers.api_sec_expiry)
   });
 }, 5000);
 
@@ -34,7 +34,7 @@ const isExpiredRequest = (expiry) => {
   const expiresOn = new Date(expiry);
   const currentTime = new Date();
 
-  return expiresOn > currentTime;
+  return currentTime > expiresOn;
 }
 
 //returns number of times this uid has made the request
@@ -69,7 +69,7 @@ const action = async (req, res) => {
   }
 
   //based on security params added in headers, verify request is not expired
-  if (!isExpiredRequest(req.headers.api_sec_expiry)) {
+  if (isExpiredRequest(req.headers.api_sec_expiry)) {
     res.writeHead(500);
     res.write("Change email endpoint not called, verification details expired");
     res.end();
