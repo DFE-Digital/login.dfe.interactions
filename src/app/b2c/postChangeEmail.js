@@ -64,13 +64,21 @@ const action = async (req, res) => {
 
   const sessionStoredData = storageService.getTokenHintFromStorage(req.cookies.session);
   const token = sessionStoredData.id_token_hint;
+  let decodedToken;
 
   if (!token) {
     res.status(500).send("Invalid details").end();
     return;
   }
 
-  const decodedToken = decode(token);
+  try {
+    console.log('decoding token');
+    decodedToken = decode(token);
+    console.log(decodedToken);
+  } catch (e) {
+    res.status(500).send("Unable to get data from token").end();
+    return;
+  }
 
   let payload;
 
