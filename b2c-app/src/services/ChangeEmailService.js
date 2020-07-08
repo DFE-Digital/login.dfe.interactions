@@ -1,7 +1,3 @@
-import { QUERY_PARAMS } from '../constants/queryParams';
-import QueryParamsService from '../services/QueryParamsService';
-
-
 class ChangeEmailService {
 
     callResendEmail() {
