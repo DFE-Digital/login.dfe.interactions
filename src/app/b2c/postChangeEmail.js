@@ -1,6 +1,6 @@
 'use strict';
 
-const logger = require('./infrastructure/logger');
+const logger = require('./../../infrastructure/logger');
 const http = require('https');
 const Config = require('./../../infrastructure/Config')();
 const RequestVerification = require('login.dfe.request-verification');
