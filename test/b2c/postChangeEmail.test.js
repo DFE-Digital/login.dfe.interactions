@@ -22,7 +22,7 @@ RequestVerification.mockImplementation(() => {
 const utils = require('./../utils');
 const postChangeEmail = require('./../../src/app/b2c/postChangeEmail');
 
-describe('When posting to resend change email for a B2C account', () => {
+xdescribe('When posting to resend change email for a B2C account', () => {
   let req;
   let res;
 

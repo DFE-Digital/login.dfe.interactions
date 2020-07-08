@@ -4,7 +4,7 @@ const http = require('https');
 const Config = require('./../../infrastructure/Config')();
 const RequestVerification = require('login.dfe.request-verification');
 const storageService = require('./storageService');
-import decode from 'jwt-decode';
+const decode = require('jwt-decode');
 
 //array to keep track of number of calls to this endpoint with same uid
 let counter = [];
