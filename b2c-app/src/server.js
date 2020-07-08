@@ -20,6 +20,7 @@ const { asyncWrapper } = require('login.dfe.express-error-handling');
 const postChangeEmail = require('../../src/app/b2c/postChangeEmail');
 import { signData } from '../../src/infrastructure/utils';
 const uuid = require('uuid/v4');
+const storageService = require('../../src/app/b2c/storageService');
 
 function getApiSecurityParams() {
 
@@ -90,6 +91,12 @@ function getHTML(app, req) {
     });
 }
 
+function storeValues(req) {
+    if (req.cookies && req.cookies.session && req.query && req.query.id_token_hint) {
+        storageService.addTokenHintToStorage(req.query.id_token_hint, req.cookies.session);
+    }
+}
+
 module.exports = (csrf) => {
 
     router.use(bodyParser.json());
@@ -101,7 +108,9 @@ module.exports = (csrf) => {
     router.post('/change-email', asyncWrapper(postChangeEmail));
 
     router.get('*', cors(), csrf, (req, res) => {
-        res.cookie('rememberme', 'yes', { expires: new Date(Date.now() + 900000), httpOnly: true, secure: true });
+
+        storeValues(req);
+
         getComponent(req)
             .then((comp) => {
                 return getHTML(comp, req);

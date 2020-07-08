@@ -49,6 +49,7 @@
     "htmlencode": "0.0.4",
     "ignore-styles": "^5.0.1",
     "ioredis": "^3.2.2",
+    "jwt-decode": "^2.2.0",
     "lodash": "^4.17.15",
     "login.dfe.audit.winston-sequelize-transport": "github:DFE-Digital/login.dfe.audit.winston-sequelize-transport#v2.12",
     "login.dfe.config.schema.common": "git+https://github.com/DFE-Digital/login.dfe.config.schema.common.git#v1.4",

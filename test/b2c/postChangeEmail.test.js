@@ -119,7 +119,7 @@ describe('When posting to resend change email for a B2C account', () => {
           nock = require('nock')
         });
 
-        it('we send the request to secured endpoint and send response back', async (done) => {
+        xit('we send the request to secured endpoint and send response back', async (done) => {
 
           const scope = nock('https://test')
             .post('/change-email')
@@ -138,7 +138,7 @@ describe('When posting to resend change email for a B2C account', () => {
 
         });
 
-        it('we send the request to secured endpoint and send response back', async (done) => {
+        xit('we send the request to secured endpoint and send response back', async (done) => {
 
           const scope = nock('https://test')
             .post('/change-email')

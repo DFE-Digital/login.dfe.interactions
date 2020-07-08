@@ -3,6 +3,8 @@
 const http = require('https');
 const Config = require('./../../infrastructure/Config')();
 const RequestVerification = require('login.dfe.request-verification');
+const storageService = require('./storageService');
+import decode from 'jwt-decode';
 
 //array to keep track of number of calls to this endpoint with same uid
 let counter = [];
@@ -60,6 +62,26 @@ const action = async (req, res) => {
 
   const securedEndpointUrl = process.env.B2C_SECURED_CHANGE_EMAIL_ENDPOINT;
 
+  const sessionStoredData = storageService.getTokenHintFromStorage(req.cookies.session);
+  const token = sessionStoredData.id_token_hint;
+
+  if (!token) {
+    res.status(500).send("Invalid details").end();
+    return;
+  }
+
+  const decodedToken = decode(token);
+
+  let payload;
+
+  if (decodedToken.newEmail && decodedToken.email) {
+    payload = {
+      NewEmail: decodedToken.newEmail,
+      CurrentEmail: decodedToken.email,
+      isResend: true
+    };
+  }
+
   //check this uid hasn't been used too many times
   if (countRequest(req.headers) > 5) {
     res.status(500).send("Change email endpoint called too many times").end();
@@ -89,7 +111,7 @@ const action = async (req, res) => {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
-      'Content-Length': Buffer.byteLength(JSON.stringify(req.body))
+      'Content-Length': Buffer.byteLength(JSON.stringify(payload))
     }
   }
 
@@ -130,7 +152,7 @@ const action = async (req, res) => {
       }
     });
 
-  proxiedReq.write(JSON.stringify(req.body));
+  proxiedReq.write(JSON.stringify(payload));
   proxiedReq.end();
 
 };
