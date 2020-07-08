@@ -29,6 +29,7 @@ class ChangeEmailService {
                     }
                 },
                 (error) => {
+                    console.log(error);
                     reject({ userMessage: 'The activation email could not be sent.' });
                 }
             );

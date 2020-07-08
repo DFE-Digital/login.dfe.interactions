@@ -1,5 +1,6 @@
 'use strict';
 
+const logger = require('./infrastructure/logger');
 const http = require('https');
 const Config = require('./../../infrastructure/Config')();
 const RequestVerification = require('login.dfe.request-verification');
@@ -62,7 +63,13 @@ const action = async (req, res) => {
 
   const securedEndpointUrl = process.env.B2C_SECURED_CHANGE_EMAIL_ENDPOINT;
 
+  logger.info(`secured change email endpoint: ${securedEndpointUrl}`);
+
+
   const sessionStoredData = storageService.getTokenHintFromStorage(req.cookies.session);
+  logger.info(`stored data: ${sessionStoredData}`);
+  logger.info(`token: ${sessionStoredData.id_token_hint}`);
+
   const token = sessionStoredData.id_token_hint;
   let decodedToken;
 
@@ -72,9 +79,9 @@ const action = async (req, res) => {
   }
 
   try {
-    console.log('decoding token');
+    logger.info(`decoding token`);
     decodedToken = decode(token);
-    console.log(decodedToken);
+    logger.info(`decoded token: ${decodedToken}`);
   } catch (e) {
     res.status(500).send("Unable to get data from token").end();
     return;
@@ -159,6 +166,8 @@ const action = async (req, res) => {
         res.end();
       }
     });
+
+  logger.info(`sending payload: ${payload}`);
 
   proxiedReq.write(JSON.stringify(payload));
   proxiedReq.end();
