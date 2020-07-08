@@ -79,7 +79,7 @@
                 "description": "b2c change email endpoint"
             }
         },
-        "b2cSecuredhangeEmailEndpoint": {
+        "b2cSecuredChangeEmailEndpoint": {
             "type": "string",
             "metadata": {
                 "description": "b2c change email endpoint"
@@ -183,7 +183,7 @@
                     "additionalAppSettings": {
                         "value": {
                             "B2C_CHANGE_EMAIL_ENDPOINT": "[parameters('b2cChangeEmailEndpoint')]",
-                            "B2C_SECURED_CHANGE_EMAIL_ENDPOINT": "[parameters('b2cSecuredhangeEmailEndpoint')]"
+                            "B2C_SECURED_CHANGE_EMAIL_ENDPOINT": "[parameters('b2cSecuredChangeEmailEndpoint')]"
                         }
                     }
                 }
