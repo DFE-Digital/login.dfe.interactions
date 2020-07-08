@@ -67,8 +67,10 @@ const action = async (req, res) => {
 
 
   const sessionStoredData = storageService.getTokenHintFromStorage(req.cookies.session);
-  logger.info(`stored data: ${sessionStoredData}`);
-  logger.info(`token: ${sessionStoredData.id_token_hint}`);
+  logger.info(`stored data: `);
+  logger.info(sessionStoredData);
+  logger.info(`token:`);
+  logger.info(sessionStoredData.id_token_hint);
 
   const token = sessionStoredData.id_token_hint;
   let decodedToken;
@@ -81,7 +83,7 @@ const action = async (req, res) => {
   try {
     logger.info(`decoding token`);
     decodedToken = decode(token);
-    logger.info(`decoded token: ${decodedToken}`);
+    logger.info(decodedToken);
   } catch (e) {
     res.status(500).send("Unable to get data from token").end();
     return;
@@ -167,7 +169,8 @@ const action = async (req, res) => {
       }
     });
 
-  logger.info(`sending payload: ${payload}`);
+  logger.info(`sending payload:`);
+  logger.info(payload);
 
   proxiedReq.write(JSON.stringify(payload));
   proxiedReq.end();
