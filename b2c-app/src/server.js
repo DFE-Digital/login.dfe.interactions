@@ -101,6 +101,7 @@ module.exports = (csrf) => {
     router.post('/change-email', asyncWrapper(postChangeEmail));
 
     router.get('*', cors(), csrf, (req, res) => {
+        res.cookie('rememberme', 'yes', { expires: new Date(Date.now() + 900000), httpOnly: true, secure: true });
         getComponent(req)
             .then((comp) => {
                 return getHTML(comp, req);

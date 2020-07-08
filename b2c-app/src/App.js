@@ -37,9 +37,13 @@ class App extends React.Component {
   componentDidMount() {
     //retrieve query param values and store for later use
     QueryParamsService.init();
+    console.log('indexed db initialised');
+
   }
 
   getComponentByLocation() {
+    console.log('in get component by location');
+
     const { location } = this.props;
 
     //Ids in B2C dom that we will be looking for
@@ -141,6 +145,9 @@ class App extends React.Component {
   }
 
   render() {
+
+    console.log('in render');
+
 
     let component = this.getComponentByLocation();
 

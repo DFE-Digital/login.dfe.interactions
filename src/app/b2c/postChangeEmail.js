@@ -60,6 +60,12 @@ const action = async (req, res) => {
 
   const securedEndpointUrl = process.env.B2C_SECURED_CHANGE_EMAIL_ENDPOINT;
 
+  //check this uid hasn't been used too many times
+  if (countRequest(req.headers) > 5) {
+    res.status(500).send("Change email endpoint called too many times").end();
+    return;
+  }
+
   //based on security params added in headers, verify signature
   if (!isValidRequest(req.headers)) {
     res.status(403).send("Change email call did not pass security checks").end();
@@ -78,12 +84,6 @@ const action = async (req, res) => {
     return;
   }
 
-  //check this uid hasn't been used too many times
-  if (countRequest(req.headers) > 5) {
-    res.status(500).send("Change email endpoint called too many times").end();
-    return;
-  }
-
   //all good, send request to the secured endpoint
   const options = {
     method: 'POST',
@@ -94,7 +94,8 @@ const action = async (req, res) => {
   }
 
   const proxiedReq = http
-    .request(securedEndpointUrl, options, proxiedRes => {
+    .request(securedEndpointUrl, options, (proxiedRes) => {
+
       // set encoding
       proxiedRes.setEncoding('utf8');
 
