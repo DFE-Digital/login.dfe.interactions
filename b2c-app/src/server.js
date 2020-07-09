@@ -106,15 +106,13 @@ function storeValues(req) {
 
 module.exports = (csrf) => {
 
-    //enable cors for pre-flight requests
-    router.options('*', cors());
-
     router.use(bodyParser.json());
 
     router.use('/assets', cors(), express.static(`${process.cwd()}/b2c-app/build`));
     router.use('/images', cors(), express.static(`${process.cwd()}/b2c-app/static-assets`));
 
     //define endpoints used to proxy from client to secured APIs
+    router.options('/change-email', cors());
     router.post('/change-email', cors(), asyncWrapper(postChangeEmail));
 
     router.get('*', cors(), csrf, (req, res) => {
