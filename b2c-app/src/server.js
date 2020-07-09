@@ -118,7 +118,7 @@ module.exports = (csrf) => {
 
     //define endpoints used to proxy from client to secured APIs
     router.options('/change-email', cors(corsOptions));
-    router.post('/change-email', cors(), asyncWrapper(postChangeEmail));
+    router.post('/change-email', cors(corsOptions), asyncWrapper(postChangeEmail));
 
     router.get('*', cors(), csrf, (req, res) => {
 
