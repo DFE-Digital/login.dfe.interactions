@@ -107,7 +107,8 @@ function storeValues(req) {
 module.exports = (csrf) => {
 
     let corsOptions = {
-        origin: /\.b2clogin\.com/
+        origin: /\.b2clogin\.com$/,
+        credentials: true
     }
 
     router.use(bodyParser.json());
