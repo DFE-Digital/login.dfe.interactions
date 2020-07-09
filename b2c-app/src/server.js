@@ -106,7 +106,9 @@ function storeValues(req) {
 
 module.exports = (csrf) => {
 
-    router.use(cors());
+    let corsOptions = {
+        origin: 'https://*.b2clogin.com'
+    }
 
     router.use(bodyParser.json());
 
@@ -114,6 +116,7 @@ module.exports = (csrf) => {
     router.use('/images', cors(), express.static(`${process.cwd()}/b2c-app/static-assets`));
 
     //define endpoints used to proxy from client to secured APIs
+    router.options('/change-email', cors(corsOptions));
     router.post('/change-email', cors(), asyncWrapper(postChangeEmail));
 
     router.get('*', cors(), csrf, (req, res) => {
