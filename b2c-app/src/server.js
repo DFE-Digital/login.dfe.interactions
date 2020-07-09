@@ -105,7 +105,12 @@ module.exports = (csrf) => {
     router.use('/images', cors(), express.static(`${process.cwd()}/b2c-app/static-assets`));
 
     //define endpoints used to proxy from client to secured APIs
-    router.post('/change-email', cors(), asyncWrapper(postChangeEmail));
+    router.post('/change-email', cors({
+        "origin": "*",
+        "methods": "GET,HEAD,PUT,PATCH,POST,DELETE, OPTIONS, FETCH",
+        "preflightContinue": false,
+        "optionsSuccessStatus": 204
+    }), asyncWrapper(postChangeEmail));
 
     router.get('*', cors(), csrf, (req, res) => {
 
