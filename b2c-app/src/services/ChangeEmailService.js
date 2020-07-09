@@ -10,7 +10,8 @@ class ChangeEmailService {
                     "api_sec_uid": window.API_SEC.uid,
                     "api_sec_expiry": window.API_SEC.expiry,
                     "api_sec_signature": window.API_SEC.signature
-                }
+                },
+                credentials: 'include'
             }).then(
                 async (response) => {
                     let parsedResponse;

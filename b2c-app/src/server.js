@@ -21,6 +21,7 @@ const postChangeEmail = require('../../src/app/b2c/postChangeEmail');
 import { signData } from '../../src/infrastructure/utils';
 const uuid = require('uuid/v4');
 const storageService = require('../../src/app/b2c/storageService');
+const logger = require('./../../src/infrastructure/logger');
 
 function getApiSecurityParams() {
 
@@ -92,6 +93,12 @@ function getHTML(app, req) {
 }
 
 function storeValues(req) {
+    logger.info('__in store b2c values');
+    logger.info(req.cookies);
+    logger.info(`__session in cookies: ${req.cookies.session}`);
+    logger.info(req.query);
+    logger.info(`__token in url query params: ${req.query.id_token_hint}`);
+
     if (req.cookies && req.cookies.session && req.query && req.query.id_token_hint) {
         storageService.addTokenHintToStorage(req.query.id_token_hint, req.cookies.session);
     }
@@ -99,13 +106,15 @@ function storeValues(req) {
 
 module.exports = (csrf) => {
 
+    //enable cors for pre-flight requests
+    router.options('*', cors());
+
     router.use(bodyParser.json());
 
     router.use('/assets', cors(), express.static(`${process.cwd()}/b2c-app/build`));
     router.use('/images', cors(), express.static(`${process.cwd()}/b2c-app/static-assets`));
 
     //define endpoints used to proxy from client to secured APIs
-    router.options('/change-email', cors());
     router.post('/change-email', cors(), asyncWrapper(postChangeEmail));
 
     router.get('*', cors(), csrf, (req, res) => {

@@ -63,25 +63,29 @@ const action = async (req, res) => {
 
   const securedEndpointUrl = process.env.B2C_SECURED_CHANGE_EMAIL_ENDPOINT;
 
-  logger.info(`secured change email endpoint: ${securedEndpointUrl}`);
+  logger.info(`__secured change email endpoint: ${securedEndpointUrl}`);
 
 
   const sessionStoredData = storageService.getTokenHintFromStorage(req.cookies.session);
-  logger.info(`stored data: `);
+
+  logger.info(`__stored data: `);
   logger.info(sessionStoredData);
-  logger.info(`token:`);
-  logger.info(sessionStoredData.id_token_hint);
+
+  if (!sessionStoredData || !sessionStoredData.id_token_hint) {
+    res.status(500).send({
+      error: "Invalid details",
+      storedData: sessionStoredData
+    }).end();
+    return;
+  }
+
+  logger.info(`__token: ${sessionStoredData.id_token_hint}`);
 
   const token = sessionStoredData.id_token_hint;
   let decodedToken;
 
-  if (!token) {
-    res.status(500).send("Invalid details").end();
-    return;
-  }
-
   try {
-    logger.info(`decoding token`);
+    logger.info(`__decoding token`);
     decodedToken = decode(token);
     logger.info(decodedToken);
   } catch (e) {
@@ -89,14 +93,15 @@ const action = async (req, res) => {
     return;
   }
 
-  let payload;
+  if (!decodedToken.newEmail || !decodedToken.email) {
+    res.status(500).send("Invalid details in token").end();
+    return;
+  }
 
-  if (decodedToken.newEmail && decodedToken.email) {
-    payload = {
-      NewEmail: decodedToken.newEmail,
-      CurrentEmail: decodedToken.email,
-      isResend: true
-    };
+  const payload = {
+    NewEmail: decodedToken.newEmail,
+    CurrentEmail: decodedToken.email,
+    isResend: true
   }
 
   //check this uid hasn't been used too many times
@@ -169,7 +174,7 @@ const action = async (req, res) => {
       }
     });
 
-  logger.info(`sending payload:`);
+  logger.info(`__sending payload:`);
   logger.info(payload);
 
   proxiedReq.write(JSON.stringify(payload));
