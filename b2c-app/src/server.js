@@ -18,27 +18,7 @@ import { StaticRouter } from 'react-router-dom';
 require('regenerator-runtime/runtime');
 const { asyncWrapper } = require('login.dfe.express-error-handling');
 const postChangeEmail = require('../../src/app/b2c/postChangeEmail');
-import { signData } from '../../src/infrastructure/utils';
-const uuid = require('uuid/v4');
-const storageService = require('../../src/app/b2c/storageService');
-const logger = require('./../../src/infrastructure/logger');
 
-function getApiSecurityParams() {
-
-    let expiresOn = new Date();
-    expiresOn.setHours(expiresOn.getHours() + 1);
-
-    const apiSecurityParams = {
-        uid: uuid(),
-        expiry: expiresOn.toISOString()
-    };
-
-    return {
-        uid: apiSecurityParams.uid,
-        expiry: apiSecurityParams.expiry,
-        signature: signData(apiSecurityParams)
-    }
-}
 
 function getComponent(req) {
 
@@ -79,11 +59,6 @@ function getHTML(app, req) {
             data = data.replace(/\/__--b2cPath--__/g, reqURL);
             //replace API urls that are set as global variables in index.html (window.API_URLS)
             data = data.replace(/__--changeEmailAPI--__/g, process.env.B2C_CHANGE_EMAIL_ENDPOINT);
-            //replace API security params to include them in index.html
-            let securityParams = getApiSecurityParams();
-            data = data.replace(/__--uid--__/g, securityParams.uid);
-            data = data.replace(/__--expiry--__/g, securityParams.expiry);
-            data = data.replace(/__--signature--__/g, securityParams.signature);
             //embed react app in the root element
             data = data.replace('<div id="root"></div>', `<div id="root">${app}</div>`)
 
@@ -92,24 +67,7 @@ function getHTML(app, req) {
     });
 }
 
-function storeValues(req) {
-    logger.info('__in store b2c values');
-    logger.info(req.cookies);
-    logger.info(`__session in cookies: ${req.cookies.session}`);
-    logger.info(req.query);
-    logger.info(`__token in url query params: ${req.query.id_token_hint}`);
-
-    if (req.cookies && req.cookies.session && req.query && req.query.id_token_hint) {
-        storageService.addTokenHintToStorage(req.query.id_token_hint, req.cookies.session);
-    }
-}
-
 module.exports = (csrf) => {
-
-    let corsOptions = {
-        origin: /\.b2clogin\.com$/,
-        credentials: true
-    }
 
     router.use(bodyParser.json());
 
@@ -117,12 +75,10 @@ module.exports = (csrf) => {
     router.use('/images', cors(), express.static(`${process.cwd()}/b2c-app/static-assets`));
 
     //define endpoints used to proxy from client to secured APIs
-    router.options('/change-email', cors(corsOptions));
-    router.post('/change-email', cors(corsOptions), asyncWrapper(postChangeEmail));
+    router.options('/change-email', cors());
+    router.post('/change-email', cors(), asyncWrapper(postChangeEmail));
 
     router.get('*', cors(), csrf, (req, res) => {
-
-        storeValues(req);
 
         getComponent(req)
             .then((comp) => {

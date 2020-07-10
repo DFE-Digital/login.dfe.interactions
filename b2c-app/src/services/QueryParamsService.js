@@ -9,9 +9,10 @@ class QueryParamsService {
         this.db = new Dexie('B2C_query_params');
 
         //create stores for client id and redirect uri
-        this.db.version(4).stores({
+        this.db.version(3).stores({
             [QUERY_PARAMS.CLIENT_ID]: '',
-            [QUERY_PARAMS.REDIRECT_URI]: ''
+            [QUERY_PARAMS.REDIRECT_URI]: '',
+            [QUERY_PARAMS.ID_TOKEN_HINT]: ''
         });
 
         this.queryParams = {}
