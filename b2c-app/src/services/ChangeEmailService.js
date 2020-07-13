@@ -1,6 +1,7 @@
 import { QUERY_PARAMS } from '../constants/queryParams';
 import QueryParamsService from '../services/QueryParamsService';
-
+import { getB2CLink } from '../helpers/urls';
+import { ACTIONS } from '../constants/actions';
 
 class ChangeEmailService {
 
@@ -10,11 +11,19 @@ class ChangeEmailService {
             QueryParamsService.getQueryParam(QUERY_PARAMS.ID_TOKEN_HINT).then(
                 (token) => {
                     if (token) {
-                        resolve({
-                            id_token_hint: token,
-                            //TODO use helper to build URL
-                            redirect_url: 'https://devauthncs.b2clogin.com/devauthncs.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1A_Account_Signup&client_id=488c321f-10e4-48f2-b9c2-261e2add2f8d&nonce=defaultNonce&redirect_uri=https%3A%2F%2Fjwt.ms&scope=openid&response_type=id_token&prompt=login'
-                        });
+                        getB2CLink(ACTIONS.CHANGE_EMAIL).then(
+                            (redirect_url) => {
+                                if (redirect_url) {
+                                    resolve({
+                                        id_token_hint: token,
+                                        redirect_url: redirect_url
+                                    });
+                                } else {
+                                    reject({ userMessage: 'Unable to get the details to resend the activation email.' });
+                                }
+                            }
+                        );
+
                     } else {
                         reject({ userMessage: 'Unable to get the details to resend the activation email.' });
                     }

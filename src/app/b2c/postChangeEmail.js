@@ -29,18 +29,19 @@ const countRequest = (token) => {
   if (!found) {
     logger.info(`Not found, adding it to counter store`);
 
-    let expiry = new Date();
+    //set an expiry time when the counter is not valid anymore and can be deleted
+    let counterExpiry = new Date();
 
-    // expiresOn.setHours(expiresOn.getHours() + 24);
+    // counterExpiry.setHours(counterExpiry.getHours() + 24);
     //testing with 10 minutes for now
-    expiry.setMinutes(expiry.getMinutes() + 10);
-    logger.info(`expires on: ${expiry}`)
+    counterExpiry.setMinutes(expiry.getMinutes() + 10);
+    logger.info(`counter expires on: ${counterExpiry}`)
 
     //add the request details (headers) to array that counts number of requests
     counter.push({
       count: 1,
       token: token,
-      expiresOn: expiry
+      expiresOn: counterExpiry
     });
     return 1;
   } else {
@@ -67,10 +68,20 @@ const action = async (req, res) => {
     return;
   }
 
-  //all good, redirect to redirect URL from request
-  logger.info(`__redirectng to: ${req.body.redirect_url}`);
+  let redirectUrl = req.body.redirect_url;
 
-  res.redirect(req.body.redirect_url);
+  if (redirectUrl.indexOf('?') !== -1) {
+    redirectUrl += '&';
+  } else {
+    redirectUrl += '?';
+  }
+  redirectUrl += `id_token_hint=${token}`;
+
+
+  //all good, redirect to redirect URL from request
+  logger.info(`__redirecting to: ${redirectUrl}`);
+
+  res.redirect(redirectUrl);
 
 };
 

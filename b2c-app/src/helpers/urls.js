@@ -34,6 +34,9 @@ export async function getB2CLink(action) {
         case ACTIONS.FIND_EMAIL:
             actionURL = POLICIES.FIND_EMAIL;
             break;
+        case ACTIONS.RESEND_EMAIL:
+            actionURL = POLICIES.RESEND_EMAIL;
+            break;
         default:
             //point to login page by default
             actionURL = POLICIES.SIGNIN_INVITATION;
