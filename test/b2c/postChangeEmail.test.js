@@ -1,160 +1,110 @@
 jest.mock('./../../src/infrastructure/Config', () => jest.fn().mockImplementation(() => ({
   hostingEnvironment: {
-  },
-  crypto: {
-    signing: {
-      publicKey: ''
-    }
   }
 })));
 
-const RequestVerification = require('login.dfe.request-verification');
-jest.mock('login.dfe.request-verification', () => jest.fn())
-
-let requestVerificationStub = jest.fn().mockReturnValue(false);
-
-RequestVerification.mockImplementation(() => {
-  return {
-    verifyRequest: requestVerificationStub,
-  };
-});
+jest.mock('./../../src/infrastructure/logger', () => ({
+  info: jest.fn(),
+}));
 
 const utils = require('./../utils');
 const postChangeEmail = require('./../../src/app/b2c/postChangeEmail');
 
-xdescribe('When posting to resend change email for a B2C account', () => {
+describe('When posting to resend change email for a B2C account', () => {
   let req;
   let res;
 
   beforeEach(() => {
     req = utils.mockRequest();
     res = utils.mockResponse();
-
     //mock response chained functions
     res.status = jest.fn().mockReturnThis();
     res.send = jest.fn().mockReturnThis();
     res.end = jest.fn().mockReturnThis();
-
-    req.headers = {
-      api_sec_uid: require('uuid/v4')()
-    };
-
+    res.redirect = jest.fn().mockReturnThis();
   });
 
-  it('if called too many times with the same UID in headers we get an error back', async () => {
+  describe('when the request received does contain wrong or insufficient information', () => {
 
-    req.headers = {
-      api_sec_uid: 'repeated-uid'
-    };
-
-    await postChangeEmail(req, res);
-    await postChangeEmail(req, res);
-    await postChangeEmail(req, res);
-    await postChangeEmail(req, res);
-    await postChangeEmail(req, res);
-
-    //reached limit of 5 calls, still not getting error back
-    expect(res.status).not.toHaveBeenCalledWith(500);
-    expect(res.status().send).not.toHaveBeenCalledWith('Change email endpoint called too many times');
-
-    //next call will cause an error because it has gone above max number of attempts
-    await postChangeEmail(req, res);
-
-    expect(res.status).toHaveBeenCalledWith(500);
-    expect(res.status().send).toHaveBeenCalledWith('Change email endpoint called too many times');
-    expect(res.status().send().end).toHaveBeenCalled();
-  });
-
-  it('if header verification is not successful we get an error back', async () => {
-
-    await postChangeEmail(req, res);
-
-    expect(res.status).toHaveBeenCalledWith(403);
-    expect(res.status().send).toHaveBeenCalledWith('Change email call did not pass security checks');
-    expect(res.status().send().end).toHaveBeenCalled();
-  });
-
-  describe('when header verification is successful', () => {
-
-    beforeEach(() => {
-      requestVerificationStub = jest.fn().mockReturnValue(true);
-    });
-
-    it('if request has expired we get an error back ', async () => {
-
-      let expiredDate = new Date();
-      expiredDate.setHours(expiredDate.getHours() - 1);
-      req.headers.api_sec_expiry = expiredDate
-
-      await postChangeEmail(req, res);
-
-      expect(res.status).toHaveBeenCalledWith(500);
-      expect(res.status().send).toHaveBeenCalledWith('Change email endpoint not called, verification details expired');
+    afterEach(() => {
+      expect(res.status).toHaveBeenCalledWith(400);
+      expect(res.status().send).toHaveBeenCalledWith('Invalid details provided with the request');
       expect(res.status().send().end).toHaveBeenCalled();
     });
 
-    describe('when request has not expired', () => {
+    it('returns a 400 error if body is not defined', async () => {
+      await postChangeEmail(req, res);
+    });
 
-      beforeEach(() => {
-        let notExpiredDate = new Date();
-        notExpiredDate.setHours(notExpiredDate.getHours() + 1);
-        req.headers.api_sec_expiry = notExpiredDate;
-      });
+    it('returns a 400 error if body is defined but id_token_hint is not present', async () => {
+      req.body = {
+        redirect_url: 'aaa'
+      }
+      await postChangeEmail(req, res);
+    });
 
-      it('if configuration is not correct (env var not set) we get an error back', async () => {
+    it('returns a 400 error if body is defined but redirect_url is not present', async () => {
+      req.body = {
+        id_token_hint: 'aaa'
+      }
+      await postChangeEmail(req, res);
+    });
 
+  });
+
+  describe('when the request received has all required information', () => {
+
+    describe('when the same token has been used more than 10 times', () => {
+
+      it('returns a 400 error', async () => {
+        req.body = {
+          id_token_hint: 'repeated',
+          redirect_url: 'test_url'
+        }
+        for (let i = 0; i < 10; i++) {
+          console.log(i);
+          await postChangeEmail(req, res);
+        }
+        //next call will cause an error as we have done 10 already with same token
         await postChangeEmail(req, res);
-
-        expect(res.status).toHaveBeenCalledWith(404);
-        expect(res.status().send).toHaveBeenCalledWith('Change email endpoint not configured properly');
+        expect(res.status).toHaveBeenCalledWith(500);
+        expect(res.status().send).toHaveBeenCalledWith('Change email endpoint called too many times');
         expect(res.status().send().end).toHaveBeenCalled();
       });
 
-      describe('when configuration is correct (env var is set)', () => {
+    });
 
-        let nock;
+    describe('when the same token has NOT been used more than 10 times', () => {
 
-        beforeEach(() => {
-          process.env.B2C_SECURED_CHANGE_EMAIL_ENDPOINT = 'https://test/change-email';
-          nock = require('nock')
-        });
+      let url = 'test_url';
+      let token = 'new_token';
 
-        xit('we send the request to secured endpoint and send response back', async (done) => {
+      beforeEach(() => {
+        req.body = {
+          id_token_hint: token,
+          redirect_url: url
+        }
+      });
 
-          const scope = nock('https://test')
-            .post('/change-email')
-            .reply(200, {
-              response: 'data',
-            });
+      it('redirects the request to the correct URL adding the token as its first and only query param', async () => {
+        await postChangeEmail(req, res);
+        expect(res.status).not.toHaveBeenCalled();
+        expect(res.send).not.toHaveBeenCalled();
+        expect(res.end).not.toHaveBeenCalled();
+        expect(res.redirect).toHaveBeenCalledWith(`${url}?id_token_hint=${token}`);
+      });
 
-          await postChangeEmail(req, res);
+      it('redirects the request to the correct URL adding the token as one of its query params', async () => {
 
-          setTimeout(() => {
-            expect(res.status).toHaveBeenCalled();
-            expect(res.status().send).toHaveBeenCalledWith('{"response":"data"}');
-            expect(res.status().send().end).toHaveBeenCalled();
-            done();
-          }, 500);
+        //add query params to passed in url
+        let queryString = `?param1=value1&param2=value2`;
+        req.body.redirect_url += queryString;
 
-        });
-
-        xit('we send the request to secured endpoint and send response back', async (done) => {
-
-          const scope = nock('https://test')
-            .post('/change-email')
-            .replyWithError('error message');
-
-          await postChangeEmail(req, res);
-
-          setTimeout(() => {
-            expect(res.status).toHaveBeenCalledWith(500);
-            expect(res.status().send).toHaveBeenCalledWith('error message');
-            expect(res.status().send().end).toHaveBeenCalled();
-            done();
-          }, 500);
-
-        });
-
+        await postChangeEmail(req, res);
+        expect(res.status).not.toHaveBeenCalled();
+        expect(res.send).not.toHaveBeenCalled();
+        expect(res.end).not.toHaveBeenCalled();
+        expect(res.redirect).toHaveBeenCalledWith(`${url}${queryString}&id_token_hint=${token}`);
       });
 
     });

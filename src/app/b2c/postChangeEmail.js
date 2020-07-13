@@ -34,7 +34,7 @@ const countRequest = (token) => {
 
     // counterExpiry.setHours(counterExpiry.getHours() + 24);
     //testing with 10 minutes for now
-    counterExpiry.setMinutes(expiry.getMinutes() + 10);
+    counterExpiry.setMinutes(counterExpiry.getMinutes() + 10);
     logger.info(`counter expires on: ${counterExpiry}`)
 
     //add the request details (headers) to array that counts number of requests
@@ -54,7 +54,7 @@ const countRequest = (token) => {
 const action = async (req, res) => {
 
   if (!req.body || !req.body.id_token_hint || !req.body.redirect_url) {
-    res.status(500).send("Invalid details provided with the request").end();
+    res.status(400).send("Invalid details provided with the request").end();
     return;
   }
 
