@@ -23,12 +23,6 @@ function Link(props) {
                 {props.children}
             </a>
     }
-    else if (props.type === LINK_TYPES.API_CALL) {
-        output =
-            <a href="/#" className="govuk-link" onClick={props.onClick}>
-                {props.children}
-            </a>
-    }
     else {
         output =
             <a href={link} className="govuk-link">

@@ -9,16 +9,10 @@ const url = require('url');
 
 const express = require('express');
 const router = express.Router({ mergeParams: true });
-const bodyParser = require('body-parser');
 
 const React = require('react');
 const ReactDOMServer = require('react-dom/server');
 import { StaticRouter } from 'react-router-dom';
-
-require('regenerator-runtime/runtime');
-const { asyncWrapper } = require('login.dfe.express-error-handling');
-const postChangeEmail = require('../../src/app/b2c/postChangeEmail');
-
 
 function getComponent(req) {
 
@@ -68,18 +62,10 @@ function getHTML(app, req) {
 }
 
 module.exports = (csrf) => {
-
-    router.use(bodyParser.json());
-
     router.use('/assets', cors(), express.static(`${process.cwd()}/b2c-app/build`));
     router.use('/images', cors(), express.static(`${process.cwd()}/b2c-app/static-assets`));
 
-    //define endpoints used to proxy from client to secured APIs
-    router.options('/change-email', cors());
-    router.post('/change-email', cors(), asyncWrapper(postChangeEmail));
-
     router.get('*', cors(), csrf, (req, res) => {
-
         getComponent(req)
             .then((comp) => {
                 return getHTML(comp, req);

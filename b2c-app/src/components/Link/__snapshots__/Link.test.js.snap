@@ -1,12 +1,5 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly link of type API call 1`] = `
-<a
-  className="govuk-link"
-  href="/#"
-/>
-`;
-
 exports[`renders correctly link of type button 1`] = `
 <a
   className="govuk-button govuk-button--start"

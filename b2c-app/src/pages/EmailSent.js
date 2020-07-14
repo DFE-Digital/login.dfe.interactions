@@ -1,5 +1,4 @@
 import React from 'react';
-import ChangeEmailService from '../services/ChangeEmailService';
 import components from '../components';
 import { getInnerTextById } from '../helpers/dom';
 import { ACTIONS } from '../constants/actions';
@@ -10,12 +9,9 @@ class EmailSent extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            showSpinner: false,
-            spinnerText: null,
             showErrors: false,
             errors: []
         }
-        this.resendEmail = this.resendEmail.bind(this);
         this.showPageLevelError = this.showPageLevelError.bind(this);
         this.clearPageLevelError = this.clearPageLevelError.bind(this);
     }
@@ -34,44 +30,13 @@ class EmailSent extends React.Component {
         this.setState({ errors: [], showErrors: false });
     }
 
-    resendEmail(e) {
-        e.preventDefault();
-
-        //start spinner
-        this.setState({ spinnerText: 'Sending activation email. Please wait.', showSpinner: true })
-
-        //make call to API to resend email
-        ChangeEmailService.callResendEmail().then(
-            () => {
-                //clear error messages if there were any from previous calls
-                this.clearPageLevelError();
-            },
-            (error) => {
-                if (error && error.userMessage) {
-                    this.showPageLevelError(error.userMessage);
-                }
-                else {
-                    this.showPageLevelError('The activation email could not be sent.');
-                }
-            })
-            .finally(
-                () => {
-                    //stop spinner
-                    this.setState({ showSpinner: false });
-                }
-            );
-    }
-
-
     render() {
 
         const b2cResultElementId = this.props.action === ACTIONS.CHANGE_EMAIL ? 'confirmationMessage' : 'successMessage';
 
         const pageConfig = {
             title: "We've sent you an email",
-            errors: this.state.errors,
-            showSpinner: this.state.showSpinner,
-            spinnerText: this.state.spinnerText
+            errors: this.state.errors
         };
 
         const contentFromB2CParagraph =
@@ -99,7 +64,7 @@ class EmailSent extends React.Component {
         const resendChangeEmailParagraph =
             <components.Paragraph>
                 If you don't receive an email after this time you can&nbsp;
-                <components.Link type={LINK_TYPES.API_CALL} onClick={this.resendEmail}>resend the activation email</components.Link>
+                <components.Link action={ACTIONS.RESEND_EMAIL}>resend the activation email</components.Link>
                 .
             </ components.Paragraph >
 
