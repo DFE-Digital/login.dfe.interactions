@@ -6,11 +6,11 @@ const logger = require('./../../infrastructure/logger');
 let counter = [];
 
 //remove all expired items from the counter every 5 seconds
-setInterval(() => {
+const clearExpiredCounters = () => {
   counter = counter.filter((item) => {
     return !isExpiredRequest(item.expiresOn)
   });
-}, 5000);
+};
 
 //returns true if request has expired based on received expiry in headers
 const isExpiredRequest = (expiry) => {
@@ -22,6 +22,11 @@ const isExpiredRequest = (expiry) => {
 
 //returns number of times this token has made the request
 const countRequest = (token) => {
+
+  //first, remove all the expired counter records
+  clearExpiredCounters();
+
+  //then check if we have a counter for this token
   let found = counter.find((item) => {
     return item.token === token;
   });

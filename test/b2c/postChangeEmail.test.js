@@ -56,13 +56,15 @@ describe('When posting to resend change email for a B2C account', () => {
 
     describe('when the same token has been used more than 10 times', () => {
 
-      it('returns a 400 error', async () => {
+      beforeEach(() => {
         req.body = {
           id_token_hint: 'repeated',
           redirect_url: 'test_url'
         }
+      });
+
+      it('returns a 400 error', async () => {
         for (let i = 0; i < 10; i++) {
-          console.log(i);
           await postChangeEmail(req, res);
         }
         //next call will cause an error as we have done 10 already with same token
