@@ -1,6 +1,6 @@
 import React from 'react';
 
-import QueryParamsService from './services/QueryParamsService';
+import * as QueryParamsService from './services/QueryParamsService';
 
 import { ACTIONS } from './constants/actions';
 import { POLICIES } from './constants/policies';

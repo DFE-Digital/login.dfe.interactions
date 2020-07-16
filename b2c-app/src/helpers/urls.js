@@ -1,7 +1,7 @@
 import { ACTIONS } from '../constants/actions';
 import { POLICIES } from '../constants/policies';
 import { QUERY_PARAMS } from '../constants/queryParams';
-import QueryParamsService from '../services/QueryParamsService';
+import * as QueryParamsService from '../services/QueryParamsService';
 
 async function getB2CParameters() {
 
