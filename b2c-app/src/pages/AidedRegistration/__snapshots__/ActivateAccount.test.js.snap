@@ -1,0 +1,313 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  id="activateAccount"
+>
+  <div>
+    <div
+      className="govuk-width-container"
+    >
+      <div
+        className="govuk-breadcrumbs"
+      >
+        <ol
+          className="govuk-breadcrumbs__list"
+        >
+          <li
+            className="govuk-breadcrumbs__list-item"
+          >
+            <a
+              className="govuk-breadcrumbs__link"
+              href="https://nationalcareers.service.gov.uk/"
+            >
+              Home
+            </a>
+          </li>
+        </ol>
+      </div>
+      <div
+        className="pageLevelErrorContainer hide"
+      >
+        <div
+          aria-labelledby="error-summary-title"
+          className="govuk-error-summary"
+          data-module="govuk-error-summary"
+          role="alert"
+          tabIndex="-1"
+        >
+          <h2
+            className="govuk-error-summary__title"
+            id="error-summary-title"
+          >
+            There is a problem
+          </h2>
+          <div
+            className="govuk-error-summary__body"
+          >
+            <ul
+              className="govuk-list govuk-error-summary__list"
+              id="errorSummaryItems"
+            />
+          </div>
+        </div>
+      </div>
+      <main
+        className="govuk-main-wrapper"
+      >
+        <div
+          className="govuk-grid-row"
+        >
+          <div
+            className="govuk-grid-column-two-thirds"
+          >
+            <h1
+              className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
+            >
+              Activate your account
+            </h1>
+            <form
+              id="customForm"
+              noValidate={true}
+              onSubmit={[Function]}
+            >
+              <div>
+                <div>
+                  <div
+                    className="govuk-form-group "
+                  >
+                    <label
+                      className="govuk-label"
+                      htmlFor="newPasswordCustom"
+                    >
+                      Create new password
+                    </label>
+                    <input
+                      className="govuk-input govuk-!-width-one-half"
+                      id="newPasswordCustom"
+                      name="newPassword"
+                      noValidate={true}
+                      onChange={[Function]}
+                      type="password"
+                    />
+                  </div>
+                  <div
+                    className="govuk-form-group"
+                  >
+                    <details
+                      className="govuk-details"
+                    >
+                      <summary
+                        className="govuk-details__summary"
+                      >
+                        <span
+                          className="govuk-details__summary-text"
+                        >
+                          Help choosing a valid password
+                        </span>
+                      </summary>
+                      <div
+                        className="govuk-details__text"
+                      >
+                        <div>
+                          <p
+                            className="govuk-body"
+                          >
+                            Your password must:
+                          </p>
+                          <ul
+                            className="govuk-list govuk-list--bullet"
+                          >
+                            <li>
+                              be between 8 and 16 characters
+                            </li>
+                            <li>
+                              include at least one uppercase letter and one lowercase letter
+                            </li>
+                            <li>
+                              include at least one number or one symbol
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                    </details>
+                  </div>
+                  <div
+                    className="govuk-form-group "
+                  >
+                    <label
+                      className="govuk-label"
+                      htmlFor="reenteredPasswordCustom"
+                    >
+                      Re-type password
+                    </label>
+                    <input
+                      className="govuk-input govuk-!-width-one-half"
+                      id="reenteredPasswordCustom"
+                      name="reenteredPassword"
+                      noValidate={true}
+                      onChange={[Function]}
+                      type="password"
+                    />
+                  </div>
+                </div>
+                <p
+                  className="govuk-body"
+                >
+                  As an extra security check, enter your date of birth.
+                </p>
+                <div
+                  className="govuk-form-group "
+                >
+                  <fieldset
+                    aria-describedby="date-of-birth-hint"
+                    className="govuk-fieldset"
+                    id="dobFieldset"
+                    role="group"
+                  >
+                    <legend
+                      className="govuk-fieldset__legend govuk-fieldset__legend--l"
+                    >
+                      <label
+                        className="govuk-label"
+                      >
+                        Date of birth
+                      </label>
+                    </legend>
+                    <span
+                      className="govuk-hint"
+                      id="date-of-birth-hint"
+                    >
+                      For example, 31 3 1980
+                    </span>
+                    <div
+                      className="govuk-date-input"
+                      id="date-of-birth"
+                    >
+                      <div
+                        className="govuk-date-input__item"
+                      >
+                        <div
+                          className="govuk-form-group"
+                        >
+                          <label
+                            className="govuk-label govuk-date-input__label"
+                            htmlFor="dobDay"
+                          >
+                            Day
+                          </label>
+                          <input
+                            className="govuk-input govuk-date-input__input govuk-input--width-2"
+                            id="dobDay"
+                            inputMode="numeric"
+                            name="dobDay"
+                            noValidate={true}
+                            onChange={[Function]}
+                            pattern="[0-9]*"
+                            type="number"
+                          />
+                        </div>
+                      </div>
+                      <div
+                        className="govuk-date-input__item"
+                      >
+                        <div
+                          className="govuk-form-group"
+                        >
+                          <label
+                            className="govuk-label govuk-date-input__label"
+                            htmlFor="dobMonth"
+                          >
+                            Month
+                          </label>
+                          <input
+                            className="govuk-input govuk-date-input__input govuk-input--width-2"
+                            id="dobMonth"
+                            inputMode="numeric"
+                            name="dobMonth"
+                            noValidate={true}
+                            onChange={[Function]}
+                            pattern="[0-9]*"
+                            type="number"
+                          />
+                        </div>
+                      </div>
+                      <div
+                        className="govuk-date-input__item"
+                      >
+                        <div
+                          className="govuk-form-group"
+                        >
+                          <label
+                            className="govuk-label govuk-date-input__label"
+                            htmlFor="dobYear"
+                          >
+                            Year
+                          </label>
+                          <input
+                            className="govuk-input govuk-date-input__input govuk-input--width-4"
+                            id="dobYear"
+                            inputMode="numeric"
+                            name="dobYear"
+                            noValidate={true}
+                            onChange={[Function]}
+                            pattern="[0-9]*"
+                            type="number"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+                <div>
+                  <h1
+                    className="govuk-heading-m"
+                  >
+                    Terms and conditions
+                  </h1>
+                  <div
+                    className="govuk-form-group "
+                  >
+                    <label
+                      className="block-label"
+                      htmlFor="tsAndCsCustom"
+                    >
+                      <input
+                        aria-invalid="true"
+                        checked={false}
+                        id="tsAndCsCustom"
+                        name="tsAndCsAccepted"
+                        noValidate={true}
+                        onChange={[Function]}
+                        type="checkbox"
+                        value={true}
+                      />
+                      I accept the 
+                      <a
+                        href="https://nationalcareers.service.gov.uk/help/terms-and-conditions"
+                        id="tsAndCsLink"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
+                        terms and conditions
+                      </a>
+                       and I am 13 or over
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <button
+                className="govuk-button"
+                id="preSubmit"
+                type="submit"
+              >
+                Activate account
+              </button>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+`;

@@ -1,0 +1,158 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  id="login"
+>
+  <div>
+    <div
+      className="govuk-width-container"
+    >
+      <div
+        className="govuk-breadcrumbs"
+      >
+        <ol
+          className="govuk-breadcrumbs__list"
+        >
+          <li
+            className="govuk-breadcrumbs__list-item"
+          >
+            <a
+              className="govuk-breadcrumbs__link"
+              href="https://nationalcareers.service.gov.uk/"
+            >
+              Home
+            </a>
+          </li>
+        </ol>
+      </div>
+      <div
+        className="pageLevelErrorContainer hide"
+      >
+        <div
+          aria-labelledby="error-summary-title"
+          className="govuk-error-summary"
+          data-module="govuk-error-summary"
+          role="alert"
+          tabIndex="-1"
+        >
+          <h2
+            className="govuk-error-summary__title"
+            id="error-summary-title"
+          >
+            There is a problem
+          </h2>
+          <div
+            className="govuk-error-summary__body"
+          >
+            <ul
+              className="govuk-list govuk-error-summary__list"
+              id="errorSummaryItems"
+            />
+          </div>
+        </div>
+      </div>
+      <main
+        className="govuk-main-wrapper"
+      >
+        <div
+          className="govuk-grid-row"
+        >
+          <div
+            className="govuk-grid-column-one-half"
+          >
+            <h1
+              className="govuk-heading-l"
+            >
+              Sign in
+            </h1>
+            <form
+              id="customForm"
+              noValidate={true}
+              onSubmit={[Function]}
+            >
+              <div>
+                <div
+                  className="govuk-form-group "
+                >
+                  <label
+                    className="govuk-label"
+                    htmlFor="emailCustom"
+                  >
+                    Email address
+                  </label>
+                  <input
+                    autoComplete="email"
+                    className="govuk-input govuk-!-width-one-half"
+                    id="emailCustom"
+                    name="email"
+                    noValidate={true}
+                    onChange={[Function]}
+                    spellCheck="false"
+                    type="email"
+                  />
+                </div>
+                <div
+                  className="govuk-form-group "
+                >
+                  <label
+                    className="govuk-label"
+                    htmlFor="passwordCustom"
+                  >
+                    Password
+                  </label>
+                  <input
+                    className="govuk-input govuk-!-width-one-half"
+                    id="passwordCustom"
+                    name="password"
+                    noValidate={true}
+                    onChange={[Function]}
+                    type="password"
+                  />
+                </div>
+                <p
+                  className="govuk-body"
+                >
+                  <a
+                    className="govuk-link"
+                    href={null}
+                  >
+                    I cannot access my account
+                  </a>
+                </p>
+              </div>
+              <button
+                className="govuk-button"
+                id="preSubmit"
+                type="submit"
+              >
+                Sign in
+              </button>
+            </form>
+          </div>
+          <div
+            className="govuk-grid-column-one-half"
+          >
+            <h1
+              className="govuk-heading-l"
+            >
+              Create an account
+            </h1>
+            <p
+              className="govuk-body"
+            >
+              <a
+                className="govuk-link"
+                href={null}
+              >
+                Creating an account
+              </a>
+               allows you to access and save your skills health check reports.
+            </p>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+`;

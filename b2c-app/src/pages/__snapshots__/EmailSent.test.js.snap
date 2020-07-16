@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  id="emailSent"
+>
+  <div>
+    <div
+      className="govuk-width-container"
+    >
+      <div
+        className="govuk-breadcrumbs"
+      >
+        <ol
+          className="govuk-breadcrumbs__list"
+        >
+          <li
+            className="govuk-breadcrumbs__list-item"
+          >
+            <a
+              className="govuk-breadcrumbs__link"
+              href="https://nationalcareers.service.gov.uk/"
+            >
+              Home
+            </a>
+          </li>
+        </ol>
+      </div>
+      <div
+        className="pageLevelErrorContainer hide"
+      >
+        <div
+          aria-labelledby="error-summary-title"
+          className="govuk-error-summary"
+          data-module="govuk-error-summary"
+          role="alert"
+          tabIndex="-1"
+        >
+          <h2
+            className="govuk-error-summary__title"
+            id="error-summary-title"
+          >
+            There is a problem
+          </h2>
+          <div
+            className="govuk-error-summary__body"
+          >
+            <ul
+              className="govuk-list govuk-error-summary__list"
+              id="errorSummaryItems"
+            />
+          </div>
+        </div>
+      </div>
+      <main
+        className="govuk-main-wrapper"
+      >
+        <div
+          className="govuk-grid-row"
+        >
+          <div
+            className="govuk-grid-column-two-thirds"
+          >
+            <h1
+              className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
+            >
+              We've sent you an email
+            </h1>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+`;
