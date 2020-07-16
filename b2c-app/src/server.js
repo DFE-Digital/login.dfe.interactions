@@ -51,8 +51,6 @@ function getHTML(app, req) {
 
             //replace b2cPath placeholder, used to have absolute paths to static assets in index.html
             data = data.replace(/\/__--b2cPath--__/g, reqURL);
-            //replace API urls that are set as global variables in index.html (window.API_URLS)
-            data = data.replace(/__--changeEmailAPI--__/g, process.env.B2C_CHANGE_EMAIL_ENDPOINT);
             //embed react app in the root element
             data = data.replace('<div id="root"></div>', `<div id="root">${app}</div>`)
 
