@@ -6,37 +6,12 @@ import { LINK_TYPES } from '../constants/linkTypes';
 
 class EmailSent extends React.Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            showErrors: false,
-            errors: []
-        }
-        this.showPageLevelError = this.showPageLevelError.bind(this);
-        this.clearPageLevelError = this.clearPageLevelError.bind(this);
-    }
-
-    showPageLevelError(errorMessage) {
-        const newError = {
-            visible: {
-                text: errorMessage
-            }
-        };
-
-        this.setState({ errors: [newError], showErrors: true });
-    }
-
-    clearPageLevelError() {
-        this.setState({ errors: [], showErrors: false });
-    }
-
     render() {
 
         const b2cResultElementId = this.props.action === ACTIONS.CHANGE_EMAIL ? 'confirmationMessage' : 'successMessage';
 
         const pageConfig = {
-            title: "We've sent you an email",
-            errors: this.state.errors
+            title: "We've sent you an email"
         };
 
         const contentFromB2CParagraph =

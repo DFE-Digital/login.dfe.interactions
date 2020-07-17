@@ -32,7 +32,7 @@ describe('when document is defined', () => {
     describe('if element with specified id exists', () => {
 
         beforeEach(() => {
-            var elem = global.document.createElement('p');
+            let elem = global.document.createElement('p');
             elem.id = 'test_id';
             elem.innerText = 'sample_text'
             global.document.body.appendChild(elem);

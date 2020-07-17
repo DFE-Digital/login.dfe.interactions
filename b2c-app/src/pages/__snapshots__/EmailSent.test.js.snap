@@ -26,31 +26,53 @@ exports[`renders correctly 1`] = `
           </li>
         </ol>
       </div>
-      <div
-        className="pageLevelErrorContainer hide"
+      <main
+        className="govuk-main-wrapper"
       >
         <div
-          aria-labelledby="error-summary-title"
-          className="govuk-error-summary"
-          data-module="govuk-error-summary"
-          role="alert"
-          tabIndex="-1"
+          className="govuk-grid-row"
         >
-          <h2
-            className="govuk-error-summary__title"
-            id="error-summary-title"
-          >
-            There is a problem
-          </h2>
           <div
-            className="govuk-error-summary__body"
+            className="govuk-grid-column-two-thirds"
           >
-            <ul
-              className="govuk-list govuk-error-summary__list"
-              id="errorSummaryItems"
-            />
+            <h1
+              className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
+            >
+              We've sent you an email
+            </h1>
           </div>
         </div>
+      </main>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`when action is ACTIONS.CHANGE_EMAIL renders correctly 1`] = `
+<div
+  id="emailSent"
+>
+  <div>
+    <div
+      className="govuk-width-container"
+    >
+      <div
+        className="govuk-breadcrumbs"
+      >
+        <ol
+          className="govuk-breadcrumbs__list"
+        >
+          <li
+            className="govuk-breadcrumbs__list-item"
+          >
+            <a
+              className="govuk-breadcrumbs__link"
+              href="https://nationalcareers.service.gov.uk/"
+            >
+              Home
+            </a>
+          </li>
+        </ol>
       </div>
       <main
         className="govuk-main-wrapper"
@@ -66,6 +88,205 @@ exports[`renders correctly 1`] = `
             >
               We've sent you an email
             </h1>
+            <div>
+              <p
+                className="govuk-body"
+              />
+              <p
+                className="govuk-body"
+              >
+                Check your spam folder if you can't see it in a few minutes.
+              </p>
+              <p
+                className="govuk-body"
+              >
+                If you don't receive an email after this time you can 
+                <a
+                  className="govuk-link"
+                  href={null}
+                >
+                  resend the activation email
+                </a>
+                .
+              </p>
+              <p
+                className="govuk-body"
+              >
+                This link expires in 24 hours.
+              </p>
+              <p
+                className="govuk-body"
+              >
+                <a
+                  className="govuk-link"
+                  href={null}
+                >
+                  I entered the wrong email address
+                </a>
+              </p>
+              <a
+                className="govuk-button govuk-button--start"
+                data-module="govuk-button"
+                draggable="false"
+                href={null}
+                role="button"
+              >
+                Return to sign in
+              </a>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`when action is ACTIONS.RESET_PASSWORD renders correctly 1`] = `
+<div
+  id="emailSent"
+>
+  <div>
+    <div
+      className="govuk-width-container"
+    >
+      <div
+        className="govuk-breadcrumbs"
+      >
+        <ol
+          className="govuk-breadcrumbs__list"
+        >
+          <li
+            className="govuk-breadcrumbs__list-item"
+          >
+            <a
+              className="govuk-breadcrumbs__link"
+              href="https://nationalcareers.service.gov.uk/"
+            >
+              Home
+            </a>
+          </li>
+        </ol>
+      </div>
+      <main
+        className="govuk-main-wrapper"
+      >
+        <div
+          className="govuk-grid-row"
+        >
+          <div
+            className="govuk-grid-column-two-thirds"
+          >
+            <h1
+              className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
+            >
+              We've sent you an email
+            </h1>
+            <div>
+              <p
+                className="govuk-body"
+              />
+              <p
+                className="govuk-body"
+              >
+                You will only receive this email if you have an account.
+              </p>
+              <p
+                className="govuk-body"
+              >
+                Check your spam folder if you can't see it in a few minutes.
+              </p>
+              <p
+                className="govuk-body"
+              >
+                If you don't receive an email after this time you can 
+                <a
+                  className="govuk-link"
+                  href={null}
+                >
+                  resend password reset email
+                </a>
+                .
+              </p>
+              <p
+                className="govuk-body"
+              >
+                This link expires in 24 hours.
+              </p>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`when action is ACTIONS.SIGNUP renders correctly 1`] = `
+<div
+  id="emailSent"
+>
+  <div>
+    <div
+      className="govuk-width-container"
+    >
+      <div
+        className="govuk-breadcrumbs"
+      >
+        <ol
+          className="govuk-breadcrumbs__list"
+        >
+          <li
+            className="govuk-breadcrumbs__list-item"
+          >
+            <a
+              className="govuk-breadcrumbs__link"
+              href="https://nationalcareers.service.gov.uk/"
+            >
+              Home
+            </a>
+          </li>
+        </ol>
+      </div>
+      <main
+        className="govuk-main-wrapper"
+      >
+        <div
+          className="govuk-grid-row"
+        >
+          <div
+            className="govuk-grid-column-two-thirds"
+          >
+            <h1
+              className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
+            >
+              We've sent you an email
+            </h1>
+            <div>
+              <p
+                className="govuk-body"
+              />
+              <p
+                className="govuk-body"
+              >
+                Check your spam folder if you can't see it in a few minutes.
+              </p>
+              <p
+                className="govuk-body"
+              >
+                This link expires in 24 hours.
+              </p>
+              <p
+                className="govuk-body"
+              >
+                <a
+                  className="govuk-link"
+                  href={null}
+                >
+                  I entered the wrong email address
+                </a>
+              </p>
+            </div>
           </div>
         </div>
       </main>
