@@ -6,6 +6,14 @@ import { LINK_TYPES } from '../constants/linkTypes';
 
 class EmailSent extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            showSpinner: false,
+            spinnerText: null
+        }
+    }
+
     showSpinner() {
         //start spinner
         this.setState({ spinnerText: 'Sending activation email. Please wait.', showSpinner: true })
