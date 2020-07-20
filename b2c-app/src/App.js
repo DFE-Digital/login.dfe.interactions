@@ -56,17 +56,18 @@ import { withRouter } from "react-router";
  * * Aided registration:
  *    Activate account:
  *      URL contains POLICIES.SIGNUP_INVITATION (without /api) and DOM has no error element
- *    Link expired:
+ *    Expired link:
  *      URL contains POLICIES.SIGNUP_INVITATION (without /api) and DOM has error element
- *    We've sent you an email:
+ *    Email sent:
  *      URL contains POLICIES.SIGNUP_INVITATION/api and DOM has success element
  *    Account activated:
- *      URL contains POLICIES.SIGNUP_INVITATION/api and DOM has no success element
+ *      URL contains POLICIES.SIGNUP_INVITATION/api and DOM has confirmation element
+ * 
  * 
  * * Reset password:
  *    Request email to reset password:
  *      URL or query params contain POLICIES.PASSWORD_RESET (without /api)
- *    Email to reset password sent:
+ *    Email sent:
  *      URL contains POLICIES.PASSWORD_RESET/api
  *    Expired link:
  *      URL contains POLICIES.PASSWORD_RESET_CONFIRMATION (without /api) and DOM has error element
@@ -75,13 +76,15 @@ import { withRouter } from "react-router";
  *    Password changed:
  *      URL contains POLICIES.PASSWORD_RESET_CONFIRMATION}/api
  * 
+ * 
  * * Forgotten email:
  *    URL or query params contain POLICIES.FIND_EMAIL
  * 
+ * 
  * * Change email:
- *    Link expired:
+ *    Expired link:
  *      URL contains POLICIES.CHANGE_EMAIL (without /api) and DOM has error element
- *    We've sent you an email:
+ *    Email sent:
  *      URL contains POLICIES.CHANGE_EMAIL/api
  *    New email activated:
  *      URL contains POLICIES.CHANGE_EMAIL (without /api) and DOM has no error element

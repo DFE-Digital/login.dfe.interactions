@@ -2,7 +2,7 @@
 
 exports[`renders correctly 1`] = `
 <div
-  id="activateAccount"
+  id="createAccount"
 >
   <div>
     <div
