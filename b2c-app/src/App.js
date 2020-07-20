@@ -32,6 +32,62 @@ import {
 
 import { withRouter } from "react-router";
 
+
+
+/**
+ * Current routes for each flow:
+ * 
+ * * Login:
+ *    URL or query params contain POLICIES.SIGNIN_INVITATION
+ *
+ * * Self registration:
+ *    Sign up:
+ *      URL or query params contain POLICIES.ACCOUNT_SIGNUP (without /api)
+ *    Email sent:
+ *      URL contains POLICIES.ACCOUNT_SIGNUP/api
+ *        OR
+ *      URL contains POLICIES.SIGNUP_CONFIRMATION and DOM has success element (comes from expired link page)
+ *    Expired link:
+ *      URL contains POLICIES.SIGNUP_CONFIRMATION and DOM has error element
+ *    Account activated:
+ *      URL contains POLICIES.SIGNUP_CONFIRMATION and DOM has no success element and no error element
+
+ * 
+ * * Aided registration:
+ *    Activate account:
+ *      URL contains POLICIES.SIGNUP_INVITATION (without /api) and DOM has no error element
+ *    Link expired:
+ *      URL contains POLICIES.SIGNUP_INVITATION (without /api) and DOM has error element
+ *    We've sent you an email:
+ *      URL contains POLICIES.SIGNUP_INVITATION/api and DOM has success element
+ *    Account activated:
+ *      URL contains POLICIES.SIGNUP_INVITATION/api and DOM has no success element
+ * 
+ * * Reset password:
+ *    Request email to reset password:
+ *      URL or query params contain POLICIES.PASSWORD_RESET (without /api)
+ *    Email to reset password sent:
+ *      URL contains POLICIES.PASSWORD_RESET/api
+ *    Expired link:
+ *      URL contains POLICIES.PASSWORD_RESET_CONFIRMATION (without /api) and DOM has error element
+ *    Enter new password page:
+ *      URL contains POLICIES.PASSWORD_RESET_CONFIRMATION (without /api) and DOM has no error element
+ *    Password changed:
+ *      URL contains POLICIES.PASSWORD_RESET_CONFIRMATION}/api
+ * 
+ * * Forgotten email:
+ *    URL or query params contain POLICIES.FIND_EMAIL
+ * 
+ * * Change email:
+ *    Link expired:
+ *      URL contains POLICIES.CHANGE_EMAIL (without /api) and DOM has error element
+ *    We've sent you an email:
+ *      URL contains POLICIES.CHANGE_EMAIL/api
+ *    New email activated:
+ *      URL contains POLICIES.CHANGE_EMAIL (without /api) and DOM has no error element
+ * 
+ */
+
 class App extends React.Component {
 
   componentDidMount() {
@@ -51,11 +107,11 @@ class App extends React.Component {
     if (matchesPath(location, POLICIES.SIGNIN_INVITATION) || hasSearchParam(location.search, 'p', POLICIES.SIGNIN_INVITATION)) {
       return <Login />;
     }
-    //Activation email sent after sign up
+    //Self registration - Activation email sent after sign up
     if (matchesPath(location, `${POLICIES.ACCOUNT_SIGNUP}/api`)) {
       return <EmailSent action={ACTIONS.SIGNUP} />;
     }
-    //Sign up page
+    //Self registration - Sign up page
     if (matchesPath(location, POLICIES.ACCOUNT_SIGNUP) || hasSearchParam(location.search, 'p', POLICIES.ACCOUNT_SIGNUP)) {
       return <Signup />;
     }
@@ -94,7 +150,7 @@ class App extends React.Component {
     if (matchesPath(location, POLICIES.FIND_EMAIL) || hasSearchParam(location.search, 'p', POLICIES.FIND_EMAIL)) {
       return <ForgottenEmail />;
     }
-    //Account activated from Self Registration
+    //Self registration - Account activated
     if (matchesPath(location, POLICIES.SIGNUP_CONFIRMATION)) {
       //Success - go to email sent page (from resend activation email)
       if (domHasElementWithId(SUCCESS_MESSAGE)) {
@@ -106,7 +162,7 @@ class App extends React.Component {
       }
       return <AccountActivated />;
     }
-    //Account activated/Email sent from Aided Registration
+    //Aided registration - Account activated/Email sent
     if (matchesPath(location, `${POLICIES.SIGNUP_INVITATION}/api`)) {
       //Success - go to email sent page (from resend activation email)
       if (domHasElementWithId(SUCCESS_MESSAGE)) {
@@ -116,7 +172,7 @@ class App extends React.Component {
         return <AccountActivated />;
       }
     }
-    //Activate account from Aided Registration
+    //Aided registration - Activate account
     if (matchesPath(location, POLICIES.SIGNUP_INVITATION)) {
       //Error - link has expired
       if (domHasElementWithId(ERROR_MESSAGE)) {
