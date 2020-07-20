@@ -220,7 +220,7 @@ describe('when location is set', () => {
                     pathname: `/${POLICIES.SIGNUP_INVITATION}/api/`,
                 };
 
-                //add error element to DOM
+                //add success element to DOM
                 let elem = global.document.createElement('p');
                 elem.id = SUCCESS_MESSAGE;
                 global.document.body.appendChild(elem);
@@ -232,14 +232,14 @@ describe('when location is set', () => {
 
         describe('-- account activated', () => {
 
-            it('renders correctly when URL contains POLICIES.SIGNUP_INVITATION/api/ and DOM has success element', () => {
+            it('renders correctly when URL contains POLICIES.SIGNUP_INVITATION/api/ and DOM has confirmation element', () => {
 
                 //set URL
                 window.location = {
                     pathname: `/${POLICIES.SIGNUP_INVITATION}/api/`,
                 };
 
-                //add error element to DOM
+                //add confirmation element to DOM
                 let elem = global.document.createElement('p');
                 elem.id = CONFIRMATION_MESSAGE;
                 global.document.body.appendChild(elem);
@@ -339,24 +339,65 @@ describe('when location is set', () => {
 
     describe('-- forgotten email', () => {
 
-        it('renders correctly when URL contains POLICIES.FIND_EMAIL/', () => {
+        describe('Find email', () => {
 
-            //set URL
-            window.location = {
-                pathname: `/${POLICIES.FIND_EMAIL}/`,
-            };
+            it('renders correctly when URL contains POLICIES.FIND_EMAIL/', () => {
 
-            const tree = renderApp();
-            expect(tree).toMatchSnapshot();
+                //set URL
+                window.location = {
+                    pathname: `/${POLICIES.FIND_EMAIL}/`,
+                };
+
+                const tree = renderApp();
+                expect(tree).toMatchSnapshot();
+            });
+
+            it('renders correctly when query params contain POLICIES.FIND_EMAIL', () => {
+
+                //set query params
+                window.location.search = `?p=${POLICIES.FIND_EMAIL}&param=value`;
+
+                const tree = renderApp();
+                expect(tree).toMatchSnapshot();
+            });
         });
 
-        it('renders correctly when query params contain POLICIES.FIND_EMAIL', () => {
+        describe('-- account found', () => {
 
-            //set query params
-            window.location.search = `?p=${POLICIES.FIND_EMAIL}&param=value`;
+            it('renders correctly when URL contains POLICIES.FIND_EMAIL/api/ and DOM has success element', () => {
 
-            const tree = renderApp();
-            expect(tree).toMatchSnapshot();
+                //set URL
+                window.location = {
+                    pathname: `/${POLICIES.FIND_EMAIL}/api/`,
+                };
+
+                //add success element to DOM
+                let elem = global.document.createElement('p');
+                elem.id = SUCCESS_MESSAGE;
+                global.document.body.appendChild(elem);
+
+                const tree = renderApp();
+                expect(tree).toMatchSnapshot();
+            });
+        });
+
+        describe('-- account not found', () => {
+
+            it('renders correctly when URL contains POLICIES.FIND_EMAIL/api/ and DOM has error element', () => {
+
+                //set URL
+                window.location = {
+                    pathname: `/${POLICIES.FIND_EMAIL}/api/`,
+                };
+
+                //add error element to DOM
+                let elem = global.document.createElement('p');
+                elem.id = ERROR_MESSAGE;
+                global.document.body.appendChild(elem);
+
+                const tree = renderApp();
+                expect(tree).toMatchSnapshot();
+            });
         });
     });
 

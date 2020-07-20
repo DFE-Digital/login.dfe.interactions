@@ -78,7 +78,12 @@ import { withRouter } from "react-router";
  * 
  * 
  * * Forgotten email:
- *    URL or query params contain POLICIES.FIND_EMAIL
+ *    Find email
+ *      URL or query params contain POLICIES.FIND_EMAIL
+ *    Account found
+ *       URL contains POLICIES.FIND_EMAIL/api and DOM has success element
+ *    Account notfound
+ *       URL contains POLICIES.FIND_EMAIL/api and DOM has success element
  * 
  * 
  * * Change email:
