@@ -6,12 +6,19 @@ import { LINK_TYPES } from '../constants/linkTypes';
 
 class EmailSent extends React.Component {
 
+    showSpinner() {
+        //start spinner
+        this.setState({ spinnerText: 'Sending activation email. Please wait.', showSpinner: true })
+    }
+
     render() {
 
         const b2cResultElementId = this.props.action === ACTIONS.CHANGE_EMAIL ? 'confirmationMessage' : 'successMessage';
 
         const pageConfig = {
-            title: "We've sent you an email"
+            title: "We've sent you an email",
+            showSpinner: this.state.showSpinner,
+            spinnerText: this.state.spinnerText
         };
 
         const contentFromB2CParagraph =
@@ -39,7 +46,7 @@ class EmailSent extends React.Component {
         const resendChangeEmailParagraph =
             <components.Paragraph>
                 If you don't receive an email after this time you can&nbsp;
-                <components.Link action={ACTIONS.RESEND_EMAIL}>resend the activation email</components.Link>
+                <components.Link action={ACTIONS.RESEND_EMAIL} onClick={this.showSpinner}>resend the activation email</components.Link>
                 .
             </ components.Paragraph >
 
