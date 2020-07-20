@@ -451,4 +451,27 @@ describe('when location is set', () => {
         });
     });
 
+    describe('-- resend email', () => {
+
+        it('renders correctly when URL contains policy name', () => {
+
+            //set URL
+            window.location = {
+                pathname: `/${POLICIES.RESEND_EMAIL}/`,
+            };
+
+            const tree = renderApp();
+            expect(tree).toMatchSnapshot();
+        });
+
+        it('renders correctly when query params contain this policy', () => {
+
+            //set query params
+            window.location.search = `?p=${POLICIES.RESEND_EMAIL}&param=value`;
+
+            const tree = renderApp();
+            expect(tree).toMatchSnapshot();
+        });
+    });
+
 });

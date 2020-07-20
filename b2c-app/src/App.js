@@ -94,6 +94,11 @@ import { withRouter } from "react-router";
  *    New email activated:
  *      URL contains POLICIES.CHANGE_EMAIL (without /api) and DOM has no error element
  * 
+ * 
+ * * Resend email:
+ *    Email sent:
+ *      URL or query params contain POLICIES.RESEND_EMAIL
+ * 
  */
 
 class App extends React.Component {
@@ -199,6 +204,10 @@ class App extends React.Component {
         return <ExpiredLinkWithResendEmail action={ACTIONS.CHANGE_EMAIL} />;
       }
       return <AccountActivated />;
+    }
+    //resend email
+    if (matchesPath(location, POLICIES.RESEND_EMAIL) || hasSearchParam(location.search, 'p', POLICIES.RESEND_EMAIL)) {
+      return <EmailSent action={ACTIONS.CHANGE_EMAIL} />;
     }
     //default
     return <Placeholder />;
