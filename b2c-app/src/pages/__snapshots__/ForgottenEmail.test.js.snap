@@ -1,0 +1,253 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  id="forgottenEmail"
+>
+  <div>
+    <div
+      className="govuk-width-container"
+    >
+      <div
+        className="govuk-breadcrumbs"
+      >
+        <ol
+          className="govuk-breadcrumbs__list"
+        >
+          <li
+            className="govuk-breadcrumbs__list-item"
+          >
+            <a
+              className="govuk-breadcrumbs__link"
+              href="https://nationalcareers.service.gov.uk/"
+            >
+              Home
+            </a>
+          </li>
+        </ol>
+      </div>
+      <div
+        className="pageLevelErrorContainer hide"
+      >
+        <div
+          aria-labelledby="error-summary-title"
+          className="govuk-error-summary"
+          data-module="govuk-error-summary"
+          role="alert"
+          tabIndex="-1"
+        >
+          <h2
+            className="govuk-error-summary__title"
+            id="error-summary-title"
+          >
+            There is a problem
+          </h2>
+          <div
+            className="govuk-error-summary__body"
+          >
+            <ul
+              className="govuk-list govuk-error-summary__list"
+              id="errorSummaryItems"
+            />
+          </div>
+        </div>
+      </div>
+      <main
+        className="govuk-main-wrapper"
+      >
+        <div
+          className="govuk-grid-row"
+        >
+          <div
+            className="govuk-grid-column-two-thirds"
+          >
+            <h1
+              className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
+            >
+              Find your email address
+            </h1>
+            <form
+              id="customForm"
+              noValidate={true}
+              onSubmit={[Function]}
+            >
+              <div>
+                <div
+                  className="govuk-form-group "
+                >
+                  <label
+                    className="govuk-label"
+                    htmlFor="firstNameCustom"
+                  >
+                    First name
+                  </label>
+                  <input
+                    className="govuk-input govuk-!-width-one-half"
+                    id="firstNameCustom"
+                    name="firstName"
+                    noValidate={true}
+                    onChange={[Function]}
+                    type="text"
+                  />
+                </div>
+                <div
+                  className="govuk-form-group "
+                >
+                  <label
+                    className="govuk-label"
+                    htmlFor="lastNameCustom"
+                  >
+                    Last name
+                  </label>
+                  <input
+                    className="govuk-input govuk-!-width-one-half"
+                    id="lastNameCustom"
+                    name="lastName"
+                    noValidate={true}
+                    onChange={[Function]}
+                    type="text"
+                  />
+                </div>
+                <div
+                  className="govuk-form-group "
+                >
+                  <fieldset
+                    aria-describedby="date-of-birth-hint"
+                    className="govuk-fieldset"
+                    id="dobFieldset"
+                    role="group"
+                  >
+                    <legend
+                      className="govuk-fieldset__legend govuk-fieldset__legend--l"
+                    >
+                      <label
+                        className="govuk-label"
+                      >
+                        Date of birth
+                      </label>
+                    </legend>
+                    <span
+                      className="govuk-hint"
+                      id="date-of-birth-hint"
+                    >
+                      For example, 31 3 1980
+                    </span>
+                    <div
+                      className="govuk-date-input"
+                      id="date-of-birth"
+                    >
+                      <div
+                        className="govuk-date-input__item"
+                      >
+                        <div
+                          className="govuk-form-group"
+                        >
+                          <label
+                            className="govuk-label govuk-date-input__label"
+                            htmlFor="dobDay"
+                          >
+                            Day
+                          </label>
+                          <input
+                            className="govuk-input govuk-date-input__input govuk-input--width-2"
+                            id="dobDay"
+                            inputMode="numeric"
+                            name="dobDay"
+                            noValidate={true}
+                            onChange={[Function]}
+                            pattern="[0-9]*"
+                            type="number"
+                          />
+                        </div>
+                      </div>
+                      <div
+                        className="govuk-date-input__item"
+                      >
+                        <div
+                          className="govuk-form-group"
+                        >
+                          <label
+                            className="govuk-label govuk-date-input__label"
+                            htmlFor="dobMonth"
+                          >
+                            Month
+                          </label>
+                          <input
+                            className="govuk-input govuk-date-input__input govuk-input--width-2"
+                            id="dobMonth"
+                            inputMode="numeric"
+                            name="dobMonth"
+                            noValidate={true}
+                            onChange={[Function]}
+                            pattern="[0-9]*"
+                            type="number"
+                          />
+                        </div>
+                      </div>
+                      <div
+                        className="govuk-date-input__item"
+                      >
+                        <div
+                          className="govuk-form-group"
+                        >
+                          <label
+                            className="govuk-label govuk-date-input__label"
+                            htmlFor="dobYear"
+                          >
+                            Year
+                          </label>
+                          <input
+                            className="govuk-input govuk-date-input__input govuk-input--width-4"
+                            id="dobYear"
+                            inputMode="numeric"
+                            name="dobYear"
+                            noValidate={true}
+                            onChange={[Function]}
+                            pattern="[0-9]*"
+                            type="number"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </fieldset>
+                </div>
+                <div
+                  className="govuk-form-group "
+                >
+                  <label
+                    className="govuk-label"
+                    htmlFor="postcodeCustom"
+                  >
+                    Enter your postcode
+                  </label>
+                  <span
+                    className="govuk-hint"
+                    id="postcode-hint"
+                  >
+                    For example, SW1A 1AA
+                  </span>
+                  <input
+                    className="govuk-input govuk-input--width-10"
+                    id="postcodeCustom"
+                    name="postcode"
+                    noValidate={true}
+                    onChange={[Function]}
+                    type="text"
+                  />
+                </div>
+              </div>
+              <button
+                className="govuk-button"
+                id="preSubmit"
+                type="submit"
+              >
+                Find email address
+              </button>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+`;

@@ -6,5 +6,6 @@ export const POLICIES = {
     FIND_EMAIL: 'B2C_1A_Find_Email',
     SIGNUP_CONFIRMATION: 'B2C_1A_Signup_Confirmation',
     SIGNUP_INVITATION: 'B2C_1A_Signup_Invitation',
-    CHANGE_EMAIL: 'B2C_1A_Change_Email'
+    CHANGE_EMAIL: 'B2C_1A_Change_Email',
+    RESEND_EMAIL: 'B2C_1A_Resend_Email'
 };

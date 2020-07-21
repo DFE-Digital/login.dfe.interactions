@@ -130,7 +130,7 @@ class Signup extends React.Component {
         ];
 
         return (
-            <div id="activateAccount">
+            <div id="createAccount">
                 <components.PageContainer pageConfig={pageConfig} columns={columns} />
             </div>
         )

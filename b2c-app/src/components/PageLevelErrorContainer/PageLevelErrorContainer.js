@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link, animateScroll } from "react-scroll";
-import B2CErrorParserService from '../../services/B2CErrorParserService';
+import * as B2CErrorParserService from '../../services/B2CErrorParserService';
 
 class PageLevelErrorContainer extends React.Component {
 

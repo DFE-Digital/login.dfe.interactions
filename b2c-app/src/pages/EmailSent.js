@@ -1,5 +1,4 @@
 import React from 'react';
-import ChangeEmailService from '../services/ChangeEmailService';
 import components from '../components';
 import { getInnerTextById } from '../helpers/dom';
 import { ACTIONS } from '../constants/actions';
@@ -11,57 +10,15 @@ class EmailSent extends React.Component {
         super(props);
         this.state = {
             showSpinner: false,
-            spinnerText: null,
-            showErrors: false,
-            errors: []
+            spinnerText: null
         }
-        this.resendEmail = this.resendEmail.bind(this);
-        this.showPageLevelError = this.showPageLevelError.bind(this);
-        this.clearPageLevelError = this.clearPageLevelError.bind(this);
+        this.showSpinner = this.showSpinner.bind(this);
     }
 
-    showPageLevelError(errorMessage) {
-        const newError = {
-            visible: {
-                text: errorMessage
-            }
-        };
-
-        this.setState({ errors: [newError], showErrors: true });
-    }
-
-    clearPageLevelError() {
-        this.setState({ errors: [], showErrors: false });
-    }
-
-    resendEmail(e) {
-        e.preventDefault();
-
+    showSpinner() {
         //start spinner
         this.setState({ spinnerText: 'Sending activation email. Please wait.', showSpinner: true })
-
-        //make call to API to resend email
-        ChangeEmailService.callResendEmail().then(
-            () => {
-                //clear error messages if there were any from previous calls
-                this.clearPageLevelError();
-            },
-            (error) => {
-                if (error && error.userMessage) {
-                    this.showPageLevelError(error.userMessage);
-                }
-                else {
-                    this.showPageLevelError('The activation email could not be sent.');
-                }
-            })
-            .finally(
-                () => {
-                    //stop spinner
-                    this.setState({ showSpinner: false });
-                }
-            );
     }
-
 
     render() {
 
@@ -69,7 +26,6 @@ class EmailSent extends React.Component {
 
         const pageConfig = {
             title: "We've sent you an email",
-            errors: this.state.errors,
             showSpinner: this.state.showSpinner,
             spinnerText: this.state.spinnerText
         };
@@ -99,7 +55,7 @@ class EmailSent extends React.Component {
         const resendChangeEmailParagraph =
             <components.Paragraph>
                 If you don't receive an email after this time you can&nbsp;
-                <components.Link type={LINK_TYPES.API_CALL} onClick={this.resendEmail}>resend the activation email</components.Link>
+                <components.Link action={ACTIONS.RESEND_EMAIL} onClick={this.showSpinner}>resend the activation email</components.Link>
                 .
             </ components.Paragraph >
 
