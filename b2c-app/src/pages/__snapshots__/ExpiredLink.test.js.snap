@@ -56,6 +56,7 @@ exports[`renders correctly with action ACTIONS.RESET_PASSWORD passed in 1`] = `
                 data-module="govuk-button"
                 draggable="false"
                 href={null}
+                onClick={null}
                 role="button"
               >
                 Resend password reset email

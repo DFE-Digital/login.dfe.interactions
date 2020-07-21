@@ -47,6 +47,7 @@ exports[`renders correctly 1`] = `
                 <a
                   className="govuk-link"
                   href={null}
+                  onClick={null}
                 >
                   Try again
                 </a>
@@ -64,6 +65,7 @@ exports[`renders correctly 1`] = `
                 <a
                   className="govuk-link"
                   href={null}
+                  onClick={null}
                 >
                   create a new account
                 </a>

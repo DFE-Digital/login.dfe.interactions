@@ -6,6 +6,7 @@ exports[`renders correctly link of type button 1`] = `
   data-module="govuk-button"
   draggable="false"
   href={null}
+  onClick={null}
   role="button"
 />
 `;
@@ -14,5 +15,6 @@ exports[`renders correctly without specified type 1`] = `
 <a
   className="govuk-link"
   href={null}
+  onClick={null}
 />
 `;

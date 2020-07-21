@@ -382,6 +382,7 @@ exports[`when location is set -- aided registration -- account activated renders
                     data-module="govuk-button"
                     draggable="false"
                     href={null}
+                    onClick={null}
                     role="button"
                   >
                     Sign in to your account
@@ -1207,6 +1208,7 @@ exports[`when location is set -- aided registration -- email sent renders correc
                     <a
                       className="govuk-link"
                       href={null}
+                      onClick={null}
                     >
                       I entered the wrong email address
                     </a>
@@ -1809,6 +1811,7 @@ exports[`when location is set -- change email -- email sent renders correctly wh
                     <a
                       className="govuk-link"
                       href={null}
+                      onClick={[Function]}
                     >
                       resend the activation email
                     </a>
@@ -1825,6 +1828,7 @@ exports[`when location is set -- change email -- email sent renders correctly wh
                     <a
                       className="govuk-link"
                       href={null}
+                      onClick={null}
                     >
                       I entered the wrong email address
                     </a>
@@ -1834,6 +1838,7 @@ exports[`when location is set -- change email -- email sent renders correctly wh
                     data-module="govuk-button"
                     draggable="false"
                     href={null}
+                    onClick={null}
                     role="button"
                   >
                     Return to sign in
@@ -2431,6 +2436,7 @@ exports[`when location is set -- change email -- new email activated renders cor
                     data-module="govuk-button"
                     draggable="false"
                     href={null}
+                    onClick={null}
                     role="button"
                   >
                     Sign in to your account
@@ -2718,6 +2724,7 @@ exports[`when location is set -- forgotten email -- account found renders correc
                     data-module="govuk-button"
                     draggable="false"
                     href={null}
+                    onClick={null}
                     role="button"
                   >
                     Sign in to your account
@@ -2998,6 +3005,7 @@ exports[`when location is set -- forgotten email -- account not found renders co
                     <a
                       className="govuk-link"
                       href={null}
+                      onClick={null}
                     >
                       Try again
                     </a>
@@ -3015,6 +3023,7 @@ exports[`when location is set -- forgotten email -- account not found renders co
                     <a
                       className="govuk-link"
                       href={null}
+                      onClick={null}
                     >
                       create a new account
                     </a>
@@ -4309,6 +4318,7 @@ exports[`when location is set -- login renders correctly when URL contains polic
                       <a
                         className="govuk-link"
                         href={null}
+                        onClick={null}
                       >
                         I cannot access my account
                       </a>
@@ -4337,6 +4347,7 @@ exports[`when location is set -- login renders correctly when URL contains polic
                   <a
                     className="govuk-link"
                     href={null}
+                    onClick={null}
                   >
                     Creating an account
                   </a>
@@ -4686,6 +4697,7 @@ exports[`when location is set -- login renders correctly when query params conta
                       <a
                         className="govuk-link"
                         href={null}
+                        onClick={null}
                       >
                         I cannot access my account
                       </a>
@@ -4714,6 +4726,7 @@ exports[`when location is set -- login renders correctly when query params conta
                   <a
                     className="govuk-link"
                     href={null}
+                    onClick={null}
                   >
                     Creating an account
                   </a>
@@ -5003,6 +5016,7 @@ exports[`when location is set -- resend email renders correctly when URL contain
                     <a
                       className="govuk-link"
                       href={null}
+                      onClick={[Function]}
                     >
                       resend the activation email
                     </a>
@@ -5019,6 +5033,7 @@ exports[`when location is set -- resend email renders correctly when URL contain
                     <a
                       className="govuk-link"
                       href={null}
+                      onClick={null}
                     >
                       I entered the wrong email address
                     </a>
@@ -5028,6 +5043,7 @@ exports[`when location is set -- resend email renders correctly when URL contain
                     data-module="govuk-button"
                     draggable="false"
                     href={null}
+                    onClick={null}
                     role="button"
                   >
                     Return to sign in
@@ -5317,6 +5333,7 @@ exports[`when location is set -- resend email renders correctly when query param
                     <a
                       className="govuk-link"
                       href={null}
+                      onClick={[Function]}
                     >
                       resend the activation email
                     </a>
@@ -5333,6 +5350,7 @@ exports[`when location is set -- resend email renders correctly when query param
                     <a
                       className="govuk-link"
                       href={null}
+                      onClick={null}
                     >
                       I entered the wrong email address
                     </a>
@@ -5342,6 +5360,7 @@ exports[`when location is set -- resend email renders correctly when query param
                     data-module="govuk-button"
                     draggable="false"
                     href={null}
+                    onClick={null}
                     role="button"
                   >
                     Return to sign in
@@ -5636,6 +5655,7 @@ exports[`when location is set -- reset password -- email sent renders correctly 
                     <a
                       className="govuk-link"
                       href={null}
+                      onClick={null}
                     >
                       resend password reset email
                     </a>
@@ -6317,6 +6337,7 @@ exports[`when location is set -- reset password -- expired link renders correctl
                     data-module="govuk-button"
                     draggable="false"
                     href={null}
+                    onClick={null}
                     role="button"
                   >
                     Resend password reset email
@@ -6601,6 +6622,7 @@ exports[`when location is set -- reset password -- password changed renders corr
                     data-module="govuk-button"
                     draggable="false"
                     href={null}
+                    onClick={null}
                     role="button"
                   >
                     Sign in to your account
@@ -6961,6 +6983,7 @@ exports[`when location is set -- reset password -- request email to reset passwo
                   <a
                     className="govuk-link"
                     href={null}
+                    onClick={null}
                   >
                     Can't remember your email address?
                   </a>
@@ -7320,6 +7343,7 @@ exports[`when location is set -- reset password -- request email to reset passwo
                   <a
                     className="govuk-link"
                     href={null}
+                    onClick={null}
                   >
                     Can't remember your email address?
                   </a>
@@ -7603,6 +7627,7 @@ exports[`when location is set -- self registration -- account activated renders 
                     data-module="govuk-button"
                     draggable="false"
                     href={null}
+                    onClick={null}
                     role="button"
                   >
                     Sign in to your account
@@ -7896,6 +7921,7 @@ exports[`when location is set -- self registration -- email sent renders correct
                     <a
                       className="govuk-link"
                       href={null}
+                      onClick={null}
                     >
                       I entered the wrong email address
                     </a>
@@ -8189,6 +8215,7 @@ exports[`when location is set -- self registration -- email sent renders correct
                     <a
                       className="govuk-link"
                       href={null}
+                      onClick={null}
                     >
                       I entered the wrong email address
                     </a>

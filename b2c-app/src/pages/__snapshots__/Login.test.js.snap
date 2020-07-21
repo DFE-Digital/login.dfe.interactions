@@ -116,6 +116,7 @@ exports[`renders correctly 1`] = `
                   <a
                     className="govuk-link"
                     href={null}
+                    onClick={null}
                   >
                     I cannot access my account
                   </a>
@@ -144,6 +145,7 @@ exports[`renders correctly 1`] = `
               <a
                 className="govuk-link"
                 href={null}
+                onClick={null}
               >
                 Creating an account
               </a>

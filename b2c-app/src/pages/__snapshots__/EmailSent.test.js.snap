@@ -104,6 +104,7 @@ exports[`when action is ACTIONS.CHANGE_EMAIL renders correctly 1`] = `
                 <a
                   className="govuk-link"
                   href={null}
+                  onClick={[Function]}
                 >
                   resend the activation email
                 </a>
@@ -120,6 +121,7 @@ exports[`when action is ACTIONS.CHANGE_EMAIL renders correctly 1`] = `
                 <a
                   className="govuk-link"
                   href={null}
+                  onClick={null}
                 >
                   I entered the wrong email address
                 </a>
@@ -129,6 +131,7 @@ exports[`when action is ACTIONS.CHANGE_EMAIL renders correctly 1`] = `
                 data-module="govuk-button"
                 draggable="false"
                 href={null}
+                onClick={null}
                 role="button"
               >
                 Return to sign in
@@ -203,6 +206,7 @@ exports[`when action is ACTIONS.RESET_PASSWORD renders correctly 1`] = `
                 <a
                   className="govuk-link"
                   href={null}
+                  onClick={null}
                 >
                   resend password reset email
                 </a>
@@ -282,6 +286,7 @@ exports[`when action is ACTIONS.SIGNUP renders correctly 1`] = `
                 <a
                   className="govuk-link"
                   href={null}
+                  onClick={null}
                 >
                   I entered the wrong email address
                 </a>
