@@ -12,6 +12,7 @@ class EmailSent extends React.Component {
             showSpinner: false,
             spinnerText: null
         }
+        this.showSpinner = this.showSpinner.bind(this);
     }
 
     showSpinner() {
