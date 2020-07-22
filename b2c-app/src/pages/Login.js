@@ -61,9 +61,6 @@ class Login extends React.Component {
 
     render() {
 
-        /**
-         * Column 1 in Login page
-         */
         const formContent =
             <div>
                 <components.InputField
@@ -88,15 +85,6 @@ class Login extends React.Component {
             </div>
 
         /**
-         * Column 2 in Login page
-         */
-        const additionalColumnContent =
-            <components.Paragraph key='paragraph'>
-                <components.Link action={ACTIONS.SIGNUP}>Creating an account</components.Link>
-                &nbsp;allows you to access and save your skills health check reports.
-            </components.Paragraph>
-
-        /**
          * Page configuration
          */
         const pageConfig = {
@@ -115,10 +103,6 @@ class Login extends React.Component {
                 formContent: formContent,
                 submitButtonText: 'Sign in',
                 submitHandler: this.handleSubmit
-            },
-            {
-                header: 'Create an account',
-                aboveFormContent: additionalColumnContent
             }
         ];
 

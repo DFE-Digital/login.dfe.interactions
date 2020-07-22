@@ -4231,10 +4231,10 @@ exports[`when location is set -- login renders correctly when URL contains polic
               className="govuk-grid-row"
             >
               <div
-                className="govuk-grid-column-one-half"
+                className="govuk-grid-column-two-thirds"
               >
                 <h1
-                  className="govuk-heading-l"
+                  className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
                 >
                   Sign in
                 </h1>
@@ -4302,27 +4302,6 @@ exports[`when location is set -- login renders correctly when URL contains polic
                     Sign in
                   </button>
                 </form>
-              </div>
-              <div
-                className="govuk-grid-column-one-half"
-              >
-                <h1
-                  className="govuk-heading-l"
-                >
-                  Create an account
-                </h1>
-                <p
-                  className="govuk-body"
-                >
-                  <a
-                    className="govuk-link"
-                    href={null}
-                    onClick={null}
-                  >
-                    Creating an account
-                  </a>
-                   allows you to access and save your skills health check reports.
-                </p>
               </div>
             </div>
           </main>
@@ -4610,10 +4589,10 @@ exports[`when location is set -- login renders correctly when query params conta
               className="govuk-grid-row"
             >
               <div
-                className="govuk-grid-column-one-half"
+                className="govuk-grid-column-two-thirds"
               >
                 <h1
-                  className="govuk-heading-l"
+                  className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
                 >
                   Sign in
                 </h1>
@@ -4681,27 +4660,6 @@ exports[`when location is set -- login renders correctly when query params conta
                     Sign in
                   </button>
                 </form>
-              </div>
-              <div
-                className="govuk-grid-column-one-half"
-              >
-                <h1
-                  className="govuk-heading-l"
-                >
-                  Create an account
-                </h1>
-                <p
-                  className="govuk-body"
-                >
-                  <a
-                    className="govuk-link"
-                    href={null}
-                    onClick={null}
-                  >
-                    Creating an account
-                  </a>
-                   allows you to access and save your skills health check reports.
-                </p>
               </div>
             </div>
           </main>
