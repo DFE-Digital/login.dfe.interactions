@@ -88,7 +88,7 @@ class ActivateAccount extends React.Component {
                     showErrors={this.state.showErrors}
                     errors={this.state.errors} />
                 <components.Paragraph errors={this.state.errors}>
-                    As an extra security check, enter your date of birth.
+                    As an extra security check, please enter your date of birth.
                 </components.Paragraph>
                 <components.DateOfBirth
                     onChange={this.onChange}
