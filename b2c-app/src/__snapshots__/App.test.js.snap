@@ -770,7 +770,7 @@ exports[`when location is set -- aided registration -- activate account renders 
                     <p
                       className="govuk-body"
                     >
-                      As an extra security check, enter your date of birth.
+                      As an extra security check, please enter your date of birth.
                     </p>
                     <div
                       className="govuk-form-group "
@@ -1201,17 +1201,6 @@ exports[`when location is set -- aided registration -- email sent renders correc
                     className="govuk-body"
                   >
                     This link expires in 24 hours.
-                  </p>
-                  <p
-                    className="govuk-body"
-                  >
-                    <a
-                      className="govuk-link"
-                      href={null}
-                      onClick={null}
-                    >
-                      I entered the wrong email address
-                    </a>
                   </p>
                 </div>
               </div>
@@ -1821,17 +1810,6 @@ exports[`when location is set -- change email -- email sent renders correctly wh
                     className="govuk-body"
                   >
                     This link expires in 24 hours.
-                  </p>
-                  <p
-                    className="govuk-body"
-                  >
-                    <a
-                      className="govuk-link"
-                      href={null}
-                      onClick={null}
-                    >
-                      I entered the wrong email address
-                    </a>
                   </p>
                   <a
                     className="govuk-button govuk-button--start"
@@ -3019,15 +2997,7 @@ exports[`when location is set -- forgotten email -- account not found renders co
                   <p
                     className="govuk-body"
                   >
-                    If you're unable to recover your registered email address, you'll have to 
-                    <a
-                      className="govuk-link"
-                      href={null}
-                      onClick={null}
-                    >
-                      create a new account
-                    </a>
-                    .
+                    If you're unable to recover your registered email address, you'll have to create a new account.
                   </p>
                 </div>
               </div>
@@ -4261,10 +4231,10 @@ exports[`when location is set -- login renders correctly when URL contains polic
               className="govuk-grid-row"
             >
               <div
-                className="govuk-grid-column-one-half"
+                className="govuk-grid-column-two-thirds"
               >
                 <h1
-                  className="govuk-heading-l"
+                  className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
                 >
                   Sign in
                 </h1>
@@ -4332,27 +4302,6 @@ exports[`when location is set -- login renders correctly when URL contains polic
                     Sign in
                   </button>
                 </form>
-              </div>
-              <div
-                className="govuk-grid-column-one-half"
-              >
-                <h1
-                  className="govuk-heading-l"
-                >
-                  Create an account
-                </h1>
-                <p
-                  className="govuk-body"
-                >
-                  <a
-                    className="govuk-link"
-                    href={null}
-                    onClick={null}
-                  >
-                    Creating an account
-                  </a>
-                   allows you to access and save your skills health check reports.
-                </p>
               </div>
             </div>
           </main>
@@ -4640,10 +4589,10 @@ exports[`when location is set -- login renders correctly when query params conta
               className="govuk-grid-row"
             >
               <div
-                className="govuk-grid-column-one-half"
+                className="govuk-grid-column-two-thirds"
               >
                 <h1
-                  className="govuk-heading-l"
+                  className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
                 >
                   Sign in
                 </h1>
@@ -4711,27 +4660,6 @@ exports[`when location is set -- login renders correctly when query params conta
                     Sign in
                   </button>
                 </form>
-              </div>
-              <div
-                className="govuk-grid-column-one-half"
-              >
-                <h1
-                  className="govuk-heading-l"
-                >
-                  Create an account
-                </h1>
-                <p
-                  className="govuk-body"
-                >
-                  <a
-                    className="govuk-link"
-                    href={null}
-                    onClick={null}
-                  >
-                    Creating an account
-                  </a>
-                   allows you to access and save your skills health check reports.
-                </p>
               </div>
             </div>
           </main>
@@ -5026,17 +4954,6 @@ exports[`when location is set -- resend email renders correctly when URL contain
                     className="govuk-body"
                   >
                     This link expires in 24 hours.
-                  </p>
-                  <p
-                    className="govuk-body"
-                  >
-                    <a
-                      className="govuk-link"
-                      href={null}
-                      onClick={null}
-                    >
-                      I entered the wrong email address
-                    </a>
                   </p>
                   <a
                     className="govuk-button govuk-button--start"
@@ -5343,17 +5260,6 @@ exports[`when location is set -- resend email renders correctly when query param
                     className="govuk-body"
                   >
                     This link expires in 24 hours.
-                  </p>
-                  <p
-                    className="govuk-body"
-                  >
-                    <a
-                      className="govuk-link"
-                      href={null}
-                      onClick={null}
-                    >
-                      I entered the wrong email address
-                    </a>
                   </p>
                   <a
                     className="govuk-button govuk-button--start"
@@ -7915,17 +7821,6 @@ exports[`when location is set -- self registration -- email sent renders correct
                   >
                     This link expires in 24 hours.
                   </p>
-                  <p
-                    className="govuk-body"
-                  >
-                    <a
-                      className="govuk-link"
-                      href={null}
-                      onClick={null}
-                    >
-                      I entered the wrong email address
-                    </a>
-                  </p>
                 </div>
               </div>
             </div>
@@ -8208,17 +8103,6 @@ exports[`when location is set -- self registration -- email sent renders correct
                     className="govuk-body"
                   >
                     This link expires in 24 hours.
-                  </p>
-                  <p
-                    className="govuk-body"
-                  >
-                    <a
-                      className="govuk-link"
-                      href={null}
-                      onClick={null}
-                    >
-                      I entered the wrong email address
-                    </a>
                   </p>
                 </div>
               </div>

@@ -115,17 +115,6 @@ exports[`when action is ACTIONS.CHANGE_EMAIL renders correctly 1`] = `
               >
                 This link expires in 24 hours.
               </p>
-              <p
-                className="govuk-body"
-              >
-                <a
-                  className="govuk-link"
-                  href={null}
-                  onClick={null}
-                >
-                  I entered the wrong email address
-                </a>
-              </p>
               <a
                 className="govuk-button govuk-button--start"
                 data-module="govuk-button"
@@ -279,17 +268,6 @@ exports[`when action is ACTIONS.SIGNUP renders correctly 1`] = `
                 className="govuk-body"
               >
                 This link expires in 24 hours.
-              </p>
-              <p
-                className="govuk-body"
-              >
-                <a
-                  className="govuk-link"
-                  href={null}
-                  onClick={null}
-                >
-                  I entered the wrong email address
-                </a>
               </p>
             </div>
           </div>

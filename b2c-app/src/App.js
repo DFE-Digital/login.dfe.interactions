@@ -82,8 +82,8 @@ import { withRouter } from "react-router";
  *      URL or query params contain POLICIES.FIND_EMAIL
  *    Account found
  *       URL contains POLICIES.FIND_EMAIL/api and DOM has success element
- *    Account notfound
- *       URL contains POLICIES.FIND_EMAIL/api and DOM has success element
+ *    Account not found
+ *       URL contains POLICIES.FIND_EMAIL/api and DOM has error element
  * 
  * 
  * * Change email:
@@ -116,18 +116,73 @@ class App extends React.Component {
     const SUCCESS_MESSAGE = 'successMessage';
     const CONFIRMATION_MESSAGE = 'confirmationMessage';
 
-    //Login page
+
+    /**
+     * Login page
+     */
+
     if (matchesPath(location, POLICIES.SIGNIN_INVITATION) || hasSearchParam(location.search, 'p', POLICIES.SIGNIN_INVITATION)) {
       return <Login />;
     }
-    //Self registration - Activation email sent after sign up
+
+
+    /**
+     * Self registration
+     */
+
+    //Activation email sent after sign up
     if (matchesPath(location, `${POLICIES.ACCOUNT_SIGNUP}/api`)) {
       return <EmailSent action={ACTIONS.SIGNUP} />;
     }
-    //Self registration - Sign up page
+    //Sign up page
     if (matchesPath(location, POLICIES.ACCOUNT_SIGNUP) || hasSearchParam(location.search, 'p', POLICIES.ACCOUNT_SIGNUP)) {
       return <Signup />;
     }
+    //From activation email
+    if (matchesPath(location, POLICIES.SIGNUP_CONFIRMATION)) {
+      //Email sent page (from resend activation email)
+      if (domHasElementWithId(SUCCESS_MESSAGE)) {
+        return <EmailSent action={ACTIONS.SIGNUP} />;
+      }
+      //Expired link
+      else if (domHasElementWithId(ERROR_MESSAGE)) {
+        return <ExpiredLinkWithResendEmail action={ACTIONS.SIGNUP} />;
+      }
+      //Account activated
+      return <AccountActivated />;
+    }
+
+
+    /**
+     * Aided registration
+     */
+
+    //Account activated/Email sent
+    if (matchesPath(location, `${POLICIES.SIGNUP_INVITATION}/api`)) {
+      //Email sent page (from resend activation email)
+      if (domHasElementWithId(SUCCESS_MESSAGE)) {
+        return <EmailSent action={ACTIONS.SIGNUP} />;
+      }
+      //Account activated
+      if (domHasElementWithId(CONFIRMATION_MESSAGE)) {
+        return <AccountActivated />;
+      }
+    }
+    //From activation email
+    if (matchesPath(location, POLICIES.SIGNUP_INVITATION)) {
+      //Expired link
+      if (domHasElementWithId(ERROR_MESSAGE)) {
+        return <ExpiredLinkWithResendEmail action={ACTIONS.SIGNUP} />;
+      }
+      //Activate account
+      return <ActivateAccount />;
+    }
+
+
+    /**
+     * Reset password
+     */
+
     //Reset password email sent
     if (matchesPath(location, `${POLICIES.PASSWORD_RESET}/api`)) {
       return <EmailSent action={ACTIONS.RESET_PASSWORD} />;
@@ -140,14 +195,21 @@ class App extends React.Component {
     if (matchesPath(location, `${POLICIES.PASSWORD_RESET_CONFIRMATION}/api`)) {
       return <PasswordChanged />;
     }
-    //Enter new password page
+    //From reset password email
     if (matchesPath(location, POLICIES.PASSWORD_RESET_CONFIRMATION)) {
-      //Error - link has expired
+      //Expired link
       if (domHasElementWithId(ERROR_MESSAGE)) {
         return <ExpiredLink action={ACTIONS.RESET_PASSWORD} />;
       }
+      //Enter new password page
       return <EnterNewPassword />;
     }
+
+
+    /**
+     * Forgotten email
+     */
+
     //Results for forgotten email page
     if (matchesPath(location, `${POLICIES.FIND_EMAIL}/api`)) {
       //Success - account was found
@@ -159,57 +221,42 @@ class App extends React.Component {
         return <AccountNotFound />;
       }
     }
-    //Forgotten email
+    //Forgotten email page
     if (matchesPath(location, POLICIES.FIND_EMAIL) || hasSearchParam(location.search, 'p', POLICIES.FIND_EMAIL)) {
       return <ForgottenEmail />;
     }
-    //Self registration - Account activated
-    if (matchesPath(location, POLICIES.SIGNUP_CONFIRMATION)) {
-      //Success - go to email sent page (from resend activation email)
-      if (domHasElementWithId(SUCCESS_MESSAGE)) {
-        return <EmailSent action={ACTIONS.SIGNUP} />;
-      }
-      //Error - link has expired
-      else if (domHasElementWithId(ERROR_MESSAGE)) {
-        return <ExpiredLinkWithResendEmail action={ACTIONS.SIGNUP} />;
-      }
-      return <AccountActivated />;
-    }
-    //Aided registration - Account activated/Email sent
-    if (matchesPath(location, `${POLICIES.SIGNUP_INVITATION}/api`)) {
-      //Success - go to email sent page (from resend activation email)
-      if (domHasElementWithId(SUCCESS_MESSAGE)) {
-        return <EmailSent action={ACTIONS.SIGNUP} />;
-      }
-      if (domHasElementWithId(CONFIRMATION_MESSAGE)) {
-        return <AccountActivated />;
-      }
-    }
-    //Aided registration - Activate account
-    if (matchesPath(location, POLICIES.SIGNUP_INVITATION)) {
-      //Error - link has expired
-      if (domHasElementWithId(ERROR_MESSAGE)) {
-        return <ExpiredLinkWithResendEmail action={ACTIONS.SIGNUP} />;
-      }
-      return <ActivateAccount />;
-    }
-    //Change email address - email sent from expired link page
+
+
+    /**
+     * Change email
+     */
+
+    //Email sent (from expired link page)
     if (matchesPath(location, `${POLICIES.CHANGE_EMAIL}/api`)) {
       return <EmailSent action={ACTIONS.CHANGE_EMAIL} />;
     }
-    //Change email address
+    //From activation email
     if (matchesPath(location, POLICIES.CHANGE_EMAIL)) {
-      //Error - link has expired
+      //Expired link
       if (domHasElementWithId(ERROR_MESSAGE)) {
         return <ExpiredLinkWithResendEmail action={ACTIONS.CHANGE_EMAIL} />;
       }
+      //New email activated
       return <AccountActivated />;
     }
-    //resend email
+
+
+    /**
+     * Resend email
+     */
+
     if (matchesPath(location, POLICIES.RESEND_EMAIL) || hasSearchParam(location.search, 'p', POLICIES.RESEND_EMAIL)) {
       return <EmailSent action={ACTIONS.CHANGE_EMAIL} />;
     }
-    //default
+
+    /**
+     * Default output
+     */
     return <Placeholder />;
   }
 

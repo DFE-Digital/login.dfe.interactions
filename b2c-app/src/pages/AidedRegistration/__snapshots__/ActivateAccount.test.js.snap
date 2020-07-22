@@ -154,7 +154,7 @@ exports[`renders correctly 1`] = `
                 <p
                   className="govuk-body"
                 >
-                  As an extra security check, enter your date of birth.
+                  As an extra security check, please enter your date of birth.
                 </p>
                 <div
                   className="govuk-form-group "
