@@ -64,11 +64,6 @@ class EmailSent extends React.Component {
                 This link expires in 24 hours.
             </components.Paragraph>
 
-        const signupLinkParagraph =
-            <components.Paragraph>
-                <components.Link action={ACTIONS.SIGNUP}>I entered the wrong email address</components.Link>
-            </components.Paragraph>
-
         const signinButton = <components.Link type={LINK_TYPES.BUTTON} action={ACTIONS.LOGIN}>Return to sign in</components.Link>
 
 
@@ -80,7 +75,6 @@ class EmailSent extends React.Component {
                     {contentFromB2CParagraph}
                     {checkSpamFolderParagraph}
                     {linkExpiresParagraph}
-                    {signupLinkParagraph}
                 </div>
         }
         else if (this.props.action === ACTIONS.RESET_PASSWORD) {
@@ -100,7 +94,6 @@ class EmailSent extends React.Component {
                     {checkSpamFolderParagraph}
                     {resendChangeEmailParagraph}
                     {linkExpiresParagraph}
-                    {signupLinkParagraph}
                     {signinButton}
                 </div>
         }

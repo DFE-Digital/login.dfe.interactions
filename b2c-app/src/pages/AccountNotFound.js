@@ -20,9 +20,7 @@ class AccountNotFound extends React.Component {
                     If you think you could have more than one account, call 0800 100 900. We'll confirm your details and delete any accounts you do not need.
                 </components.Paragraph>
                 <components.Paragraph>
-                    If you're unable to recover your registered email address, you'll have to&nbsp;
-                    <components.Link action={ACTIONS.SIGNUP}>create a new account</components.Link>
-                    .
+                    If you're unable to recover your registered email address, you'll have to create a new account.
                 </components.Paragraph>
             </div>
 

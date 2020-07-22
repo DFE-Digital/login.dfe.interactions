@@ -61,15 +61,7 @@ exports[`renders correctly 1`] = `
               <p
                 className="govuk-body"
               >
-                If you're unable to recover your registered email address, you'll have to 
-                <a
-                  className="govuk-link"
-                  href={null}
-                  onClick={null}
-                >
-                  create a new account
-                </a>
-                .
+                If you're unable to recover your registered email address, you'll have to create a new account.
               </p>
             </div>
           </div>
