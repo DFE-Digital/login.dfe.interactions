@@ -26,32 +26,6 @@ exports[`renders correctly with action ACTIONS.CHANGE_EMAIL passed in 1`] = `
           </li>
         </ol>
       </div>
-      <div
-        className="pageLevelErrorContainer hide"
-      >
-        <div
-          aria-labelledby="error-summary-title"
-          className="govuk-error-summary"
-          data-module="govuk-error-summary"
-          role="alert"
-          tabIndex="-1"
-        >
-          <h2
-            className="govuk-error-summary__title"
-            id="error-summary-title"
-          >
-            There is a problem
-          </h2>
-          <div
-            className="govuk-error-summary__body"
-          >
-            <ul
-              className="govuk-list govuk-error-summary__list"
-              id="errorSummaryItems"
-            />
-          </div>
-        </div>
-      </div>
       <main
         className="govuk-main-wrapper"
       >
@@ -61,6 +35,32 @@ exports[`renders correctly with action ACTIONS.CHANGE_EMAIL passed in 1`] = `
           <div
             className="govuk-grid-column-two-thirds"
           >
+            <div
+              className="pageLevelErrorContainer hide"
+            >
+              <div
+                aria-labelledby="error-summary-title"
+                className="govuk-error-summary"
+                data-module="govuk-error-summary"
+                role="alert"
+                tabIndex="-1"
+              >
+                <h2
+                  className="govuk-error-summary__title"
+                  id="error-summary-title"
+                >
+                  There is a problem
+                </h2>
+                <div
+                  className="govuk-error-summary__body"
+                >
+                  <ul
+                    className="govuk-list govuk-error-summary__list"
+                    id="errorSummaryItems"
+                  />
+                </div>
+              </div>
+            </div>
             <h1
               className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
             >
@@ -119,32 +119,6 @@ exports[`renders correctly with action ACTIONS.SIGNUP passed in 1`] = `
           </li>
         </ol>
       </div>
-      <div
-        className="pageLevelErrorContainer hide"
-      >
-        <div
-          aria-labelledby="error-summary-title"
-          className="govuk-error-summary"
-          data-module="govuk-error-summary"
-          role="alert"
-          tabIndex="-1"
-        >
-          <h2
-            className="govuk-error-summary__title"
-            id="error-summary-title"
-          >
-            There is a problem
-          </h2>
-          <div
-            className="govuk-error-summary__body"
-          >
-            <ul
-              className="govuk-list govuk-error-summary__list"
-              id="errorSummaryItems"
-            />
-          </div>
-        </div>
-      </div>
       <main
         className="govuk-main-wrapper"
       >
@@ -154,6 +128,32 @@ exports[`renders correctly with action ACTIONS.SIGNUP passed in 1`] = `
           <div
             className="govuk-grid-column-two-thirds"
           >
+            <div
+              className="pageLevelErrorContainer hide"
+            >
+              <div
+                aria-labelledby="error-summary-title"
+                className="govuk-error-summary"
+                data-module="govuk-error-summary"
+                role="alert"
+                tabIndex="-1"
+              >
+                <h2
+                  className="govuk-error-summary__title"
+                  id="error-summary-title"
+                >
+                  There is a problem
+                </h2>
+                <div
+                  className="govuk-error-summary__body"
+                >
+                  <ul
+                    className="govuk-list govuk-error-summary__list"
+                    id="errorSummaryItems"
+                  />
+                </div>
+              </div>
+            </div>
             <h1
               className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
             >
@@ -212,32 +212,6 @@ exports[`renders correctly without action passed in 1`] = `
           </li>
         </ol>
       </div>
-      <div
-        className="pageLevelErrorContainer hide"
-      >
-        <div
-          aria-labelledby="error-summary-title"
-          className="govuk-error-summary"
-          data-module="govuk-error-summary"
-          role="alert"
-          tabIndex="-1"
-        >
-          <h2
-            className="govuk-error-summary__title"
-            id="error-summary-title"
-          >
-            There is a problem
-          </h2>
-          <div
-            className="govuk-error-summary__body"
-          >
-            <ul
-              className="govuk-list govuk-error-summary__list"
-              id="errorSummaryItems"
-            />
-          </div>
-        </div>
-      </div>
       <main
         className="govuk-main-wrapper"
       >
@@ -247,6 +221,32 @@ exports[`renders correctly without action passed in 1`] = `
           <div
             className="govuk-grid-column-two-thirds"
           >
+            <div
+              className="pageLevelErrorContainer hide"
+            >
+              <div
+                aria-labelledby="error-summary-title"
+                className="govuk-error-summary"
+                data-module="govuk-error-summary"
+                role="alert"
+                tabIndex="-1"
+              >
+                <h2
+                  className="govuk-error-summary__title"
+                  id="error-summary-title"
+                >
+                  There is a problem
+                </h2>
+                <div
+                  className="govuk-error-summary__body"
+                >
+                  <ul
+                    className="govuk-list govuk-error-summary__list"
+                    id="errorSummaryItems"
+                  />
+                </div>
+              </div>
+            </div>
             <h1
               className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
             >
@@ -255,18 +255,6 @@ exports[`renders correctly without action passed in 1`] = `
             <p
               className="govuk-body"
             />
-            <form
-              id="customForm"
-              noValidate={true}
-              onSubmit={[Function]}
-            >
-              <div />
-              <button
-                className="govuk-button"
-                id="preSubmit"
-                type="submit"
-              />
-            </form>
           </div>
         </div>
       </main>

@@ -24,12 +24,6 @@ class EmailSent extends React.Component {
 
         const b2cResultElementId = this.props.action === ACTIONS.CHANGE_EMAIL ? 'confirmationMessage' : 'successMessage';
 
-        const pageConfig = {
-            title: "We've sent you an email",
-            showSpinner: this.state.showSpinner,
-            spinnerText: this.state.spinnerText
-        };
-
         const contentFromB2CParagraph =
             <components.Paragraph>
                 {getInnerTextById(b2cResultElementId)}
@@ -98,17 +92,20 @@ class EmailSent extends React.Component {
                 </div>
         }
 
-        const columns = [
-            {
-                header: pageConfig.title,
-                aboveFormContent: content
-            }
-        ];
+        const title = "We've sent you an email";
+
+        const pageConfig = {
+            title: title,
+            header: title,
+            aboveFormContent: content,
+            showSpinner: this.state.showSpinner,
+            spinnerText: this.state.spinnerText
+        };
+
 
         return (
-
             <div id="emailSent">
-                <components.PageContainer pageConfig={pageConfig} columns={columns} />
+                <components.PageContainer pageConfig={pageConfig} />
             </div>
         )
     }

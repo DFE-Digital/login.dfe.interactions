@@ -57,12 +57,6 @@ class ResetPassword extends React.Component {
 
     render() {
 
-        const pageConfig = {
-            title: "Access your account",
-            errors: this.state.errors,
-            showB2CErrors: this.state.showB2CErrors
-        };
-
         const aboveFormContent =
             <div>
                 <components.Paragraph>You can reset your password if you've forgotten it.</components.Paragraph>
@@ -87,20 +81,24 @@ class ResetPassword extends React.Component {
                 <components.Link action={ACTIONS.FIND_EMAIL}>Can't remember your email address?</components.Link>
             </components.Paragraph>
 
-        const columns = [
-            {
-                header: pageConfig.title,
-                aboveFormContent: aboveFormContent,
-                formContent: formContent,
-                belowFormContent: belowFormContent,
-                submitButtonText: 'Send email',
-                submitHandler: this.handleSubmit
-            }
-        ];
+        const title = 'Access your account';
+
+        const pageConfig = {
+            title: title,
+            header: title,
+            aboveFormContent: aboveFormContent,
+            formContent: formContent,
+            belowFormContent: belowFormContent,
+            submitButtonText: 'Send email',
+            submitHandler: this.handleSubmit,
+            errors: this.state.errors,
+            showB2CErrors: this.state.showB2CErrors
+        };
+
 
         return (
             <div id="resetPassword">
-                <components.PageContainer pageConfig={pageConfig} columns={columns} />
+                <components.PageContainer pageConfig={pageConfig} />
             </div>
         )
     }

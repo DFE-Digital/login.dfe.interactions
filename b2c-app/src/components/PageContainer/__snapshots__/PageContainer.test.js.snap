@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly with props to setup the page as one column 1`] = `
+exports[`renders correctly with props to setup the page 1`] = `
 <div>
   <div
     className="govuk-width-container"
@@ -35,7 +35,7 @@ exports[`renders correctly with props to setup the page as one column 1`] = `
           <h1
             className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
           >
-            test
+            test_header
           </h1>
           <div>
             <p>
@@ -48,13 +48,16 @@ exports[`renders correctly with props to setup the page as one column 1`] = `
           <form
             id="customForm"
             noValidate={true}
+            onSubmit={[MockFunction]}
           >
             <form />
             <button
               className="govuk-button"
               id="preSubmit"
               type="submit"
-            />
+            >
+              submit
+            </button>
           </form>
           <div>
             <p>
@@ -68,137 +71,4 @@ exports[`renders correctly with props to setup the page as one column 1`] = `
 </div>
 `;
 
-exports[`renders correctly with props to setup the page as two columns 1`] = `
-<div>
-  <div
-    className="govuk-width-container"
-  >
-    <div
-      className="govuk-breadcrumbs"
-    >
-      <ol
-        className="govuk-breadcrumbs__list"
-      >
-        <li
-          className="govuk-breadcrumbs__list-item"
-        >
-          <a
-            className="govuk-breadcrumbs__link"
-            href="https://nationalcareers.service.gov.uk/"
-          >
-            Home
-          </a>
-        </li>
-      </ol>
-    </div>
-    <main
-      className="govuk-main-wrapper"
-    >
-      <div
-        className="govuk-grid-row"
-      >
-        <div
-          className="govuk-grid-column-one-half"
-        >
-          <h1
-            className="govuk-heading-l"
-          >
-            header 1
-          </h1>
-          <div>
-            <p>
-              paragraph 1
-            </p>
-            <p>
-              paragraph 2
-            </p>
-          </div>
-          <form
-            id="customForm"
-            noValidate={true}
-          >
-            <form />
-            <button
-              className="govuk-button"
-              id="preSubmit"
-              type="submit"
-            />
-          </form>
-          <div>
-            <p>
-              paragraph 3
-            </p>
-          </div>
-        </div>
-        <div
-          className="govuk-grid-column-one-half"
-        >
-          <h1
-            className="govuk-heading-l"
-          >
-            header 2
-          </h1>
-          <div>
-            <p>
-              paragraph 1
-            </p>
-            <p>
-              paragraph 2
-            </p>
-          </div>
-          <form
-            id="customForm"
-            noValidate={true}
-          >
-            <form />
-            <button
-              className="govuk-button"
-              id="preSubmit"
-              type="submit"
-            />
-          </form>
-          <div>
-            <p>
-              paragraph 3
-            </p>
-          </div>
-        </div>
-      </div>
-    </main>
-  </div>
-</div>
-`;
-
-exports[`renders correctly without props 1`] = `
-<div>
-  <div
-    className="govuk-width-container"
-  >
-    <div
-      className="govuk-breadcrumbs"
-    >
-      <ol
-        className="govuk-breadcrumbs__list"
-      >
-        <li
-          className="govuk-breadcrumbs__list-item"
-        >
-          <a
-            className="govuk-breadcrumbs__link"
-            href="https://nationalcareers.service.gov.uk/"
-          >
-            Home
-          </a>
-        </li>
-      </ol>
-    </div>
-    <main
-      className="govuk-main-wrapper"
-    >
-      <div
-        className="govuk-grid-row"
-      />
-    </main>
-  </div>
-</div>
-`;
+exports[`renders correctly without props 1`] = `null`;

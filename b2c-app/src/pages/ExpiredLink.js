@@ -7,10 +7,6 @@ class ExpiredLink extends React.Component {
 
     render() {
 
-        const pageConfig = {
-            title: "Expired link"
-        };
-
         let linkExpiredParagraph;
         let requestAgainLink;
 
@@ -34,17 +30,18 @@ class ExpiredLink extends React.Component {
                 {requestAgainLink}
             </div>
 
-        const columns = [
-            {
-                header: pageConfig.title,
-                aboveFormContent: content
-            }
-        ];
+        const title = 'Expired link';
+
+        const pageConfig = {
+            title: title,
+            header: title,
+            aboveFormContent: content
+        };
+
 
         return (
-
             <div id="expiredLink">
-                <components.PageContainer pageConfig={pageConfig} columns={columns} />
+                <components.PageContainer pageConfig={pageConfig} />
             </div>
         )
     }

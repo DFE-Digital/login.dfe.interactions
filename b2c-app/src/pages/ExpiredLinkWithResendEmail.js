@@ -23,12 +23,6 @@ class ExpiredLinkWithResendEmail extends React.Component {
 
     render() {
 
-        const pageConfig = {
-            title: "Activation link expired",
-            showB2CErrors: this.state.showB2CErrors,
-            errors: this.state.errors
-        };
-
         let linkExpiredText;
         let submitButtonText;
 
@@ -50,20 +44,23 @@ class ExpiredLinkWithResendEmail extends React.Component {
 
         const content = linkExpiredParagraph;
 
-        const columns = [
-            {
-                header: pageConfig.title,
-                aboveFormContent: content,
-                formContent: formContent,
-                submitButtonText: submitButtonText,
-                submitHandler: this.handleSubmit
-            }
-        ];
+        const title = 'Activation link expired';
+
+        const pageConfig = {
+            title: title,
+            header: title,
+            aboveFormContent: content,
+            formContent: formContent,
+            submitButtonText: submitButtonText,
+            submitHandler: this.handleSubmit,
+            showB2CErrors: this.state.showB2CErrors,
+            errors: this.state.errors
+        };
+
 
         return (
-
             <div id="expiredLink" >
-                <components.PageContainer pageConfig={pageConfig} columns={columns} />
+                <components.PageContainer pageConfig={pageConfig} />
             </div>
         )
     }

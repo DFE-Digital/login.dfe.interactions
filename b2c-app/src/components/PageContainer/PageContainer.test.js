@@ -15,11 +15,7 @@ it('renders correctly without props', () => {
     expect(tree).toMatchSnapshot();
 });
 
-it('renders correctly with props to setup the page as one column', () => {
-
-    const pageConfig = {
-        title: "test"
-    };
+it('renders correctly with props to setup the page', () => {
 
     const content =
         <div>
@@ -34,60 +30,18 @@ it('renders correctly with props to setup the page as one column', () => {
             <p>paragraph 3</p>
         </div>
 
-    const columns = [
-        {
-            header: pageConfig.title,
-            aboveFormContent: content,
-            formContent: formContent,
-            belowFormContent: belowFormContent
-        }
-    ];
-
-    const tree = renderer
-        .create(<components.PageContainer pageConfig={pageConfig} columns={columns} />)
-        .toJSON();
-    expect(tree).toMatchSnapshot();
-
-    //check page title has been set
-    expect(global.window.document.title).toBe(`${pageConfig.title} | National Careers Service`)
-});
-
-it('renders correctly with props to setup the page as two columns', () => {
-
     const pageConfig = {
-        title: "test"
+        title: "test_title",
+        header: "test_header",
+        aboveFormContent: content,
+        formContent: formContent,
+        submitButtonText: 'submit',
+        submitHandler: jest.fn(),
+        belowFormContent: belowFormContent
     };
 
-    const content =
-        <div>
-            <p>paragraph 1</p>
-            <p>paragraph 2</p>
-        </div>
-
-    const formContent = <form></form>
-
-    const belowFormContent =
-        <div>
-            <p>paragraph 3</p>
-        </div>
-
-    const columns = [
-        {
-            header: 'header 1',
-            aboveFormContent: content,
-            formContent: formContent,
-            belowFormContent: belowFormContent
-        },
-        {
-            header: 'header 2',
-            aboveFormContent: content,
-            formContent: formContent,
-            belowFormContent: belowFormContent
-        }
-    ];
-
     const tree = renderer
-        .create(<components.PageContainer pageConfig={pageConfig} columns={columns} />)
+        .create(<components.PageContainer pageConfig={pageConfig} />)
         .toJSON();
     expect(tree).toMatchSnapshot();
 
