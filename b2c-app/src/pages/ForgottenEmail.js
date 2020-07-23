@@ -76,12 +76,6 @@ class ForgottenEmail extends React.Component {
 
     render() {
 
-        const pageConfig = {
-            title: "Find your email address",
-            errors: this.state.errors,
-            showB2CErrors: this.state.showB2CErrors
-        };
-
         const formContent =
             <div>
                 <components.InputField
@@ -108,18 +102,22 @@ class ForgottenEmail extends React.Component {
                     errors={this.state.errors} />
             </div>
 
-        const columns = [
-            {
-                header: pageConfig.title,
-                formContent: formContent,
-                submitButtonText: 'Find email address',
-                submitHandler: this.handleSubmit
-            }
-        ];
+        const title = 'Find your email address';
+
+        const pageConfig = {
+            title: title,
+            header: title,
+            formContent: formContent,
+            submitButtonText: 'Find email address',
+            submitHandler: this.handleSubmit,
+            errors: this.state.errors,
+            showB2CErrors: this.state.showB2CErrors
+        };
+
 
         return (
             <div id="forgottenEmail">
-                <components.PageContainer pageConfig={pageConfig} columns={columns} />
+                <components.PageContainer pageConfig={pageConfig} />
             </div>
         )
     }

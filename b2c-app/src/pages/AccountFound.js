@@ -8,10 +8,6 @@ class AccountFound extends React.Component {
 
     render() {
 
-        const pageConfig = {
-            title: "We've found your email address"
-        };
-
         const contentFromB2C = getInnerTextById('foundEmailMessageWithEmail');
 
         const content =
@@ -21,17 +17,18 @@ class AccountFound extends React.Component {
                 <components.Link type={LINK_TYPES.BUTTON} action={ACTIONS.LOGIN}>Sign in to your account</components.Link>
             </div>
 
-        const columns = [
-            {
-                header: pageConfig.title,
-                aboveFormContent: content
-            }
-        ];
+        const title = "We've found your email address";
+
+        const pageConfig = {
+            title: title,
+            header: title,
+            aboveFormContent: content
+        };
+
 
         return (
-
             <div id="accountFound">
-                <components.PageContainer pageConfig={pageConfig} columns={columns} />
+                <components.PageContainer pageConfig={pageConfig} />
             </div>
         )
     }

@@ -6,10 +6,6 @@ class AccountNotFound extends React.Component {
 
     render() {
 
-        const pageConfig = {
-            title: "Unable to find your account"
-        };
-
         const content =
             <div>
                 <components.Paragraph>
@@ -24,17 +20,18 @@ class AccountNotFound extends React.Component {
                 </components.Paragraph>
             </div>
 
-        const columns = [
-            {
-                header: pageConfig.title,
-                aboveFormContent: content
-            }
-        ];
+        const title = 'Unable to find your account';
+
+        const pageConfig = {
+            title: title,
+            header: title,
+            aboveFormContent: content
+        };
+
 
         return (
-
             <div id="accountNotFound">
-                <components.PageContainer pageConfig={pageConfig} columns={columns} />
+                <components.PageContainer pageConfig={pageConfig} />
             </div>
         )
     }

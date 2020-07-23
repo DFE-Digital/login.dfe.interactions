@@ -40,7 +40,7 @@ describe('when clicking the resend button (submitting custom form)', () => {
 
     beforeEach(() => {
         //mount page with values in state for all required fields
-        wrapper = mount(<ExpiredLinkWithResendEmail />);
+        wrapper = mount(<ExpiredLinkWithResendEmail action={ACTIONS.SIGNUP} />);
 
         //get form element to simulate submit in tests
         form = wrapper.find('#customForm');

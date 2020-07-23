@@ -642,32 +642,6 @@ exports[`when location is set -- aided registration -- activate account renders 
               </li>
             </ol>
           </div>
-          <div
-            className="pageLevelErrorContainer hide"
-          >
-            <div
-              aria-labelledby="error-summary-title"
-              className="govuk-error-summary"
-              data-module="govuk-error-summary"
-              role="alert"
-              tabIndex="-1"
-            >
-              <h2
-                className="govuk-error-summary__title"
-                id="error-summary-title"
-              >
-                There is a problem
-              </h2>
-              <div
-                className="govuk-error-summary__body"
-              >
-                <ul
-                  className="govuk-list govuk-error-summary__list"
-                  id="errorSummaryItems"
-                />
-              </div>
-            </div>
-          </div>
           <main
             className="govuk-main-wrapper"
           >
@@ -677,6 +651,32 @@ exports[`when location is set -- aided registration -- activate account renders 
               <div
                 className="govuk-grid-column-two-thirds"
               >
+                <div
+                  className="pageLevelErrorContainer hide"
+                >
+                  <div
+                    aria-labelledby="error-summary-title"
+                    className="govuk-error-summary"
+                    data-module="govuk-error-summary"
+                    role="alert"
+                    tabIndex="-1"
+                  >
+                    <h2
+                      className="govuk-error-summary__title"
+                      id="error-summary-title"
+                    >
+                      There is a problem
+                    </h2>
+                    <div
+                      className="govuk-error-summary__body"
+                    >
+                      <ul
+                        className="govuk-list govuk-error-summary__list"
+                        id="errorSummaryItems"
+                      />
+                    </div>
+                  </div>
+                </div>
                 <h1
                   className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
                 >
@@ -1457,32 +1457,6 @@ exports[`when location is set -- aided registration -- expired link renders corr
               </li>
             </ol>
           </div>
-          <div
-            className="pageLevelErrorContainer hide"
-          >
-            <div
-              aria-labelledby="error-summary-title"
-              className="govuk-error-summary"
-              data-module="govuk-error-summary"
-              role="alert"
-              tabIndex="-1"
-            >
-              <h2
-                className="govuk-error-summary__title"
-                id="error-summary-title"
-              >
-                There is a problem
-              </h2>
-              <div
-                className="govuk-error-summary__body"
-              >
-                <ul
-                  className="govuk-list govuk-error-summary__list"
-                  id="errorSummaryItems"
-                />
-              </div>
-            </div>
-          </div>
           <main
             className="govuk-main-wrapper"
           >
@@ -1492,6 +1466,32 @@ exports[`when location is set -- aided registration -- expired link renders corr
               <div
                 className="govuk-grid-column-two-thirds"
               >
+                <div
+                  className="pageLevelErrorContainer hide"
+                >
+                  <div
+                    aria-labelledby="error-summary-title"
+                    className="govuk-error-summary"
+                    data-module="govuk-error-summary"
+                    role="alert"
+                    tabIndex="-1"
+                  >
+                    <h2
+                      className="govuk-error-summary__title"
+                      id="error-summary-title"
+                    >
+                      There is a problem
+                    </h2>
+                    <div
+                      className="govuk-error-summary__body"
+                    >
+                      <ul
+                        className="govuk-list govuk-error-summary__list"
+                        id="errorSummaryItems"
+                      />
+                    </div>
+                  </div>
+                </div>
                 <h1
                   className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
                 >
@@ -2076,32 +2076,6 @@ exports[`when location is set -- change email -- expired link renders correctly 
               </li>
             </ol>
           </div>
-          <div
-            className="pageLevelErrorContainer hide"
-          >
-            <div
-              aria-labelledby="error-summary-title"
-              className="govuk-error-summary"
-              data-module="govuk-error-summary"
-              role="alert"
-              tabIndex="-1"
-            >
-              <h2
-                className="govuk-error-summary__title"
-                id="error-summary-title"
-              >
-                There is a problem
-              </h2>
-              <div
-                className="govuk-error-summary__body"
-              >
-                <ul
-                  className="govuk-list govuk-error-summary__list"
-                  id="errorSummaryItems"
-                />
-              </div>
-            </div>
-          </div>
           <main
             className="govuk-main-wrapper"
           >
@@ -2111,6 +2085,32 @@ exports[`when location is set -- change email -- expired link renders correctly 
               <div
                 className="govuk-grid-column-two-thirds"
               >
+                <div
+                  className="pageLevelErrorContainer hide"
+                >
+                  <div
+                    aria-labelledby="error-summary-title"
+                    className="govuk-error-summary"
+                    data-module="govuk-error-summary"
+                    role="alert"
+                    tabIndex="-1"
+                  >
+                    <h2
+                      className="govuk-error-summary__title"
+                      id="error-summary-title"
+                    >
+                      There is a problem
+                    </h2>
+                    <div
+                      className="govuk-error-summary__body"
+                    >
+                      <ul
+                        className="govuk-list govuk-error-summary__list"
+                        id="errorSummaryItems"
+                      />
+                    </div>
+                  </div>
+                </div>
                 <h1
                   className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
                 >
@@ -3254,32 +3254,6 @@ exports[`when location is set -- forgotten email Find email renders correctly wh
               </li>
             </ol>
           </div>
-          <div
-            className="pageLevelErrorContainer hide"
-          >
-            <div
-              aria-labelledby="error-summary-title"
-              className="govuk-error-summary"
-              data-module="govuk-error-summary"
-              role="alert"
-              tabIndex="-1"
-            >
-              <h2
-                className="govuk-error-summary__title"
-                id="error-summary-title"
-              >
-                There is a problem
-              </h2>
-              <div
-                className="govuk-error-summary__body"
-              >
-                <ul
-                  className="govuk-list govuk-error-summary__list"
-                  id="errorSummaryItems"
-                />
-              </div>
-            </div>
-          </div>
           <main
             className="govuk-main-wrapper"
           >
@@ -3289,6 +3263,32 @@ exports[`when location is set -- forgotten email Find email renders correctly wh
               <div
                 className="govuk-grid-column-two-thirds"
               >
+                <div
+                  className="pageLevelErrorContainer hide"
+                >
+                  <div
+                    aria-labelledby="error-summary-title"
+                    className="govuk-error-summary"
+                    data-module="govuk-error-summary"
+                    role="alert"
+                    tabIndex="-1"
+                  >
+                    <h2
+                      className="govuk-error-summary__title"
+                      id="error-summary-title"
+                    >
+                      There is a problem
+                    </h2>
+                    <div
+                      className="govuk-error-summary__body"
+                    >
+                      <ul
+                        className="govuk-list govuk-error-summary__list"
+                        id="errorSummaryItems"
+                      />
+                    </div>
+                  </div>
+                </div>
                 <h1
                   className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
                 >
@@ -3726,32 +3726,6 @@ exports[`when location is set -- forgotten email Find email renders correctly wh
               </li>
             </ol>
           </div>
-          <div
-            className="pageLevelErrorContainer hide"
-          >
-            <div
-              aria-labelledby="error-summary-title"
-              className="govuk-error-summary"
-              data-module="govuk-error-summary"
-              role="alert"
-              tabIndex="-1"
-            >
-              <h2
-                className="govuk-error-summary__title"
-                id="error-summary-title"
-              >
-                There is a problem
-              </h2>
-              <div
-                className="govuk-error-summary__body"
-              >
-                <ul
-                  className="govuk-list govuk-error-summary__list"
-                  id="errorSummaryItems"
-                />
-              </div>
-            </div>
-          </div>
           <main
             className="govuk-main-wrapper"
           >
@@ -3761,6 +3735,32 @@ exports[`when location is set -- forgotten email Find email renders correctly wh
               <div
                 className="govuk-grid-column-two-thirds"
               >
+                <div
+                  className="pageLevelErrorContainer hide"
+                >
+                  <div
+                    aria-labelledby="error-summary-title"
+                    className="govuk-error-summary"
+                    data-module="govuk-error-summary"
+                    role="alert"
+                    tabIndex="-1"
+                  >
+                    <h2
+                      className="govuk-error-summary__title"
+                      id="error-summary-title"
+                    >
+                      There is a problem
+                    </h2>
+                    <div
+                      className="govuk-error-summary__body"
+                    >
+                      <ul
+                        className="govuk-list govuk-error-summary__list"
+                        id="errorSummaryItems"
+                      />
+                    </div>
+                  </div>
+                </div>
                 <h1
                   className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
                 >
@@ -4198,32 +4198,6 @@ exports[`when location is set -- login renders correctly when URL contains polic
               </li>
             </ol>
           </div>
-          <div
-            className="pageLevelErrorContainer hide"
-          >
-            <div
-              aria-labelledby="error-summary-title"
-              className="govuk-error-summary"
-              data-module="govuk-error-summary"
-              role="alert"
-              tabIndex="-1"
-            >
-              <h2
-                className="govuk-error-summary__title"
-                id="error-summary-title"
-              >
-                There is a problem
-              </h2>
-              <div
-                className="govuk-error-summary__body"
-              >
-                <ul
-                  className="govuk-list govuk-error-summary__list"
-                  id="errorSummaryItems"
-                />
-              </div>
-            </div>
-          </div>
           <main
             className="govuk-main-wrapper"
           >
@@ -4233,6 +4207,32 @@ exports[`when location is set -- login renders correctly when URL contains polic
               <div
                 className="govuk-grid-column-two-thirds"
               >
+                <div
+                  className="pageLevelErrorContainer hide"
+                >
+                  <div
+                    aria-labelledby="error-summary-title"
+                    className="govuk-error-summary"
+                    data-module="govuk-error-summary"
+                    role="alert"
+                    tabIndex="-1"
+                  >
+                    <h2
+                      className="govuk-error-summary__title"
+                      id="error-summary-title"
+                    >
+                      There is a problem
+                    </h2>
+                    <div
+                      className="govuk-error-summary__body"
+                    >
+                      <ul
+                        className="govuk-list govuk-error-summary__list"
+                        id="errorSummaryItems"
+                      />
+                    </div>
+                  </div>
+                </div>
                 <h1
                   className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
                 >
@@ -4556,32 +4556,6 @@ exports[`when location is set -- login renders correctly when query params conta
               </li>
             </ol>
           </div>
-          <div
-            className="pageLevelErrorContainer hide"
-          >
-            <div
-              aria-labelledby="error-summary-title"
-              className="govuk-error-summary"
-              data-module="govuk-error-summary"
-              role="alert"
-              tabIndex="-1"
-            >
-              <h2
-                className="govuk-error-summary__title"
-                id="error-summary-title"
-              >
-                There is a problem
-              </h2>
-              <div
-                className="govuk-error-summary__body"
-              >
-                <ul
-                  className="govuk-list govuk-error-summary__list"
-                  id="errorSummaryItems"
-                />
-              </div>
-            </div>
-          </div>
           <main
             className="govuk-main-wrapper"
           >
@@ -4591,6 +4565,32 @@ exports[`when location is set -- login renders correctly when query params conta
               <div
                 className="govuk-grid-column-two-thirds"
               >
+                <div
+                  className="pageLevelErrorContainer hide"
+                >
+                  <div
+                    aria-labelledby="error-summary-title"
+                    className="govuk-error-summary"
+                    data-module="govuk-error-summary"
+                    role="alert"
+                    tabIndex="-1"
+                  >
+                    <h2
+                      className="govuk-error-summary__title"
+                      id="error-summary-title"
+                    >
+                      There is a problem
+                    </h2>
+                    <div
+                      className="govuk-error-summary__body"
+                    >
+                      <ul
+                        className="govuk-list govuk-error-summary__list"
+                        id="errorSummaryItems"
+                      />
+                    </div>
+                  </div>
+                </div>
                 <h1
                   className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
                 >
@@ -5827,32 +5827,6 @@ exports[`when location is set -- reset password -- enter new password renders co
               </li>
             </ol>
           </div>
-          <div
-            className="pageLevelErrorContainer hide"
-          >
-            <div
-              aria-labelledby="error-summary-title"
-              className="govuk-error-summary"
-              data-module="govuk-error-summary"
-              role="alert"
-              tabIndex="-1"
-            >
-              <h2
-                className="govuk-error-summary__title"
-                id="error-summary-title"
-              >
-                There is a problem
-              </h2>
-              <div
-                className="govuk-error-summary__body"
-              >
-                <ul
-                  className="govuk-list govuk-error-summary__list"
-                  id="errorSummaryItems"
-                />
-              </div>
-            </div>
-          </div>
           <main
             className="govuk-main-wrapper"
           >
@@ -5862,6 +5836,32 @@ exports[`when location is set -- reset password -- enter new password renders co
               <div
                 className="govuk-grid-column-two-thirds"
               >
+                <div
+                  className="pageLevelErrorContainer hide"
+                >
+                  <div
+                    aria-labelledby="error-summary-title"
+                    className="govuk-error-summary"
+                    data-module="govuk-error-summary"
+                    role="alert"
+                    tabIndex="-1"
+                  >
+                    <h2
+                      className="govuk-error-summary__title"
+                      id="error-summary-title"
+                    >
+                      There is a problem
+                    </h2>
+                    <div
+                      className="govuk-error-summary__body"
+                    >
+                      <ul
+                        className="govuk-list govuk-error-summary__list"
+                        id="errorSummaryItems"
+                      />
+                    </div>
+                  </div>
+                </div>
                 <h1
                   className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
                 >
@@ -6788,32 +6788,6 @@ exports[`when location is set -- reset password -- request email to reset passwo
               </li>
             </ol>
           </div>
-          <div
-            className="pageLevelErrorContainer hide"
-          >
-            <div
-              aria-labelledby="error-summary-title"
-              className="govuk-error-summary"
-              data-module="govuk-error-summary"
-              role="alert"
-              tabIndex="-1"
-            >
-              <h2
-                className="govuk-error-summary__title"
-                id="error-summary-title"
-              >
-                There is a problem
-              </h2>
-              <div
-                className="govuk-error-summary__body"
-              >
-                <ul
-                  className="govuk-list govuk-error-summary__list"
-                  id="errorSummaryItems"
-                />
-              </div>
-            </div>
-          </div>
           <main
             className="govuk-main-wrapper"
           >
@@ -6823,6 +6797,32 @@ exports[`when location is set -- reset password -- request email to reset passwo
               <div
                 className="govuk-grid-column-two-thirds"
               >
+                <div
+                  className="pageLevelErrorContainer hide"
+                >
+                  <div
+                    aria-labelledby="error-summary-title"
+                    className="govuk-error-summary"
+                    data-module="govuk-error-summary"
+                    role="alert"
+                    tabIndex="-1"
+                  >
+                    <h2
+                      className="govuk-error-summary__title"
+                      id="error-summary-title"
+                    >
+                      There is a problem
+                    </h2>
+                    <div
+                      className="govuk-error-summary__body"
+                    >
+                      <ul
+                        className="govuk-list govuk-error-summary__list"
+                        id="errorSummaryItems"
+                      />
+                    </div>
+                  </div>
+                </div>
                 <h1
                   className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
                 >
@@ -7148,32 +7148,6 @@ exports[`when location is set -- reset password -- request email to reset passwo
               </li>
             </ol>
           </div>
-          <div
-            className="pageLevelErrorContainer hide"
-          >
-            <div
-              aria-labelledby="error-summary-title"
-              className="govuk-error-summary"
-              data-module="govuk-error-summary"
-              role="alert"
-              tabIndex="-1"
-            >
-              <h2
-                className="govuk-error-summary__title"
-                id="error-summary-title"
-              >
-                There is a problem
-              </h2>
-              <div
-                className="govuk-error-summary__body"
-              >
-                <ul
-                  className="govuk-list govuk-error-summary__list"
-                  id="errorSummaryItems"
-                />
-              </div>
-            </div>
-          </div>
           <main
             className="govuk-main-wrapper"
           >
@@ -7183,6 +7157,32 @@ exports[`when location is set -- reset password -- request email to reset passwo
               <div
                 className="govuk-grid-column-two-thirds"
               >
+                <div
+                  className="pageLevelErrorContainer hide"
+                >
+                  <div
+                    aria-labelledby="error-summary-title"
+                    className="govuk-error-summary"
+                    data-module="govuk-error-summary"
+                    role="alert"
+                    tabIndex="-1"
+                  >
+                    <h2
+                      className="govuk-error-summary__title"
+                      id="error-summary-title"
+                    >
+                      There is a problem
+                    </h2>
+                    <div
+                      className="govuk-error-summary__body"
+                    >
+                      <ul
+                        className="govuk-list govuk-error-summary__list"
+                        id="errorSummaryItems"
+                      />
+                    </div>
+                  </div>
+                </div>
                 <h1
                   className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
                 >
@@ -8359,32 +8359,6 @@ exports[`when location is set -- self registration -- expired link renders corre
               </li>
             </ol>
           </div>
-          <div
-            className="pageLevelErrorContainer hide"
-          >
-            <div
-              aria-labelledby="error-summary-title"
-              className="govuk-error-summary"
-              data-module="govuk-error-summary"
-              role="alert"
-              tabIndex="-1"
-            >
-              <h2
-                className="govuk-error-summary__title"
-                id="error-summary-title"
-              >
-                There is a problem
-              </h2>
-              <div
-                className="govuk-error-summary__body"
-              >
-                <ul
-                  className="govuk-list govuk-error-summary__list"
-                  id="errorSummaryItems"
-                />
-              </div>
-            </div>
-          </div>
           <main
             className="govuk-main-wrapper"
           >
@@ -8394,6 +8368,32 @@ exports[`when location is set -- self registration -- expired link renders corre
               <div
                 className="govuk-grid-column-two-thirds"
               >
+                <div
+                  className="pageLevelErrorContainer hide"
+                >
+                  <div
+                    aria-labelledby="error-summary-title"
+                    className="govuk-error-summary"
+                    data-module="govuk-error-summary"
+                    role="alert"
+                    tabIndex="-1"
+                  >
+                    <h2
+                      className="govuk-error-summary__title"
+                      id="error-summary-title"
+                    >
+                      There is a problem
+                    </h2>
+                    <div
+                      className="govuk-error-summary__body"
+                    >
+                      <ul
+                        className="govuk-list govuk-error-summary__list"
+                        id="errorSummaryItems"
+                      />
+                    </div>
+                  </div>
+                </div>
                 <h1
                   className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
                 >
@@ -8672,32 +8672,6 @@ exports[`when location is set -- self registration -- sign up renders correctly 
               </li>
             </ol>
           </div>
-          <div
-            className="pageLevelErrorContainer hide"
-          >
-            <div
-              aria-labelledby="error-summary-title"
-              className="govuk-error-summary"
-              data-module="govuk-error-summary"
-              role="alert"
-              tabIndex="-1"
-            >
-              <h2
-                className="govuk-error-summary__title"
-                id="error-summary-title"
-              >
-                There is a problem
-              </h2>
-              <div
-                className="govuk-error-summary__body"
-              >
-                <ul
-                  className="govuk-list govuk-error-summary__list"
-                  id="errorSummaryItems"
-                />
-              </div>
-            </div>
-          </div>
           <main
             className="govuk-main-wrapper"
           >
@@ -8707,6 +8681,32 @@ exports[`when location is set -- self registration -- sign up renders correctly 
               <div
                 className="govuk-grid-column-two-thirds"
               >
+                <div
+                  className="pageLevelErrorContainer hide"
+                >
+                  <div
+                    aria-labelledby="error-summary-title"
+                    className="govuk-error-summary"
+                    data-module="govuk-error-summary"
+                    role="alert"
+                    tabIndex="-1"
+                  >
+                    <h2
+                      className="govuk-error-summary__title"
+                      id="error-summary-title"
+                    >
+                      There is a problem
+                    </h2>
+                    <div
+                      className="govuk-error-summary__body"
+                    >
+                      <ul
+                        className="govuk-list govuk-error-summary__list"
+                        id="errorSummaryItems"
+                      />
+                    </div>
+                  </div>
+                </div>
                 <h1
                   className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
                 >
@@ -9158,32 +9158,6 @@ exports[`when location is set -- self registration -- sign up renders correctly 
               </li>
             </ol>
           </div>
-          <div
-            className="pageLevelErrorContainer hide"
-          >
-            <div
-              aria-labelledby="error-summary-title"
-              className="govuk-error-summary"
-              data-module="govuk-error-summary"
-              role="alert"
-              tabIndex="-1"
-            >
-              <h2
-                className="govuk-error-summary__title"
-                id="error-summary-title"
-              >
-                There is a problem
-              </h2>
-              <div
-                className="govuk-error-summary__body"
-              >
-                <ul
-                  className="govuk-list govuk-error-summary__list"
-                  id="errorSummaryItems"
-                />
-              </div>
-            </div>
-          </div>
           <main
             className="govuk-main-wrapper"
           >
@@ -9193,6 +9167,32 @@ exports[`when location is set -- self registration -- sign up renders correctly 
               <div
                 className="govuk-grid-column-two-thirds"
               >
+                <div
+                  className="pageLevelErrorContainer hide"
+                >
+                  <div
+                    aria-labelledby="error-summary-title"
+                    className="govuk-error-summary"
+                    data-module="govuk-error-summary"
+                    role="alert"
+                    tabIndex="-1"
+                  >
+                    <h2
+                      className="govuk-error-summary__title"
+                      id="error-summary-title"
+                    >
+                      There is a problem
+                    </h2>
+                    <div
+                      className="govuk-error-summary__body"
+                    >
+                      <ul
+                        className="govuk-list govuk-error-summary__list"
+                        id="errorSummaryItems"
+                      />
+                    </div>
+                  </div>
+                </div>
                 <h1
                   className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
                 >

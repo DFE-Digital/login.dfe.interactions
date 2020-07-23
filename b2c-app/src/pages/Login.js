@@ -88,27 +88,20 @@ class Login extends React.Component {
          * Page configuration
          */
         const pageConfig = {
-            title: "Sign in to your account",
+            title: 'Sign in to your account',
+            header: 'Sign in',
+            formContent: formContent,
+            submitButtonText: 'Sign in',
+            submitHandler: this.handleSubmit,
             errors: this.state.errors,
             showB2CErrors: this.state.showB2CErrors,
             errorSummaryContent: <components.Paragraph>Your sign in details are incorrect</components.Paragraph>
         };
 
-        /**
-         * Column object to pass to page container
-         */
-        const columns = [
-            {
-                header: 'Sign in',
-                formContent: formContent,
-                submitButtonText: 'Sign in',
-                submitHandler: this.handleSubmit
-            }
-        ];
 
         return (
             <div id="login">
-                <components.PageContainer pageConfig={pageConfig} columns={columns} />
+                <components.PageContainer pageConfig={pageConfig} />
             </div>
         )
     }
