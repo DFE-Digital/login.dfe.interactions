@@ -1,7 +1,7 @@
 import React from 'react';
 import components from '../components';
 import { getInnerTextById } from '../helpers/dom';
-import { ACTIONS } from '../constants/actions';
+import { POLICIES } from '../constants/policies';
 import { LINK_TYPES } from '../constants/linkTypes';
 
 class EmailSent extends React.Component {
@@ -22,7 +22,7 @@ class EmailSent extends React.Component {
 
     render() {
 
-        const b2cResultElementId = this.props.action === ACTIONS.CHANGE_EMAIL ? 'confirmationMessage' : 'successMessage';
+        const b2cResultElementId = this.props.policy === POLICIES.CHANGE_EMAIL ? 'confirmationMessage' : 'successMessage';
 
         const contentFromB2CParagraph =
             <components.Paragraph>
@@ -42,14 +42,14 @@ class EmailSent extends React.Component {
         const resendActivationLinkParagraph =
             <components.Paragraph>
                 If you don't receive an email after this time you can&nbsp;
-                <components.Link action={ACTIONS.RESET_PASSWORD}>resend password reset email</components.Link>
+                <components.Link policy={POLICIES.PASSWORD_RESET}>resend password reset email</components.Link>
                 .
             </ components.Paragraph>
 
         const resendChangeEmailParagraph =
             <components.Paragraph>
                 If you don't receive an email after this time you can&nbsp;
-                <components.Link action={ACTIONS.RESEND_EMAIL} onClick={this.showSpinner}>resend the activation email</components.Link>
+                <components.Link policy={POLICIES.RESEND_EMAIL} onClick={this.showSpinner}>resend the activation email</components.Link>
                 .
             </ components.Paragraph >
 
@@ -58,12 +58,12 @@ class EmailSent extends React.Component {
                 This link expires in 24 hours.
             </components.Paragraph>
 
-        const signinButton = <components.Link type={LINK_TYPES.BUTTON} action={ACTIONS.LOGIN}>Return to sign in</components.Link>
+        const signinButton = <components.Link type={LINK_TYPES.BUTTON} policy={POLICIES.SIGNIN_INVITATION}>Return to sign in</components.Link>
 
 
         let content;
 
-        if (this.props.action === ACTIONS.SIGNUP) {
+        if (this.props.policy === POLICIES.SIGNUP_INVITATION || this.props.policy === POLICIES.ACCOUNT_SIGNUP) {
             content =
                 <div>
                     {contentFromB2CParagraph}
@@ -71,7 +71,7 @@ class EmailSent extends React.Component {
                     {linkExpiresParagraph}
                 </div>
         }
-        else if (this.props.action === ACTIONS.RESET_PASSWORD) {
+        else if (this.props.policy === POLICIES.PASSWORD_RESET) {
             content =
                 <div>
                     {contentFromB2CParagraph}
@@ -81,7 +81,7 @@ class EmailSent extends React.Component {
                     {linkExpiresParagraph}
                 </div>
         }
-        else if (this.props.action === ACTIONS.CHANGE_EMAIL) {
+        else if (this.props.policy === POLICIES.CHANGE_EMAIL) {
             content =
                 <div>
                     {contentFromB2CParagraph}

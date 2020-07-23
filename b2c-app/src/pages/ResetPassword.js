@@ -2,7 +2,7 @@ import React from 'react';
 import { animateScroll } from "react-scroll";
 
 import components from '../components';
-import { ACTIONS } from '../constants/actions';
+import { POLICIES } from '../constants/policies';
 import { onChange } from '../helpers/pageUpdatesHandler';
 
 class ResetPassword extends React.Component {
@@ -78,7 +78,7 @@ class ResetPassword extends React.Component {
 
         const belowFormContent =
             <components.Paragraph>
-                <components.Link action={ACTIONS.FIND_EMAIL}>Can't remember your email address?</components.Link>
+                <components.Link policy={POLICIES.FIND_EMAIL}>Can't remember your email address?</components.Link>
             </components.Paragraph>
 
         const title = 'Access your account';

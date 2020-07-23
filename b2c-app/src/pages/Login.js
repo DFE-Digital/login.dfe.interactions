@@ -2,7 +2,7 @@ import React from 'react';
 import { animateScroll } from "react-scroll";
 
 import components from '../components';
-import { ACTIONS } from '../constants/actions';
+import { POLICIES } from '../constants/policies';
 import { onChange } from '../helpers/pageUpdatesHandler';
 
 class Login extends React.Component {
@@ -80,7 +80,7 @@ class Login extends React.Component {
                     showErrors={this.state.showErrors}
                     errors={this.state.errors} />
                 <components.Paragraph errors={this.state.errors}>
-                    <components.Link action={ACTIONS.RESET_PASSWORD}>I cannot access my account</components.Link>
+                    <components.Link policy={POLICIES.PASSWORD_RESET}>I cannot access my account</components.Link>
                 </components.Paragraph>
             </div>
 

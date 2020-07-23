@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import renderer from 'react-test-renderer';
-import { ACTIONS } from '../constants/actions';
+import { POLICIES } from '../constants/policies';
 
 import ExpiredLink from './ExpiredLink';
 
@@ -9,16 +9,16 @@ it('renders without crashing', () => {
     shallow(<ExpiredLink />);
 });
 
-it('renders correctly without action passed in', () => {
+it('renders correctly without policy passed in', () => {
     const tree = renderer
         .create(<ExpiredLink />)
         .toJSON();
     expect(tree).toMatchSnapshot();
 });
 
-it('renders correctly with action ACTIONS.RESET_PASSWORD passed in', () => {
+it('renders correctly with policy POLICIES.RESET_PASSWORD passed in', () => {
     const tree = renderer
-        .create(<ExpiredLink action={ACTIONS.RESET_PASSWORD} />)
+        .create(<ExpiredLink policy={POLICIES.PASSWORD_RESET} />)
         .toJSON();
     expect(tree).toMatchSnapshot();
 });
