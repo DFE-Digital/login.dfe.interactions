@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`renders correctly with action ACTIONS.RESET_PASSWORD passed in 1`] = `
+exports[`renders correctly with policy POLICIES.RESET_PASSWORD passed in 1`] = `
 <div
   id="expiredLink"
 >
@@ -70,7 +70,7 @@ exports[`renders correctly with action ACTIONS.RESET_PASSWORD passed in 1`] = `
 </div>
 `;
 
-exports[`renders correctly without action passed in 1`] = `
+exports[`renders correctly without policy passed in 1`] = `
 <div
   id="expiredLink"
 >

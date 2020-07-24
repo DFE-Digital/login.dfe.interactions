@@ -2,7 +2,6 @@ import React from 'react';
 
 import * as QueryParamsService from './services/QueryParamsService';
 
-import { ACTIONS } from './constants/actions';
 import { POLICIES } from './constants/policies';
 
 import { domHasElementWithId } from './helpers/dom';
@@ -132,7 +131,7 @@ class App extends React.Component {
 
     //Activation email sent after sign up
     if (matchesPath(location, `${POLICIES.ACCOUNT_SIGNUP}/api`)) {
-      return <EmailSent action={ACTIONS.SIGNUP} />;
+      return <EmailSent policy={POLICIES.ACCOUNT_SIGNUP} />;
     }
     //Sign up page
     if (matchesPath(location, POLICIES.ACCOUNT_SIGNUP) || hasSearchParam(location.search, 'p', POLICIES.ACCOUNT_SIGNUP)) {
@@ -142,11 +141,11 @@ class App extends React.Component {
     if (matchesPath(location, POLICIES.SIGNUP_CONFIRMATION)) {
       //Email sent page (from resend activation email)
       if (domHasElementWithId(SUCCESS_MESSAGE)) {
-        return <EmailSent action={ACTIONS.SIGNUP} />;
+        return <EmailSent policy={POLICIES.ACCOUNT_SIGNUP} />;
       }
       //Expired link
       else if (domHasElementWithId(ERROR_MESSAGE)) {
-        return <ExpiredLinkWithResendEmail action={ACTIONS.SIGNUP} />;
+        return <ExpiredLinkWithResendEmail policy={POLICIES.ACCOUNT_SIGNUP} />;
       }
       //Account activated
       return <AccountActivated />;
@@ -161,7 +160,7 @@ class App extends React.Component {
     if (matchesPath(location, `${POLICIES.SIGNUP_INVITATION}/api`)) {
       //Email sent page (from resend activation email)
       if (domHasElementWithId(SUCCESS_MESSAGE)) {
-        return <EmailSent action={ACTIONS.SIGNUP} />;
+        return <EmailSent policy={POLICIES.SIGNUP_INVITATION} />;
       }
       //Account activated
       if (domHasElementWithId(CONFIRMATION_MESSAGE)) {
@@ -172,7 +171,7 @@ class App extends React.Component {
     if (matchesPath(location, POLICIES.SIGNUP_INVITATION)) {
       //Expired link
       if (domHasElementWithId(ERROR_MESSAGE)) {
-        return <ExpiredLinkWithResendEmail action={ACTIONS.SIGNUP} />;
+        return <ExpiredLinkWithResendEmail policy={POLICIES.SIGNUP_INVITATION} />;
       }
       //Activate account
       return <ActivateAccount />;
@@ -185,7 +184,7 @@ class App extends React.Component {
 
     //Reset password email sent
     if (matchesPath(location, `${POLICIES.PASSWORD_RESET}/api`)) {
-      return <EmailSent action={ACTIONS.RESET_PASSWORD} />;
+      return <EmailSent policy={POLICIES.PASSWORD_RESET} />;
     }
     //Request email to reset your password
     if (matchesPath(location, POLICIES.PASSWORD_RESET) || hasSearchParam(location.search, 'p', POLICIES.PASSWORD_RESET)) {
@@ -199,7 +198,7 @@ class App extends React.Component {
     if (matchesPath(location, POLICIES.PASSWORD_RESET_CONFIRMATION)) {
       //Expired link
       if (domHasElementWithId(ERROR_MESSAGE)) {
-        return <ExpiredLink action={ACTIONS.RESET_PASSWORD} />;
+        return <ExpiredLink policy={POLICIES.PASSWORD_RESET} />;
       }
       //Enter new password page
       return <EnterNewPassword />;
@@ -233,13 +232,13 @@ class App extends React.Component {
 
     //Email sent (from expired link page)
     if (matchesPath(location, `${POLICIES.CHANGE_EMAIL}/api`)) {
-      return <EmailSent action={ACTIONS.CHANGE_EMAIL} />;
+      return <EmailSent policy={POLICIES.CHANGE_EMAIL} />;
     }
     //From activation email
     if (matchesPath(location, POLICIES.CHANGE_EMAIL)) {
       //Expired link
       if (domHasElementWithId(ERROR_MESSAGE)) {
-        return <ExpiredLinkWithResendEmail action={ACTIONS.CHANGE_EMAIL} />;
+        return <ExpiredLinkWithResendEmail policy={POLICIES.CHANGE_EMAIL} />;
       }
       //New email activated
       return <AccountActivated />;
@@ -251,7 +250,7 @@ class App extends React.Component {
      */
 
     if (matchesPath(location, POLICIES.RESEND_EMAIL) || hasSearchParam(location.search, 'p', POLICIES.RESEND_EMAIL)) {
-      return <EmailSent action={ACTIONS.CHANGE_EMAIL} />;
+      return <EmailSent policy={POLICIES.CHANGE_EMAIL} />;
     }
 
     /**

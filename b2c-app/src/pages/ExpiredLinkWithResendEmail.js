@@ -1,6 +1,6 @@
 import React from 'react';
 import components from '../components';
-import { ACTIONS } from '../constants/actions';
+import { POLICIES } from '../constants/policies';
 
 class ExpiredLinkWithResendEmail extends React.Component {
 
@@ -26,11 +26,11 @@ class ExpiredLinkWithResendEmail extends React.Component {
         let linkExpiredText;
         let submitButtonText;
 
-        if (this.props.action === ACTIONS.SIGNUP) {
+        if (this.props.policy === POLICIES.SIGNUP_INVITATION || this.props.policy === POLICIES.ACCOUNT_SIGNUP) {
             linkExpiredText = 'The link in your account activation email has expired.';
             submitButtonText = 'Resend activation email';
         }
-        else if (this.props.action === ACTIONS.CHANGE_EMAIL) {
+        else if (this.props.policy === POLICIES.CHANGE_EMAIL) {
             linkExpiredText = 'This activation link has expired.';
             submitButtonText = 'Request new activation link';
         }

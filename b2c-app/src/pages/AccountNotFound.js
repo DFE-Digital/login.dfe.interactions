@@ -1,6 +1,6 @@
 import React from 'react';
 import components from '../components';
-import { ACTIONS } from '../constants/actions';
+import { POLICIES } from '../constants/policies';
 
 class AccountNotFound extends React.Component {
 
@@ -9,7 +9,7 @@ class AccountNotFound extends React.Component {
         const content =
             <div>
                 <components.Paragraph>
-                    <components.Link action={ACTIONS.RESET_PASSWORD}>Try again</components.Link>
+                    <components.Link policy={POLICIES.PASSWORD_RESET}>Try again</components.Link>
                     &nbsp;with other details you may have used when you created your account.
                 </components.Paragraph>
                 <components.Paragraph>

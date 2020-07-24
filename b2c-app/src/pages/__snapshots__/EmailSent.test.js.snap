@@ -48,7 +48,7 @@ exports[`renders correctly 1`] = `
 </div>
 `;
 
-exports[`when action is ACTIONS.CHANGE_EMAIL renders correctly 1`] = `
+exports[`when policy is POLICIES.CHANGE_EMAIL renders correctly 1`] = `
 <div
   id="emailSent"
 >
@@ -134,7 +134,7 @@ exports[`when action is ACTIONS.CHANGE_EMAIL renders correctly 1`] = `
 </div>
 `;
 
-exports[`when action is ACTIONS.RESET_PASSWORD renders correctly 1`] = `
+exports[`when policy is POLICIES.RESET_PASSWORD renders correctly 1`] = `
 <div
   id="emailSent"
 >
@@ -215,7 +215,7 @@ exports[`when action is ACTIONS.RESET_PASSWORD renders correctly 1`] = `
 </div>
 `;
 
-exports[`when action is ACTIONS.SIGNUP renders correctly 1`] = `
+exports[`when policy is POLICIES.SIGNUP renders correctly 1`] = `
 <div
   id="emailSent"
 >

@@ -1,6 +1,6 @@
 import React from 'react';
 import components from '..';
-import { ACTIONS } from '../../constants/actions';
+import { POLICIES } from '../../constants/policies';
 
 function LockedAccountHelp(props) {
 
@@ -16,7 +16,7 @@ function LockedAccountHelp(props) {
             or
             <ul className="govuk-list govuk-list--bullet">
                 <li>
-                    <components.Link action={ACTIONS.RESET_PASSWORD}>reset your password now</components.Link>
+                    <components.Link policy={POLICIES.PASSWORD_RESET}>reset your password now</components.Link>
                 </li>
             </ul>
         </div>

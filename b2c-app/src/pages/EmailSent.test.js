@@ -1,7 +1,7 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 import renderer from 'react-test-renderer';
-import { ACTIONS } from '../constants/actions';
+import { POLICIES } from '../constants/policies';
 
 import EmailSent from './EmailSent';
 
@@ -16,28 +16,28 @@ it('renders correctly', () => {
     expect(tree).toMatchSnapshot();
 });
 
-describe('when action is ACTIONS.SIGNUP', () => {
+describe('when policy is POLICIES.SIGNUP', () => {
     it('renders correctly', () => {
         const tree = renderer
-            .create(<EmailSent action={ACTIONS.SIGNUP} />)
+            .create(<EmailSent policy={POLICIES.SIGNUP_INVITATION} />)
             .toJSON();
         expect(tree).toMatchSnapshot();
     });
 });
 
-describe('when action is ACTIONS.RESET_PASSWORD', () => {
+describe('when policy is POLICIES.RESET_PASSWORD', () => {
     it('renders correctly', () => {
         const tree = renderer
-            .create(<EmailSent action={ACTIONS.RESET_PASSWORD} />)
+            .create(<EmailSent policy={POLICIES.PASSWORD_RESET} />)
             .toJSON();
         expect(tree).toMatchSnapshot();
     });
 });
 
-describe('when action is ACTIONS.CHANGE_EMAIL', () => {
+describe('when policy is POLICIES.CHANGE_EMAIL', () => {
     it('renders correctly', () => {
         const tree = renderer
-            .create(<EmailSent action={ACTIONS.CHANGE_EMAIL} />)
+            .create(<EmailSent policy={POLICIES.CHANGE_EMAIL} />)
             .toJSON();
         expect(tree).toMatchSnapshot();
     });
