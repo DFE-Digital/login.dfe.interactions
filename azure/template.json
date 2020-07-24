@@ -72,20 +72,7 @@
             "metadata": {
                 "description": "The name of the Resource Group that contains the Key Vault"
             }
-        },
-        "b2cChangeEmailEndpoint": {
-            "type": "string",
-            "metadata": {
-                "description": "b2c change email endpoint"
-            }
-        },
-        "b2cSecuredChangeEmailEndpoint": {
-            "type": "string",
-            "metadata": {
-                "description": "b2c change email endpoint"
-            }
         }
-
     },
     "variables": {
     },
