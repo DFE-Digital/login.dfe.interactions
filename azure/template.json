@@ -149,7 +149,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/DFE-Digital/login.dfe.infrastructure/develop/Shared/app-service-azure-config.json",
+                    "uri": "https://raw.githubusercontent.com/DFE-Digital/login.dfe.infrastructure/develop/Shared/app-service.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
@@ -179,12 +179,6 @@
                     },
                     "certificateThumbprint": {
                         "value": "[reference(concat(parameters('appServiceName'), '-certificate')).outputs.certificateThumbprint.value]"
-                    },
-                    "additionalAppSettings": {
-                        "value": {
-                            "B2C_CHANGE_EMAIL_ENDPOINT": "[parameters('b2cChangeEmailEndpoint')]",
-                            "B2C_SECURED_CHANGE_EMAIL_ENDPOINT": "[parameters('b2cSecuredChangeEmailEndpoint')]"
-                        }
                     }
                 }
             },
