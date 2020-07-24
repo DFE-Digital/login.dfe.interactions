@@ -88,6 +88,8 @@ const cryptoSchema = new SimpleSchema({
   signing: Object,
   'signing.publicKey': String,
   'signing.privateKey': String,
+  key: String,
+  salt: String,
 });
 
 const cacheSchema = new SimpleSchema({
