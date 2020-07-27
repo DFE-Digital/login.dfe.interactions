@@ -3,7 +3,9 @@ function getElementById(id) {
     try {
         return document.getElementById(id);
     }
-    catch (e) { }
+    catch (e) {
+        return null;
+    }
 }
 
 export function domHasElementWithId(id) {
