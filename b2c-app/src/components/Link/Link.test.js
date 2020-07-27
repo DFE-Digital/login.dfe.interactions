@@ -23,10 +23,3 @@ it('renders correctly link of type button', () => {
         .toJSON();
     expect(tree).toMatchSnapshot();
 });
-
-it('renders correctly link of type API call', () => {
-    const tree = renderer
-        .create(<components.Link type={LINK_TYPES.API_CALL} />)
-        .toJSON();
-    expect(tree).toMatchSnapshot();
-});

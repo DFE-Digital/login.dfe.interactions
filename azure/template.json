@@ -32,7 +32,7 @@
             "metadata": {
                 "description": "The default NodeJS version that the App Service will run"
             }
-            
+
         },
         "minTlsVersion": {
             "type": "string",
@@ -71,12 +71,6 @@
             "type": "string",
             "metadata": {
                 "description": "The name of the Resource Group that contains the Key Vault"
-            }
-        },
-        "b2cChangeEmailEndpoint": {
-            "type": "string",
-            "metadata": {
-                "description": "b2c change email endpoint"
             }
         }
     },
@@ -142,7 +136,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/DFE-Digital/login.dfe.infrastructure/develop/Shared/app-service-azure-config.json",
+                    "uri": "https://raw.githubusercontent.com/DFE-Digital/login.dfe.infrastructure/develop/Shared/app-service.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
@@ -172,11 +166,6 @@
                     },
                     "certificateThumbprint": {
                         "value": "[reference(concat(parameters('appServiceName'), '-certificate')).outputs.certificateThumbprint.value]"
-                    },
-                    "additionalAppSettings": {
-                        "value": {
-                            "B2C_CHANGE_EMAIL_ENDPOINT": "[parameters('b2cChangeEmailEndpoint')]"
-                        }
                     }
                 }
             },

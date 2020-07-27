@@ -59,32 +59,30 @@ class EnterNewPassword extends React.Component {
 
     render() {
 
-        const pageConfig = {
-            title: "Reset your password",
-            errors: this.state.errors,
-            showB2CErrors: this.state.showB2CErrors,
-            errorSummaryContent: <components.PasswordHelp />
-        };
-
         const formContent =
             <components.CreateNewPassword
                 onChange={this.onChange}
                 showErrors={this.state.showErrors}
                 errors={this.state.errors}
-            />;
+            />
 
-        const columns = [
-            {
-                header: pageConfig.title,
-                formContent: formContent,
-                submitButtonText: 'Reset password',
-                submitHandler: this.handleSubmit
-            }
-        ];
+        const title = 'Reset your password';
+
+        const pageConfig = {
+            title: title,
+            header: title,
+            formContent: formContent,
+            submitButtonText: 'Reset password',
+            submitHandler: this.handleSubmit,
+            errors: this.state.errors,
+            showB2CErrors: this.state.showB2CErrors,
+            errorSummaryContent: <components.PasswordHelp />
+        };
+
 
         return (
             <div id="enterNewPassword">
-                <components.PageContainer pageConfig={pageConfig} columns={columns} />
+                <components.PageContainer pageConfig={pageConfig} />
             </div>
         )
     }

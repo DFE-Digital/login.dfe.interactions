@@ -1,8 +1,7 @@
 import React from 'react';
-import ChangeEmailService from '../services/ChangeEmailService';
 import components from '../components';
 import { getInnerTextById } from '../helpers/dom';
-import { ACTIONS } from '../constants/actions';
+import { POLICIES } from '../constants/policies';
 import { LINK_TYPES } from '../constants/linkTypes';
 
 class EmailSent extends React.Component {
@@ -11,68 +10,19 @@ class EmailSent extends React.Component {
         super(props);
         this.state = {
             showSpinner: false,
-            spinnerText: null,
-            showErrors: false,
-            errors: []
+            spinnerText: null
         }
-        this.resendEmail = this.resendEmail.bind(this);
-        this.showPageLevelError = this.showPageLevelError.bind(this);
-        this.clearPageLevelError = this.clearPageLevelError.bind(this);
+        this.showSpinner = this.showSpinner.bind(this);
     }
 
-    showPageLevelError(errorMessage) {
-        const newError = {
-            visible: {
-                text: errorMessage
-            }
-        };
-
-        this.setState({ errors: [newError], showErrors: true });
-    }
-
-    clearPageLevelError() {
-        this.setState({ errors: [], showErrors: false });
-    }
-
-    resendEmail(e) {
-        e.preventDefault();
-
+    showSpinner() {
         //start spinner
         this.setState({ spinnerText: 'Sending activation email. Please wait.', showSpinner: true })
-
-        //make call to API to resend email
-        ChangeEmailService.callResendEmail().then(
-            () => {
-                //clear error messages if there were any from previous calls
-                this.clearPageLevelError();
-            },
-            (error) => {
-                if (error && error.userMessage) {
-                    this.showPageLevelError(error.userMessage);
-                }
-                else {
-                    this.showPageLevelError('The activation email could not be sent.');
-                }
-            })
-            .finally(
-                () => {
-                    //stop spinner
-                    this.setState({ showSpinner: false });
-                }
-            );
     }
-
 
     render() {
 
-        const b2cResultElementId = this.props.action === ACTIONS.CHANGE_EMAIL ? 'confirmationMessage' : 'successMessage';
-
-        const pageConfig = {
-            title: "We've sent you an email",
-            errors: this.state.errors,
-            showSpinner: this.state.showSpinner,
-            spinnerText: this.state.spinnerText
-        };
+        const b2cResultElementId = this.props.policy === POLICIES.CHANGE_EMAIL ? 'confirmationMessage' : 'successMessage';
 
         const contentFromB2CParagraph =
             <components.Paragraph>
@@ -92,14 +42,14 @@ class EmailSent extends React.Component {
         const resendActivationLinkParagraph =
             <components.Paragraph>
                 If you don't receive an email after this time you can&nbsp;
-                <components.Link action={ACTIONS.RESET_PASSWORD}>resend password reset email</components.Link>
+                <components.Link policy={POLICIES.PASSWORD_RESET}>resend password reset email</components.Link>
                 .
             </ components.Paragraph>
 
         const resendChangeEmailParagraph =
             <components.Paragraph>
                 If you don't receive an email after this time you can&nbsp;
-                <components.Link type={LINK_TYPES.API_CALL} onClick={this.resendEmail}>resend the activation email</components.Link>
+                <components.Link policy={POLICIES.RESEND_EMAIL} onClick={this.showSpinner}>resend the activation email</components.Link>
                 .
             </ components.Paragraph >
 
@@ -108,26 +58,20 @@ class EmailSent extends React.Component {
                 This link expires in 24 hours.
             </components.Paragraph>
 
-        const signupLinkParagraph =
-            <components.Paragraph>
-                <components.Link action={ACTIONS.SIGNUP}>I entered the wrong email address</components.Link>
-            </components.Paragraph>
-
-        const signinButton = <components.Link type={LINK_TYPES.BUTTON} action={ACTIONS.LOGIN}>Return to sign in</components.Link>
+        const signinButton = <components.Link type={LINK_TYPES.BUTTON} policy={POLICIES.SIGNIN_INVITATION}>Return to sign in</components.Link>
 
 
         let content;
 
-        if (this.props.action === ACTIONS.SIGNUP) {
+        if (this.props.policy === POLICIES.SIGNUP_INVITATION || this.props.policy === POLICIES.ACCOUNT_SIGNUP) {
             content =
                 <div>
                     {contentFromB2CParagraph}
                     {checkSpamFolderParagraph}
                     {linkExpiresParagraph}
-                    {signupLinkParagraph}
                 </div>
         }
-        else if (this.props.action === ACTIONS.RESET_PASSWORD) {
+        else if (this.props.policy === POLICIES.PASSWORD_RESET) {
             content =
                 <div>
                     {contentFromB2CParagraph}
@@ -137,29 +81,31 @@ class EmailSent extends React.Component {
                     {linkExpiresParagraph}
                 </div>
         }
-        else if (this.props.action === ACTIONS.CHANGE_EMAIL) {
+        else if (this.props.policy === POLICIES.CHANGE_EMAIL) {
             content =
                 <div>
                     {contentFromB2CParagraph}
                     {checkSpamFolderParagraph}
                     {resendChangeEmailParagraph}
                     {linkExpiresParagraph}
-                    {signupLinkParagraph}
                     {signinButton}
                 </div>
         }
 
-        const columns = [
-            {
-                header: pageConfig.title,
-                aboveFormContent: content
-            }
-        ];
+        const title = "We've sent you an email";
+
+        const pageConfig = {
+            title: title,
+            header: title,
+            aboveFormContent: content,
+            showSpinner: this.state.showSpinner,
+            spinnerText: this.state.spinnerText
+        };
+
 
         return (
-
             <div id="emailSent">
-                <components.PageContainer pageConfig={pageConfig} columns={columns} />
+                <components.PageContainer pageConfig={pageConfig} />
             </div>
         )
     }

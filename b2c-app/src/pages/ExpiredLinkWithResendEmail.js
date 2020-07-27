@@ -1,6 +1,6 @@
 import React from 'react';
 import components from '../components';
-import { ACTIONS } from '../constants/actions';
+import { POLICIES } from '../constants/policies';
 
 class ExpiredLinkWithResendEmail extends React.Component {
 
@@ -23,20 +23,14 @@ class ExpiredLinkWithResendEmail extends React.Component {
 
     render() {
 
-        const pageConfig = {
-            title: "Activation link expired",
-            showB2CErrors: this.state.showB2CErrors,
-            errors: this.state.errors
-        };
-
         let linkExpiredText;
         let submitButtonText;
 
-        if (this.props.action === ACTIONS.SIGNUP) {
+        if (this.props.policy === POLICIES.SIGNUP_INVITATION || this.props.policy === POLICIES.ACCOUNT_SIGNUP) {
             linkExpiredText = 'The link in your account activation email has expired.';
             submitButtonText = 'Resend activation email';
         }
-        else if (this.props.action === ACTIONS.CHANGE_EMAIL) {
+        else if (this.props.policy === POLICIES.CHANGE_EMAIL) {
             linkExpiredText = 'This activation link has expired.';
             submitButtonText = 'Request new activation link';
         }
@@ -50,20 +44,23 @@ class ExpiredLinkWithResendEmail extends React.Component {
 
         const content = linkExpiredParagraph;
 
-        const columns = [
-            {
-                header: pageConfig.title,
-                aboveFormContent: content,
-                formContent: formContent,
-                submitButtonText: submitButtonText,
-                submitHandler: this.handleSubmit
-            }
-        ];
+        const title = 'Activation link expired';
+
+        const pageConfig = {
+            title: title,
+            header: title,
+            aboveFormContent: content,
+            formContent: formContent,
+            submitButtonText: submitButtonText,
+            submitHandler: this.handleSubmit,
+            showB2CErrors: this.state.showB2CErrors,
+            errors: this.state.errors
+        };
+
 
         return (
-
             <div id="expiredLink" >
-                <components.PageContainer pageConfig={pageConfig} columns={columns} />
+                <components.PageContainer pageConfig={pageConfig} />
             </div>
         )
     }

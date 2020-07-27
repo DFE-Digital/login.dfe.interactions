@@ -1,15 +1,7 @@
 const Config = require('./../../infrastructure/Config')();
 const { sendResult } = require('./../../infrastructure/utils');
-const crypto = require('crypto');
+const { signData } = require('./../../infrastructure/utils');
 
-const signData = (data) => {
-  const sign = crypto.createSign('RSA-SHA256');
-
-  sign.write(JSON.stringify(data));
-  sign.end();
-
-  return sign.sign(Config.crypto.signing.privateKey, 'base64');
-};
 
 const buildPostbackData = (uuid, data) => {
   const postbackData = { uuid };

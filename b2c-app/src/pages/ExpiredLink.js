@@ -1,28 +1,24 @@
 import React from 'react';
 import components from '../components';
-import { ACTIONS } from '../constants/actions';
+import { POLICIES } from '../constants/policies';
 import { LINK_TYPES } from '../constants/linkTypes';
 
 class ExpiredLink extends React.Component {
 
     render() {
 
-        const pageConfig = {
-            title: "Expired link"
-        };
-
         let linkExpiredParagraph;
         let requestAgainLink;
 
-        //we keep the logic to check different actions passed in, in case we have to reuse this page for different flows again
-        if (this.props.action === ACTIONS.RESET_PASSWORD) {
+        //we keep the logic to check different policies passed in, in case we have to reuse this page for different flows again
+        if (this.props.policy === POLICIES.PASSWORD_RESET) {
             linkExpiredParagraph =
                 <components.Paragraph>
                     The link in your password reset email has expired.
                 </components.Paragraph>
 
             requestAgainLink =
-                <components.Link type={LINK_TYPES.BUTTON} action={ACTIONS.RESET_PASSWORD}>Resend password reset email</components.Link>
+                <components.Link type={LINK_TYPES.BUTTON} policy={POLICIES.PASSWORD_RESET}>Resend password reset email</components.Link>
         }
 
         const content =
@@ -34,17 +30,18 @@ class ExpiredLink extends React.Component {
                 {requestAgainLink}
             </div>
 
-        const columns = [
-            {
-                header: pageConfig.title,
-                aboveFormContent: content
-            }
-        ];
+        const title = 'Expired link';
+
+        const pageConfig = {
+            title: title,
+            header: title,
+            aboveFormContent: content
+        };
+
 
         return (
-
             <div id="expiredLink">
-                <components.PageContainer pageConfig={pageConfig} columns={columns} />
+                <components.PageContainer pageConfig={pageConfig} />
             </div>
         )
     }
