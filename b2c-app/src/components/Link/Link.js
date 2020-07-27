@@ -10,7 +10,9 @@ function Link(props) {
         async function getLink() {
             try {
                 setLink(props.url || await getB2CLink(props.policy));
-            } catch (e) { }
+            } catch (e) {
+                return null;
+            }
         }
         getLink();
     });
