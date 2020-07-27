@@ -88,7 +88,8 @@ describe('when location is set', () => {
 
     describe('-- self registration', () => {
 
-        describe('-- sign up', () => {
+        //show page not found while self registration is disabled
+        describe('-- page not found', () => {
 
             it('renders correctly when URL contains POLICIES.ACCOUNT_SIGNUP/', () => {
 
@@ -111,7 +112,31 @@ describe('when location is set', () => {
             });
         });
 
-        describe('-- email sent', () => {
+        //skipping all the following test while self registration is switched off
+        xdescribe('-- sign up', () => {
+
+            it('renders correctly when URL contains POLICIES.ACCOUNT_SIGNUP/', () => {
+
+                //set URL
+                window.location = {
+                    pathname: `/${POLICIES.ACCOUNT_SIGNUP}/`,
+                };
+
+                const tree = renderApp();
+                expect(tree).toMatchSnapshot();
+            });
+
+            it('renders correctly when query params contain POLICIES.ACCOUNT_SIGNUP', () => {
+
+                //set query params
+                window.location.search = `?p=${POLICIES.ACCOUNT_SIGNUP}&param=value`;
+
+                const tree = renderApp();
+                expect(tree).toMatchSnapshot();
+            });
+        });
+
+        xdescribe('-- email sent', () => {
 
             it('renders correctly when URL contains POLICIES.ACCOUNT_SIGNUP/api/', () => {
 
@@ -142,7 +167,7 @@ describe('when location is set', () => {
 
         });
 
-        describe('-- expired link', () => {
+        xdescribe('-- expired link', () => {
 
             it('renders correctly when URL contains POLICIES.SIGNUP_CONFIRMATION and DOM has error element', () => {
 
@@ -161,7 +186,7 @@ describe('when location is set', () => {
             });
         });
 
-        describe('-- account activated', () => {
+        xdescribe('-- account activated', () => {
 
             it('renders correctly when URL contains POLICIES.SIGNUP_CONFIRMATION and DOM has error element', () => {
 
