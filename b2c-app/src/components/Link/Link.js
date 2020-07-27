@@ -9,7 +9,7 @@ function Link(props) {
     useEffect(() => {
         async function getLink() {
             try {
-                setLink(await getB2CLink(props.policy));
+                setLink(props.url || await getB2CLink(props.policy));
             } catch (e) { }
         }
         getLink();
