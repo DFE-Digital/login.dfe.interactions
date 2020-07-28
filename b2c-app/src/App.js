@@ -255,7 +255,7 @@ class App extends React.Component {
     if (matchesPath(location, POLICIES.RESEND_EMAIL) || hasSearchParam(location.search, 'p', POLICIES.RESEND_EMAIL)) {
       //Email sent page (from resend activation email)
       if (domHasElementWithId(SUCCESS_MESSAGE)) {
-        return <EmailSent action={ACTIONS.RESEND_EMAIL} />;
+        return <EmailSent policy={POLICIES.RESEND_EMAIL} />;
       }
       return <ResendActivationEmail />;
     }
