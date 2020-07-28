@@ -88,7 +88,7 @@ class EmailSent extends React.Component {
                 </div>
         }
         else if (this.props.policy === POLICIES.CHANGE_EMAIL ||
-            this.props.policy === POLICIES.CHANGE_EMAIL) {
+            this.props.policy === POLICIES.RESEND_EMAIL) {
 
             content =
                 <div>
