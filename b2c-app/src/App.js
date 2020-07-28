@@ -1,6 +1,6 @@
 import React from 'react';
 
-import * as QueryParamsService from './services/QueryParamsService';
+import * as ServerSideQueryParamsService from './services/ServerSideQueryParamsService';
 
 import { POLICIES } from './constants/policies';
 
@@ -31,6 +31,7 @@ import {
 } from "react-router-dom";
 
 import { withRouter } from "react-router";
+import { QUERY_PARAMS } from './constants/queryParams';
 
 
 
@@ -103,11 +104,6 @@ import { withRouter } from "react-router";
 
 class App extends React.Component {
 
-  componentDidMount() {
-    //retrieve query param values and store for later use
-    QueryParamsService.init();
-  }
-
   getComponentByLocation() {
     const { location } = this.props;
 
@@ -115,6 +111,9 @@ class App extends React.Component {
     const ERROR_MESSAGE = 'errorMessage';
     const SUCCESS_MESSAGE = 'successMessage';
     const CONFIRMATION_MESSAGE = 'confirmationMessage';
+
+    console.log(ServerSideQueryParamsService.getQueryParam(QUERY_PARAMS.CLIENT_ID));
+    console.log(ServerSideQueryParamsService.getQueryParam(QUERY_PARAMS.POLICY));
 
 
     /**
