@@ -9,6 +9,7 @@ class ExpiredLink extends React.Component {
 
         let paragraphText;
         let buttonText;
+        let link;
 
         if (this.props.policy === POLICIES.RESEND_EMAIL) {
             paragraphText = 'The link in your account activation email has expired.';
@@ -18,12 +19,16 @@ class ExpiredLink extends React.Component {
             buttonText = 'Resend password reset email';
         }
 
+        if (buttonText) {
+            link = <components.Link type={LINK_TYPES.BUTTON} policy={this.props.policy}>{buttonText}</components.Link>
+        }
+
         const content =
             <div>
                 <components.Paragraph>
                     {paragraphText}
                 </components.Paragraph>
-                <components.Link type={LINK_TYPES.BUTTON} policy={this.props.policy}>{buttonText}</components.Link>
+                {link}
             </div>
 
         const title = 'Expired link';

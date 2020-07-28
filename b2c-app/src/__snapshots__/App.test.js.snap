@@ -1466,56 +1466,28 @@ exports[`when location is set -- aided registration -- expired link renders corr
               <div
                 className="govuk-grid-column-two-thirds"
               >
-                <div
-                  className="pageLevelErrorContainer hide"
-                >
-                  <div
-                    aria-labelledby="error-summary-title"
-                    className="govuk-error-summary"
-                    data-module="govuk-error-summary"
-                    role="alert"
-                    tabIndex="-1"
-                  >
-                    <h2
-                      className="govuk-error-summary__title"
-                      id="error-summary-title"
-                    >
-                      There is a problem
-                    </h2>
-                    <div
-                      className="govuk-error-summary__body"
-                    >
-                      <ul
-                        className="govuk-list govuk-error-summary__list"
-                        id="errorSummaryItems"
-                      />
-                    </div>
-                  </div>
-                </div>
                 <h1
                   className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
                 >
-                  Activation link expired
+                  Expired link
                 </h1>
-                <p
-                  className="govuk-body"
-                >
-                  The link in your account activation email has expired.
-                </p>
-                <form
-                  id="customForm"
-                  noValidate={true}
-                  onSubmit={[Function]}
-                >
-                  <div />
-                  <button
-                    className="govuk-button"
-                    id="preSubmit"
-                    type="submit"
+                <div>
+                  <p
+                    className="govuk-body"
+                  >
+                    The link in your account activation email has expired.
+                  </p>
+                  <a
+                    className="govuk-button govuk-button--start"
+                    data-module="govuk-button"
+                    draggable="false"
+                    href={null}
+                    onClick={null}
+                    role="button"
                   >
                     Resend activation email
-                  </button>
-                </form>
+                  </a>
+                </div>
               </div>
             </div>
           </main>
@@ -4890,7 +4862,7 @@ exports[`when location is set -- resend email renders correctly when URL contain
     id="routes"
   >
     <div
-      id="emailSent"
+      id="resendActivationEmail"
     >
       <div>
         <div
@@ -4923,49 +4895,72 @@ exports[`when location is set -- resend email renders correctly when URL contain
               <div
                 className="govuk-grid-column-two-thirds"
               >
+                <div
+                  className="pageLevelErrorContainer hide"
+                >
+                  <div
+                    aria-labelledby="error-summary-title"
+                    className="govuk-error-summary"
+                    data-module="govuk-error-summary"
+                    role="alert"
+                    tabIndex="-1"
+                  >
+                    <h2
+                      className="govuk-error-summary__title"
+                      id="error-summary-title"
+                    >
+                      There is a problem
+                    </h2>
+                    <div
+                      className="govuk-error-summary__body"
+                    >
+                      <ul
+                        className="govuk-list govuk-error-summary__list"
+                        id="errorSummaryItems"
+                      />
+                    </div>
+                  </div>
+                </div>
                 <h1
                   className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
                 >
-                  We've sent you an email
+                  Resend activation email
                 </h1>
-                <div>
-                  <p
-                    className="govuk-body"
-                  />
-                  <p
-                    className="govuk-body"
-                  >
-                    Check your spam folder if you can't see it in a few minutes.
-                  </p>
-                  <p
-                    className="govuk-body"
-                  >
-                    If you don't receive an email after this time you can 
-                    <a
-                      className="govuk-link"
-                      href={null}
-                      onClick={[Function]}
+                <form
+                  id="customForm"
+                  noValidate={true}
+                  onSubmit={[Function]}
+                >
+                  <div>
+                    <div
+                      className="govuk-form-group "
                     >
-                      resend the activation email
-                    </a>
-                    .
-                  </p>
-                  <p
-                    className="govuk-body"
+                      <label
+                        className="govuk-label"
+                        htmlFor="emailCustom"
+                      >
+                        Email address
+                      </label>
+                      <input
+                        autoComplete="email"
+                        className="govuk-input govuk-!-width-one-half"
+                        id="emailCustom"
+                        name="email"
+                        noValidate={true}
+                        onChange={[Function]}
+                        spellCheck="false"
+                        type="email"
+                      />
+                    </div>
+                  </div>
+                  <button
+                    className="govuk-button"
+                    id="preSubmit"
+                    type="submit"
                   >
-                    This link expires in 24 hours.
-                  </p>
-                  <a
-                    className="govuk-button govuk-button--start"
-                    data-module="govuk-button"
-                    draggable="false"
-                    href={null}
-                    onClick={null}
-                    role="button"
-                  >
-                    Return to sign in
-                  </a>
-                </div>
+                    Send activation email
+                  </button>
+                </form>
               </div>
             </div>
           </main>
@@ -5196,7 +5191,7 @@ exports[`when location is set -- resend email renders correctly when query param
     id="routes"
   >
     <div
-      id="emailSent"
+      id="resendActivationEmail"
     >
       <div>
         <div
@@ -5229,49 +5224,72 @@ exports[`when location is set -- resend email renders correctly when query param
               <div
                 className="govuk-grid-column-two-thirds"
               >
+                <div
+                  className="pageLevelErrorContainer hide"
+                >
+                  <div
+                    aria-labelledby="error-summary-title"
+                    className="govuk-error-summary"
+                    data-module="govuk-error-summary"
+                    role="alert"
+                    tabIndex="-1"
+                  >
+                    <h2
+                      className="govuk-error-summary__title"
+                      id="error-summary-title"
+                    >
+                      There is a problem
+                    </h2>
+                    <div
+                      className="govuk-error-summary__body"
+                    >
+                      <ul
+                        className="govuk-list govuk-error-summary__list"
+                        id="errorSummaryItems"
+                      />
+                    </div>
+                  </div>
+                </div>
                 <h1
                   className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
                 >
-                  We've sent you an email
+                  Resend activation email
                 </h1>
-                <div>
-                  <p
-                    className="govuk-body"
-                  />
-                  <p
-                    className="govuk-body"
-                  >
-                    Check your spam folder if you can't see it in a few minutes.
-                  </p>
-                  <p
-                    className="govuk-body"
-                  >
-                    If you don't receive an email after this time you can 
-                    <a
-                      className="govuk-link"
-                      href={null}
-                      onClick={[Function]}
+                <form
+                  id="customForm"
+                  noValidate={true}
+                  onSubmit={[Function]}
+                >
+                  <div>
+                    <div
+                      className="govuk-form-group "
                     >
-                      resend the activation email
-                    </a>
-                    .
-                  </p>
-                  <p
-                    className="govuk-body"
+                      <label
+                        className="govuk-label"
+                        htmlFor="emailCustom"
+                      >
+                        Email address
+                      </label>
+                      <input
+                        autoComplete="email"
+                        className="govuk-input govuk-!-width-one-half"
+                        id="emailCustom"
+                        name="email"
+                        noValidate={true}
+                        onChange={[Function]}
+                        spellCheck="false"
+                        type="email"
+                      />
+                    </div>
+                  </div>
+                  <button
+                    className="govuk-button"
+                    id="preSubmit"
+                    type="submit"
                   >
-                    This link expires in 24 hours.
-                  </p>
-                  <a
-                    className="govuk-button govuk-button--start"
-                    data-module="govuk-button"
-                    draggable="false"
-                    href={null}
-                    onClick={null}
-                    role="button"
-                  >
-                    Return to sign in
-                  </a>
-                </div>
+                    Send activation email
+                  </button>
+                </form>
               </div>
             </div>
           </main>
@@ -6232,11 +6250,6 @@ exports[`when location is set -- reset password -- expired link renders correctl
                     className="govuk-body"
                   >
                     The link in your password reset email has expired.
-                  </p>
-                  <p
-                    className="govuk-body"
-                  >
-                    Request another email.
                   </p>
                   <a
                     className="govuk-button govuk-button--start"

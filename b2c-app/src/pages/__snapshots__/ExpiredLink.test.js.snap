@@ -46,11 +46,6 @@ exports[`renders correctly with policy POLICIES.RESET_PASSWORD passed in 1`] = `
               >
                 The link in your password reset email has expired.
               </p>
-              <p
-                className="govuk-body"
-              >
-                Request another email.
-              </p>
               <a
                 className="govuk-button govuk-button--start"
                 data-module="govuk-button"
@@ -113,9 +108,7 @@ exports[`renders correctly without policy passed in 1`] = `
             <div>
               <p
                 className="govuk-body"
-              >
-                Request another email.
-              </p>
+              />
             </div>
           </div>
         </div>
