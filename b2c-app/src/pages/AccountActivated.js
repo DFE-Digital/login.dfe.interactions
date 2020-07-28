@@ -2,6 +2,7 @@ import React from 'react';
 import components from '../components';
 import { POLICIES } from '../constants/policies';
 import { LINK_TYPES } from '../constants/linkTypes';
+import { PAGE_IDS } from '../constants/pageIds';
 
 class AccountActivated extends React.Component {
 
@@ -23,7 +24,7 @@ class AccountActivated extends React.Component {
 
 
         return (
-            <div id="accountActivated">
+            <div id={PAGE_IDS.ACCOUNT_ACTIVATED}>
                 <components.PageContainer pageConfig={pageConfig} />
             </div>
         )

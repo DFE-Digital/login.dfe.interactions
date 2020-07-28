@@ -1,6 +1,7 @@
 import React from 'react';
 import components from '../components';
 import { POLICIES } from '../constants/policies';
+import { PAGE_IDS } from '../constants/pageIds';
 
 class ExpiredLinkWithResendEmail extends React.Component {
 
@@ -59,7 +60,7 @@ class ExpiredLinkWithResendEmail extends React.Component {
 
 
         return (
-            <div id="expiredLink" >
+            <div id={PAGE_IDS.EXPIRED_LINK_WITH_RESEND}>
                 <components.PageContainer pageConfig={pageConfig} />
             </div>
         )

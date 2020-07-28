@@ -3,6 +3,7 @@ import { animateScroll } from "react-scroll";
 
 import components from '../components';
 import { onChange } from '../helpers/pageUpdatesHandler';
+import { PAGE_IDS } from '../constants/pageIds';
 
 class EnterNewPassword extends React.Component {
 
@@ -81,7 +82,7 @@ class EnterNewPassword extends React.Component {
 
 
         return (
-            <div id="enterNewPassword">
+            <div id={PAGE_IDS.ENTER_NEW_PASSWORD}>
                 <components.PageContainer pageConfig={pageConfig} />
             </div>
         )

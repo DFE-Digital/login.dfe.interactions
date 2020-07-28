@@ -3,6 +3,7 @@ import { animateScroll } from "react-scroll";
 
 import components from '../components';
 import { onChange } from '../helpers/pageUpdatesHandler';
+import { PAGE_IDS } from '../constants/pageIds';
 
 class ForgottenEmail extends React.Component {
 
@@ -116,7 +117,7 @@ class ForgottenEmail extends React.Component {
 
 
         return (
-            <div id="forgottenEmail">
+            <div id={PAGE_IDS.FORGOTTEN_EMAIL}>
                 <components.PageContainer pageConfig={pageConfig} />
             </div>
         )

@@ -1,5 +1,6 @@
 import React from 'react';
 import components from '../components';
+import { PAGE_IDS } from '../constants/pageIds';
 
 class PageNotFound extends React.Component {
 
@@ -30,7 +31,7 @@ class PageNotFound extends React.Component {
 
 
         return (
-            <div id="pageNotFound">
+            <div id={PAGE_IDS.NOT_FOUND}>
                 <components.PageContainer pageConfig={pageConfig} />
             </div>
         )

@@ -2,6 +2,7 @@ import React from 'react';
 import components from '../components';
 import { POLICIES } from '../constants/policies';
 import { LINK_TYPES } from '../constants/linkTypes';
+import { PAGE_IDS } from '../constants/pageIds';
 
 class ExpiredLink extends React.Component {
 
@@ -40,7 +41,7 @@ class ExpiredLink extends React.Component {
 
 
         return (
-            <div id="expiredLink">
+            <div id={PAGE_IDS.EXPIRED_LINK}>
                 <components.PageContainer pageConfig={pageConfig} />
             </div>
         )

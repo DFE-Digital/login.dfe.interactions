@@ -2,6 +2,7 @@ import React from 'react';
 import components from '../components';
 import { POLICIES } from '../constants/policies';
 import { LINK_TYPES } from '../constants/linkTypes';
+import { PAGE_IDS } from '../constants/pageIds';
 
 class PasswordChanged extends React.Component {
 
@@ -23,7 +24,7 @@ class PasswordChanged extends React.Component {
 
 
         return (
-            <div id="passwordChanged">
+            <div id={PAGE_IDS.PASSWORD_CHANGED}>
                 <components.PageContainer pageConfig={pageConfig} />
             </div>
         )
