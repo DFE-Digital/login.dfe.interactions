@@ -12,7 +12,9 @@ class ExpiredLink extends React.Component {
         let requestAgainLink;
 
         //we keep the logic to check different policies passed in, in case we have to reuse this page for different flows again
-        if (this.props.policy === POLICIES.PASSWORD_RESET) {
+        if (this.props.policy === POLICIES.PASSWORD_RESET ||
+            this.props.policy === POLICIES.PASSWORD_RESET_CONFIRMATION) {
+
             linkExpiredParagraph =
                 <components.Paragraph>
                     The link in your password reset email has expired.

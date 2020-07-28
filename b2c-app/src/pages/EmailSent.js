@@ -64,7 +64,10 @@ class EmailSent extends React.Component {
 
         let content;
 
-        if (this.props.policy === POLICIES.SIGNUP_INVITATION || this.props.policy === POLICIES.ACCOUNT_SIGNUP) {
+        if (this.props.policy === POLICIES.SIGNUP_INVITATION ||
+            this.props.policy === POLICIES.ACCOUNT_SIGNUP ||
+            this.props.policy === POLICIES.SIGNUP_CONFIRMATION) {
+
             content =
                 <div>
                     {contentFromB2CParagraph}
@@ -72,7 +75,9 @@ class EmailSent extends React.Component {
                     {linkExpiresParagraph}
                 </div>
         }
-        else if (this.props.policy === POLICIES.PASSWORD_RESET) {
+        else if (this.props.policy === POLICIES.PASSWORD_RESET ||
+            this.props.policy === POLICIES.PASSWORD_RESET_CONFIRMATION) {
+
             content =
                 <div>
                     {contentFromB2CParagraph}
@@ -82,7 +87,9 @@ class EmailSent extends React.Component {
                     {linkExpiresParagraph}
                 </div>
         }
-        else if (this.props.policy === POLICIES.CHANGE_EMAIL) {
+        else if (this.props.policy === POLICIES.CHANGE_EMAIL ||
+            this.props.policy === POLICIES.CHANGE_EMAIL) {
+
             content =
                 <div>
                     {contentFromB2CParagraph}
