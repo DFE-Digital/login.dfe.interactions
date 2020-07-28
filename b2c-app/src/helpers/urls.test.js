@@ -55,11 +55,11 @@ describe('when building the URL for a link that points to a B2C policy', () => {
         ServerSideQueryParamsService.getQueryParam.mockReturnValue(mockReturnValue);
     });
 
-    it('returns URL with policy set by default to SIGNIN_INVITATION when no policy is passed in', async () => {
+    it('returns URL with policy set by default to SIGNIN_INVITATION when no policy is passed in', () => {
         expect(getB2CLink()).toEqual(`/${mockReturnValue}.onmicrosoft.com/oauth2/v2.0/authorize?p=${POLICIES.SIGNIN_INVITATION}&client_id=${mockReturnValue}&nonce=defaultNonce&redirect_uri=${mockReturnValue}&scope=openid&response_type=id_token&prompt=login`);
     });
 
-    it('returns URL with the corresponding policy based on passed in policy', async () => {
+    it('returns URL with the corresponding policy based on passed in policy', () => {
         expect(getB2CLink(POLICIES.ACCOUNT_SIGNUP)).toEqual(`/${mockReturnValue}.onmicrosoft.com/oauth2/v2.0/authorize?p=${POLICIES.ACCOUNT_SIGNUP}&client_id=${mockReturnValue}&nonce=defaultNonce&redirect_uri=${mockReturnValue}&scope=openid&response_type=id_token&prompt=login`);
         expect(getB2CLink(POLICIES.SIGNIN_INVITATION)).toEqual(`/${mockReturnValue}.onmicrosoft.com/oauth2/v2.0/authorize?p=${POLICIES.SIGNIN_INVITATION}&client_id=${mockReturnValue}&nonce=defaultNonce&redirect_uri=${mockReturnValue}&scope=openid&response_type=id_token&prompt=login`);
         expect(getB2CLink(POLICIES.PASSWORD_RESET)).toEqual(`/${mockReturnValue}.onmicrosoft.com/oauth2/v2.0/authorize?p=${POLICIES.PASSWORD_RESET}&client_id=${mockReturnValue}&nonce=defaultNonce&redirect_uri=${mockReturnValue}&scope=openid&response_type=id_token&prompt=login`);
