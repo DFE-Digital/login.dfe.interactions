@@ -1200,6 +1200,19 @@ exports[`when location is set -- aided registration -- email sent renders correc
                   <p
                     className="govuk-body"
                   >
+                    If you don't receive an email after this time you can 
+                    <a
+                      className="govuk-link"
+                      href={null}
+                      onClick={null}
+                    >
+                      resend the activation email
+                    </a>
+                    .
+                  </p>
+                  <p
+                    className="govuk-body"
+                  >
                     This link expires in 24 hours.
                   </p>
                 </div>
