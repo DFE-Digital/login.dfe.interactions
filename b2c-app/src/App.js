@@ -7,7 +7,7 @@ import { POLICIES } from './constants/policies';
 import { domHasElementWithId } from './helpers/dom';
 import { matchesPath, hasSearchParam } from './helpers/urls';
 
-import Signup from './pages/Signup';
+//import Signup from './pages/Signup';
 import Login from './pages/Login';
 import EmailSent from './pages/EmailSent';
 import AccountActivated from './pages/AccountActivated';
@@ -22,6 +22,7 @@ import ActivateAccount from './pages/AidedRegistration/ActivateAccount';
 import ExpiredLink from './pages/ExpiredLink';
 import ExpiredLinkWithResendEmail from './pages/ExpiredLinkWithResendEmail';
 import ResendActivationEmail from './pages/ResendActivationEmail';
+import PageNotFound from './pages/PageNotFound';
 
 import components from './components';
 
@@ -132,27 +133,35 @@ class App extends React.Component {
      * Self registration
      */
 
-    //Activation email sent after sign up
-    if (matchesPath(location, `${POLICIES.ACCOUNT_SIGNUP}/api`)) {
-      return <EmailSent policy={POLICIES.ACCOUNT_SIGNUP} />;
-    }
-    //Sign up page
+    //routing all self registration pages to "Page not found"
     if (matchesPath(location, POLICIES.ACCOUNT_SIGNUP) || hasSearchParam(location.search, 'p', POLICIES.ACCOUNT_SIGNUP)) {
-      return <Signup />;
+      return <PageNotFound />;
     }
-    //From activation email
-    if (matchesPath(location, POLICIES.SIGNUP_CONFIRMATION)) {
-      //Email sent page (from resend activation email)
-      if (domHasElementWithId(SUCCESS_MESSAGE)) {
+
+    //If signup gets enabled again, this block below is the routing that would bring it back
+    /*
+      //Activation email sent after sign up
+      if (matchesPath(location, `${POLICIES.ACCOUNT_SIGNUP}/api`)) {
         return <EmailSent policy={POLICIES.ACCOUNT_SIGNUP} />;
       }
-      //Expired link
-      else if (domHasElementWithId(ERROR_MESSAGE)) {
-        return <ExpiredLinkWithResendEmail policy={POLICIES.ACCOUNT_SIGNUP} />;
+      //Sign up page
+      if (matchesPath(location, POLICIES.ACCOUNT_SIGNUP) || hasSearchParam(location.search, 'p', POLICIES.ACCOUNT_SIGNUP)) {
+        return <Signup />;
       }
-      //Account activated
-      return <AccountActivated />;
-    }
+      //From activation email
+      if (matchesPath(location, POLICIES.SIGNUP_CONFIRMATION)) {
+        //Email sent page (from resend activation email)
+        if (domHasElementWithId(SUCCESS_MESSAGE)) {
+          return <EmailSent policy={POLICIES.ACCOUNT_SIGNUP} />;
+        }
+        //Expired link
+        else if (domHasElementWithId(ERROR_MESSAGE)) {
+          return <ExpiredLinkWithResendEmail policy={POLICIES.ACCOUNT_SIGNUP} />;
+        }
+        //Account activated
+        return <AccountActivated />;
+      }
+    */
 
 
     /**
