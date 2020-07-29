@@ -7,27 +7,28 @@ class ExpiredLink extends React.Component {
 
     render() {
 
-        let linkExpiredParagraph;
-        let requestAgainLink;
+        let paragraphText;
+        let buttonText;
+        let link;
 
-        //we keep the logic to check different policies passed in, in case we have to reuse this page for different flows again
-        if (this.props.policy === POLICIES.PASSWORD_RESET) {
-            linkExpiredParagraph =
-                <components.Paragraph>
-                    The link in your password reset email has expired.
-                </components.Paragraph>
+        if (this.props.policy === POLICIES.RESEND_EMAIL) {
+            paragraphText = 'The link in your account activation email has expired.';
+            buttonText = 'Resend activation email';
+        } else if (this.props.policy === POLICIES.PASSWORD_RESET) {
+            paragraphText = 'The link in your password reset email has expired.';
+            buttonText = 'Resend password reset email';
+        }
 
-            requestAgainLink =
-                <components.Link type={LINK_TYPES.BUTTON} policy={POLICIES.PASSWORD_RESET}>Resend password reset email</components.Link>
+        if (buttonText) {
+            link = <components.Link type={LINK_TYPES.BUTTON} policy={this.props.policy}>{buttonText}</components.Link>
         }
 
         const content =
             <div>
-                {linkExpiredParagraph}
                 <components.Paragraph>
-                    Request another email.
+                    {paragraphText}
                 </components.Paragraph>
-                {requestAgainLink}
+                {link}
             </div>
 
         const title = 'Expired link';

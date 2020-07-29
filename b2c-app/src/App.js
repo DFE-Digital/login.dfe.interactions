@@ -21,6 +21,7 @@ import EnterNewPassword from './pages/EnterNewPassword';
 import ActivateAccount from './pages/AidedRegistration/ActivateAccount';
 import ExpiredLink from './pages/ExpiredLink';
 import ExpiredLinkWithResendEmail from './pages/ExpiredLinkWithResendEmail';
+import ResendActivationEmail from './pages/ResendActivationEmail';
 import PageNotFound from './pages/PageNotFound';
 
 import components from './components';
@@ -97,7 +98,9 @@ import { withRouter } from "react-router";
  * 
  * * Resend email:
  *    Email sent:
- *      URL or query params contain POLICIES.RESEND_EMAIL
+ *      URL or query params contain POLICIES.RESEND_EMAIL and DOM has success element
+ *    Resend activation email:
+ *      URL or query params contain POLICIES.RESEND_EMAIL and DOM has no success element
  * 
  */
 
@@ -180,7 +183,7 @@ class App extends React.Component {
     if (matchesPath(location, POLICIES.SIGNUP_INVITATION)) {
       //Expired link
       if (domHasElementWithId(ERROR_MESSAGE)) {
-        return <ExpiredLinkWithResendEmail policy={POLICIES.SIGNUP_INVITATION} />;
+        return <ExpiredLink policy={POLICIES.RESEND_EMAIL} />;
       }
       //Activate account
       return <ActivateAccount />;
@@ -259,7 +262,11 @@ class App extends React.Component {
      */
 
     if (matchesPath(location, POLICIES.RESEND_EMAIL) || hasSearchParam(location.search, 'p', POLICIES.RESEND_EMAIL)) {
-      return <EmailSent policy={POLICIES.CHANGE_EMAIL} />;
+      //Email sent page (from resend activation email)
+      if (domHasElementWithId(SUCCESS_MESSAGE)) {
+        return <EmailSent policy={POLICIES.RESEND_EMAIL} />;
+      }
+      return <ResendActivationEmail />;
     }
 
     /**

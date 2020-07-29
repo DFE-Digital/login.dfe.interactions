@@ -1,10 +1,12 @@
 import React from 'react';
 import components from '../components';
+import { POLICIES } from '../constants/policies';
 
 
 export function parseB2CErrors(error) {
 
     const lockedAccountTextToMatch = 'ACCOUNT_LOCKED';
+    const accountAlreadyActivatedTextToMatch = 'ACCOUNT_ACTIVATED';
 
     //array that contains all the B2C error transformations we will be doing in the app.
     //we will get an error and if it matches any of the error messages defined here we will
@@ -13,6 +15,16 @@ export function parseB2CErrors(error) {
         {
             text: lockedAccountTextToMatch,
             output: <components.LockedAccountHelp />
+        },
+        {
+            text: accountAlreadyActivatedTextToMatch,
+            output:
+                <div>
+                    <components.Paragraph>
+                        Account already activated.
+                    </components.Paragraph>
+                    <components.Link policy={POLICIES.SIGNIN_INVITATION}>Return to sign in page</components.Link>
+                </div>
         }
     ];
 
