@@ -44,7 +44,7 @@ class ResendActivationEmail extends React.Component {
 
     setDataAndSubmit() {
         //retrieve all elements we will need and set their values
-        let b2cEmail = document.getElementById('email');
+        let b2cEmail = document.getElementById('resend_email');
         let b2cSubmitButton = document.getElementById('continue');
 
         if (b2cEmail && b2cSubmitButton) {
@@ -55,6 +55,11 @@ class ResendActivationEmail extends React.Component {
     }
 
     render() {
+
+        const content =
+            <div>
+                <components.Paragraph>Enter the email you used to create your account. We'll send you a new account activation email.</components.Paragraph>
+            </div>
 
         const formContent =
             <div>
@@ -75,6 +80,7 @@ class ResendActivationEmail extends React.Component {
         const pageConfig = {
             title: title,
             header: title,
+            aboveFormContent: content,
             formContent: formContent,
             submitButtonText: 'Send activation email',
             submitHandler: this.handleSubmit,

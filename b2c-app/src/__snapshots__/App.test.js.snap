@@ -4926,6 +4926,13 @@ exports[`when location is set -- resend email renders correctly when URL contain
                 >
                   Resend activation email
                 </h1>
+                <div>
+                  <p
+                    className="govuk-body"
+                  >
+                    Enter the email you used to create your account. We'll send you a new account activation email.
+                  </p>
+                </div>
                 <form
                   id="customForm"
                   noValidate={true}
@@ -5255,6 +5262,13 @@ exports[`when location is set -- resend email renders correctly when query param
                 >
                   Resend activation email
                 </h1>
+                <div>
+                  <p
+                    className="govuk-body"
+                  >
+                    Enter the email you used to create your account. We'll send you a new account activation email.
+                  </p>
+                </div>
                 <form
                   id="customForm"
                   noValidate={true}
