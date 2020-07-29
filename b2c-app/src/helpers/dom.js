@@ -1,10 +1,10 @@
 //function with try/catch in case document is not defined as that was making the page stop loading in B2C
-function getElementById(id){
+function getElementById(id) {
     try {
         return document.getElementById(id);
     }
     catch (e) {
-        console.log(e);
+        return null;
     }
 }
 
@@ -14,7 +14,7 @@ export function domHasElementWithId(id) {
 
 export function getInnerTextById(id) {
     let elem = getElementById(id);
-    if(elem){
+    if (elem) {
         return elem.innerText;
     }
 }
