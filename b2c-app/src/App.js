@@ -112,7 +112,7 @@ class App extends React.Component {
           break;
 
         default:
-          result = <Placeholder />;
+          result = <PageNotFound />;
           break;
       }
 
@@ -262,9 +262,9 @@ class App extends React.Component {
         //Expired link
         if (domHasElementWithId(ERROR_MESSAGE)) {
           return <ExpiredLink policy={POLICIES.RESEND_EMAIL} />;
-          //Activate account
-          return <ActivateAccount />;
         }
+        //Activate account
+        return <ActivateAccount />;
       }
 
 

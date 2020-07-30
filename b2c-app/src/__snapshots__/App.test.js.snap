@@ -3677,7 +3677,300 @@ exports[`when page is set in server side query params renders login page correct
 </div>
 `;
 
-exports[`when page is set in server side query params renders not found page correctly 1`] = `
+exports[`when page is set in server side query params renders not found page correctly when this page is specified 1`] = `
+<div
+  className="App"
+  id="app"
+>
+  <header
+    className="govuk-header "
+    data-module="govuk-header"
+    role="banner"
+  >
+    <div
+      className="govuk-header__container govuk-width-container ncs-custom"
+    >
+      <h1
+        className="govuk-heading-l govuk-!-margin-top-0 govuk-!-margin-bottom-0"
+      >
+        <a
+          className="govuk-header__link govuk-header__link--service-name"
+          href="https://nationalcareers.service.gov.uk/"
+        >
+          National Careers Service
+        </a>
+      </h1>
+      <button
+        aria-controls="navigation"
+        aria-label="Show or hide Top Level Navigation"
+        className="govuk-header__menu-button govuk-js-header-toggle"
+        id="menuToggle"
+        onClick={[Function]}
+        type="button"
+      >
+        Menu
+      </button>
+      <nav>
+        <ul
+          aria-label="Top Level Navigation"
+          className="govuk-header__navigation"
+          id="navigation"
+        >
+          <li
+            className="govuk-header__navigation-item"
+          >
+            <a
+              className="govuk-header__link"
+              href="https://nationalcareers.service.gov.uk/job-profiles"
+            >
+              Explore careers
+            </a>
+          </li>
+          <li
+            className="govuk-header__navigation-item"
+          >
+            <a
+              className="govuk-header__link"
+              href="https://nationalcareers.service.gov.uk/skills-health-check"
+            >
+              Skills assessment
+            </a>
+          </li>
+          <li
+            className="govuk-header__navigation-item"
+          >
+            <a
+              className="govuk-header__link"
+              href="https://nationalcareers.service.gov.uk/course-directory"
+            >
+              Find a course
+            </a>
+          </li>
+          <li
+            className="govuk-header__navigation-item"
+          >
+            <a
+              className="govuk-header__link"
+              href="https://nationalcareers.service.gov.uk/contact-us"
+            >
+              Contact us
+            </a>
+          </li>
+          <li
+            className="govuk-header__navigation-item"
+          >
+            <a
+              className="govuk-header__link"
+              href="https://nationalcareers.service.gov.uk/about-us"
+            >
+              About us
+            </a>
+          </li>
+          <li
+            className="govuk-header__navigation-item"
+          >
+            <a
+              className="govuk-header__link"
+              href="https://nationalcareers.service.gov.uk/get-a-job"
+            >
+              Help to get a job
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <div
+    id="routes"
+  >
+    <div
+      id="pageNotFound"
+    >
+      <div>
+        <div
+          className="govuk-width-container"
+        >
+          <div
+            className="govuk-breadcrumbs"
+          >
+            <ol
+              className="govuk-breadcrumbs__list"
+            >
+              <li
+                className="govuk-breadcrumbs__list-item"
+              >
+                <a
+                  className="govuk-breadcrumbs__link"
+                  href="https://nationalcareers.service.gov.uk/"
+                >
+                  Home
+                </a>
+              </li>
+            </ol>
+          </div>
+          <main
+            className="govuk-main-wrapper"
+          >
+            <div
+              className="govuk-grid-row"
+            >
+              <div
+                className="govuk-grid-column-two-thirds"
+              >
+                <h1
+                  className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
+                >
+                  Page not found
+                </h1>
+                <div>
+                  <p
+                    className="govuk-body"
+                  >
+                    If you typed the web address or used a bookmark, check it is correct.
+                  </p>
+                  <p
+                    className="govuk-body"
+                  >
+                    If you pasted the web address, check you copied the whole address.
+                  </p>
+                  <p
+                    className="govuk-body"
+                  >
+                    If the web address is correct you can 
+                    <a
+                      className="govuk-link"
+                      href="https://nationalcareers.service.gov.uk/contact-us"
+                      onClick={null}
+                    >
+                      contact us
+                    </a>
+                     to get help using this service or call 0800 100 900, 8am to 10pm, 7 days a week.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer
+    className="govuk-footer "
+    role="contentinfo"
+  >
+    <div
+      className="govuk-width-container "
+    >
+      <div
+        className="govuk-footer__meta"
+      >
+        <div
+          className="govuk-footer__meta-item govuk-footer__meta-item--grow"
+        >
+          <h2
+            className="govuk-visually-hidden"
+          >
+            Support links
+          </h2>
+          <ul
+            className="govuk-footer__inline-list"
+          >
+            <li
+              className="govuk-footer__inline-list-item"
+            >
+              <a
+                className="govuk-footer__link"
+                href="https://nationalcareers.service.gov.uk/help"
+              >
+                Help
+              </a>
+            </li>
+            <li
+              className="govuk-footer__inline-list-item"
+            >
+              <a
+                className="govuk-footer__link"
+                href="https://nationalcareers.service.gov.uk/help/privacy-and-cookies"
+              >
+                Privacy and cookies
+              </a>
+            </li>
+            <li
+              className="govuk-footer__inline-list-item"
+            >
+              <a
+                className="govuk-footer__link"
+                href="https://nationalcareers.service.gov.uk/help/accessibility"
+              >
+                Accessibility statement
+              </a>
+            </li>
+            <li
+              className="govuk-footer__inline-list-item"
+            >
+              <a
+                className="govuk-footer__link"
+                href="https://nationalcareers.service.gov.uk/help/terms-and-conditions"
+              >
+                Terms and conditions
+              </a>
+            </li>
+            <li
+              className="govuk-footer__inline-list-item"
+            >
+              <a
+                className="govuk-footer__link"
+                href="https://nationalcareers.service.gov.uk/help/information-sources"
+              >
+                Information sources
+              </a>
+            </li>
+          </ul>
+          <svg
+            aria-hidden="true"
+            className="govuk-footer__licence-logo"
+            focusable="false"
+            height="17"
+            viewBox="0 0 483.2 195.7"
+            width="41"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M421.5 142.8V.1l-50.7 32.3v161.1h112.4v-50.7zm-122.3-9.6A47.12 47.12 0 0 1 221 97.8c0-26 21.1-47.1 47.1-47.1 16.7 0 31.4 8.7 39.7 21.8l42.7-27.2A97.63 97.63 0 0 0 268.1 0c-36.5 0-68.3 20.1-85.1 49.7A98 98 0 0 0 97.8 0C43.9 0 0 43.9 0 97.8s43.9 97.8 97.8 97.8c36.5 0 68.3-20.1 85.1-49.7a97.76 97.76 0 0 0 149.6 25.4l19.4 22.2h3v-87.8h-80l24.3 27.5zM97.8 145c-26 0-47.1-21.1-47.1-47.1s21.1-47.1 47.1-47.1 47.2 21 47.2 47S123.8 145 97.8 145"
+              fill="currentColor"
+            />
+          </svg>
+          <span
+            className="govuk-footer__licence-description"
+          >
+            All content is available under the
+            <a
+              className="govuk-footer__link"
+              href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/"
+              rel="license"
+            >
+               Open Government Licence v3.0
+            </a>
+            , except where otherwise stated
+          </span>
+        </div>
+        <div
+          className="govuk-footer__meta-item"
+        >
+          <a
+            className="govuk-footer__link govuk-footer__copyright-logo"
+            href="https://www.nationalarchives.gov.uk/information-management/re-using-public-sector-information/uk-government-licensing-framework/crown-copyright/"
+          >
+            © Crown copyright
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</div>
+`;
+
+exports[`when page is set in server side query params renders page not page correctly when routing does not find a match 1`] = `
 <div
   className="App"
   id="app"
