@@ -2959,7 +2959,7 @@ exports[`when location is set -- forgotten email -- account not found renders co
                 <h1
                   className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
                 >
-                  Unable to find your account
+                  We have not been able to find your account
                 </h1>
                 <div>
                   <p
