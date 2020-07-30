@@ -4,5 +4,6 @@ export const QUERY_PARAMS = {
     ID_TOKEN_HINT: 'id_token_hint',
     TENANT_ID: 'tenant_id',
     POLICY: 'policy',
-    PAGE: 'custom_ui_page'
+    PAGE: 'custom_ui_page',
+    ORIGINAL_POLICY: 'original_policy'
 }

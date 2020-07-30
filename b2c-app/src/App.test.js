@@ -6,6 +6,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 
 import { POLICIES } from './constants/policies';
 import { PAGE_IDS } from './constants/pageIds';
+import { QUERY_PARAMS } from './constants/queryParams';
 
 import App from './App';
 
@@ -58,6 +59,37 @@ describe('when page is set in server side query params', () => {
 
     it('renders email sent page correctly', () => {
         ServerSideQueryParamsService.getQueryParam.mockReturnValue(PAGE_IDS.EMAIL_SENT);
+
+        const tree = renderApp();
+        expect(tree).toMatchSnapshot();
+    });
+
+    it('renders email sent page correctly when policy is Resend Email', () => {
+        ServerSideQueryParamsService.getQueryParam.mockImplementation((id) => {
+            if (id === QUERY_PARAMS.PAGE) {
+                return PAGE_IDS.EMAIL_SENT;
+            }
+            if (id === QUERY_PARAMS.POLICY) {
+                return POLICIES.RESEND_EMAIL;
+            }
+        });
+
+        const tree = renderApp();
+        expect(tree).toMatchSnapshot();
+    });
+
+    it('renders email sent page correctly when policy is Resend Email ad original policy is defined', () => {
+        ServerSideQueryParamsService.getQueryParam.mockImplementation((id) => {
+            if (id === QUERY_PARAMS.PAGE) {
+                return PAGE_IDS.EMAIL_SENT;
+            }
+            if (id === QUERY_PARAMS.POLICY) {
+                return POLICIES.RESEND_EMAIL;
+            }
+            if (id === QUERY_PARAMS.ORIGINAL_POLICY) {
+                return POLICIES.SIGNUP_INVITATION;
+            }
+        });
 
         const tree = renderApp();
         expect(tree).toMatchSnapshot();
