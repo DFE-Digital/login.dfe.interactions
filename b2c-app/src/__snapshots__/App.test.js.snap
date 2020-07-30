@@ -942,7 +942,7 @@ exports[`when page is set in server side query params renders account not found 
                 <h1
                   className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
                 >
-                  Unable to find your account
+                  We have not been able to find your account
                 </h1>
                 <div>
                   <p
@@ -2722,9 +2722,7 @@ exports[`when page is set in server side query params renders expired link page 
                 <div>
                   <p
                     className="govuk-body"
-                  >
-                    Request another email.
-                  </p>
+                  />
                 </div>
               </div>
             </div>

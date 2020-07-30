@@ -40,7 +40,14 @@ class EmailSent extends React.Component {
                 Check your spam folder if you can't see it in a few minutes.
             </components.Paragraph>
 
-        const resendActivationLinkParagraph =
+        const resendActivationEmailParagraph =
+            <components.Paragraph>
+                If you don't receive an email after this time you can&nbsp;
+                <components.Link policy={POLICIES.RESEND_EMAIL}>resend the activation email</components.Link>
+                .
+            </ components.Paragraph >
+
+        const resendPasswordResetParagraph =
             <components.Paragraph>
                 If you don't receive an email after this time you can&nbsp;
                 <components.Link policy={POLICIES.PASSWORD_RESET}>resend password reset email</components.Link>
@@ -72,6 +79,7 @@ class EmailSent extends React.Component {
                 <div>
                     {contentFromB2CParagraph}
                     {checkSpamFolderParagraph}
+                    {resendActivationEmailParagraph}
                     {linkExpiresParagraph}
                 </div>
         }
@@ -83,7 +91,7 @@ class EmailSent extends React.Component {
                     {contentFromB2CParagraph}
                     {accountRequiredParagraph}
                     {checkSpamFolderParagraph}
-                    {resendActivationLinkParagraph}
+                    {resendPasswordResetParagraph}
                     {linkExpiresParagraph}
                 </div>
         }

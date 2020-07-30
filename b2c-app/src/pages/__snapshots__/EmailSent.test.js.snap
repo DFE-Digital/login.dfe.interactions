@@ -264,6 +264,18 @@ exports[`when policy is POLICIES.SIGNUP renders correctly 1`] = `
               <p
                 className="govuk-body"
               >
+                If you don't receive an email after this time you can 
+                <a
+                  className="govuk-link"
+                  onClick={null}
+                >
+                  resend the activation email
+                </a>
+                .
+              </p>
+              <p
+                className="govuk-body"
+              >
                 This link expires in 24 hours.
               </p>
             </div>

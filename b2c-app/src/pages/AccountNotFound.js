@@ -21,7 +21,7 @@ class AccountNotFound extends React.Component {
                 </components.Paragraph>
             </div>
 
-        const title = 'Unable to find your account';
+        const title = 'We have not been able to find your account';
 
         const pageConfig = {
             title: title,

@@ -38,7 +38,7 @@ exports[`renders correctly 1`] = `
             <h1
               className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
             >
-              Unable to find your account
+              We have not been able to find your account
             </h1>
             <div>
               <p
