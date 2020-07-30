@@ -12,5 +12,6 @@ export const PAGE_IDS = {
     ACCOUNT_FOUND: 'accountFound',
     ACCOUNT_NOT_FOUND: 'accountNotFound',
     EXPIRED_LINK_WITH_RESEND: 'expiredLinkWithResend',
+    RESEND_ACTIVATION_EMAIL: 'resendActivationEmail',
     NOT_FOUND: 'pageNotFound'
 }

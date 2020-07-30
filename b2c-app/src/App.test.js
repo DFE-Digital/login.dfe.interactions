@@ -140,6 +140,13 @@ describe('when page is set in server side query params', () => {
         expect(tree).toMatchSnapshot();
     });
 
+    it('renders resend activation email page correctly', () => {
+        ServerSideQueryParamsService.getQueryParam.mockReturnValue(PAGE_IDS.RESEND_ACTIVATION_EMAIL);
+
+        const tree = renderApp();
+        expect(tree).toMatchSnapshot();
+    });
+
     it('renders page not page correctly when routing does not find a match', () => {
         //mock value from query params service
         ServerSideQueryParamsService.getQueryParam.mockReturnValue('some_value');

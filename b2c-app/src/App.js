@@ -42,10 +42,6 @@ class App extends React.Component {
     const page = ServerSideQueryParamsService.getQueryParam(QUERY_PARAMS.PAGE);
     const policy = ServerSideQueryParamsService.getQueryParam(QUERY_PARAMS.POLICY);
 
-    console.log(page);
-    console.log(policy);
-
-
     //Keep both options temporarily until it is all implemented
 
     //new version of routing
@@ -109,6 +105,10 @@ class App extends React.Component {
 
         case PAGE_IDS.NOT_FOUND:
           result = <PageNotFound />;
+          break;
+
+        case PAGE_IDS.RESEND_ACTIVATION_EMAIL:
+          result = <ResendActivationEmail />;
           break;
 
         default:
