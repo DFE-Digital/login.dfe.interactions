@@ -4,8 +4,8 @@ import * as ServerSideQueryParamsService from './services/ServerSideQueryParamsS
 
 import { POLICIES } from './constants/policies';
 
-import { domHasElementWithId } from './helpers/dom';
-import { matchesPath, hasSearchParam } from './helpers/urls';
+// import { domHasElementWithId } from './helpers/dom';
+// import { matchesPath, hasSearchParam } from './helpers/urls';
 
 import Signup from './pages/Signup';
 import Login from './pages/Login';
