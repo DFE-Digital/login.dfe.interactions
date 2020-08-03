@@ -382,6 +382,7 @@ exports[`when location is set -- aided registration -- account activated renders
                     data-module="govuk-button"
                     draggable="false"
                     href={null}
+                    id="signInLink"
                     onClick={null}
                     role="button"
                   >
@@ -1204,6 +1205,7 @@ exports[`when location is set -- aided registration -- email sent renders correc
                     <a
                       className="govuk-link"
                       href={null}
+                      id="resendEmailLink"
                       onClick={null}
                     >
                       resend the activation email
@@ -1495,6 +1497,7 @@ exports[`when location is set -- aided registration -- expired link renders corr
                     data-module="govuk-button"
                     draggable="false"
                     href={null}
+                    id="resendEmailLink"
                     onClick={null}
                     role="button"
                   >
@@ -1785,6 +1788,7 @@ exports[`when location is set -- change email -- email sent renders correctly wh
                     <a
                       className="govuk-link"
                       href={null}
+                      id="resendEmailLink"
                       onClick={[Function]}
                     >
                       resend the activation email
@@ -1801,6 +1805,7 @@ exports[`when location is set -- change email -- email sent renders correctly wh
                     data-module="govuk-button"
                     draggable="false"
                     href={null}
+                    id="signInLink"
                     onClick={null}
                     role="button"
                   >
@@ -2399,6 +2404,7 @@ exports[`when location is set -- change email -- new email activated renders cor
                     data-module="govuk-button"
                     draggable="false"
                     href={null}
+                    id="signInLink"
                     onClick={null}
                     role="button"
                   >
@@ -2687,6 +2693,7 @@ exports[`when location is set -- forgotten email -- account found renders correc
                     data-module="govuk-button"
                     draggable="false"
                     href={null}
+                    id="signInLink"
                     onClick={null}
                     role="button"
                   >
@@ -2968,6 +2975,7 @@ exports[`when location is set -- forgotten email -- account not found renders co
                     <a
                       className="govuk-link"
                       href={null}
+                      id="resetPasswordLink"
                       onClick={null}
                     >
                       Try again
@@ -4273,6 +4281,7 @@ exports[`when location is set -- login renders correctly when URL contains polic
                       <a
                         className="govuk-link"
                         href={null}
+                        id="resetPasswordLink"
                         onClick={null}
                       >
                         I cannot access my account
@@ -4631,6 +4640,7 @@ exports[`when location is set -- login renders correctly when query params conta
                       <a
                         className="govuk-link"
                         href={null}
+                        id="resetPasswordLink"
                         onClick={null}
                       >
                         I cannot access my account
@@ -5606,6 +5616,7 @@ exports[`when location is set -- reset password -- email sent renders correctly 
                     <a
                       className="govuk-link"
                       href={null}
+                      id="resendEmailLink"
                       onClick={null}
                     >
                       resend password reset email
@@ -6283,6 +6294,7 @@ exports[`when location is set -- reset password -- expired link renders correctl
                     data-module="govuk-button"
                     draggable="false"
                     href={null}
+                    id="resendEmailLink"
                     onClick={null}
                     role="button"
                   >
@@ -6568,6 +6580,7 @@ exports[`when location is set -- reset password -- password changed renders corr
                     data-module="govuk-button"
                     draggable="false"
                     href={null}
+                    id="signInLink"
                     onClick={null}
                     role="button"
                   >
@@ -6929,6 +6942,7 @@ exports[`when location is set -- reset password -- request email to reset passwo
                   <a
                     className="govuk-link"
                     href={null}
+                    id="forgottenEmailLink"
                     onClick={null}
                   >
                     Can't remember your email address?
@@ -7289,6 +7303,7 @@ exports[`when location is set -- reset password -- request email to reset passwo
                   <a
                     className="govuk-link"
                     href={null}
+                    id="forgottenEmailLink"
                     onClick={null}
                   >
                     Can't remember your email address?
@@ -8744,6 +8759,7 @@ exports[`when location is set -- self registration -- page not found renders cor
                     <a
                       className="govuk-link"
                       href={null}
+                      id="contactUsLink"
                       onClick={null}
                     >
                       contact us
@@ -9037,6 +9053,7 @@ exports[`when location is set -- self registration -- page not found renders cor
                     <a
                       className="govuk-link"
                       href="https://nationalcareers.service.gov.uk/contact-us"
+                      id="contactUsLink"
                       onClick={null}
                     >
                       contact us

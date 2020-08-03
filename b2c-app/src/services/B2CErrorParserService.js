@@ -23,7 +23,7 @@ export function parseB2CErrors(error) {
                     <components.Paragraph>
                         Account already activated.
                     </components.Paragraph>
-                    <components.Link policy={POLICIES.SIGNIN_INVITATION}>Return to sign in page</components.Link>
+                    <components.Link id="signInLink" policy={POLICIES.SIGNIN_INVITATION}>Return to sign in page</components.Link>
                 </div>
         }
     ];

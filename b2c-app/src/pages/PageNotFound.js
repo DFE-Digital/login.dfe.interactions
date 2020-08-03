@@ -15,7 +15,7 @@ class PageNotFound extends React.Component {
                 </components.Paragraph>
                 <components.Paragraph>
                     If the web address is correct you can&nbsp;
-                    <components.Link url="https://nationalcareers.service.gov.uk/contact-us">contact us</components.Link>
+                    <components.Link id="contactUsLink" url="https://nationalcareers.service.gov.uk/contact-us">contact us</components.Link>
                     &nbsp;to get help using this service or call 0800 100 900, 8am to 10pm, 7 days a week.
                 </components.Paragraph>
             </div >

@@ -20,7 +20,7 @@ class ExpiredLink extends React.Component {
         }
 
         if (buttonText) {
-            link = <components.Link type={LINK_TYPES.BUTTON} policy={this.props.policy}>{buttonText}</components.Link>
+            link = <components.Link id="resendEmailLink" type={LINK_TYPES.BUTTON} policy={this.props.policy}>{buttonText}</components.Link>
         }
 
         const content =

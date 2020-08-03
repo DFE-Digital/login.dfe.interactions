@@ -51,6 +51,7 @@ exports[`renders correctly 1`] = `
                 data-module="govuk-button"
                 draggable="false"
                 href={null}
+                id="signInLink"
                 onClick={null}
                 role="button"
               >

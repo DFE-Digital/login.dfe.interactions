@@ -42,21 +42,21 @@ class EmailSent extends React.Component {
         const resendActivationEmailParagraph =
             <components.Paragraph>
                 If you don't receive an email after this time you can&nbsp;
-                <components.Link policy={POLICIES.RESEND_EMAIL}>resend the activation email</components.Link>
+                <components.Link id="resendEmailLink" policy={POLICIES.RESEND_EMAIL}>resend the activation email</components.Link>
                 .
             </ components.Paragraph >
 
         const resendPasswordResetParagraph =
             <components.Paragraph>
                 If you don't receive an email after this time you can&nbsp;
-                <components.Link policy={POLICIES.PASSWORD_RESET}>resend password reset email</components.Link>
+                <components.Link id="resendEmailLink" policy={POLICIES.PASSWORD_RESET}>resend password reset email</components.Link>
                 .
             </ components.Paragraph>
 
         const resendChangeEmailParagraph =
             <components.Paragraph>
                 If you don't receive an email after this time you can&nbsp;
-                <components.Link policy={POLICIES.RESEND_EMAIL} onClick={this.showSpinner}>resend the activation email</components.Link>
+                <components.Link id="resendEmailLink" policy={POLICIES.RESEND_EMAIL} onClick={this.showSpinner}>resend the activation email</components.Link>
                 .
             </ components.Paragraph >
 
@@ -65,7 +65,7 @@ class EmailSent extends React.Component {
                 This link expires in 24 hours.
             </components.Paragraph>
 
-        const signinButton = <components.Link type={LINK_TYPES.BUTTON} policy={POLICIES.SIGNIN_INVITATION}>Return to sign in</components.Link>
+        const signinButton = <components.Link id="signInLink" type={LINK_TYPES.BUTTON} policy={POLICIES.SIGNIN_INVITATION}>Return to sign in</components.Link>
 
 
         let content;
