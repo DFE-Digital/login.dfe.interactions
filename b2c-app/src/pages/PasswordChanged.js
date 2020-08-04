@@ -10,7 +10,7 @@ class PasswordChanged extends React.Component {
         const content =
             <div>
                 <components.Paragraph>Use your new details to sign in and access your information.</components.Paragraph>
-                <components.Link type={LINK_TYPES.BUTTON} policy={POLICIES.SIGNIN_INVITATION}>Sign in to your account</components.Link>
+                <components.Link id="signInLink" type={LINK_TYPES.BUTTON} policy={POLICIES.SIGNIN_INVITATION}>Sign in to your account</components.Link>
             </div>
 
         const title = "We've changed your password";

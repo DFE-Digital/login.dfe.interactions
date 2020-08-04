@@ -21,13 +21,13 @@ function Link(props) {
 
     if (props.type === LINK_TYPES.BUTTON) {
         output =
-            <a href={link} role="button" onClick={props.onClick ? props.onClick : null} draggable="false" className="govuk-button govuk-button--start" data-module="govuk-button">
+            <a href={link} id={props.id} role="button" onClick={props.onClick ? props.onClick : null} draggable="false" className="govuk-button govuk-button--start" data-module="govuk-button">
                 {props.children}
             </a>
     }
     else {
         output =
-            <a href={link} onClick={props.onClick ? props.onClick : null} className="govuk-link">
+            <a href={link} id={props.id} onClick={props.onClick ? props.onClick : null} className="govuk-link">
                 {props.children}
             </a>
     }

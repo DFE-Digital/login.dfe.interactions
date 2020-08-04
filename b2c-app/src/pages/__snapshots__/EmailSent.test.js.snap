@@ -104,6 +104,7 @@ exports[`when policy is POLICIES.CHANGE_EMAIL renders correctly 1`] = `
                 <a
                   className="govuk-link"
                   href={null}
+                  id="resendEmailLink"
                   onClick={[Function]}
                 >
                   resend the activation email
@@ -120,6 +121,7 @@ exports[`when policy is POLICIES.CHANGE_EMAIL renders correctly 1`] = `
                 data-module="govuk-button"
                 draggable="false"
                 href={null}
+                id="signInLink"
                 onClick={null}
                 role="button"
               >
@@ -195,6 +197,7 @@ exports[`when policy is POLICIES.RESET_PASSWORD renders correctly 1`] = `
                 <a
                   className="govuk-link"
                   href={null}
+                  id="resendEmailLink"
                   onClick={null}
                 >
                   resend password reset email
@@ -271,6 +274,7 @@ exports[`when policy is POLICIES.SIGNUP renders correctly 1`] = `
                 <a
                   className="govuk-link"
                   href={null}
+                  id="resendEmailLink"
                   onClick={null}
                 >
                   resend the activation email

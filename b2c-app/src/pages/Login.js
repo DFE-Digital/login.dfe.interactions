@@ -80,7 +80,7 @@ class Login extends React.Component {
                     showErrors={this.state.showErrors}
                     errors={this.state.errors} />
                 <components.Paragraph errors={this.state.errors}>
-                    <components.Link policy={POLICIES.PASSWORD_RESET}>I cannot access my account</components.Link>
+                    <components.Link id="resetPasswordLink" policy={POLICIES.PASSWORD_RESET}>I cannot access my account</components.Link>
                 </components.Paragraph>
             </div>
 
