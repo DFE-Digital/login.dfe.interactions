@@ -103,6 +103,7 @@ exports[`when policy is POLICIES.CHANGE_EMAIL renders correctly 1`] = `
                 If you don't receive an email after this time you can 
                 <a
                   className="govuk-link"
+                  id="resendEmailLink"
                   onClick={[Function]}
                 >
                   resend the activation email
@@ -118,6 +119,7 @@ exports[`when policy is POLICIES.CHANGE_EMAIL renders correctly 1`] = `
                 className="govuk-button govuk-button--start"
                 data-module="govuk-button"
                 draggable="false"
+                id="signInLink"
                 onClick={null}
                 role="button"
               >
@@ -192,6 +194,7 @@ exports[`when policy is POLICIES.RESET_PASSWORD renders correctly 1`] = `
                 If you don't receive an email after this time you can 
                 <a
                   className="govuk-link"
+                  id="resendEmailLink"
                   onClick={null}
                 >
                   resend password reset email
@@ -267,6 +270,7 @@ exports[`when policy is POLICIES.SIGNUP renders correctly 1`] = `
                 If you don't receive an email after this time you can 
                 <a
                   className="govuk-link"
+                  id="resendEmailLink"
                   onClick={null}
                 >
                   resend the activation email

@@ -25,7 +25,7 @@ class EmailSent extends React.Component {
         return (
             <components.Paragraph>
                 If you don't receive an email after this time you can&nbsp;
-                <components.Link policy={linkToPolicy} onClick={showSpinner && this.showSpinner}>{linkText}</components.Link>
+                <components.Link id='resendEmailLink' policy={linkToPolicy} onClick={showSpinner && this.showSpinner}>{linkText}</components.Link>
                 .
             </ components.Paragraph >
         )
@@ -55,7 +55,7 @@ class EmailSent extends React.Component {
                 This link expires in 24 hours.
             </components.Paragraph>
 
-        const signinButton = <components.Link type={LINK_TYPES.BUTTON} policy={POLICIES.SIGNIN_INVITATION}>Return to sign in</components.Link>
+        const signinButton = <components.Link id="signInLink" type={LINK_TYPES.BUTTON} policy={POLICIES.SIGNIN_INVITATION}>Return to sign in</components.Link>
 
 
         let content;

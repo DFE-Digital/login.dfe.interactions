@@ -16,7 +16,7 @@ function LockedAccountHelp(props) {
             or
             <ul className="govuk-list govuk-list--bullet">
                 <li>
-                    <components.Link policy={POLICIES.PASSWORD_RESET}>reset your password now</components.Link>
+                    <components.Link id="resetPasswordLink" policy={POLICIES.PASSWORD_RESET}>reset your password now</components.Link>
                 </li>
             </ul>
         </div>

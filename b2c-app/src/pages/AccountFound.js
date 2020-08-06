@@ -15,7 +15,7 @@ class AccountFound extends React.Component {
             <div>
                 <components.Paragraph>{contentFromB2C}</components.Paragraph>
                 <components.Paragraph>You'll need to use this email address to sign in to your account.</components.Paragraph>
-                <components.Link type={LINK_TYPES.BUTTON} policy={POLICIES.SIGNIN_INVITATION}>Sign in to your account</components.Link>
+                <components.Link id="signInLink" type={LINK_TYPES.BUTTON} policy={POLICIES.SIGNIN_INVITATION}>Sign in to your account</components.Link>
             </div>
 
         const title = "We've found your email address";

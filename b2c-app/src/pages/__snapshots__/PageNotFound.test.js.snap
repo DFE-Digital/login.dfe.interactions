@@ -58,6 +58,7 @@ exports[`renders correctly 1`] = `
                 <a
                   className="govuk-link"
                   href="https://nationalcareers.service.gov.uk/contact-us"
+                  id="contactUsLink"
                   onClick={null}
                 >
                   contact us

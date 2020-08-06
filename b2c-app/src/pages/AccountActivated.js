@@ -11,7 +11,7 @@ class AccountActivated extends React.Component {
         const content =
             <div>
                 <components.Paragraph>You can start using your account to access your information.</components.Paragraph>
-                <components.Link type={LINK_TYPES.BUTTON} policy={POLICIES.SIGNIN_INVITATION}>Sign in to your account</components.Link>
+                <components.Link id="signInLink" type={LINK_TYPES.BUTTON} policy={POLICIES.SIGNIN_INVITATION}>Sign in to your account</components.Link>
             </div>
 
         const title = "We've activated your account";

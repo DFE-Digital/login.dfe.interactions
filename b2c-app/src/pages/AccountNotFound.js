@@ -10,7 +10,7 @@ class AccountNotFound extends React.Component {
         const content =
             <div>
                 <components.Paragraph>
-                    <components.Link policy={POLICIES.PASSWORD_RESET}>Try again</components.Link>
+                    <components.Link id="resetPasswordLink" policy={POLICIES.PASSWORD_RESET}>Try again</components.Link>
                     &nbsp;with other details you may have used when you created your account.
                 </components.Paragraph>
                 <components.Paragraph>

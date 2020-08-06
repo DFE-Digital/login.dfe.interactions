@@ -8,13 +8,13 @@ function Link(props) {
 
     if (props.type === LINK_TYPES.BUTTON) {
         output =
-            <a href={props.url || getB2CLink(props.policy)} role="button" onClick={props.onClick ? props.onClick : null} draggable="false" className="govuk-button govuk-button--start" data-module="govuk-button">
+            <a href={props.url || getB2CLink(props.policy)} id={props.id} role="button" onClick={props.onClick ? props.onClick : null} draggable="false" className="govuk-button govuk-button--start" data-module="govuk-button">
                 {props.children}
             </a>
     }
     else {
         output =
-            <a href={props.url || getB2CLink(props.policy)} onClick={props.onClick ? props.onClick : null} className="govuk-link">
+            <a href={props.url || getB2CLink(props.policy)} id={props.id} onClick={props.onClick ? props.onClick : null} className="govuk-link">
                 {props.children}
             </a>
     }
