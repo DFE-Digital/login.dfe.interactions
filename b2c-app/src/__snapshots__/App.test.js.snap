@@ -381,7 +381,7 @@ exports[`when page is set in server side query params renders account activated 
                     className="govuk-button govuk-button--start"
                     data-module="govuk-button"
                     draggable="false"
-                    href="/accountActivated.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1A_Signin_Invitation&client_id=accountActivated&nonce=defaultNonce&redirect_uri=accountActivated&scope=openid&response_type=id_token&prompt=login"
+                    href="/accountActivated/oauth2/v2.0/authorize?p=B2C_1A_Signin_Invitation&client_id=accountActivated&nonce=defaultNonce&redirect_uri=accountActivated&scope=openid&response_type=id_token&prompt=login"
                     id="signInLink"
                     onClick={null}
                     role="button"
@@ -670,7 +670,7 @@ exports[`when page is set in server side query params renders account found chan
                     className="govuk-button govuk-button--start"
                     data-module="govuk-button"
                     draggable="false"
-                    href="/accountFound.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1A_Signin_Invitation&client_id=accountFound&nonce=defaultNonce&redirect_uri=accountFound&scope=openid&response_type=id_token&prompt=login"
+                    href="/accountFound/oauth2/v2.0/authorize?p=B2C_1A_Signin_Invitation&client_id=accountFound&nonce=defaultNonce&redirect_uri=accountFound&scope=openid&response_type=id_token&prompt=login"
                     id="signInLink"
                     onClick={null}
                     role="button"
@@ -952,7 +952,7 @@ exports[`when page is set in server side query params renders account not found 
                   >
                     <a
                       className="govuk-link"
-                      href="/accountNotFound.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1A_Password_Reset&client_id=accountNotFound&nonce=defaultNonce&redirect_uri=accountNotFound&scope=openid&response_type=id_token&prompt=login"
+                      href="/accountNotFound/oauth2/v2.0/authorize?p=B2C_1A_Password_Reset&client_id=accountNotFound&nonce=defaultNonce&redirect_uri=accountNotFound&scope=openid&response_type=id_token&prompt=login"
                       id="resetPasswordLink"
                       onClick={null}
                     >
@@ -4144,7 +4144,7 @@ exports[`when page is set in server side query params renders login page correct
                     >
                       <a
                         className="govuk-link"
-                        href="/login.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1A_Password_Reset&client_id=login&nonce=defaultNonce&redirect_uri=login&scope=openid&response_type=id_token&prompt=login"
+                        href="/login/oauth2/v2.0/authorize?p=B2C_1A_Password_Reset&client_id=login&nonce=defaultNonce&redirect_uri=login&scope=openid&response_type=id_token&prompt=login"
                         id="resetPasswordLink"
                         onClick={null}
                       >
@@ -5026,7 +5026,7 @@ exports[`when page is set in server side query params renders password changed p
                     className="govuk-button govuk-button--start"
                     data-module="govuk-button"
                     draggable="false"
-                    href="/passwordChanged.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1A_Signin_Invitation&client_id=passwordChanged&nonce=defaultNonce&redirect_uri=passwordChanged&scope=openid&response_type=id_token&prompt=login"
+                    href="/passwordChanged/oauth2/v2.0/authorize?p=B2C_1A_Signin_Invitation&client_id=passwordChanged&nonce=defaultNonce&redirect_uri=passwordChanged&scope=openid&response_type=id_token&prompt=login"
                     id="signInLink"
                     onClick={null}
                     role="button"
@@ -5724,7 +5724,7 @@ exports[`when page is set in server side query params renders reset password pag
                 >
                   <a
                     className="govuk-link"
-                    href="/resetPassword.onmicrosoft.com/oauth2/v2.0/authorize?p=B2C_1A_Find_Email&client_id=resetPassword&nonce=defaultNonce&redirect_uri=resetPassword&scope=openid&response_type=id_token&prompt=login"
+                    href="/resetPassword/oauth2/v2.0/authorize?p=B2C_1A_Find_Email&client_id=resetPassword&nonce=defaultNonce&redirect_uri=resetPassword&scope=openid&response_type=id_token&prompt=login"
                     id="forgottenEmailLink"
                     onClick={null}
                   >

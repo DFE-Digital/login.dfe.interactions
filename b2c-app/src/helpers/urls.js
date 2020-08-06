@@ -17,7 +17,7 @@ export function getB2CLink(policy) {
 
     if (tenantId && clientId && redirectURI) {
 
-        relativeUrl = `/${tenantId}.onmicrosoft.com/oauth2/v2.0/` +
+        relativeUrl = `/${tenantId}/oauth2/v2.0/` +
             `authorize?p=${_policy}&client_id=${clientId}&nonce=defaultNonce` +
             `&redirect_uri=${redirectURI}&scope=openid&response_type=id_token&prompt=login`;
 
