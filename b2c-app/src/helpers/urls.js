@@ -24,11 +24,13 @@ export async function getB2CLink(policy) {
     const clientId = ServerSideQueryParamsService.getQueryParam(QUERY_PARAMS.CLIENT_ID);
     const redirectURI = ServerSideQueryParamsService.getQueryParam(QUERY_PARAMS.REDIRECT_URI);
 
+    const tenantFromURL = window.location.pathname.slice(1, window.location.pathname.indexOf('/', 1));
+
     let relativeUrl;
 
     if (tenantId && clientId && redirectURI) {
 
-        relativeUrl = `/${tenantId}/oauth2/v2.0/` +
+        relativeUrl = `/${tenantId || tenantFromURL}/oauth2/v2.0/` +
             `authorize?p=${_policy}&client_id=${clientId}&nonce=defaultNonce` +
             `&redirect_uri=${redirectURI}&scope=openid&response_type=id_token&prompt=login`;
 
