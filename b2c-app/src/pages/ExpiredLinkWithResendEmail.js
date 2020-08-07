@@ -1,6 +1,5 @@
 import React from 'react';
 import components from '../components';
-import { POLICIES } from '../constants/policies';
 import { PAGE_IDS } from '../constants/pageIds';
 
 class ExpiredLinkWithResendEmail extends React.Component {
