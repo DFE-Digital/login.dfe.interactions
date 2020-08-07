@@ -1,5 +1,6 @@
 import React from 'react';
 
+import * as QueryParamsService from './services/QueryParamsService';
 import * as ServerSideQueryParamsService from './services/ServerSideQueryParamsService';
 
 import { POLICIES } from './constants/policies';
@@ -32,6 +33,11 @@ import { QUERY_PARAMS } from './constants/queryParams';
 import { PAGE_IDS } from './constants/pageIds';
 
 class App extends React.Component {
+
+  componentDidMount() {
+    //retrieve query param values and store for later use
+    QueryParamsService.init();
+  }
 
   getComponentByLocation() {
 

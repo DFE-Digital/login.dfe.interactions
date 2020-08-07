@@ -1,17 +1,28 @@
 import { POLICIES } from '../constants/policies';
 import { QUERY_PARAMS } from '../constants/queryParams';
+import * as QueryParamsService from '../services/QueryParamsService';
 import * as ServerSideQueryParamsService from '../services/ServerSideQueryParamsService';
 
-export function getB2CLink(policy) {
+async function getB2CParameters() {
+
+    const b2cParams = {
+        token: await QueryParamsService.getQueryParam(QUERY_PARAMS.ID_TOKEN_HINT)
+    };
+    return b2cParams;
+}
+
+export async function getB2CLink(policy) {
 
     //link to policy passed in or sign in by default
     const _policy = policy || POLICIES.SIGNIN_INVITATION;
+
+    //get token hint from stored query params
+    const { token } = await getB2CParameters();
 
     //get parameters required to build URL from query params (server side request)
     const tenantId = ServerSideQueryParamsService.getQueryParam(QUERY_PARAMS.TENANT_ID);
     const clientId = ServerSideQueryParamsService.getQueryParam(QUERY_PARAMS.CLIENT_ID);
     const redirectURI = ServerSideQueryParamsService.getQueryParam(QUERY_PARAMS.REDIRECT_URI);
-    const token = ServerSideQueryParamsService.getQueryParam(QUERY_PARAMS.ID_TOKEN_HINT);
 
     let relativeUrl;
 
