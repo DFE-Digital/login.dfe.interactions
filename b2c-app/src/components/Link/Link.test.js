@@ -13,17 +13,19 @@ it('renders without crashing', () => {
 describe('when URL passed in as prop', () => {
 
     it('renders correctly without specified type', () => {
-        const tree = renderer
-            .create(<components.Link url='https://test.com' />)
-            .toJSON();
-        expect(tree).toMatchSnapshot();
+        let tree;
+        act(() => {
+            tree = create(<components.Link url='https://test.com' />)
+        });
+        expect(tree.toJSON()).toMatchSnapshot();
     });
 
     it('renders correctly link of type button', () => {
-        const tree = renderer
-            .create(<components.Link type={LINK_TYPES.BUTTON} url='https://test.com' />)
-            .toJSON();
-        expect(tree).toMatchSnapshot();
+        let tree;
+        act(() => {
+            tree = create(<components.Link type={LINK_TYPES.BUTTON} url='https://test.com' />)
+        });
+        expect(tree.toJSON()).toMatchSnapshot();
     });
 });
 
