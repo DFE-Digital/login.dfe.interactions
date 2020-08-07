@@ -13,6 +13,7 @@ import ForgottenEmail from './pages/ForgottenEmail';
 import AccountNotFound from './pages/AccountNotFound';
 import AccountFound from './pages/AccountFound';
 import PasswordChanged from './pages/PasswordChanged';
+import Placeholder from './pages/Placeholder';
 import EnterNewPassword from './pages/EnterNewPassword';
 import ActivateAccount from './pages/AidedRegistration/ActivateAccount';
 import ExpiredLink from './pages/ExpiredLink';
@@ -119,7 +120,7 @@ class App extends React.Component {
       return result;
     }
 
-    return <PageNotFound />;
+    return <Placeholder />;
 
   }
 
