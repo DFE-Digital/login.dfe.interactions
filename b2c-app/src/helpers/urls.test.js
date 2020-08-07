@@ -64,7 +64,7 @@ describe('when building the URL for a link that points to a B2C policy', () => {
         expect(getB2CLink(POLICIES.SIGNIN_INVITATION)).toEqual(`/${mockReturnValue}/oauth2/v2.0/authorize?p=${POLICIES.SIGNIN_INVITATION}&client_id=${mockReturnValue}&nonce=defaultNonce&redirect_uri=${mockReturnValue}&scope=openid&response_type=id_token&prompt=login`);
         expect(getB2CLink(POLICIES.PASSWORD_RESET)).toEqual(`/${mockReturnValue}/oauth2/v2.0/authorize?p=${POLICIES.PASSWORD_RESET}&client_id=${mockReturnValue}&nonce=defaultNonce&redirect_uri=${mockReturnValue}&scope=openid&response_type=id_token&prompt=login`);
         expect(getB2CLink(POLICIES.FIND_EMAIL)).toEqual(`/${mockReturnValue}/oauth2/v2.0/authorize?p=${POLICIES.FIND_EMAIL}&client_id=${mockReturnValue}&nonce=defaultNonce&redirect_uri=${mockReturnValue}&scope=openid&response_type=id_token&prompt=login`);
-        expect(getB2CLink(POLICIES.RESEND_EMAIL)).toEqual(`/${mockReturnValue}/oauth2/v2.0/authorize?p=${POLICIES.RESEND_EMAIL}&client_id=${mockReturnValue}&nonce=defaultNonce&redirect_uri=${mockReturnValue}&scope=openid&response_type=id_token&prompt=login&id_token_hint=${mockReturnValue}`);
+        expect(getB2CLink(POLICIES.RESEND_EMAIL)).toEqual(`/${mockReturnValue}/oauth2/v2.0/authorize?p=${POLICIES.RESEND_EMAIL}&client_id=${mockReturnValue}&nonce=defaultNonce&redirect_uri=${mockReturnValue}&scope=openid&response_type=id_token&prompt=login&id_token_hint=${mockReturnValue}&idtokenhint=${mockReturnValue}`);
     });
 
 });

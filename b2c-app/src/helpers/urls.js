@@ -22,7 +22,7 @@ export function getB2CLink(policy) {
             `&redirect_uri=${redirectURI}&scope=openid&response_type=id_token&prompt=login`;
 
         if (_policy === POLICIES.RESEND_EMAIL && token) {
-            relativeUrl += `&id_token_hint=${token}`;
+            relativeUrl += `&id_token_hint=${token}&idtokenhint=${token}`;
         }
     }
 
