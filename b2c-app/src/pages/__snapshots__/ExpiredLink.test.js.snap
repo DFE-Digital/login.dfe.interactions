@@ -50,6 +50,7 @@ exports[`renders correctly with policy POLICIES.RESET_PASSWORD passed in 1`] = `
                 className="govuk-button govuk-button--start"
                 data-module="govuk-button"
                 draggable="false"
+                href={null}
                 id="resendEmailLink"
                 onClick={null}
                 role="button"

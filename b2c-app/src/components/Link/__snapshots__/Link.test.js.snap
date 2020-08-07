@@ -5,6 +5,7 @@ exports[`when URL is not specified renders correctly link of type button 1`] = `
   className="govuk-button govuk-button--start"
   data-module="govuk-button"
   draggable="false"
+  href={null}
   onClick={null}
   role="button"
 />
@@ -13,6 +14,7 @@ exports[`when URL is not specified renders correctly link of type button 1`] = `
 exports[`when URL is not specified renders correctly without specified type 1`] = `
 <a
   className="govuk-link"
+  href={null}
   onClick={null}
 />
 `;
@@ -31,7 +33,7 @@ exports[`when URL passed in as prop renders correctly link of type button 1`] = 
 exports[`when URL passed in as prop renders correctly without specified type 1`] = `
 <a
   className="govuk-link"
-  href="https://test.com"
+  href={null}
   onClick={null}
 />
 `;

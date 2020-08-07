@@ -30,6 +30,7 @@ exports[`renders correctly 1`] = `
     <li>
       <a
         className="govuk-link"
+        href={null}
         id="resetPasswordLink"
         onClick={null}
       >

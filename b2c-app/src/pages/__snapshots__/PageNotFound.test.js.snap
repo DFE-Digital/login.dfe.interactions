@@ -57,7 +57,7 @@ exports[`renders correctly 1`] = `
                 If the web address is correct you can 
                 <a
                   className="govuk-link"
-                  href="https://nationalcareers.service.gov.uk/contact-us"
+                  href={null}
                   id="contactUsLink"
                   onClick={null}
                 >

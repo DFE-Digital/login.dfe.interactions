@@ -103,6 +103,7 @@ exports[`when policy is POLICIES.CHANGE_EMAIL renders correctly 1`] = `
                 If you don't receive an email after this time you can 
                 <a
                   className="govuk-link"
+                  href={null}
                   id="resendEmailLink"
                   onClick={[Function]}
                 >
@@ -119,6 +120,7 @@ exports[`when policy is POLICIES.CHANGE_EMAIL renders correctly 1`] = `
                 className="govuk-button govuk-button--start"
                 data-module="govuk-button"
                 draggable="false"
+                href={null}
                 id="signInLink"
                 onClick={null}
                 role="button"
@@ -194,6 +196,7 @@ exports[`when policy is POLICIES.RESET_PASSWORD renders correctly 1`] = `
                 If you don't receive an email after this time you can 
                 <a
                   className="govuk-link"
+                  href={null}
                   id="resendEmailLink"
                   onClick={null}
                 >
@@ -270,6 +273,7 @@ exports[`when policy is POLICIES.SIGNUP renders correctly 1`] = `
                 If you don't receive an email after this time you can 
                 <a
                   className="govuk-link"
+                  href={null}
                   id="resendEmailLink"
                   onClick={null}
                 >
