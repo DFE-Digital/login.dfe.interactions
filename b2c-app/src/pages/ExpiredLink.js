@@ -9,21 +9,29 @@ class ExpiredLink extends React.Component {
     render() {
 
         let paragraphText;
-        let buttonText;
         let link;
 
-        if (this.props.policy === POLICIES.RESEND_EMAIL) {
+        if (this.props.policy === POLICIES.SIGNUP_INVITATION ||
+            this.props.policy === POLICIES.ACCOUNT_SIGNUP ||
+            this.props.policy === POLICIES.SIGNUP_CONFIRMATION ||
+            this.props.policy === POLICIES.RESEND_EMAIL) {
+
             paragraphText = 'The link in your account activation email has expired.';
-            buttonText = 'Resend activation email';
+            link =
+                <components.Link id="resendEmailLink" type={LINK_TYPES.BUTTON} policy={POLICIES.RESEND_EMAIL}>
+                    Resend activation email
+                </components.Link>
+
         } else if (this.props.policy === POLICIES.PASSWORD_RESET ||
             this.props.policy === POLICIES.PASSWORD_RESET_CONFIRMATION) {
+
             paragraphText = 'The link in your password reset email has expired.';
-            buttonText = 'Resend password reset email';
+            link =
+                <components.Link id="resendEmailLink" type={LINK_TYPES.BUTTON} policy={POLICIES.PASSWORD_RESET}>
+                    Resend password reset email
+                </components.Link>
         }
 
-        if (buttonText) {
-            link = <components.Link id="resendEmailLink" type={LINK_TYPES.BUTTON} policy={this.props.policy}>{buttonText}</components.Link>
-        }
 
         const content =
             <div>

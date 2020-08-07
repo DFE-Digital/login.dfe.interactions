@@ -18,13 +18,6 @@ it('renders correctly without policy passed in', () => {
     expect(tree).toMatchSnapshot();
 });
 
-it('renders correctly with policy POLICIES.SIGNUP passed in', () => {
-    const tree = renderer
-        .create(<ExpiredLinkWithResendEmail policy={POLICIES.ACCOUNT_SIGNUP} />)
-        .toJSON();
-    expect(tree).toMatchSnapshot();
-});
-
 it('renders correctly with policy POLICIES.CHANGE_EMAIL passed in', () => {
     const tree = renderer
         .create(<ExpiredLinkWithResendEmail policy={POLICIES.CHANGE_EMAIL} />)

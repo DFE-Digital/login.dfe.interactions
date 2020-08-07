@@ -3123,7 +3123,23 @@ exports[`when page is set in server side query params renders expired link (with
                 </h1>
                 <p
                   className="govuk-body"
-                />
+                >
+                  This activation link has expired.
+                </p>
+                <form
+                  id="customForm"
+                  noValidate={true}
+                  onSubmit={[Function]}
+                >
+                  <div />
+                  <button
+                    className="govuk-button"
+                    id="preSubmit"
+                    type="submit"
+                  >
+                    Request new activation link
+                  </button>
+                </form>
               </div>
             </div>
           </main>

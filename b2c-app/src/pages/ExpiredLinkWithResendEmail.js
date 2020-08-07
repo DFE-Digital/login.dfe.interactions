@@ -24,29 +24,14 @@ class ExpiredLinkWithResendEmail extends React.Component {
 
     render() {
 
-        let linkExpiredText;
-        let submitButtonText;
-
-        if (this.props.policy === POLICIES.SIGNUP_INVITATION ||
-            this.props.policy === POLICIES.ACCOUNT_SIGNUP ||
-            this.props.policy === POLICIES.SIGNUP_CONFIRMATION) {
-
-            linkExpiredText = 'The link in your account activation email has expired.';
-            submitButtonText = 'Resend activation email';
-        }
-        else if (this.props.policy === POLICIES.CHANGE_EMAIL) {
-            linkExpiredText = 'This activation link has expired.';
-            submitButtonText = 'Request new activation link';
-        }
-
-        const linkExpiredParagraph =
-            <components.Paragraph>
-                {linkExpiredText}
-            </components.Paragraph>
+        const submitButtonText = 'Request new activation link';
 
         const formContent = <div></div>
 
-        const content = linkExpiredParagraph;
+        const content =
+            <components.Paragraph>
+                This activation link has expired.
+            </components.Paragraph>
 
         const title = 'Activation link expired';
 
