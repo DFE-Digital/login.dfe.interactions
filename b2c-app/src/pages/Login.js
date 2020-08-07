@@ -4,6 +4,7 @@ import { animateScroll } from "react-scroll";
 import components from '../components';
 import { POLICIES } from '../constants/policies';
 import { onChange } from '../helpers/pageUpdatesHandler';
+import { PAGE_IDS } from '../constants/pageIds';
 
 class Login extends React.Component {
 
@@ -100,7 +101,7 @@ class Login extends React.Component {
 
 
         return (
-            <div id="login">
+            <div id={PAGE_IDS.LOGIN}>
                 <components.PageContainer pageConfig={pageConfig} />
             </div>
         )

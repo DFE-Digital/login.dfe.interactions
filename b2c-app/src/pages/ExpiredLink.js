@@ -2,6 +2,7 @@ import React from 'react';
 import components from '../components';
 import { POLICIES } from '../constants/policies';
 import { LINK_TYPES } from '../constants/linkTypes';
+import { PAGE_IDS } from '../constants/pageIds';
 
 class ExpiredLink extends React.Component {
 
@@ -12,9 +13,13 @@ class ExpiredLink extends React.Component {
         let link;
 
         if (this.props.policy === POLICIES.RESEND_EMAIL) {
+
             paragraphText = 'The link in your account activation email has expired.';
             buttonText = 'Resend activation email';
-        } else if (this.props.policy === POLICIES.PASSWORD_RESET) {
+
+        } else if (this.props.policy === POLICIES.PASSWORD_RESET ||
+            this.props.policy === POLICIES.PASSWORD_RESET_CONFIRMATION) {
+
             paragraphText = 'The link in your password reset email has expired.';
             buttonText = 'Resend password reset email';
         }
@@ -41,7 +46,7 @@ class ExpiredLink extends React.Component {
 
 
         return (
-            <div id="expiredLink">
+            <div id={PAGE_IDS.EXPIRED_LINK}>
                 <components.PageContainer pageConfig={pageConfig} />
             </div>
         )

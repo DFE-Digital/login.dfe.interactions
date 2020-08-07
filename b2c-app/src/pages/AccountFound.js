@@ -3,6 +3,7 @@ import components from '../components';
 import { POLICIES } from '../constants/policies';
 import { LINK_TYPES } from '../constants/linkTypes';
 import { getInnerTextById } from '../helpers/dom';
+import { PAGE_IDS } from '../constants/pageIds';
 
 class AccountFound extends React.Component {
 
@@ -27,7 +28,7 @@ class AccountFound extends React.Component {
 
 
         return (
-            <div id="accountFound">
+            <div id={PAGE_IDS.ACCOUNT_FOUND}>
                 <components.PageContainer pageConfig={pageConfig} />
             </div>
         )

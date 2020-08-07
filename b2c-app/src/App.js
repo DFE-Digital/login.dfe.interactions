@@ -1,13 +1,11 @@
 import React from 'react';
 
 import * as QueryParamsService from './services/QueryParamsService';
+import * as ServerSideQueryParamsService from './services/ServerSideQueryParamsService';
 
 import { POLICIES } from './constants/policies';
 
-import { domHasElementWithId } from './helpers/dom';
-import { matchesPath, hasSearchParam } from './helpers/urls';
-
-//import Signup from './pages/Signup';
+import Signup from './pages/Signup';
 import Login from './pages/Login';
 import EmailSent from './pages/EmailSent';
 import AccountActivated from './pages/AccountActivated';
@@ -16,7 +14,6 @@ import ForgottenEmail from './pages/ForgottenEmail';
 import AccountNotFound from './pages/AccountNotFound';
 import AccountFound from './pages/AccountFound';
 import PasswordChanged from './pages/PasswordChanged';
-import Placeholder from './pages/Placeholder';
 import EnterNewPassword from './pages/EnterNewPassword';
 import ActivateAccount from './pages/AidedRegistration/ActivateAccount';
 import ExpiredLink from './pages/ExpiredLink';
@@ -32,77 +29,8 @@ import {
 } from "react-router-dom";
 
 import { withRouter } from "react-router";
-
-
-
-/**
- * Current routes for each flow:
- * 
- * * Login:
- *    URL or query params contain POLICIES.SIGNIN_INVITATION
- *
- * * Self registration:
- *    Sign up:
- *      URL or query params contain POLICIES.ACCOUNT_SIGNUP (without /api)
- *    Email sent:
- *      URL contains POLICIES.ACCOUNT_SIGNUP/api
- *        OR
- *      URL contains POLICIES.SIGNUP_CONFIRMATION and DOM has success element (comes from expired link page)
- *    Expired link:
- *      URL contains POLICIES.SIGNUP_CONFIRMATION and DOM has error element
- *    Account activated:
- *      URL contains POLICIES.SIGNUP_CONFIRMATION and DOM has no success element and no error element
-
- * 
- * * Aided registration:
- *    Activate account:
- *      URL contains POLICIES.SIGNUP_INVITATION (without /api) and DOM has no error element
- *    Expired link:
- *      URL contains POLICIES.SIGNUP_INVITATION (without /api) and DOM has error element
- *    Email sent:
- *      URL contains POLICIES.SIGNUP_INVITATION/api and DOM has success element
- *    Account activated:
- *      URL contains POLICIES.SIGNUP_INVITATION/api and DOM has confirmation element
- * 
- * 
- * * Reset password:
- *    Request email to reset password:
- *      URL or query params contain POLICIES.PASSWORD_RESET (without /api)
- *    Email sent:
- *      URL contains POLICIES.PASSWORD_RESET/api
- *    Expired link:
- *      URL contains POLICIES.PASSWORD_RESET_CONFIRMATION (without /api) and DOM has error element
- *    Enter new password page:
- *      URL contains POLICIES.PASSWORD_RESET_CONFIRMATION (without /api) and DOM has no error element
- *    Password changed:
- *      URL contains POLICIES.PASSWORD_RESET_CONFIRMATION}/api
- * 
- * 
- * * Forgotten email:
- *    Find email
- *      URL or query params contain POLICIES.FIND_EMAIL
- *    Account found
- *       URL contains POLICIES.FIND_EMAIL/api and DOM has success element
- *    Account not found
- *       URL contains POLICIES.FIND_EMAIL/api and DOM has error element
- * 
- * 
- * * Change email:
- *    Expired link:
- *      URL contains POLICIES.CHANGE_EMAIL (without /api) and DOM has error element
- *    Email sent:
- *      URL contains POLICIES.CHANGE_EMAIL/api
- *    New email activated:
- *      URL contains POLICIES.CHANGE_EMAIL (without /api) and DOM has no error element
- * 
- * 
- * * Resend email:
- *    Email sent:
- *      URL or query params contain POLICIES.RESEND_EMAIL and DOM has success element
- *    Resend activation email:
- *      URL or query params contain POLICIES.RESEND_EMAIL and DOM has no success element
- * 
- */
+import { QUERY_PARAMS } from './constants/queryParams';
+import { PAGE_IDS } from './constants/pageIds';
 
 class App extends React.Component {
 
@@ -112,167 +40,93 @@ class App extends React.Component {
   }
 
   getComponentByLocation() {
-    const { location } = this.props;
 
-    //Ids in B2C dom that we will be looking for
-    const ERROR_MESSAGE = 'errorMessage';
-    const SUCCESS_MESSAGE = 'successMessage';
-    const CONFIRMATION_MESSAGE = 'confirmationMessage';
+    const page = ServerSideQueryParamsService.getQueryParam(QUERY_PARAMS.PAGE);
+    let policy = ServerSideQueryParamsService.getQueryParam(QUERY_PARAMS.POLICY);
 
+    if (page && policy) {
 
-    /**
-     * Login page
-     */
+      let result;
 
-    if (matchesPath(location, POLICIES.SIGNIN_INVITATION) || hasSearchParam(location.search, 'p', POLICIES.SIGNIN_INVITATION)) {
-      return <Login />;
-    }
+      switch (page) {
 
+        case PAGE_IDS.LOGIN:
+          result = <Login />;
+          break;
 
-    /**
-     * Self registration
-     */
+        case PAGE_IDS.SIGNUP:
+          result = <Signup />;
+          break;
 
-    //routing all self registration pages to "Page not found"
-    if (matchesPath(location, POLICIES.ACCOUNT_SIGNUP) || hasSearchParam(location.search, 'p', POLICIES.ACCOUNT_SIGNUP)) {
-      return <PageNotFound />;
-    }
+        case PAGE_IDS.EMAIL_SENT:
+          if (policy === POLICIES.RESEND_EMAIL) {
+            //retrieve the original policy that the resent email was for to show page content accordingly
+            const original_policy = ServerSideQueryParamsService.getQueryParam(QUERY_PARAMS.ORIGINAL_POLICY);
+            if (original_policy) {
+              policy = original_policy;
+            }
+          }
+          result = <EmailSent policy={policy} />;
+          break;
 
-    //If signup gets enabled again, this block below is the routing that would bring it back
-    /*
-      //Activation email sent after sign up
-      if (matchesPath(location, `${POLICIES.ACCOUNT_SIGNUP}/api`)) {
-        return <EmailSent policy={POLICIES.ACCOUNT_SIGNUP} />;
+        case PAGE_IDS.EXPIRED_LINK:
+          result = <ExpiredLink policy={policy} />;
+          break;
+
+        case PAGE_IDS.EXPIRED_LINK_WITH_RESEND:
+          result = <ExpiredLinkWithResendEmail policy={policy} />;
+          break;
+
+        case PAGE_IDS.ACCOUNT_ACTIVATED:
+          result = <AccountActivated />;
+          break;
+
+        case PAGE_IDS.ACTIVATE_ACCOUNT:
+          result = <ActivateAccount />;
+          break;
+
+        case PAGE_IDS.RESET_PASSWORD:
+          result = <ResetPassword />;
+          break;
+
+        case PAGE_IDS.ENTER_NEW_PASSWORD:
+          result = <EnterNewPassword />;
+          break;
+
+        case PAGE_IDS.PASSWORD_CHANGED:
+          result = <PasswordChanged />;
+          break;
+
+        case PAGE_IDS.FORGOTTEN_EMAIL:
+          result = <ForgottenEmail />;
+          break;
+
+        case PAGE_IDS.ACCOUNT_FOUND:
+          result = <AccountFound />;
+          break;
+
+        case PAGE_IDS.ACCOUNT_NOT_FOUND:
+          result = <AccountNotFound />;
+          break;
+
+        case PAGE_IDS.NOT_FOUND:
+          result = <PageNotFound />;
+          break;
+
+        case PAGE_IDS.RESEND_ACTIVATION_EMAIL:
+          result = <ResendActivationEmail />;
+          break;
+
+        default:
+          result = <PageNotFound />;
+          break;
       }
-      //Sign up page
-      if (matchesPath(location, POLICIES.ACCOUNT_SIGNUP) || hasSearchParam(location.search, 'p', POLICIES.ACCOUNT_SIGNUP)) {
-        return <Signup />;
-      }
-      //From activation email
-      if (matchesPath(location, POLICIES.SIGNUP_CONFIRMATION)) {
-        //Email sent page (from resend activation email)
-        if (domHasElementWithId(SUCCESS_MESSAGE)) {
-          return <EmailSent policy={POLICIES.ACCOUNT_SIGNUP} />;
-        }
-        //Expired link
-        else if (domHasElementWithId(ERROR_MESSAGE)) {
-          return <ExpiredLinkWithResendEmail policy={POLICIES.ACCOUNT_SIGNUP} />;
-        }
-        //Account activated
-        return <AccountActivated />;
-      }
-    */
 
-
-    /**
-     * Aided registration
-     */
-
-    //Account activated/Email sent
-    if (matchesPath(location, `${POLICIES.SIGNUP_INVITATION}/api`)) {
-      //Email sent page (from resend activation email)
-      if (domHasElementWithId(SUCCESS_MESSAGE)) {
-        return <EmailSent policy={POLICIES.SIGNUP_INVITATION} />;
-      }
-      //Account activated
-      if (domHasElementWithId(CONFIRMATION_MESSAGE)) {
-        return <AccountActivated />;
-      }
-    }
-    //From activation email
-    if (matchesPath(location, POLICIES.SIGNUP_INVITATION)) {
-      //Expired link
-      if (domHasElementWithId(ERROR_MESSAGE)) {
-        return <ExpiredLink policy={POLICIES.RESEND_EMAIL} />;
-      }
-      //Activate account
-      return <ActivateAccount />;
+      return result;
     }
 
+    return <PageNotFound />;
 
-    /**
-     * Reset password
-     */
-
-    //Reset password email sent
-    if (matchesPath(location, `${POLICIES.PASSWORD_RESET}/api`)) {
-      return <EmailSent policy={POLICIES.PASSWORD_RESET} />;
-    }
-    //Request email to reset your password
-    if (matchesPath(location, POLICIES.PASSWORD_RESET) || hasSearchParam(location.search, 'p', POLICIES.PASSWORD_RESET)) {
-      return <ResetPassword />;
-    }
-    //Password has been changed
-    if (matchesPath(location, `${POLICIES.PASSWORD_RESET_CONFIRMATION}/api`)) {
-      return <PasswordChanged />;
-    }
-    //From reset password email
-    if (matchesPath(location, POLICIES.PASSWORD_RESET_CONFIRMATION)) {
-      //Expired link
-      if (domHasElementWithId(ERROR_MESSAGE)) {
-        return <ExpiredLink policy={POLICIES.PASSWORD_RESET} />;
-      }
-      //Enter new password page
-      return <EnterNewPassword />;
-    }
-
-
-    /**
-     * Forgotten email
-     */
-
-    //Results for forgotten email page
-    if (matchesPath(location, `${POLICIES.FIND_EMAIL}/api`)) {
-      //Success - account was found
-      if (domHasElementWithId(SUCCESS_MESSAGE)) {
-        return <AccountFound />;
-      }
-      //Error - account was not found
-      if (domHasElementWithId(ERROR_MESSAGE)) {
-        return <AccountNotFound />;
-      }
-    }
-    //Forgotten email page
-    if (matchesPath(location, POLICIES.FIND_EMAIL) || hasSearchParam(location.search, 'p', POLICIES.FIND_EMAIL)) {
-      return <ForgottenEmail />;
-    }
-
-
-    /**
-     * Change email
-     */
-
-    //Email sent (from expired link page)
-    if (matchesPath(location, `${POLICIES.CHANGE_EMAIL}/api`)) {
-      return <EmailSent policy={POLICIES.CHANGE_EMAIL} />;
-    }
-    //From activation email
-    if (matchesPath(location, POLICIES.CHANGE_EMAIL)) {
-      //Expired link
-      if (domHasElementWithId(ERROR_MESSAGE)) {
-        return <ExpiredLinkWithResendEmail policy={POLICIES.CHANGE_EMAIL} />;
-      }
-      //New email activated
-      return <AccountActivated />;
-    }
-
-
-    /**
-     * Resend email
-     */
-
-    if (matchesPath(location, POLICIES.RESEND_EMAIL) || hasSearchParam(location.search, 'p', POLICIES.RESEND_EMAIL)) {
-      //Email sent page (from resend activation email)
-      if (domHasElementWithId(SUCCESS_MESSAGE)) {
-        return <EmailSent policy={POLICIES.RESEND_EMAIL} />;
-      }
-      return <ResendActivationEmail />;
-    }
-
-    /**
-     * Default output
-     */
-    return <Placeholder />;
   }
 
   render() {

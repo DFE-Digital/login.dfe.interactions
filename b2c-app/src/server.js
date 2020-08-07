@@ -51,6 +51,12 @@ function getHTML(app, req) {
 
             //replace b2cPath placeholder, used to have absolute paths to static assets in index.html
             data = data.replace(/\/__--b2cPath--__/g, reqURL);
+
+            //replace serverSideQueryString placeholder with the query we got in server side
+            let queryJson = JSON.stringify(req.query);
+            var escapedQueryJson = JSON.stringify(queryJson);
+            data = data.replace(/"__--serverSideQueryString--__"/g, escapedQueryJson);
+
             //embed react app in the root element
             data = data.replace('<div id="root"></div>', `<div id="root">${app}</div>`)
 
