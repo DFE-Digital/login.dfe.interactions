@@ -33,7 +33,7 @@ exports[`when URL passed in as prop renders correctly link of type button 1`] = 
 exports[`when URL passed in as prop renders correctly without specified type 1`] = `
 <a
   className="govuk-link"
-  href={null}
+  href="https://test.com"
   onClick={null}
 />
 `;

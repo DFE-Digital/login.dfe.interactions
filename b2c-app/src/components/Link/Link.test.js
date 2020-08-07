@@ -2,6 +2,7 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import renderer from 'react-test-renderer';
 import { LINK_TYPES } from '../../constants/linkTypes';
+import { create, act } from 'react-test-renderer';
 
 import components from '..';
 
