@@ -2,8 +2,6 @@ import React from 'react';
 
 import * as ServerSideQueryParamsService from './services/ServerSideQueryParamsService';
 
-import { POLICIES } from './constants/policies';
-
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import EmailSent from './pages/EmailSent';
@@ -54,13 +52,6 @@ class App extends React.Component {
           break;
 
         case PAGE_IDS.EMAIL_SENT:
-          if (policy === POLICIES.RESEND_EMAIL) {
-            //retrieve the original policy that the resent email was for to show page content accordingly
-            const original_policy = ServerSideQueryParamsService.getQueryParam(QUERY_PARAMS.ORIGINAL_POLICY);
-            if (original_policy) {
-              policy = original_policy;
-            }
-          }
           result = <EmailSent policy={policy} />;
           break;
 

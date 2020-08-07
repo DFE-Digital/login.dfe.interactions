@@ -4,6 +4,8 @@ import { getInnerTextById } from '../helpers/dom';
 import { POLICIES } from '../constants/policies';
 import { LINK_TYPES } from '../constants/linkTypes';
 import { PAGE_IDS } from '../constants/pageIds';
+import { QUERY_PARAMS } from '../constants/queryParams';
+import * as ServerSideQueryParamsService from '../services/ServerSideQueryParamsService';
 
 class EmailSent extends React.Component {
 
@@ -33,7 +35,19 @@ class EmailSent extends React.Component {
 
     render() {
 
-        const b2cResultElementId = this.props.policy === POLICIES.CHANGE_EMAIL ? 'confirmationMessage' : 'successMessage';
+        let policyForContent;
+
+        if (this.props.policy === POLICIES.RESEND_EMAIL) {
+            // retrieve the original policy that the resent email was for
+            // and then use it to show page content accordingly
+            // if not found, use resend email by default
+            policyForContent = ServerSideQueryParamsService.getQueryParam(QUERY_PARAMS.ORIGINAL_POLICY) || POLICIES.RESEND_EMAIL;
+
+        } else {
+            policyForContent = this.props.policy;
+        }
+
+        const b2cResultElementId = policyForContent === POLICIES.CHANGE_EMAIL ? 'confirmationMessage' : 'successMessage';
 
         const contentFromB2CParagraph =
             <components.Paragraph>
@@ -60,9 +74,9 @@ class EmailSent extends React.Component {
 
         let content;
 
-        if (this.props.policy === POLICIES.SIGNUP_INVITATION ||
-            this.props.policy === POLICIES.ACCOUNT_SIGNUP ||
-            this.props.policy === POLICIES.SIGNUP_CONFIRMATION) {
+        if (policyForContent === POLICIES.SIGNUP_INVITATION ||
+            policyForContent === POLICIES.ACCOUNT_SIGNUP ||
+            policyForContent === POLICIES.SIGNUP_CONFIRMATION) {
 
             content =
                 <div>
@@ -72,8 +86,8 @@ class EmailSent extends React.Component {
                     {linkExpiresParagraph}
                 </div>
         }
-        else if (this.props.policy === POLICIES.PASSWORD_RESET ||
-            this.props.policy === POLICIES.PASSWORD_RESET_CONFIRMATION) {
+        else if (policyForContent === POLICIES.PASSWORD_RESET ||
+            policyForContent === POLICIES.PASSWORD_RESET_CONFIRMATION) {
 
             content =
                 <div>
@@ -84,8 +98,8 @@ class EmailSent extends React.Component {
                     {linkExpiresParagraph}
                 </div>
         }
-        else if (this.props.policy === POLICIES.CHANGE_EMAIL ||
-            this.props.policy === POLICIES.RESEND_EMAIL) {
+        else if (policyForContent === POLICIES.CHANGE_EMAIL ||
+            policyForContent === POLICIES.RESEND_EMAIL) {
 
             content =
                 <div>
