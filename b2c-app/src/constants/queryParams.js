@@ -5,5 +5,5 @@ export const QUERY_PARAMS = {
     TENANT_ID: 'tenant_id',
     POLICY: 'policy',
     PAGE: 'custom_ui_page',
-    ORIGINAL_POLICY: 'original_policy'
+    ORIGINAL_POLICY: 'referrer_policy'
 }
