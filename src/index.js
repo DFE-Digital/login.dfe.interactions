@@ -200,7 +200,7 @@ if (config.hostingEnvironment.env === 'dev') {
     logger.info(`Server listening on http://${config.hostingEnvironment.host}:${config.hostingEnvironment.port}`);
   });
 } else {
-  app.listen(process.env.port || 8081, () => {
+  app.listen(process.env.PORT, () => {
     logger.info(`Server listening on http://${config.hostingEnvironment.host}:${config.hostingEnvironment.port}/dev`);
   });
 }
