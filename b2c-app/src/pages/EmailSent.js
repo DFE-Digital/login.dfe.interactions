@@ -76,7 +76,8 @@ class EmailSent extends React.Component {
 
         if (policyForContent === POLICIES.SIGNUP_INVITATION ||
             policyForContent === POLICIES.ACCOUNT_SIGNUP ||
-            policyForContent === POLICIES.SIGNUP_CONFIRMATION) {
+            policyForContent === POLICIES.SIGNUP_CONFIRMATION ||
+            policyForContent === POLICIES.SIGNIN_INVITATION) {
 
             content =
                 <div>
