@@ -115,7 +115,6 @@ exports[`renders correctly 1`] = `
                 >
                   <a
                     className="govuk-link"
-                    href={null}
                     id="resetPasswordLink"
                     onClick={null}
                   >

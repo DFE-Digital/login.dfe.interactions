@@ -3,6 +3,9 @@ import components from '../components';
 import { getInnerTextById } from '../helpers/dom';
 import { POLICIES } from '../constants/policies';
 import { LINK_TYPES } from '../constants/linkTypes';
+import { PAGE_IDS } from '../constants/pageIds';
+import { QUERY_PARAMS } from '../constants/queryParams';
+import * as ServerSideQueryParamsService from '../services/ServerSideQueryParamsService';
 
 class EmailSent extends React.Component {
 
@@ -20,9 +23,31 @@ class EmailSent extends React.Component {
         this.setState({ spinnerText: 'Sending activation email. Please wait.', showSpinner: true })
     }
 
+    buildResendEmailParagraph(linkToPolicy, linkText, showSpinner) {
+        return (
+            <components.Paragraph>
+                If you don't receive an email after this time you can&nbsp;
+                <components.Link id='resendEmailLink' policy={linkToPolicy} onClick={showSpinner && this.showSpinner}>{linkText}</components.Link>
+                .
+            </ components.Paragraph >
+        )
+    }
+
     render() {
 
-        const b2cResultElementId = this.props.policy === POLICIES.CHANGE_EMAIL ? 'confirmationMessage' : 'successMessage';
+        let policyForContent;
+
+        if (this.props.policy === POLICIES.RESEND_EMAIL) {
+            // retrieve the original policy that the resent email was for
+            // and then use it to show page content accordingly
+            // if not found, use resend email by default
+            policyForContent = ServerSideQueryParamsService.getQueryParam(QUERY_PARAMS.ORIGINAL_POLICY) || POLICIES.RESEND_EMAIL;
+
+        } else {
+            policyForContent = this.props.policy;
+        }
+
+        const b2cResultElementId = policyForContent === POLICIES.CHANGE_EMAIL ? 'confirmationMessage' : 'successMessage';
 
         const contentFromB2CParagraph =
             <components.Paragraph>
@@ -39,27 +64,6 @@ class EmailSent extends React.Component {
                 Check your spam folder if you can't see it in a few minutes.
             </components.Paragraph>
 
-        const resendActivationEmailParagraph =
-            <components.Paragraph>
-                If you don't receive an email after this time you can&nbsp;
-                <components.Link id="resendEmailLink" policy={POLICIES.RESEND_EMAIL}>resend the activation email</components.Link>
-                .
-            </ components.Paragraph >
-
-        const resendPasswordResetParagraph =
-            <components.Paragraph>
-                If you don't receive an email after this time you can&nbsp;
-                <components.Link id="resendEmailLink" policy={POLICIES.PASSWORD_RESET}>resend password reset email</components.Link>
-                .
-            </ components.Paragraph>
-
-        const resendChangeEmailParagraph =
-            <components.Paragraph>
-                If you don't receive an email after this time you can&nbsp;
-                <components.Link id="resendEmailLink" policy={POLICIES.RESEND_EMAIL} onClick={this.showSpinner}>resend the activation email</components.Link>
-                .
-            </ components.Paragraph >
-
         const linkExpiresParagraph =
             <components.Paragraph>
                 This link expires in 24 hours.
@@ -70,31 +74,38 @@ class EmailSent extends React.Component {
 
         let content;
 
-        if (this.props.policy === POLICIES.SIGNUP_INVITATION || this.props.policy === POLICIES.ACCOUNT_SIGNUP) {
+        if (policyForContent === POLICIES.SIGNUP_INVITATION ||
+            policyForContent === POLICIES.ACCOUNT_SIGNUP ||
+            policyForContent === POLICIES.SIGNUP_CONFIRMATION) {
+
             content =
                 <div>
                     {contentFromB2CParagraph}
                     {checkSpamFolderParagraph}
-                    {resendActivationEmailParagraph}
+                    {this.buildResendEmailParagraph(POLICIES.RESEND_EMAIL, 'resend the activation email', false)}
                     {linkExpiresParagraph}
                 </div>
         }
-        else if (this.props.policy === POLICIES.PASSWORD_RESET) {
+        else if (policyForContent === POLICIES.PASSWORD_RESET ||
+            policyForContent === POLICIES.PASSWORD_RESET_CONFIRMATION) {
+
             content =
                 <div>
                     {contentFromB2CParagraph}
                     {accountRequiredParagraph}
                     {checkSpamFolderParagraph}
-                    {resendPasswordResetParagraph}
+                    {this.buildResendEmailParagraph(POLICIES.PASSWORD_RESET, 'resend password reset email', false)}
                     {linkExpiresParagraph}
                 </div>
         }
-        else if (this.props.policy === POLICIES.CHANGE_EMAIL || this.props.policy === POLICIES.RESEND_EMAIL) {
+        else if (policyForContent === POLICIES.CHANGE_EMAIL ||
+            policyForContent === POLICIES.RESEND_EMAIL) {
+
             content =
                 <div>
                     {contentFromB2CParagraph}
                     {checkSpamFolderParagraph}
-                    {resendChangeEmailParagraph}
+                    {this.buildResendEmailParagraph(POLICIES.RESEND_EMAIL, 'resend the activation email', true)}
                     {linkExpiresParagraph}
                     {signinButton}
                 </div>
@@ -112,7 +123,7 @@ class EmailSent extends React.Component {
 
 
         return (
-            <div id="emailSent">
+            <div id={PAGE_IDS.EMAIL_SENT}>
                 <components.PageContainer pageConfig={pageConfig} />
             </div>
         )

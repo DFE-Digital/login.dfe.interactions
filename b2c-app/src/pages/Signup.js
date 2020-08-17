@@ -3,6 +3,7 @@ import { animateScroll } from "react-scroll";
 
 import components from '../components';
 import { onChange } from '../helpers/pageUpdatesHandler';
+import { PAGE_IDS } from '../constants/pageIds';
 
 class Signup extends React.Component {
 
@@ -128,7 +129,7 @@ class Signup extends React.Component {
 
 
         return (
-            <div id="createAccount">
+            <div id={PAGE_IDS.SIGNUP}>
                 <components.PageContainer pageConfig={pageConfig} />
             </div>
         )

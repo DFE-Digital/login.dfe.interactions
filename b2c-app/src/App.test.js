@@ -3,14 +3,15 @@ import React from 'react';
 import { shallow } from 'enzyme';
 import renderer from 'react-test-renderer';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { JSDOM } from "jsdom";
 
 import { POLICIES } from './constants/policies';
+import { PAGE_IDS } from './constants/pageIds';
+import { QUERY_PARAMS } from './constants/queryParams';
+
 import App from './App';
 
-const ERROR_MESSAGE = 'errorMessage';
-const SUCCESS_MESSAGE = 'successMessage';
-const CONFIRMATION_MESSAGE = 'confirmationMessage';
+import * as ServerSideQueryParamsService from './services/ServerSideQueryParamsService';
+jest.mock('./services/ServerSideQueryParamsService');
 
 const renderApp = () => {
     return renderer
@@ -21,7 +22,7 @@ const renderApp = () => {
         ).toJSON();
 }
 
-describe('when location is not set', () => {
+describe('when page is not set in server side query params', () => {
 
     it('renders without crashing', () => {
         shallow(
@@ -38,465 +39,152 @@ describe('when location is not set', () => {
 
 });
 
-describe('when location is set', () => {
+describe('when page is set in server side query params', () => {
 
-    beforeEach(() => {
-        delete window.location;
-        window.location = {
-            pathname: '/test_path/',
-        };
-        const dom = new JSDOM();
-        global.document = dom.window.document;
-        global.document.body.innerHTML = '';
-    });
 
-    it('renders without crashing', () => {
-        shallow(
-            <Router>
-                <App />
-            </Router>
-        );
-    });
+    it('renders login page correctly', () => {
+        //mock value from query params service
+        ServerSideQueryParamsService.getQueryParam.mockReturnValue(PAGE_IDS.LOGIN);
 
-    it('renders correctly', () => {
         const tree = renderApp();
         expect(tree).toMatchSnapshot();
     });
 
-    describe('-- login', () => {
+    it('renders signup page correctly', () => {
+        ServerSideQueryParamsService.getQueryParam.mockReturnValue(PAGE_IDS.SIGNUP);
 
-        it('renders correctly when URL contains policy name', () => {
-
-            //set URL
-            window.location = {
-                pathname: `/${POLICIES.SIGNIN_INVITATION}/`,
-            };
-
-            const tree = renderApp();
-            expect(tree).toMatchSnapshot();
-        });
-
-        it('renders correctly when query params contain this policy', () => {
-
-            //set query params
-            window.location.search = `?p=${POLICIES.SIGNIN_INVITATION}&param=value`;
-
-            const tree = renderApp();
-            expect(tree).toMatchSnapshot();
-        });
+        const tree = renderApp();
+        expect(tree).toMatchSnapshot();
     });
 
-    describe('-- self registration', () => {
+    it('renders email sent page correctly', () => {
+        ServerSideQueryParamsService.getQueryParam.mockReturnValue(PAGE_IDS.EMAIL_SENT);
 
-        //show page not found while self registration is disabled
-        describe('-- page not found', () => {
-
-            it('renders correctly when URL contains POLICIES.ACCOUNT_SIGNUP/', () => {
-
-                //set URL
-                window.location = {
-                    pathname: `/${POLICIES.ACCOUNT_SIGNUP}/`,
-                };
-
-                const tree = renderApp();
-                expect(tree).toMatchSnapshot();
-            });
-
-            it('renders correctly when query params contain POLICIES.ACCOUNT_SIGNUP', () => {
-
-                //set query params
-                window.location.search = `?p=${POLICIES.ACCOUNT_SIGNUP}&param=value`;
-
-                const tree = renderApp();
-                expect(tree).toMatchSnapshot();
-            });
-        });
-
-        //skipping all the following test while self registration is switched off
-        xdescribe('-- sign up', () => {
-
-            it('renders correctly when URL contains POLICIES.ACCOUNT_SIGNUP/', () => {
-
-                //set URL
-                window.location = {
-                    pathname: `/${POLICIES.ACCOUNT_SIGNUP}/`,
-                };
-
-                const tree = renderApp();
-                expect(tree).toMatchSnapshot();
-            });
-
-            it('renders correctly when query params contain POLICIES.ACCOUNT_SIGNUP', () => {
-
-                //set query params
-                window.location.search = `?p=${POLICIES.ACCOUNT_SIGNUP}&param=value`;
-
-                const tree = renderApp();
-                expect(tree).toMatchSnapshot();
-            });
-        });
-
-        xdescribe('-- email sent', () => {
-
-            it('renders correctly when URL contains POLICIES.ACCOUNT_SIGNUP/api/', () => {
-
-                //set URL
-                window.location = {
-                    pathname: `/${POLICIES.ACCOUNT_SIGNUP}/api/`,
-                };
-
-                const tree = renderApp();
-                expect(tree).toMatchSnapshot();
-            });
-
-            it('renders correctly when URL contains POLICIES.SIGNUP_CONFIRMATION and DOM has success element', () => {
-
-                //set URL
-                window.location = {
-                    pathname: `/${POLICIES.SIGNUP_CONFIRMATION}/`,
-                };
-
-                //add success element to DOM
-                let elem = global.document.createElement('p');
-                elem.id = SUCCESS_MESSAGE;
-                global.document.body.appendChild(elem);
-
-                const tree = renderApp();
-                expect(tree).toMatchSnapshot();
-            });
-
-        });
-
-        xdescribe('-- expired link', () => {
-
-            it('renders correctly when URL contains POLICIES.SIGNUP_CONFIRMATION and DOM has error element', () => {
-
-                //set URL
-                window.location = {
-                    pathname: `/${POLICIES.SIGNUP_CONFIRMATION}/`,
-                };
-
-                //add error element to DOM
-                let elem = global.document.createElement('p');
-                elem.id = ERROR_MESSAGE;
-                global.document.body.appendChild(elem);
-
-                const tree = renderApp();
-                expect(tree).toMatchSnapshot();
-            });
-        });
-
-        xdescribe('-- account activated', () => {
-
-            it('renders correctly when URL contains POLICIES.SIGNUP_CONFIRMATION and DOM has error element', () => {
-
-                //set URL
-                window.location = {
-                    pathname: `/${POLICIES.SIGNUP_CONFIRMATION}/`,
-                };
-
-                const tree = renderApp();
-                expect(tree).toMatchSnapshot();
-            });
-        });
+        const tree = renderApp();
+        expect(tree).toMatchSnapshot();
     });
 
-    describe('-- aided registration', () => {
-
-        describe('-- activate account', () => {
-
-            it('renders correctly when URL contains POLICIES.SIGNUP_INVITATION', () => {
-
-                //set URL
-                window.location = {
-                    pathname: `/${POLICIES.SIGNUP_INVITATION}/`,
-                };
-
-                const tree = renderApp();
-                expect(tree).toMatchSnapshot();
-            });
+    it('renders email sent page correctly when policy is Resend Email', () => {
+        ServerSideQueryParamsService.getQueryParam.mockImplementation((id) => {
+            if (id === QUERY_PARAMS.PAGE) {
+                return PAGE_IDS.EMAIL_SENT;
+            }
+            if (id === QUERY_PARAMS.POLICY) {
+                return POLICIES.RESEND_EMAIL;
+            }
         });
 
-        describe('-- expired link', () => {
-
-            it('renders correctly when URL contains POLICIES.SIGNUP_INVITATION and DOM has error element', () => {
-
-                //set URL
-                window.location = {
-                    pathname: `/${POLICIES.SIGNUP_INVITATION}/`,
-                };
-
-                //add error element to DOM
-                let elem = global.document.createElement('p');
-                elem.id = ERROR_MESSAGE;
-                global.document.body.appendChild(elem);
-
-                const tree = renderApp();
-                expect(tree).toMatchSnapshot();
-            });
-        });
-
-        describe('-- email sent', () => {
-
-            it('renders correctly when URL contains POLICIES.SIGNUP_INVITATION/api/ and DOM has success element', () => {
-
-                //set URL
-                window.location = {
-                    pathname: `/${POLICIES.SIGNUP_INVITATION}/api/`,
-                };
-
-                //add success element to DOM
-                let elem = global.document.createElement('p');
-                elem.id = SUCCESS_MESSAGE;
-                global.document.body.appendChild(elem);
-
-                const tree = renderApp();
-                expect(tree).toMatchSnapshot();
-            });
-        });
-
-        describe('-- account activated', () => {
-
-            it('renders correctly when URL contains POLICIES.SIGNUP_INVITATION/api/ and DOM has confirmation element', () => {
-
-                //set URL
-                window.location = {
-                    pathname: `/${POLICIES.SIGNUP_INVITATION}/api/`,
-                };
-
-                //add confirmation element to DOM
-                let elem = global.document.createElement('p');
-                elem.id = CONFIRMATION_MESSAGE;
-                global.document.body.appendChild(elem);
-
-                const tree = renderApp();
-                expect(tree).toMatchSnapshot();
-            });
-        });
+        const tree = renderApp();
+        expect(tree).toMatchSnapshot();
     });
 
-    describe('-- reset password', () => {
-
-        describe('-- request email to reset password', () => {
-
-            it('renders correctly when URL contains POLICIES.PASSWORD_RESET/', () => {
-
-                //set URL
-                window.location = {
-                    pathname: `/${POLICIES.PASSWORD_RESET}/`,
-                };
-
-                const tree = renderApp();
-                expect(tree).toMatchSnapshot();
-            });
-
-            it('renders correctly when query params contain POLICIES.PASSWORD_RESET', () => {
-
-                //set query params
-                window.location.search = `?p=${POLICIES.PASSWORD_RESET}&param=value`;
-
-                const tree = renderApp();
-                expect(tree).toMatchSnapshot();
-            });
+    it('renders email sent page correctly when policy is Resend Email ad original policy is defined', () => {
+        ServerSideQueryParamsService.getQueryParam.mockImplementation((id) => {
+            if (id === QUERY_PARAMS.PAGE) {
+                return PAGE_IDS.EMAIL_SENT;
+            }
+            if (id === QUERY_PARAMS.POLICY) {
+                return POLICIES.RESEND_EMAIL;
+            }
+            if (id === QUERY_PARAMS.ORIGINAL_POLICY) {
+                return POLICIES.SIGNUP_INVITATION;
+            }
         });
 
-        describe('-- email sent', () => {
-
-            it('renders correctly when URL contains POLICIES.PASSWORD_RESET/api/', () => {
-
-                //set URL
-                window.location = {
-                    pathname: `/${POLICIES.PASSWORD_RESET}/api/`,
-                };
-
-                const tree = renderApp();
-                expect(tree).toMatchSnapshot();
-            });
-        });
-
-        describe('-- expired link', () => {
-
-            it('renders correctly when URL contains POLICIES.PASSWORD_RESET_CONFIRMATION and DOM has error element', () => {
-
-                //set URL
-                window.location = {
-                    pathname: `/${POLICIES.PASSWORD_RESET_CONFIRMATION}/`,
-                };
-
-                //add error element to DOM
-                let elem = global.document.createElement('p');
-                elem.id = ERROR_MESSAGE;
-                global.document.body.appendChild(elem);
-
-                const tree = renderApp();
-                expect(tree).toMatchSnapshot();
-            });
-        });
-
-        describe('-- enter new password', () => {
-
-            it('renders correctly when URL contains POLICIES.PASSWORD_RESET_CONFIRMATION and DOM has no error element', () => {
-
-                //set URL
-                window.location = {
-                    pathname: `/${POLICIES.PASSWORD_RESET_CONFIRMATION}/`,
-                };
-
-                const tree = renderApp();
-                expect(tree).toMatchSnapshot();
-            });
-        });
-
-        describe('-- password changed', () => {
-
-            it('renders correctly when URL contains POLICIES.PASSWORD_RESET_CONFIRMATION/api/', () => {
-
-                //set URL
-                window.location = {
-                    pathname: `/${POLICIES.PASSWORD_RESET_CONFIRMATION}/api/`,
-                };
-
-                const tree = renderApp();
-                expect(tree).toMatchSnapshot();
-            });
-        });
+        const tree = renderApp();
+        expect(tree).toMatchSnapshot();
     });
 
-    describe('-- forgotten email', () => {
+    it('renders expired link page correctly', () => {
+        ServerSideQueryParamsService.getQueryParam.mockReturnValue(PAGE_IDS.EXPIRED_LINK);
 
-        describe('Find email', () => {
-
-            it('renders correctly when URL contains POLICIES.FIND_EMAIL/', () => {
-
-                //set URL
-                window.location = {
-                    pathname: `/${POLICIES.FIND_EMAIL}/`,
-                };
-
-                const tree = renderApp();
-                expect(tree).toMatchSnapshot();
-            });
-
-            it('renders correctly when query params contain POLICIES.FIND_EMAIL', () => {
-
-                //set query params
-                window.location.search = `?p=${POLICIES.FIND_EMAIL}&param=value`;
-
-                const tree = renderApp();
-                expect(tree).toMatchSnapshot();
-            });
-        });
-
-        describe('-- account found', () => {
-
-            it('renders correctly when URL contains POLICIES.FIND_EMAIL/api/ and DOM has success element', () => {
-
-                //set URL
-                window.location = {
-                    pathname: `/${POLICIES.FIND_EMAIL}/api/`,
-                };
-
-                //add success element to DOM
-                let elem = global.document.createElement('p');
-                elem.id = SUCCESS_MESSAGE;
-                global.document.body.appendChild(elem);
-
-                const tree = renderApp();
-                expect(tree).toMatchSnapshot();
-            });
-        });
-
-        describe('-- account not found', () => {
-
-            it('renders correctly when URL contains POLICIES.FIND_EMAIL/api/ and DOM has error element', () => {
-
-                //set URL
-                window.location = {
-                    pathname: `/${POLICIES.FIND_EMAIL}/api/`,
-                };
-
-                //add error element to DOM
-                let elem = global.document.createElement('p');
-                elem.id = ERROR_MESSAGE;
-                global.document.body.appendChild(elem);
-
-                const tree = renderApp();
-                expect(tree).toMatchSnapshot();
-            });
-        });
+        const tree = renderApp();
+        expect(tree).toMatchSnapshot();
     });
 
-    describe('-- change email', () => {
+    it('renders expired link (with resend button) page correctly', () => {
+        ServerSideQueryParamsService.getQueryParam.mockReturnValue(PAGE_IDS.EXPIRED_LINK_WITH_RESEND);
 
-        describe('-- expired link', () => {
-
-            it('renders correctly when URL contains POLICIES.CHANGE_EMAIL and DOM has error element', () => {
-
-                //set URL
-                window.location = {
-                    pathname: `/${POLICIES.CHANGE_EMAIL}/`,
-                };
-
-                //add error element to DOM
-                let elem = global.document.createElement('p');
-                elem.id = ERROR_MESSAGE;
-                global.document.body.appendChild(elem);
-
-                const tree = renderApp();
-                expect(tree).toMatchSnapshot();
-            });
-        });
-
-        describe('-- email sent', () => {
-
-            it('renders correctly when URL contains POLICIES.CHANGE_EMAIL/api/', () => {
-
-                //set URL
-                window.location = {
-                    pathname: `/${POLICIES.CHANGE_EMAIL}/api/`,
-                };
-
-                const tree = renderApp();
-                expect(tree).toMatchSnapshot();
-            });
-        });
-
-        describe('-- new email activated', () => {
-
-            it('renders correctly when URL contains POLICIES.CHANGE_EMAIL and DOM has no error element', () => {
-
-                //set URL
-                window.location = {
-                    pathname: `/${POLICIES.CHANGE_EMAIL}/`,
-                };
-
-                const tree = renderApp();
-                expect(tree).toMatchSnapshot();
-            });
-        });
+        const tree = renderApp();
+        expect(tree).toMatchSnapshot();
     });
 
-    describe('-- resend email', () => {
+    it('renders account activated page correctly', () => {
+        ServerSideQueryParamsService.getQueryParam.mockReturnValue(PAGE_IDS.ACCOUNT_ACTIVATED);
 
-        it('renders correctly when URL contains policy name', () => {
+        const tree = renderApp();
+        expect(tree).toMatchSnapshot();
+    });
 
-            //set URL
-            window.location = {
-                pathname: `/${POLICIES.RESEND_EMAIL}/`,
-            };
+    it('renders activate account page correctly', () => {
+        ServerSideQueryParamsService.getQueryParam.mockReturnValue(PAGE_IDS.ACTIVATE_ACCOUNT);
 
-            const tree = renderApp();
-            expect(tree).toMatchSnapshot();
-        });
+        const tree = renderApp();
+        expect(tree).toMatchSnapshot();
+    });
 
-        it('renders correctly when query params contain this policy', () => {
+    it('renders reset password page correctly', () => {
+        ServerSideQueryParamsService.getQueryParam.mockReturnValue(PAGE_IDS.RESET_PASSWORD);
 
-            //set query params
-            window.location.search = `?p=${POLICIES.RESEND_EMAIL}&param=value`;
+        const tree = renderApp();
+        expect(tree).toMatchSnapshot();
+    });
 
-            const tree = renderApp();
-            expect(tree).toMatchSnapshot();
-        });
+    it('renders enter new password page correctly', () => {
+        ServerSideQueryParamsService.getQueryParam.mockReturnValue(PAGE_IDS.ENTER_NEW_PASSWORD);
+
+        const tree = renderApp();
+        expect(tree).toMatchSnapshot();
+    });
+
+    it('renders password changed page correctly', () => {
+        ServerSideQueryParamsService.getQueryParam.mockReturnValue(PAGE_IDS.PASSWORD_CHANGED);
+
+        const tree = renderApp();
+        expect(tree).toMatchSnapshot();
+    });
+
+    it('renders forgotten email changed page correctly', () => {
+        ServerSideQueryParamsService.getQueryParam.mockReturnValue(PAGE_IDS.FORGOTTEN_EMAIL);
+
+        const tree = renderApp();
+        expect(tree).toMatchSnapshot();
+    });
+
+    it('renders account found changed page correctly', () => {
+        ServerSideQueryParamsService.getQueryParam.mockReturnValue(PAGE_IDS.ACCOUNT_FOUND);
+
+        const tree = renderApp();
+        expect(tree).toMatchSnapshot();
+    });
+
+    it('renders account not found changed page correctly', () => {
+        ServerSideQueryParamsService.getQueryParam.mockReturnValue(PAGE_IDS.ACCOUNT_NOT_FOUND);
+
+        const tree = renderApp();
+        expect(tree).toMatchSnapshot();
+    });
+
+    it('renders page not found correctly when this page is specified', () => {
+        ServerSideQueryParamsService.getQueryParam.mockReturnValue(PAGE_IDS.NOT_FOUND);
+
+        const tree = renderApp();
+        expect(tree).toMatchSnapshot();
+    });
+
+    it('renders resend activation email page correctly', () => {
+        ServerSideQueryParamsService.getQueryParam.mockReturnValue(PAGE_IDS.RESEND_ACTIVATION_EMAIL);
+
+        const tree = renderApp();
+        expect(tree).toMatchSnapshot();
+    });
+
+    it('renders page not found correctly when routing does not find a match', () => {
+        //mock value from query params service
+        ServerSideQueryParamsService.getQueryParam.mockReturnValue('some_value');
+
+        const tree = renderApp();
+        expect(tree).toMatchSnapshot();
     });
 
 });

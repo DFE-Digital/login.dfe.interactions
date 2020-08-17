@@ -1,6 +1,7 @@
 import React from 'react';
 import components from '../components';
 import { POLICIES } from '../constants/policies';
+import { PAGE_IDS } from '../constants/pageIds';
 
 class AccountNotFound extends React.Component {
 
@@ -30,7 +31,7 @@ class AccountNotFound extends React.Component {
 
 
         return (
-            <div id="accountNotFound">
+            <div id={PAGE_IDS.ACCOUNT_NOT_FOUND}>
                 <components.PageContainer pageConfig={pageConfig} />
             </div>
         )
