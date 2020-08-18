@@ -1,6 +1,7 @@
 import { POLICIES } from '../constants/policies';
 import { QUERY_PARAMS } from '../constants/queryParams';
 import * as ServerSideQueryParamsService from '../services/ServerSideQueryParamsService';
+import { getInnerTextById } from '../helpers/dom';
 
 export function getB2CLink(policy) {
 
@@ -11,7 +12,8 @@ export function getB2CLink(policy) {
     const tenantId = ServerSideQueryParamsService.getQueryParam(QUERY_PARAMS.TENANT_ID);
     const clientId = ServerSideQueryParamsService.getQueryParam(QUERY_PARAMS.CLIENT_ID);
     const redirectURI = ServerSideQueryParamsService.getQueryParam(QUERY_PARAMS.REDIRECT_URI);
-    const token = ServerSideQueryParamsService.getQueryParam(QUERY_PARAMS.ID_TOKEN_HINT);
+    //try to get token from either server side query params or from the DOM
+    const token = ServerSideQueryParamsService.getQueryParam(QUERY_PARAMS.ID_TOKEN_HINT) || getInnerTextById('token');
 
     let relativeUrl;
 
