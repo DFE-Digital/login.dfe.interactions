@@ -90,7 +90,7 @@ describe('when building the URL for a link that points to a B2C policy', () => {
 
             beforeEach(() => {
                 let elem = global.document.createElement('p');
-                elem.id = 'token';
+                elem.id = QUERY_PARAMS.ID_TOKEN_HINT;
                 elem.innerText = testToken;
                 global.document.body.appendChild(elem);
             });

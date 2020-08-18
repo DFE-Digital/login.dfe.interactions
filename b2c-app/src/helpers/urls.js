@@ -13,7 +13,8 @@ export function getB2CLink(policy) {
     const clientId = ServerSideQueryParamsService.getQueryParam(QUERY_PARAMS.CLIENT_ID);
     const redirectURI = ServerSideQueryParamsService.getQueryParam(QUERY_PARAMS.REDIRECT_URI);
     //try to get token from either server side query params or from the DOM
-    const token = ServerSideQueryParamsService.getQueryParam(QUERY_PARAMS.ID_TOKEN_HINT) || getInnerTextById('token');
+    const token = ServerSideQueryParamsService.getQueryParam(QUERY_PARAMS.ID_TOKEN_HINT) ||
+        getInnerTextById(QUERY_PARAMS.ID_TOKEN_HINT);
 
     let relativeUrl;
 
