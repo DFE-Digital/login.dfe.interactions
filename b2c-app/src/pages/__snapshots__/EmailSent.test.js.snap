@@ -91,6 +91,7 @@ exports[`when policy is POLICIES.ACCOUNT_SIGNUP renders correctly 1`] = `
             <div>
               <p
                 className="govuk-body"
+                id="emailSentTo"
               />
               <p
                 className="govuk-body"
@@ -167,6 +168,7 @@ exports[`when policy is POLICIES.CHANGE_EMAIL renders correctly 1`] = `
             <div>
               <p
                 className="govuk-body"
+                id="emailSentTo"
               />
               <p
                 className="govuk-body"
@@ -253,6 +255,7 @@ exports[`when policy is POLICIES.PASSWORD_RESET renders correctly 1`] = `
             <div>
               <p
                 className="govuk-body"
+                id="emailSentTo"
               />
               <p
                 className="govuk-body"
@@ -334,6 +337,7 @@ exports[`when policy is POLICIES.PASSWORD_RESET_CONFIRMATION renders correctly 1
             <div>
               <p
                 className="govuk-body"
+                id="emailSentTo"
               />
               <p
                 className="govuk-body"
@@ -415,6 +419,7 @@ exports[`when policy is POLICIES.RESEND_EMAIL renders correctly 1`] = `
             <div>
               <p
                 className="govuk-body"
+                id="emailSentTo"
               />
               <p
                 className="govuk-body"
@@ -501,6 +506,7 @@ exports[`when policy is POLICIES.SIGNIN_INVITATION renders correctly 1`] = `
             <div>
               <p
                 className="govuk-body"
+                id="emailSentTo"
               />
               <p
                 className="govuk-body"
@@ -591,6 +597,7 @@ exports[`when policy is POLICIES.SIGNUP_CONFIRMATION renders correctly 1`] = `
             <div>
               <p
                 className="govuk-body"
+                id="emailSentTo"
               />
               <p
                 className="govuk-body"
@@ -667,6 +674,7 @@ exports[`when policy is POLICIES.SIGNUP_INVITATION renders correctly 1`] = `
             <div>
               <p
                 className="govuk-body"
+                id="emailSentTo"
               />
               <p
                 className="govuk-body"

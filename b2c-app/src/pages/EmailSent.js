@@ -55,7 +55,7 @@ class EmailSent extends React.Component {
         }
 
         const contentFromB2CParagraph =
-            <components.Paragraph>
+            <components.Paragraph id='emailSentTo'>
                 {getInnerTextById(b2cResultElementId)}
             </components.Paragraph>
 
@@ -86,61 +86,64 @@ class EmailSent extends React.Component {
 
         let content;
 
-        if (policyForContent === POLICIES.ACCOUNT_SIGNUP ||
-            policyForContent === POLICIES.SIGNUP_CONFIRMATION) {
+        switch (policyForContent) {
 
-            content =
-                <div>
-                    {contentFromB2CParagraph}
-                    {checkSpamFolderParagraph}
-                    {this.buildResendEmailParagraph(POLICIES.RESEND_EMAIL, 'resend the activation email', false)}
-                    {linkExpiresParagraph}
-                </div>
+            case POLICIES.ACCOUNT_SIGNUP:
+            case POLICIES.SIGNUP_CONFIRMATION:
+                content =
+                    <div>
+                        {contentFromB2CParagraph}
+                        {checkSpamFolderParagraph}
+                        {this.buildResendEmailParagraph(POLICIES.RESEND_EMAIL, 'resend the activation email', false)}
+                        {linkExpiresParagraph}
+                    </div>
+                break;
 
-        } else if (policyForContent === POLICIES.SIGNUP_INVITATION) {
+            case POLICIES.SIGNUP_INVITATION:
+                content =
+                    <div>
+                        {contentFromB2CParagraph}
+                        {accountRequiredParagraph}
+                        {checkSpamFolderParagraph}
+                        {this.buildResendEmailParagraph(POLICIES.RESEND_EMAIL, 'resend the activation email', false)}
+                        {linkExpiresParagraph}
+                    </div>
+                break;
 
-            content =
-                <div>
-                    {contentFromB2CParagraph}
-                    {accountRequiredParagraph}
-                    {checkSpamFolderParagraph}
-                    {this.buildResendEmailParagraph(POLICIES.RESEND_EMAIL, 'resend the activation email', false)}
-                    {linkExpiresParagraph}
-                </div>
+            case POLICIES.SIGNIN_INVITATION:
+                content =
+                    <div>
+                        {contentFromB2CParagraph}
+                        {checkSpamFolderParagraph}
+                        {this.buildResendEmailParagraph(POLICIES.RESEND_EMAIL, 'resend the activation email', false)}
+                        {linkExpiresParagraph}
+                        {changedIncorrectEmailParagraph}
+                    </div>
+                break;
 
-        } else if (policyForContent === POLICIES.SIGNIN_INVITATION) {
-            content =
-                <div>
-                    {contentFromB2CParagraph}
-                    {checkSpamFolderParagraph}
-                    {this.buildResendEmailParagraph(POLICIES.RESEND_EMAIL, 'resend the activation email', false)}
-                    {linkExpiresParagraph}
-                    {changedIncorrectEmailParagraph}
-                </div>
+            case POLICIES.CHANGE_EMAIL:
+            case POLICIES.RESEND_EMAIL:
+                content =
+                    <div>
+                        {contentFromB2CParagraph}
+                        {checkSpamFolderParagraph}
+                        {this.buildResendEmailParagraph(POLICIES.RESEND_EMAIL, 'resend the activation email', true)}
+                        {linkExpiresParagraph}
+                        {signinButton}
+                    </div>
+                break;
 
-        } else if (policyForContent === POLICIES.CHANGE_EMAIL ||
-            policyForContent === POLICIES.RESEND_EMAIL) {
-
-            content =
-                <div>
-                    {contentFromB2CParagraph}
-                    {checkSpamFolderParagraph}
-                    {this.buildResendEmailParagraph(POLICIES.RESEND_EMAIL, 'resend the activation email', true)}
-                    {linkExpiresParagraph}
-                    {signinButton}
-                </div>
-        } else if (policyForContent === POLICIES.PASSWORD_RESET ||
-            policyForContent === POLICIES.PASSWORD_RESET_CONFIRMATION) {
-
-            content =
-                <div>
-                    {contentFromB2CParagraph}
-                    {accountRequiredParagraph}
-                    {checkSpamFolderParagraph}
-                    {this.buildResendEmailParagraph(POLICIES.PASSWORD_RESET, 'resend password reset email', false)}
-                    {linkExpiresParagraph}
-                </div>
-
+            case POLICIES.PASSWORD_RESET:
+            case POLICIES.PASSWORD_RESET_CONFIRMATION:
+                content =
+                    <div>
+                        {contentFromB2CParagraph}
+                        {accountRequiredParagraph}
+                        {checkSpamFolderParagraph}
+                        {this.buildResendEmailParagraph(POLICIES.PASSWORD_RESET, 'resend password reset email', false)}
+                        {linkExpiresParagraph}
+                    </div>
+                break;
         }
 
         const title = "We've sent you an email";

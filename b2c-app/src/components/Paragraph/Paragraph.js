@@ -3,7 +3,7 @@ import React from 'react';
 function Paragraph(props) {
 
     return (
-        <p className="govuk-body">{props.children}</p>
+        <p id={props.id} className="govuk-body">{props.children}</p>
     )
 }
 

@@ -2042,6 +2042,7 @@ exports[`when page is set in server side query params renders email sent page co
                 <div>
                   <p
                     className="govuk-body"
+                    id="emailSentTo"
                   />
                   <p
                     className="govuk-body"
@@ -2348,6 +2349,7 @@ exports[`when page is set in server side query params renders email sent page co
                 <div>
                   <p
                     className="govuk-body"
+                    id="emailSentTo"
                   />
                   <p
                     className="govuk-body"
