@@ -86,13 +86,23 @@ class EmailSent extends React.Component {
 
         let content;
 
-        if (policyForContent === POLICIES.SIGNUP_INVITATION ||
-            policyForContent === POLICIES.ACCOUNT_SIGNUP ||
+        if (policyForContent === POLICIES.ACCOUNT_SIGNUP ||
             policyForContent === POLICIES.SIGNUP_CONFIRMATION) {
 
             content =
                 <div>
                     {contentFromB2CParagraph}
+                    {checkSpamFolderParagraph}
+                    {this.buildResendEmailParagraph(POLICIES.RESEND_EMAIL, 'resend the activation email', false)}
+                    {linkExpiresParagraph}
+                </div>
+
+        } else if (policyForContent === POLICIES.SIGNUP_INVITATION) {
+
+            content =
+                <div>
+                    {contentFromB2CParagraph}
+                    {accountRequiredParagraph}
                     {checkSpamFolderParagraph}
                     {this.buildResendEmailParagraph(POLICIES.RESEND_EMAIL, 'resend the activation email', false)}
                     {linkExpiresParagraph}

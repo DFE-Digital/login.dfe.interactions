@@ -2352,6 +2352,11 @@ exports[`when page is set in server side query params renders email sent page co
                   <p
                     className="govuk-body"
                   >
+                    You will only receive this email if you have an account.
+                  </p>
+                  <p
+                    className="govuk-body"
+                  >
                     Check your spam folder if you can't see it in a few minutes.
                   </p>
                   <p

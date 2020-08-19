@@ -671,6 +671,11 @@ exports[`when policy is POLICIES.SIGNUP_INVITATION renders correctly 1`] = `
               <p
                 className="govuk-body"
               >
+                You will only receive this email if you have an account.
+              </p>
+              <p
+                className="govuk-body"
+              >
                 Check your spam folder if you can't see it in a few minutes.
               </p>
               <p
