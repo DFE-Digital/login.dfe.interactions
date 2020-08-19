@@ -144,6 +144,10 @@ class EmailSent extends React.Component {
                         {linkExpiresParagraph}
                     </div>
                 break;
+
+            default:
+                content = null;
+                break;
         }
 
         const title = "We've sent you an email";
