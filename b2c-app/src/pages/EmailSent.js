@@ -47,7 +47,12 @@ class EmailSent extends React.Component {
             policyForContent = this.props.policy;
         }
 
-        const b2cResultElementId = policyForContent === POLICIES.CHANGE_EMAIL ? 'confirmationMessage' : 'successMessage';
+        let b2cResultElementId;
+        if (policyForContent === POLICIES.CHANGE_EMAIL || policyForContent === POLICIES.SIGNIN_INVITATION) {
+            b2cResultElementId = 'confirmationMessage';
+        } else {
+            b2cResultElementId = 'successMessage';
+        }
 
         const contentFromB2CParagraph =
             <components.Paragraph>
@@ -69,6 +74,13 @@ class EmailSent extends React.Component {
                 This link expires in 24 hours.
             </components.Paragraph>
 
+        const changedIncorrectEmailParagraph =
+            <components.Paragraph>
+                If you changed your details to an incorrect email address and have been locked out of your account,&nbsp;
+                <components.Link id="contactUsLink" url="https://nationalcareers.service.gov.uk/contact-us">contact us</components.Link>
+                .
+            </components.Paragraph>
+
         const signinButton = <components.Link id="signInLink" type={LINK_TYPES.BUTTON} policy={POLICIES.SIGNIN_INVITATION}>Return to sign in</components.Link>
 
 
@@ -76,8 +88,7 @@ class EmailSent extends React.Component {
 
         if (policyForContent === POLICIES.SIGNUP_INVITATION ||
             policyForContent === POLICIES.ACCOUNT_SIGNUP ||
-            policyForContent === POLICIES.SIGNUP_CONFIRMATION ||
-            policyForContent === POLICIES.SIGNIN_INVITATION) {
+            policyForContent === POLICIES.SIGNUP_CONFIRMATION) {
 
             content =
                 <div>
@@ -86,20 +97,18 @@ class EmailSent extends React.Component {
                     {this.buildResendEmailParagraph(POLICIES.RESEND_EMAIL, 'resend the activation email', false)}
                     {linkExpiresParagraph}
                 </div>
-        }
-        else if (policyForContent === POLICIES.PASSWORD_RESET ||
-            policyForContent === POLICIES.PASSWORD_RESET_CONFIRMATION) {
 
+        } else if (policyForContent === POLICIES.SIGNIN_INVITATION) {
             content =
                 <div>
                     {contentFromB2CParagraph}
-                    {accountRequiredParagraph}
                     {checkSpamFolderParagraph}
-                    {this.buildResendEmailParagraph(POLICIES.PASSWORD_RESET, 'resend password reset email', false)}
+                    {this.buildResendEmailParagraph(POLICIES.RESEND_EMAIL, 'resend the activation email', false)}
                     {linkExpiresParagraph}
+                    {changedIncorrectEmailParagraph}
                 </div>
-        }
-        else if (policyForContent === POLICIES.CHANGE_EMAIL ||
+
+        } else if (policyForContent === POLICIES.CHANGE_EMAIL ||
             policyForContent === POLICIES.RESEND_EMAIL) {
 
             content =
@@ -110,6 +119,18 @@ class EmailSent extends React.Component {
                     {linkExpiresParagraph}
                     {signinButton}
                 </div>
+        } else if (policyForContent === POLICIES.PASSWORD_RESET ||
+            policyForContent === POLICIES.PASSWORD_RESET_CONFIRMATION) {
+
+            content =
+                <div>
+                    {contentFromB2CParagraph}
+                    {accountRequiredParagraph}
+                    {checkSpamFolderParagraph}
+                    {this.buildResendEmailParagraph(POLICIES.PASSWORD_RESET, 'resend password reset email', false)}
+                    {linkExpiresParagraph}
+                </div>
+
         }
 
         const title = "We've sent you an email";
