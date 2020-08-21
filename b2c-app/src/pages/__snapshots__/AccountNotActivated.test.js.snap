@@ -1,0 +1,101 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  id="accountNotActivated"
+>
+  <div>
+    <div
+      className="govuk-width-container"
+    >
+      <div
+        className="govuk-breadcrumbs"
+      >
+        <ol
+          className="govuk-breadcrumbs__list"
+        >
+          <li
+            className="govuk-breadcrumbs__list-item"
+          >
+            <a
+              className="govuk-breadcrumbs__link"
+              href="https://nationalcareers.service.gov.uk/"
+            >
+              Home
+            </a>
+          </li>
+        </ol>
+      </div>
+      <main
+        className="govuk-main-wrapper"
+      >
+        <div
+          className="govuk-grid-row"
+        >
+          <div
+            className="govuk-grid-column-two-thirds"
+          >
+            <div
+              className="pageLevelErrorContainer hide"
+            >
+              <div
+                aria-labelledby="error-summary-title"
+                className="govuk-error-summary"
+                data-module="govuk-error-summary"
+                role="alert"
+                tabIndex="-1"
+              >
+                <h2
+                  className="govuk-error-summary__title"
+                  id="error-summary-title"
+                >
+                  There is a problem
+                </h2>
+                <div
+                  className="govuk-error-summary__body"
+                >
+                  <ul
+                    className="govuk-list govuk-error-summary__list"
+                    id="errorSummaryItems"
+                  />
+                </div>
+              </div>
+            </div>
+            <h1
+              className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
+            >
+              Account requires activation
+            </h1>
+            <div>
+              <p
+                className="govuk-body"
+              >
+                Our records show that you have recently updated information about your account.
+              </p>
+              <p
+                className="govuk-body"
+              >
+                You need to complete activation before you can access your account.
+              </p>
+            </div>
+            <form
+              id="customForm"
+              noValidate={true}
+              onSubmit={[Function]}
+            >
+              <div />
+              <button
+                className="govuk-button"
+                id="preSubmit"
+                type="submit"
+              >
+                Resend account activation link
+              </button>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+`;

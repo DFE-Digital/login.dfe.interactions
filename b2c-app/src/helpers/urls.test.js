@@ -1,8 +1,11 @@
 import { matchesPath, hasSearchParam, getB2CLink } from './urls';
 import { POLICIES } from '../constants/policies';
+import { QUERY_PARAMS } from '../constants/queryParams';
 
 import * as ServerSideQueryParamsService from './../services/ServerSideQueryParamsService';
 jest.mock('./../services/ServerSideQueryParamsService');
+
+import { JSDOM } from "jsdom";
 
 describe('when searching for a match in the location URL', () => {
 
@@ -66,5 +69,48 @@ describe('when building the URL for a link that points to a B2C policy', () => {
         expect(getB2CLink(POLICIES.FIND_EMAIL)).toEqual(`/${mockReturnValue}/oauth2/v2.0/authorize?p=${POLICIES.FIND_EMAIL}&client_id=${mockReturnValue}&nonce=defaultNonce&redirect_uri=${mockReturnValue}&scope=openid&response_type=id_token&prompt=login`);
         expect(getB2CLink(POLICIES.RESEND_EMAIL)).toEqual(`/${mockReturnValue}/oauth2/v2.0/authorize?p=${POLICIES.RESEND_EMAIL}&client_id=${mockReturnValue}&nonce=defaultNonce&redirect_uri=${mockReturnValue}&scope=openid&response_type=id_token&prompt=login&id_token_hint=${mockReturnValue}&idtokenhint=${mockReturnValue}`);
     });
+
+    describe('when the token is not defined in the server side query params', () => {
+
+        beforeEach(() => {
+            ServerSideQueryParamsService.getQueryParam.mockImplementation((id) => {
+                if (id === QUERY_PARAMS.ID_TOKEN_HINT) {
+                    return;
+                }
+                return mockReturnValue
+            });
+
+            const dom = new JSDOM();
+            global.document = dom.window.document;
+        });
+
+        describe('when the token is present in the DOM', () => {
+
+            let testToken = 'test_token';
+
+            beforeEach(() => {
+                let elem = global.document.createElement('p');
+                elem.id = QUERY_PARAMS.ID_TOKEN_HINT;
+                elem.innerText = testToken;
+                global.document.body.appendChild(elem);
+            });
+
+            it('returns URL with the token obtained from the DOM element', () => {
+                expect(getB2CLink(POLICIES.RESEND_EMAIL)).toEqual(`/${mockReturnValue}/oauth2/v2.0/authorize?p=${POLICIES.RESEND_EMAIL}&client_id=${mockReturnValue}&nonce=defaultNonce&redirect_uri=${mockReturnValue}&scope=openid&response_type=id_token&prompt=login&id_token_hint=${testToken}&idtokenhint=${testToken}`);
+            });
+        });
+
+        describe('when the token is not present in the DOM', () => {
+
+            beforeEach(() => {
+                global.document.body.innerHTML = '';
+            });
+
+            it('returns URL without the token', () => {
+                expect(getB2CLink(POLICIES.RESEND_EMAIL)).toEqual(`/${mockReturnValue}/oauth2/v2.0/authorize?p=${POLICIES.RESEND_EMAIL}&client_id=${mockReturnValue}&nonce=defaultNonce&redirect_uri=${mockReturnValue}&scope=openid&response_type=id_token&prompt=login`);
+            });
+        })
+
+    })
 
 });
