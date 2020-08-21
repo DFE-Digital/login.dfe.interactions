@@ -115,7 +115,7 @@ class EmailSent extends React.Component {
                     <div>
                         {contentFromB2CParagraph}
                         {checkSpamFolderParagraph}
-                        {this.buildResendEmailParagraph(POLICIES.RESEND_EMAIL, 'resend the activation email', false)}
+                        {this.buildResendEmailParagraph(POLICIES.RESEND_EMAIL, 'resend the activation email', true)}
                         {linkExpiresParagraph}
                         {changedIncorrectEmailParagraph}
                     </div>
