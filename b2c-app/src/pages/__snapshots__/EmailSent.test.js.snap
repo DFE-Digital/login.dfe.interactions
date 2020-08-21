@@ -520,7 +520,7 @@ exports[`when policy is POLICIES.SIGNIN_INVITATION renders correctly 1`] = `
                 <a
                   className="govuk-link"
                   id="resendEmailLink"
-                  onClick={null}
+                  onClick={[Function]}
                 >
                   resend the activation email
                 </a>
