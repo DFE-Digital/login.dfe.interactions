@@ -26,7 +26,7 @@ class EmailSent extends React.Component {
     buildResendEmailParagraph(linkToPolicy, linkText, showSpinner) {
         return (
             <components.Paragraph>
-                If you don't receive an email after this time you can&nbsp;
+                If you do not receive an email after this time you can&nbsp;
                 <components.Link id='resendEmailLink' policy={linkToPolicy} onClick={showSpinner && this.showSpinner}>{linkText}</components.Link>
                 .
             </ components.Paragraph >
@@ -66,7 +66,7 @@ class EmailSent extends React.Component {
 
         const checkSpamFolderParagraph =
             <components.Paragraph>
-                Check your spam folder if you can't see it in a few minutes.
+                Check your spam folder if you cannot see it in a few minutes.
             </components.Paragraph>
 
         const linkExpiresParagraph =
