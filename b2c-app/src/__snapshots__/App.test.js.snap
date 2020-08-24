@@ -2047,12 +2047,12 @@ exports[`when page is set in server side query params renders email sent page co
                   <p
                     className="govuk-body"
                   >
-                    Check your spam folder if you can't see it in a few minutes.
+                    Check your spam folder if you cannot see it in a few minutes.
                   </p>
                   <p
                     className="govuk-body"
                   >
-                    If you don't receive an email after this time you can 
+                    If you do not receive an email after this time you can 
                     <a
                       className="govuk-link"
                       id="resendEmailLink"
@@ -2359,12 +2359,12 @@ exports[`when page is set in server side query params renders email sent page co
                   <p
                     className="govuk-body"
                   >
-                    Check your spam folder if you can't see it in a few minutes.
+                    Check your spam folder if you cannot see it in a few minutes.
                   </p>
                   <p
                     className="govuk-body"
                   >
-                    If you don't receive an email after this time you can 
+                    If you do not receive an email after this time you can 
                     <a
                       className="govuk-link"
                       id="resendEmailLink"
