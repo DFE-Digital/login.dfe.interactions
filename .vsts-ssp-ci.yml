@@ -21,4 +21,4 @@ variables:
 stages:
 - template: /Application/node/stages/signin-master-stage.yml@devopsTemplates
   parameters:
-    applicationName: int
+    applicationName: interactions
