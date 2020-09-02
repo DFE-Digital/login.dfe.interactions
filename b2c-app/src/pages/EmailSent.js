@@ -2,7 +2,6 @@ import React from 'react';
 import components from '../components';
 import { getInnerTextById } from '../helpers/dom';
 import { POLICIES } from '../constants/policies';
-import { LINK_TYPES } from '../constants/linkTypes';
 import { PAGE_IDS } from '../constants/pageIds';
 import { QUERY_PARAMS } from '../constants/queryParams';
 import * as ServerSideQueryParamsService from '../services/ServerSideQueryParamsService';
