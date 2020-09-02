@@ -41,7 +41,7 @@ class EmailSent extends React.Component {
             // retrieve the original policy that the resent email was for
             // and then use it to show page content accordingly
             // if not found, use resend email by default
-            policyForContent = ServerSideQueryParamsService.getQueryParam(QUERY_PARAMS.ORIGINAL_POLICY) || POLICIES.RESEND_EMAIL;
+            policyForContent = ServerSideQueryParamsService.getQueryParam(QUERY_PARAMS.ORIGINAL_POLICY);
 
         } else {
             policyForContent = this.props.policy;
@@ -88,28 +88,32 @@ class EmailSent extends React.Component {
 
         switch (policyForContent) {
 
+            // Activation (self registration) - Not used at the moment
             case POLICIES.ACCOUNT_SIGNUP:
             case POLICIES.SIGNUP_CONFIRMATION:
                 content =
                     <div>
                         {contentFromB2CParagraph}
                         {checkSpamFolderParagraph}
-                        {this.buildResendEmailParagraph(POLICIES.RESEND_EMAIL, 'resend the activation email', false)}
+                        {this.buildResendEmailParagraph(POLICIES.RESEND_EMAIL, 'resend email', false)}
                         {linkExpiresParagraph}
                     </div>
                 break;
 
+            // Activation (aided registration)
             case POLICIES.SIGNUP_INVITATION:
                 content =
                     <div>
                         {contentFromB2CParagraph}
                         {accountRequiredParagraph}
                         {checkSpamFolderParagraph}
-                        {this.buildResendEmailParagraph(POLICIES.RESEND_EMAIL, 'resend the activation email', false)}
+                        {this.buildResendEmailParagraph(POLICIES.RESEND_EMAIL, 'resend email', false)}
                         {linkExpiresParagraph}
                     </div>
                 break;
 
+            // Change Email (from initial request or from 'account requires activation')
+            case POLICIES.CHANGE_EMAIL:
             case POLICIES.SIGNIN_INVITATION:
                 content =
                     <div>
@@ -121,18 +125,7 @@ class EmailSent extends React.Component {
                     </div>
                 break;
 
-            case POLICIES.CHANGE_EMAIL:
-            case POLICIES.RESEND_EMAIL:
-                content =
-                    <div>
-                        {contentFromB2CParagraph}
-                        {checkSpamFolderParagraph}
-                        {this.buildResendEmailParagraph(POLICIES.RESEND_EMAIL, 'resend the activation email', true)}
-                        {linkExpiresParagraph}
-                        {signinButton}
-                    </div>
-                break;
-
+            // Reset Password
             case POLICIES.PASSWORD_RESET:
             case POLICIES.PASSWORD_RESET_CONFIRMATION:
                 content =
@@ -140,7 +133,7 @@ class EmailSent extends React.Component {
                         {contentFromB2CParagraph}
                         {accountRequiredParagraph}
                         {checkSpamFolderParagraph}
-                        {this.buildResendEmailParagraph(POLICIES.PASSWORD_RESET, 'resend password reset email', false)}
+                        {this.buildResendEmailParagraph(POLICIES.PASSWORD_RESET, 'resend email', false)}
                         {linkExpiresParagraph}
                     </div>
                 break;
