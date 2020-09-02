@@ -18,7 +18,7 @@ const callApi = async (opts) => {
     throw new Error(`Error getting bearer token to call oidc - ${e.message}`);
   }
 
-  const url = opts.isGateway ? 'https://gateway-test.signin.education.gov.uk/interaction' : config.oidcService.url;
+  const { url } = config.oidcService;
 
   try {
     const uri = `${url}${route}`;
