@@ -61,15 +61,6 @@ describe('when policy is POLICIES.CHANGE_EMAIL', () => {
     });
 });
 
-describe('when policy is POLICIES.RESEND_EMAIL', () => {
-    it('renders correctly', () => {
-        const tree = renderer
-            .create(<EmailSent policy={POLICIES.RESEND_EMAIL} />)
-            .toJSON();
-        expect(tree).toMatchSnapshot();
-    });
-});
-
 describe('when policy is POLICIES.PASSWORD_RESET', () => {
     it('renders correctly', () => {
         const tree = renderer
@@ -83,6 +74,15 @@ describe('when policy is POLICIES.PASSWORD_RESET_CONFIRMATION', () => {
     it('renders correctly', () => {
         const tree = renderer
             .create(<EmailSent policy={POLICIES.PASSWORD_RESET_CONFIRMATION} />)
+            .toJSON();
+        expect(tree).toMatchSnapshot();
+    });
+});
+
+describe('when policy is none of the above', () => {
+    it('renders correctly', () => {
+        const tree = renderer
+            .create(<EmailSent policy={POLICIES.RESEND_EMAIL} />)
             .toJSON();
         expect(tree).toMatchSnapshot();
     });
