@@ -81,9 +81,6 @@ class EmailSent extends React.Component {
                 .
             </components.Paragraph>
 
-        const signinButton = <components.Link id="signInLink" type={LINK_TYPES.BUTTON} policy={POLICIES.SIGNIN_INVITATION}>Return to sign in</components.Link>
-
-
         let content;
 
         switch (policyForContent) {
