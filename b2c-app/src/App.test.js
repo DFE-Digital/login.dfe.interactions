@@ -64,13 +64,13 @@ describe('when page is set in server side query params', () => {
         expect(tree).toMatchSnapshot();
     });
 
-    it('renders email sent page correctly when policy is Resend Email', () => {
+    it('renders email sent page correctly when policy is Resend Email and original policy is NOT defined', () => {
         ServerSideQueryParamsService.getQueryParam.mockImplementation((id) => {
             if (id === QUERY_PARAMS.PAGE) {
                 return PAGE_IDS.EMAIL_SENT;
             }
             if (id === QUERY_PARAMS.POLICY) {
-                return POLICIES.RESEND_EMAIL;
+                return;
             }
         });
 
@@ -78,13 +78,13 @@ describe('when page is set in server side query params', () => {
         expect(tree).toMatchSnapshot();
     });
 
-    it('renders email sent page correctly when policy is Resend Email ad original policy is defined', () => {
+    it('renders email sent page correctly when policy is Resend Email and original policy is defined', () => {
         ServerSideQueryParamsService.getQueryParam.mockImplementation((id) => {
             if (id === QUERY_PARAMS.PAGE) {
                 return PAGE_IDS.EMAIL_SENT;
             }
             if (id === QUERY_PARAMS.POLICY) {
-                return POLICIES.RESEND_EMAIL;
+                return POLICIES.CHANGE_EMAIL;
             }
             if (id === QUERY_PARAMS.ORIGINAL_POLICY) {
                 return POLICIES.SIGNUP_INVITATION;

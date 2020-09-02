@@ -107,7 +107,7 @@ exports[`when policy is POLICIES.ACCOUNT_SIGNUP renders correctly 1`] = `
                   id="resendEmailLink"
                   onClick={null}
                 >
-                  resend the activation email
+                  resend email
                 </a>
                 .
               </p>
@@ -193,16 +193,20 @@ exports[`when policy is POLICIES.CHANGE_EMAIL renders correctly 1`] = `
               >
                 This link expires in 24 hours.
               </p>
-              <a
-                className="govuk-button govuk-button--start"
-                data-module="govuk-button"
-                draggable="false"
-                id="signInLink"
-                onClick={null}
-                role="button"
+              <p
+                className="govuk-body"
               >
-                Return to sign in
-              </a>
+                If you changed your details to an incorrect email address and have been locked out of your account, 
+                <a
+                  className="govuk-link"
+                  href="https://nationalcareers.service.gov.uk/contact-us"
+                  id="contactUsLink"
+                  onClick={null}
+                >
+                  contact us
+                </a>
+                .
+              </p>
             </div>
           </div>
         </div>
@@ -276,7 +280,7 @@ exports[`when policy is POLICIES.PASSWORD_RESET renders correctly 1`] = `
                   id="resendEmailLink"
                   onClick={null}
                 >
-                  resend password reset email
+                  resend email
                 </a>
                 .
               </p>
@@ -358,7 +362,7 @@ exports[`when policy is POLICIES.PASSWORD_RESET_CONFIRMATION renders correctly 1
                   id="resendEmailLink"
                   onClick={null}
                 >
-                  resend password reset email
+                  resend email
                 </a>
                 .
               </p>
@@ -367,93 +371,6 @@ exports[`when policy is POLICIES.PASSWORD_RESET_CONFIRMATION renders correctly 1
               >
                 This link expires in 24 hours.
               </p>
-            </div>
-          </div>
-        </div>
-      </main>
-    </div>
-  </div>
-</div>
-`;
-
-exports[`when policy is POLICIES.RESEND_EMAIL renders correctly 1`] = `
-<div
-  id="emailSent"
->
-  <div>
-    <div
-      className="govuk-width-container"
-    >
-      <div
-        className="govuk-breadcrumbs"
-      >
-        <ol
-          className="govuk-breadcrumbs__list"
-        >
-          <li
-            className="govuk-breadcrumbs__list-item"
-          >
-            <a
-              className="govuk-breadcrumbs__link"
-              href="https://nationalcareers.service.gov.uk/"
-            >
-              Home
-            </a>
-          </li>
-        </ol>
-      </div>
-      <main
-        className="govuk-main-wrapper"
-      >
-        <div
-          className="govuk-grid-row"
-        >
-          <div
-            className="govuk-grid-column-two-thirds"
-          >
-            <h1
-              className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
-            >
-              We've sent you an email
-            </h1>
-            <div>
-              <p
-                className="govuk-body"
-                id="emailSentTo"
-              />
-              <p
-                className="govuk-body"
-              >
-                Check your spam folder if you cannot see it in a few minutes.
-              </p>
-              <p
-                className="govuk-body"
-              >
-                If you do not receive an email after this time you can 
-                <a
-                  className="govuk-link"
-                  id="resendEmailLink"
-                  onClick={[Function]}
-                >
-                  resend the activation email
-                </a>
-                .
-              </p>
-              <p
-                className="govuk-body"
-              >
-                This link expires in 24 hours.
-              </p>
-              <a
-                className="govuk-button govuk-button--start"
-                data-module="govuk-button"
-                draggable="false"
-                id="signInLink"
-                onClick={null}
-                role="button"
-              >
-                Return to sign in
-              </a>
             </div>
           </div>
         </div>
@@ -613,7 +530,7 @@ exports[`when policy is POLICIES.SIGNUP_CONFIRMATION renders correctly 1`] = `
                   id="resendEmailLink"
                   onClick={null}
                 >
-                  resend the activation email
+                  resend email
                 </a>
                 .
               </p>
@@ -695,7 +612,7 @@ exports[`when policy is POLICIES.SIGNUP_INVITATION renders correctly 1`] = `
                   id="resendEmailLink"
                   onClick={null}
                 >
-                  resend the activation email
+                  resend email
                 </a>
                 .
               </p>
@@ -705,6 +622,54 @@ exports[`when policy is POLICIES.SIGNUP_INVITATION renders correctly 1`] = `
                 This link expires in 24 hours.
               </p>
             </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`when policy is none of the above renders correctly 1`] = `
+<div
+  id="emailSent"
+>
+  <div>
+    <div
+      className="govuk-width-container"
+    >
+      <div
+        className="govuk-breadcrumbs"
+      >
+        <ol
+          className="govuk-breadcrumbs__list"
+        >
+          <li
+            className="govuk-breadcrumbs__list-item"
+          >
+            <a
+              className="govuk-breadcrumbs__link"
+              href="https://nationalcareers.service.gov.uk/"
+            >
+              Home
+            </a>
+          </li>
+        </ol>
+      </div>
+      <main
+        className="govuk-main-wrapper"
+      >
+        <div
+          className="govuk-grid-row"
+        >
+          <div
+            className="govuk-grid-column-two-thirds"
+          >
+            <h1
+              className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
+            >
+              We've sent you an email
+            </h1>
           </div>
         </div>
       </main>
