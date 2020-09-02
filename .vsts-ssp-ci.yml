@@ -24,4 +24,4 @@ stages:
     applicationName: interactions
     resourceGroupSuffix: int
     additionalFoldersForBuild: 
-    - 'b2c-app\\**'
+    - 'b2c-app//**'
