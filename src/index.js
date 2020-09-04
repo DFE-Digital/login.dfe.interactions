@@ -1,4 +1,4 @@
-// process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
+process.env.NODE_TLS_REJECT_UNAUTHORIZED = 0;
 
 const listEndpoints = require('express-list-endpoints');
 const express = require('express');
