@@ -1,7 +1,7 @@
+const emailValidator = require('email-validator');
 const InteractionComplete = require('./../InteractionComplete');
 const applicationsApi = require('./../../infrastructure/applications');
 const Users = require('./../../infrastructure/Users');
-const emailValidator = require('email-validator');
 const logger = require('./../../infrastructure/logger');
 const { sendRedirect, sendResult } = require('./../../infrastructure/utils');
 const osaApi = require('./../../infrastructure/osa');
@@ -119,7 +119,7 @@ const handleValidLegacyUser = (req, res, user, client) => {
     serviceId: client.id,
     userName: req.body.username,
     osaUserId: user.osaId,
-    service: user.services.find(s => s.id.toLowerCase() === client.id.toLowerCase()),
+    service: user.services.find((s) => s.id.toLowerCase() === client.id.toLowerCase()),
 
   };
   if (req.migrationUser.service) {
@@ -153,7 +153,13 @@ const handleValidSigninUser = (req, res, user) => {
 };
 
 const post = async (req, res) => {
-  const interactionDetails = await oidc.getInteractionById(req.params.uuid);
+  let isGateway = false;
+
+  if (req.params.clientId === 'GIAS') {
+    isGateway = true;
+  }
+
+  const interactionDetails = await oidc.getInteractionById(req.params.uuid, isGateway);
   if (!interactionDetails) {
     return sendRedirect(req, res, {
       redirect: true,

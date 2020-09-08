@@ -1,19 +1,29 @@
-import React from 'react'
+import React from 'react';
+import classNames from 'classnames';
 
 import components from '../../components';
 
 function PageNavigation(props) {
 
-    //build array of components with actual config
-    const navItemComponents = props.navigationItems.map( 
-        navItem => {
-            return <components.NavigationLink title={navItem.title} link={navItem.link} key={navItem.title+navItem.link}/> 
-        }
-    );
-    
+    const navigationClasses = classNames({
+        'govuk-header__navigation': true,
+        'govuk-header__navigation--open': props.expanded
+    });
+
+    let navItemComponents;
+
+    if (props.children) {
+        //build array of components with actual config
+        navItemComponents = props.children.map(
+            navItem => {
+                return <components.NavigationLink title={navItem.title} link={navItem.link} key={navItem.title + navItem.link} />
+            }
+        );
+    }
+
     return (
         <nav>
-            <ul id="navigation" className="govuk-header__navigation " aria-label="Top Level Navigation">
+            <ul id={props.navigationId} className={navigationClasses} aria-label="Top Level Navigation">
                 {navItemComponents}
             </ul>
         </nav>

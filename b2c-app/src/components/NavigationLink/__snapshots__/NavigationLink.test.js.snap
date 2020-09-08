@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<li
+  className="govuk-header__navigation-item"
+>
+  <a
+    className="govuk-header__link"
+  >
+    this is a test
+  </a>
+</li>
+`;

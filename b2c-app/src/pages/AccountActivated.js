@@ -1,33 +1,35 @@
 import React from 'react';
 import components from '../components';
-import { getB2CLink } from '../helpers/urls';
-import { ACTIONS } from '../constants/actions';
+import { POLICIES } from '../constants/policies';
+import { LINK_TYPES } from '../constants/linkTypes';
+import { PAGE_IDS } from '../constants/pageIds';
 
-export default function AccountActivated() {
-    return (
-        <div id="accountActivated">
+class AccountActivated extends React.Component {
 
-            <div className="govuk-width-container">
-                <components.Breadcrumbs />
+    render() {
 
-                <div id="pageLevelErrorContainer"></div>
-
-                <main className="govuk-main-wrapper">
-                    <div className="govuk-grid-row">
-                        <div className="govuk-grid-column-two-thirds">
-                            <components.PageTitle size='xl' title="We've activated your account"/>
-                            <components.B2C />
-                            <a href={getB2CLink(ACTIONS.LOGIN)} role="button" draggable="false" className="govuk-button govuk-button--start" data-module="govuk-button">
-                                Sign in to your account
-                            </a>
-                        </div>
-                    </div>
-                </main>
-
+        const content =
+            <div>
+                <components.Paragraph>You can start using your account to access your information.</components.Paragraph>
+                <components.Link id="signInLink" type={LINK_TYPES.BUTTON} policy={POLICIES.SIGNIN_INVITATION}>Sign in to your account</components.Link>
             </div>
 
-            <script src="__--b2cPath--__/b2c/assets/js-static/pages/accountActivated.js"></script>
+        const title = "We've activated your account";
 
-        </div>
-    )
+        const pageConfig = {
+            title: title,
+            header: title,
+            aboveFormContent: content
+        };
+
+
+        return (
+            <div id={PAGE_IDS.ACCOUNT_ACTIVATED}>
+                <components.PageContainer pageConfig={pageConfig} />
+            </div>
+        )
+    }
+
 }
+
+export default AccountActivated;

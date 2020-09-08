@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "",
   "engines": {
-    "node": "10.x.x"
+    "node": "12.x.x"
   },
   "scripts": {
     "test": "./node_modules/.bin/jest --coverage",
@@ -84,8 +84,39 @@
     "napa": "^3.0.0"
   },
   "jest": {
-    "testEnvironment": "node",
-    "collectCoverage": false,
-    "clearMocks": true
+    "projects": [
+      {
+        "displayName": "interactions",
+        "testEnvironment": "node",
+        "collectCoverage": false,
+        "clearMocks": true,
+        "modulePathIgnorePatterns": [
+          "<rootDir>/b2c-app/"
+        ]
+      },
+      {
+        "displayName": "b2c-app",
+        "testEnvironment": "jsdom",
+        "rootDir": "<rootDir>/b2c-app/",
+        "setupFilesAfterEnv": [
+          "<rootDir>/src/setupTests.js"
+        ],
+        "moduleNameMapper": {
+          "\\.(css|scss)$": "<rootDir>/test/styleMock.js"
+        },
+        "transform": {
+          "^.+\\.(js|jsx)$": "<rootDir>/test/jest-transformer.js"
+        },
+        "collectCoverageFrom": [
+          "**/*.{js,jsx}",
+          "!**/node_modules/**",
+          "!**/coverage/**",
+          "!**/serviceWorker.js",
+          "!**/index.js",
+          "!**/server.js",
+          "!**/post-build.js"
+        ]
+      }
+    ]
   }
 }

@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  id="accountFound"
+>
+  <div>
+    <div
+      className="govuk-width-container"
+    >
+      <div
+        className="govuk-breadcrumbs"
+      >
+        <ol
+          className="govuk-breadcrumbs__list"
+        >
+          <li
+            className="govuk-breadcrumbs__list-item"
+          >
+            <a
+              className="govuk-breadcrumbs__link"
+              href="https://nationalcareers.service.gov.uk/"
+            >
+              Home
+            </a>
+          </li>
+        </ol>
+      </div>
+      <main
+        className="govuk-main-wrapper"
+      >
+        <div
+          className="govuk-grid-row"
+        >
+          <div
+            className="govuk-grid-column-two-thirds"
+          >
+            <h1
+              className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
+            >
+              We've found your email address
+            </h1>
+            <div>
+              <p
+                className="govuk-body"
+              />
+              <p
+                className="govuk-body"
+              >
+                You'll need to use this email address to sign in to your account.
+              </p>
+              <a
+                className="govuk-button govuk-button--start"
+                data-module="govuk-button"
+                draggable="false"
+                id="signInLink"
+                onClick={null}
+                role="button"
+              >
+                Sign in to your account
+              </a>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+`;

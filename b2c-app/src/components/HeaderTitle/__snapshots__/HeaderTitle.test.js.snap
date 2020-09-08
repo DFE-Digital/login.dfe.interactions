@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<h1
+  className="govuk-heading-l govuk-!-margin-top-0 govuk-!-margin-bottom-0"
+>
+  <a
+    className="govuk-header__link govuk-header__link--service-name"
+    href="https://nationalcareers.service.gov.uk/"
+  >
+    this is a test
+  </a>
+</h1>
+`;
