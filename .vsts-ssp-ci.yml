@@ -13,7 +13,8 @@ resources:
 trigger:
   branches:
     include:
-    - feature/failover-pipeline
+    - develop
+    - master
 
 variables:
 - group: platform-global
