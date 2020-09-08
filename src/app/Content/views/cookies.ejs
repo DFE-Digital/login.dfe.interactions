@@ -20,10 +20,32 @@
             <tbody>
                 <tr>
                     <td>_csrf</td>
-                    <td></td>
-                    <td></td>
+                    <td>a value assoicated with each user to enable site requests, 
+                        such as form submissions.</td>
+                    <td>Expires on log out</td>
+                </tr>
+                <tr>
+                    <td>cookies_preferences_set</td>
+                    <td>Saves user acceptance to cookies</td>
+                    <td>1 year</td>
+                </tr>
+                <tr>
+                    <td>cookies_policy</td>
+                    <td>Saves user preferences to which cookies accepted.</td>
+                    <td>1 year</td>
+                </tr>
+                <tr>
+                    <td>session.sig</td>
+                    <td>a session value used to enable you to remain logged in throughout navigation of our site.</td>
+                    <td>Expires on log out</td>
+                </tr>
+                <tr>
+                    <td>session</td>
+                    <td>a session value used to enable you to remain logged in throughout navigation of our site.</td>
+                    <td>Expires on log out</td>
                 </tr>
             </tbody>
+            
         </table>
 
         <p>You'll normally see a message on the site before we store a cookie on your computer.</p>
@@ -47,17 +69,12 @@
         </ul>
 
         <p>We don’t collect or store your personal information (for example your name or address) so this information can’t be used to identify who you are. </p>
-
         <div role="note" aria-label="Information" class="panel panel-border-narrow">
             <p>We don’t allow Google to use or share our analytics data. You can <a rel="external" target="_blank" href="https://tools.google.com/dlpage/gaoptout">opt out of Google Analytics cookies.</a>
             </p>
         </div>
 
         <p>Google Analytics sets the following cookies:</p>
-
-        <h3 class="heading-medium">
-            Universal Analytics
-        </h3>
 
         <table class="condensed">
             <thead>
@@ -77,6 +94,11 @@
                 <td>_gat</td>
                 <td>Used to manage the rate at which page view requests are made</td>
                 <td>10 minutes</td>
+            </tr>
+            <tr>
+                <td>_gid</td>
+                <td>These help us count how many people visit DfE by tracking if you’ve visited before</td>
+                <td>24 hours</td>
             </tr>
             </tbody>
         </table>
