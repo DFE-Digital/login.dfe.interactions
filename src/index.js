@@ -33,7 +33,7 @@ const consent = require('./app/consent');
 const devLauncher = require('./app/DevLauncher');
 const content = require('./app/Content');
 const setCorrelationId = require('express-mw-correlation-id');
-// const b2cApp = require('./app/b2c');
+const b2cApp = require('./app/b2c');
 
 https.globalAgent.maxSockets = http.globalAgent.maxSockets = config.hostingEnvironment.agentKeepAlive.maxSockets || 50;
 
