@@ -6,10 +6,10 @@
     "node": "12.x.x"
   },
   "scripts": {
-    
     "test": "./node_modules/.bin/jest --coverage",
     "test-watcher": "./node_modules/.bin/jest --watch --coverage",
-    "dev": "settings='./config/login.dfe.interactions.dev.json' node src/index.js"
+    "dev": "settings='./config/login.dfe.interactions.dev.json' node src/index.js",
+    "postinstall": "cd b2c-app && npm i && npm run build && node ./src/post-build.js build"
   },
   "repository": {
     "type": "git",

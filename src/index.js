@@ -130,7 +130,7 @@ app.use('/:uuid/digipass', digipass(csrf));
 app.use('/:uuid/select-organisation', selectOrganisation(csrf));
 app.use('/:uuid/gias-lockout', giasLockout(csrf));
 app.use('/:uuid/consent', consent(csrf));
-// app.use('/b2c/', b2cApp(csrf));
+app.use('/b2c/', b2cApp(csrf));
 
 if (config.hostingEnvironment.useDevViews) {
   app.use('/dev/', devLauncher(csrf));
