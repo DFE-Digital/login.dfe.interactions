@@ -25,3 +25,5 @@ stages:
     applicationName: interactions
     resourceGroupSuffix: int-failover
     armTemplateName: template-failover.json
+    additionalFoldersForBuild: 
+    - 'b2c-app//**' 
