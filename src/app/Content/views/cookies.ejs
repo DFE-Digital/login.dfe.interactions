@@ -16,69 +16,72 @@
                 Cookie settings
             </h2>
             <p>You can choose which cookies you're happy for us to use.</p>
-
-            <fieldset>
-                <legend>
-                    <h2 class="heading-medium">
-                        Cookies that measure website use
-                    </h2>
-                </legend>
-                <p>
-                    We use analytical software to measure
-                    how you use this website so we can 
-                    improve it based on user needs. We do not 
-                    allow Google or other third party analytical software providers 
-                    to use or share data about how you use this site.
-                </p>
-                <div class="multiple-choice">
-                    <input id="cookie-radio-usage-true" type="radio" name="cookie.usage" value="true">
-                    <label for="cookie-radio-usage-true">
-                        <strong>Use</strong> cookies that measure my website use
-                    </label>
-                </div>
-                <div class="multiple-choice">
-                    <input id="cookie-radio-usage-false" type="radio" name="cookie.usage" value="false">
-                    <label for="cookie-radio-usage-false">
-                        <strong>Do not use</strong> cookies that measure my website use
-                    </label>
-                </div>
-            </fieldset>
-
-            <fieldset>
             
-                <legend>
-                    <h2 class="heading-medium">
-                        Cookies that remember your settings
-                    </h2>
-                </legend>
-                <p>
-                    These cookies do things like remember your preferences, 
-                    the notifications you've seen, and the choices you make, 
-                    to personalise your experience of using this site.
-                </p>
-                <div class="multiple-choice">
-                    <input id="cookie-radio-settings-true" type="radio" name="cookie.settings" value="true">
-                    <label for="cookie-radio-settings-true">
-                        <strong>Use</strong> cookies that remember my settings
-                    </label>
-                </div>
-                <div class="multiple-choice">
-                    <input id="cookie-radio-settings-false" type="radio" name="cookie.settings" value="false">
-                    <label for="cookie-radio-settings-false">
-                        <strong>Do not use</strong> cookies that remember my settings
-                    </label>
-                </div>
-            </fieldset>
-            <h2 class="heading-large">
-                Strictly necessary cookies
-            </h2>
-            <p>
-                These essential cookies do things like 
-                remember your progress through a form 
-                (for example a census).
-            </p>
-            <p>They always need to be on.</p>
+            <form class="cookies-page-dfe-sign-in__preferences-form">
+                <fieldset>
+                    <legend>
+                        <h2 class="heading-medium">
+                            Cookies that measure website use
+                        </h2>
+                    </legend>
+                    <p>
+                        We use analytical software to measure
+                        how you use this website so we can 
+                        improve it based on user needs. We do not 
+                        allow Google or other third party analytical software providers 
+                        to use or share data about how you use this site.
+                    </p>
+                    <div class="multiple-choice">
+                        <input id="cookie-radio-usage-true" type="radio" name="cookie.usage" value="1" checked>
+                        <label for="cookie-radio-usage-true">
+                            <strong>Use</strong> cookies that measure my website use
+                        </label>
+                    </div>
+                    <div class="multiple-choice">
+                        <input id="cookie-radio-usage-false" type="radio" name="cookie.usage" value="">
+                        <label for="cookie-radio-usage-false">
+                            <strong>Do not use</strong> cookies that measure my website use
+                        </label>
+                    </div>
+                </fieldset>
 
+                <fieldset>
+                    <legend>
+                        <h2 class="heading-medium">
+                            Cookies that remember your settings
+                        </h2>
+                    </legend>
+                    <p>
+                        These cookies do things like remember your preferences, 
+                        the notifications you've seen, and the choices you make, 
+                        to personalise your experience of using this site.
+                    </p>
+                    <div class="multiple-choice">
+                        <input id="cookie-radio-settings-true" type="radio" name="cookie.settings" value="1" checked>
+                        <label for="cookie-radio-settings-true">
+                            <strong>Use</strong> cookies that remember my settings
+                        </label>
+                    </div>
+                    <div class="multiple-choice">
+                        <input id="cookie-radio-settings-false" type="radio" name="cookie.settings" value="">
+                        <label for="cookie-radio-settings-false">
+                            <strong>Do not use</strong> cookies that remember my settings
+                        </label>
+                    </div>
+                </fieldset>
+                <h2 class="heading-medium">
+                    Strictly necessary cookies
+                </h2>
+                <p>
+                    These essential cookies do things like 
+                    remember your progress through a form 
+                    (for example a census).
+                </p>
+                <p>They always need to be on.</p>
+            </form>
+            <button class="button button--govuk" id="dsi-set-cookie-preferences">
+                Save cookie preferences
+            </button>
         </div>
     </div>
 </div>
