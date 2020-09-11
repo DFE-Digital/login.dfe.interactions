@@ -13,7 +13,8 @@ resources:
 trigger:
   branches:
     include:
-    - feature/failover-pipeline
+    - develop
+    - master
 
 variables:
 - group: platform-global
@@ -22,3 +23,7 @@ stages:
 - template: /Application/node/stages/signin-master-stage.yml@devopsTemplates
   parameters:
     applicationName: interactions
+    resourceGroupSuffix: int-failover
+    armTemplateName: template-failover.json
+    additionalFoldersForBuild: 
+    - 'b2c-app//**' 
