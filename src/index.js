@@ -1,5 +1,4 @@
 const listEndpoints = require('express-list-endpoints');
-const logger = require('./infrastructure/logger');
 const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
@@ -10,6 +9,7 @@ const csurf = require('csurf');
 const session = require('cookie-session');
 const http = require('http');
 const https = require('https');
+const logger = require('./infrastructure/logger');
 const config = require('./infrastructure/Config')();
 const helmet = require('helmet');
 const sanitization = require('login.dfe.sanitization');
@@ -91,7 +91,7 @@ app.use(sanitization({
   sanitizer: (key, value) => {
     const fieldToNotSanitize = ['email', 'username', 'password', 'confirmPassword', 'newPassword'];
 
-    if (fieldToNotSanitize.find(x => x.toLowerCase() === key.toLowerCase())) {
+    if (fieldToNotSanitize.find((x) => x.toLowerCase() === key.toLowerCase())) {
       return value;
     }
 
@@ -117,9 +117,7 @@ app.set('layout', 'shared/layout');
 
 // Setup routes
 app.use('/healthcheck', healthCheck({ config }));
-app.get('/', (req, res) => {
-  return res.redirect(config.hostingEnvironment.servicesUrl || '/welcome');
-});
+app.get('/', (req, res) => res.redirect(config.hostingEnvironment.servicesUrl || '/welcome'));
 app.use('/', content(csrf));
 
 app.use('/:uuid/usernamepassword', usernamePassword(csrf));
@@ -130,7 +128,7 @@ app.use('/:uuid/digipass', digipass(csrf));
 app.use('/:uuid/select-organisation', selectOrganisation(csrf));
 app.use('/:uuid/gias-lockout', giasLockout(csrf));
 app.use('/:uuid/consent', consent(csrf));
-app.use('/b2c/', b2cApp(csrf))
+app.use('/b2c/', b2cApp(csrf));
 
 if (config.hostingEnvironment.useDevViews) {
   app.use('/dev/', devLauncher(csrf));
@@ -156,7 +154,7 @@ Object.assign(app.locals, {
 });
 
 app.use((err, req, res, next) => {
-  if (err.code !== 'EBADCSRFTOKEN') return next(err)
+  if (err.code !== 'EBADCSRFTOKEN') return next(err);
 
   return sendRedirect(req, res, {
     redirect: true,
