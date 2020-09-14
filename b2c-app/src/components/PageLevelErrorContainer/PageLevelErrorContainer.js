@@ -81,13 +81,13 @@ class PageLevelErrorContainer extends React.Component {
         //show error summary if there are errors (not considering B2C errors as they don't show/hide summary text)
         return this.hasErrorItems() &&
             errorArray.some(item => {
-                return item.visible.showSummaryText;
+                return item.showSummaryText;
             });
     }
 
     hasErrorItems(errorArray) {
         let hasErrors = errorArray && errorArray.some(errorItem => {
-            return !!errorItem.visible.text;
+            return !!errorItem.text;
         });
         return hasErrors;
     }
@@ -103,7 +103,6 @@ class PageLevelErrorContainer extends React.Component {
 
             //turn errors passed in into an array to then map it into link components
             Object.keys(this.props.errorItems).forEach((key) => {
-                // console.log(errors);
                 errorArray.push(this.props.errorItems[key]);
             });
 
@@ -119,7 +118,7 @@ class PageLevelErrorContainer extends React.Component {
                                 smooth={true}
                                 offset={-80}
                                 duration={500}>
-                                {error.visible.text}
+                                {error.text}
                             </Link>
                         </li>
                     )
@@ -127,8 +126,8 @@ class PageLevelErrorContainer extends React.Component {
                 //if there is no id then render as a normal paragraph
                 else {
                     return (
-                        <li key={error.visible.text}>
-                            <p>{error.visible.text}</p>
+                        <li key={error.text}>
+                            <p>{error.text}</p>
                         </li>
                     )
                 }

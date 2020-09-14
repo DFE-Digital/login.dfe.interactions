@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { onError } from '../../helpers/pageUpdatesHandler';
-
 import "./TermsAndConditions.scss";
 
 class TermsAndConditions extends React.Component {
@@ -12,24 +10,17 @@ class TermsAndConditions extends React.Component {
             tsAndCsAccepted: false,
             errors: {
                 tsAndCs: {
-                    current: {
-                        text: 'You must accept our Terms and Conditions',
-                        showSummaryText: false
-                    },
-                    visible: {
-                        text: '',
-                        showSummaryText: false
-                    },
+                    text: 'You must accept our Terms and Conditions',
+                    showSummaryText: false,
                     id: 'tsAndCsCustom'
                 }
             }
         };
         this.handleChange = this.handleChange.bind(this);
-        this.onError = onError.bind(this);
         this.isValidTsAndCs = this.isValidTsAndCs.bind(this);
 
-        //initialise errors in parent component
-        this.props.initialiseErrors(this.state.errors);
+        //initialise visible errors in parent component
+        this.props.initialiseParentErrors(this.state.errors);
     }
 
     handleChange(e) {
@@ -47,29 +38,19 @@ class TermsAndConditions extends React.Component {
     isValidTsAndCs() {
         let isValid = true;
 
-        //build new error state
-        const newErrorState = {
-            tsAndCs: {
-                current: {
-                    text: '',
-                    showSummaryText: false
-                },
-                visible: {
-                    text: '',
-                    showSummaryText: false
-                },
-                id: 'tsAndCsCustom'
-            }
-        }
+        //build new error state with empty value for text
+        const newErrorState = { ...this.state.errors }
+        newErrorState.tsAndCs.text = '';
 
+        //now update value for the text if invalid
         if (!this.state.tsAndCsAccepted) {
             isValid = false;
-            newErrorState.tsAndCs.current.text = 'You must accept our Terms and Conditions';
+            newErrorState.tsAndCs.text = 'You must accept our Terms and Conditions';
         }
 
         this.setState({ errors: newErrorState }, () => {
             //call parent to update its state
-            this.props.updateErrors(this.state.errors);
+            this.props.updateParentErrors(this.state.errors);
         });
 
         return isValid;
@@ -77,14 +58,14 @@ class TermsAndConditions extends React.Component {
 
     render() {
 
-        let { errors, showErrors } = this.props;
+        let { visibleErrors, showErrors } = this.props;
 
         let tsAndCsErrorElement;
-        if (showErrors && errors.tsAndCs.visible.text.length > 0) {
+        if (showErrors && visibleErrors.tsAndCs.text.length > 0) {
             tsAndCsErrorElement =
                 <span id="tsAndCsError" className="govuk-error-message">
                     <span className="govuk-visually-hidden">Error:</span>
-                    {errors.tsAndCs.visible.text}
+                    {visibleErrors.tsAndCs.text}
                 </span>
         }
 
@@ -92,7 +73,7 @@ class TermsAndConditions extends React.Component {
 
             <div>
                 <h1 className='govuk-heading-m'>Terms and conditions</h1>
-                <div className={`govuk-form-group ${showErrors && errors.tsAndCs.visible.text.length > 0 ? "govuk-form-group--error" : ""}`}>
+                <div className={`govuk-form-group ${showErrors && visibleErrors.tsAndCs.text.length > 0 ? "govuk-form-group--error" : ""}`}>
                     {tsAndCsErrorElement}
                     <label className="block-label" htmlFor="tsAndCsCustom">
                         <input id="tsAndCsCustom" name="tsAndCsAccepted" type="checkbox" value={true} aria-invalid="true"

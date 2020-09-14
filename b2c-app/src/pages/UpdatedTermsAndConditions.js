@@ -12,28 +12,32 @@ class UpdatedTermsAndConditions extends React.Component {
             tsAndCsAccepted: false,
             showErrors: false,
             showB2CErrors: true,
-            errors: {}
+            childrenErrors: {},
+            visibleErrors: {}
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onChange = onChange.bind(this);
-        this.addErrorsToState = this.addErrorsToState.bind(this);
-        this.updateErrorsInState = this.updateErrorsInState.bind(this);
+        this.initialiseVisibleErrorsInState = this.initialiseVisibleErrorsInState.bind(this);
+        this.updateCurrentErrorsInState = this.updateCurrentErrorsInState.bind(this);
     }
 
-    addErrorsToState(childErrors) {
-        //add errors sent from a child component to the full list of errors for this page
-        this.setState({ errors: { ...this.state.errors, ...childErrors } });
-    }
-
-    updateErrorsInState(errors) {
-        let newErrorState = { ...this.state.errors };
-
-        //update the relevant error in the page with new error data coming from one component
-        Object.keys(errors).forEach((key) => {
-            newErrorState[key] = errors[key];
+    initialiseVisibleErrorsInState(childErrors) {
+        let initialVisibleErrors = {};
+        Object.keys(childErrors).forEach((key) => {
+            //initialise visible errors empty
+            initialVisibleErrors[key] = { ...childErrors[key] };
+            initialVisibleErrors[key].text = '';
         });
 
-        this.setState({ errors: newErrorState });
+        //add errors sent from a child component to the full list of visible errors for this page
+        this.setState({ visibleErrors: initialVisibleErrors });
+
+        this.updateCurrentErrorsInState(childErrors);
+    }
+
+    updateCurrentErrorsInState(childErrors) {
+        //add errors sent from a child component to the full list of current errors for this page
+        this.setState({ childrenErrors: { ...this.state.childrenErrors, ...childErrors } });
     }
 
     handleSubmit(e) {
@@ -42,24 +46,15 @@ class UpdatedTermsAndConditions extends React.Component {
         this.setState({ showB2CErrors: false });
 
         //build new error state to update visible errors on submit (and not before)
-        let newErrorState = {};
+        let newVisibleErrorState = {};
 
-        Object.keys(this.state.errors).forEach((key) => {
-            let error = this.state.errors[key];
-            newErrorState[key] = {
-                current: {
-                    text: error.current.text,
-                    showSummaryText: error.current.showSummaryText
-                },
-                visible: {
-                    text: error.current.text,
-                    showSummaryText: error.current.showSummaryText
-                },
-                id: error.id
-            }
+        //do this for each component we have errors for
+        Object.keys(this.state.childrenErrors).forEach((key) => {
+            //make current error be the visible error now
+            newVisibleErrorState[key] = { ...this.state.childrenErrors[key] };
         });
 
-        this.setState({ errors: newErrorState });
+        this.setState({ visibleErrors: newVisibleErrorState });
 
         //do something to validate and decide if we submit or show errors
         if (this.state.tsAndCsAccepted) {
@@ -100,15 +95,16 @@ class UpdatedTermsAndConditions extends React.Component {
                 <components.TermsAndConditions
                     onChange={this.onChange}
                     showErrors={this.state.showErrors}
-                    errors={this.state.errors}
-                    initialiseErrors={this.addErrorsToState}
-                    updateErrors={this.updateErrorsInState} />
+                    visibleErrors={this.state.visibleErrors}
+                    initialiseParentErrors={this.initialiseVisibleErrorsInState}
+                    updateParentErrors={this.updateCurrentErrorsInState} />
             </div>
 
         /**
          * Page configuration
          */
         const title = 'Updated terms and conditions';
+
         const pageConfig = {
             title: title,
             header: title,
@@ -116,7 +112,7 @@ class UpdatedTermsAndConditions extends React.Component {
             formContent: formContent,
             submitButtonText: 'Continue to your account',
             submitHandler: this.handleSubmit,
-            errors: this.state.errors,
+            errors: this.state.visibleErrors,
             showB2CErrors: this.state.showB2CErrors
         };
 
