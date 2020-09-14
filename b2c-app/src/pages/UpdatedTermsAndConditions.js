@@ -2,7 +2,13 @@ import React from 'react';
 import { animateScroll } from "react-scroll";
 
 import components from '../components';
+
 import { onChange } from '../helpers/pageUpdatesHandler';
+import {
+    updateVisibleErrorsInState,
+    initialiseErrorsInState,
+    updateCurrentErrorsInState
+} from '../helpers/pageErrorHandler';
 
 class UpdatedTermsAndConditions extends React.Component {
 
@@ -17,44 +23,19 @@ class UpdatedTermsAndConditions extends React.Component {
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onChange = onChange.bind(this);
-        this.initialiseVisibleErrorsInState = this.initialiseVisibleErrorsInState.bind(this);
-        this.updateCurrentErrorsInState = this.updateCurrentErrorsInState.bind(this);
+        this.updateVisibleErrorsInState = updateVisibleErrorsInState.bind(this);
+        this.initialiseErrorsInState = initialiseErrorsInState.bind(this);
+        this.updateCurrentErrorsInState = updateCurrentErrorsInState.bind(this);
     }
 
-    initialiseVisibleErrorsInState(childErrors) {
-        let initialVisibleErrors = {};
-        Object.keys(childErrors).forEach((key) => {
-            //initialise visible errors empty
-            initialVisibleErrors[key] = { ...childErrors[key] };
-            initialVisibleErrors[key].text = '';
-        });
 
-        //add errors sent from a child component to the full list of visible errors for this page
-        this.setState({ visibleErrors: initialVisibleErrors });
-
-        this.updateCurrentErrorsInState(childErrors);
-    }
-
-    updateCurrentErrorsInState(childErrors) {
-        //add errors sent from a child component to the full list of current errors for this page
-        this.setState({ childrenErrors: { ...this.state.childrenErrors, ...childErrors } });
-    }
 
     handleSubmit(e) {
         e.preventDefault();
         //hide B2C errors and only show again if we are going to submit the form to B2C
         this.setState({ showB2CErrors: false });
 
-        //build new error state to update visible errors on submit (and not before)
-        let newVisibleErrorState = {};
-
-        //do this for each component we have errors for
-        Object.keys(this.state.childrenErrors).forEach((key) => {
-            //make current error be the visible error now
-            newVisibleErrorState[key] = { ...this.state.childrenErrors[key] };
-        });
-
-        this.setState({ visibleErrors: newVisibleErrorState });
+        this.updateVisibleErrorsInState();
 
         //do something to validate and decide if we submit or show errors
         if (this.state.tsAndCsAccepted) {
@@ -96,7 +77,7 @@ class UpdatedTermsAndConditions extends React.Component {
                     onChange={this.onChange}
                     showErrors={this.state.showErrors}
                     visibleErrors={this.state.visibleErrors}
-                    initialiseParentErrors={this.initialiseVisibleErrorsInState}
+                    initialiseParentErrors={this.initialiseErrorsInState}
                     updateParentErrors={this.updateCurrentErrorsInState} />
             </div>
 
