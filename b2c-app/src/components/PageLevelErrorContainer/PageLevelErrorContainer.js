@@ -77,16 +77,16 @@ class PageLevelErrorContainer extends React.Component {
         }
     }
 
-    showSummaryText() {
+    showSummaryText(errorArray) {
         //show error summary if there are errors (not considering B2C errors as they don't show/hide summary text)
         return this.hasErrorItems() &&
-            this.props.errorItems.some(item => {
+            errorArray.some(item => {
                 return item.visible.showSummaryText;
             });
     }
 
-    hasErrorItems() {
-        let hasErrors = this.props.errorItems && this.props.errorItems.some(errorItem => {
+    hasErrorItems(errorArray) {
+        let hasErrors = errorArray && errorArray.some(errorItem => {
             return !!errorItem.visible.text;
         });
         return hasErrors;
@@ -98,8 +98,16 @@ class PageLevelErrorContainer extends React.Component {
 
     render() {
         let errorItems;
+        let errorArray = [];
         if (this.props.errorItems) {
-            errorItems = this.props.errorItems.map(error => {
+
+            //turn errors passed in into an array to then map it into link components
+            Object.keys(this.props.errorItems).forEach((key) => {
+                // console.log(errors);
+                errorArray.push(this.props.errorItems[key]);
+            });
+
+            errorItems = errorArray.map(error => {
                 //render links if there is an id that the link will take user to
                 if (error.id) {
                     return (
@@ -142,14 +150,14 @@ class PageLevelErrorContainer extends React.Component {
         }
 
         let errorSummary;
-        if (this.props.summaryTextContent && this.showSummaryText()) {
+        if (this.props.summaryTextContent && this.showSummaryText(errorArray)) {
             errorSummary =
                 <div id="errorSummaryText">
                     {this.props.summaryTextContent}
                 </div>
         }
 
-        const containerClassName = `pageLevelErrorContainer ${this.hasErrorItems() || this.hasB2CErrorItems() ? "show" : "hide"}`;
+        const containerClassName = `pageLevelErrorContainer ${this.hasErrorItems(errorArray) || this.hasB2CErrorItems() ? "show" : "hide"}`;
 
         return (
             <div className={containerClassName}>

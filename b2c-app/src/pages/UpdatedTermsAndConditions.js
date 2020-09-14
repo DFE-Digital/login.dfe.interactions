@@ -12,21 +12,55 @@ class UpdatedTermsAndConditions extends React.Component {
             tsAndCsAccepted: false,
             showErrors: false,
             showB2CErrors: true,
-            errors: []
+            errors: {}
         }
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onChange = onChange.bind(this);
+        this.addErrorsToState = this.addErrorsToState.bind(this);
+        this.updateErrorsInState = this.updateErrorsInState.bind(this);
+    }
+
+    addErrorsToState(childErrors) {
+        //add errors sent from a child component to the full list of errors for this page
+        this.setState({ errors: { ...this.state.errors, ...childErrors } });
+    }
+
+    updateErrorsInState(errors) {
+        let newErrorState = { ...this.state.errors };
+
+        //update the relevant error in the page with new error data coming from one component
+        Object.keys(errors).forEach((key) => {
+            newErrorState[key] = errors[key];
+        });
+
+        this.setState({ errors: newErrorState });
     }
 
     handleSubmit(e) {
         e.preventDefault();
         //hide B2C errors and only show again if we are going to submit the form to B2C
         this.setState({ showB2CErrors: false });
-        //update error messages
-        this.state.errors.forEach((error) => {
-            error.visible.text = error.current.text;
-            error.visible.showSummaryText = true;
+
+        //build new error state to update visible errors on submit (and not before)
+        let newErrorState = {};
+
+        Object.keys(this.state.errors).forEach((key) => {
+            let error = this.state.errors[key];
+            newErrorState[key] = {
+                current: {
+                    text: error.current.text,
+                    showSummaryText: error.current.showSummaryText
+                },
+                visible: {
+                    text: error.current.text,
+                    showSummaryText: error.current.showSummaryText
+                },
+                id: error.id
+            }
         });
+
+        this.setState({ errors: newErrorState });
+
         //do something to validate and decide if we submit or show errors
         if (this.state.tsAndCsAccepted) {
             //hide our validation errors and prepare to show B2C ones (in case there are any)
@@ -66,7 +100,9 @@ class UpdatedTermsAndConditions extends React.Component {
                 <components.TermsAndConditions
                     onChange={this.onChange}
                     showErrors={this.state.showErrors}
-                    errors={this.state.errors} />
+                    errors={this.state.errors}
+                    initialiseErrors={this.addErrorsToState}
+                    updateErrors={this.updateErrorsInState} />
             </div>
 
         /**
