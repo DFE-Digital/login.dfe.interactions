@@ -30,34 +30,7 @@
     </div>
 </div>
 
-<div class="global-cookie-message-dfe-sign-in column-full" id="dsi-cookie-banner">
-    <div class="grid-row global-cookie-message-dfe-sign-in__cookie-message-container">
-        <div class="column-two-thirds">
-            <h2 class="heading-medium heading-medium--govuk">
-                Tell us whether you accept cookies
-            </h2>
-            <p class="govuk-body govuk-body--shim">
-                We use cookies to
-                <a href="/cookies">collect information</a>
-                about how you use DfE Sign in.
-                We use this information to improve our services
-                and to make this website work as efficently as possible.
-            </p>
-            <div class="grid-row">
-                <div class="column-one-half">
-                    <button class="button button--govuk cookie-accept">
-                        Accept all cookies
-                    </button>
-                </div>
-                <div class="column-one-half">
-                    <a class="button button--govuk" href="/cookies">
-                        Set cookie preferences
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<%include ../../../node_modules/dfe-frontend-toolkit/app/views/concepts/components/cookie-banner.html %>
 
 <div class="wrapper">
     <%if(app.environmentBannerMessage) {%>
@@ -162,14 +135,9 @@
 <script type="text/javascript" src="<%= locals.urls.assets %>/javascript/vendors/vendors.min.js"></script>
 <!-- Global site tag (gtag.js) - Google Analytics -->
 <script>
-    window.dataLayer = window.dataLayer || [];
-    window.gtag = function () {
-        dataLayer.push(arguments);
-    }
     window.gaTrackingId = '<%=locals.gaTrackingId || 'UA-114739594-1'%>';
-
 </script>
 <script src="<%= locals.urls.assets %>/javascript/app.min.js"></script>
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-114739594-1"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=<%=locals.gaTrackingId || 'UA-114739594-1'%>"></script>
 </body>
 </html>
