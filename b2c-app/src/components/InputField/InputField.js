@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { onError } from '../../helpers/pageUpdatesHandler';
-
 class InputField extends React.Component {
 
     constructor(props) {
@@ -13,14 +11,8 @@ class InputField extends React.Component {
             [this.props.inputId]: null,
             errors: {
                 [this.props.inputId]: {
-                    current: {
-                        text: this.defaultErrorMessage,
-                        showSummaryText: false
-                    },
-                    visible: {
-                        text: '',
-                        showSummaryText: false
-                    },
+                    text: this.defaultErrorMessage,
+                    showSummaryText: false,
                     id: this.elementUniqueId
                 }
             }
@@ -29,14 +21,12 @@ class InputField extends React.Component {
         this.inputType = this.props.type || 'text'; //set to text by default
 
         this.handleChange = this.handleChange.bind(this);
-        this.onError = onError.bind(this);
         this.isValidInput = this.isValidInput.bind(this);
 
-        //initialise errors in parent component, which will contain a reference to them
-        this.onError(this.props.errors);
-
-        //get reference to errors to keep code cleaner
-        this.errors = this.state.errors[this.props.inputId];
+        //initialise visible errors in parent component
+        if (this.props.initialiseParentErrors) {
+            this.props.initialiseParentErrors(this.state.errors);
+        }
     }
 
     handleChange(e) {
@@ -52,13 +42,15 @@ class InputField extends React.Component {
     isValidInput() {
         let isValid = true;
 
-        //clear errors
-        this.errors.current.text = '';
+        //build new error state with empty value for text
+        const newErrorState = { ...this.state.errors }
+        newErrorState[this.props.inputId].text = '';
 
+        //now update values if invalid
         //the only validation done by default is check that the input field is not empty
         if (!this.state[this.props.inputId]) {
             isValid = false;
-            this.errors.current.text = this.defaultErrorMessage;
+            newErrorState[this.props.inputId].text = this.defaultErrorMessage;
         }
 
         else if (this.inputType === 'email') {
@@ -66,14 +58,13 @@ class InputField extends React.Component {
             const pattern = /^[a-zA-Z0-9.!#$%&amp;'^_`{}~+-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/;
             if (!this.state[this.props.inputId].match(pattern)) {
                 isValid = false;
-                this.errors.current.text = `Invalid ${this.props.errorMessagePlaceholder}`;
+                newErrorState[this.props.inputId].text = `Invalid ${this.props.errorMessagePlaceholder}`;
             }
         }
 
-        this.setState({
-            errors: {
-                [this.props.inputId]: this.errors
-            }
+        this.setState({ errors: newErrorState }, () => {
+            //call parent to update its state
+            this.props.updateParentErrors(this.state.errors);
         });
 
         return isValid;
@@ -81,12 +72,14 @@ class InputField extends React.Component {
 
     render() {
 
+        const { visibleErrors, showErrors } = this.props;
+
         let inputErrorElement;
-        if (this.props.showErrors && this.errors.visible.text.length > 0)
+        if (showErrors && visibleErrors[this.props.inputId].text.length > 0)
             inputErrorElement =
                 <span id={`${this.elementUniqueId}Error`} className="govuk-error-message">
                     <span className="govuk-visually-hidden">Error:</span>
-                    {this.errors.visible.text}
+                    {visibleErrors[this.props.inputId].text}
                 </span>
 
         let inputHint;
@@ -125,7 +118,7 @@ class InputField extends React.Component {
 
         return (
 
-            <div className={`govuk-form-group ${this.props.showErrors && this.errors.visible.text.length > 0 ? "govuk-form-group--error" : ""}`}>
+            <div className={`govuk-form-group ${showErrors && visibleErrors[this.props.inputId].text.length > 0 ? "govuk-form-group--error" : ""}`}>
                 <label className="govuk-label" htmlFor={this.elementUniqueId}>
                     {this.props.inputLabel}
                 </label>

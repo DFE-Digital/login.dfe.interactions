@@ -6,7 +6,7 @@ import components from '../components';
 import { onChange } from '../helpers/pageUpdatesHandler';
 import {
     updateVisibleErrorsInState,
-    initialiseErrorsInState,
+    initialiseErrorsInContainer,
     updateCurrentErrorsInState
 } from '../helpers/pageErrorHandler';
 
@@ -21,14 +21,17 @@ class UpdatedTermsAndConditions extends React.Component {
             childrenErrors: {},
             visibleErrors: {}
         }
+        this.childrenErrors = {};
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onChange = onChange.bind(this);
         this.updateVisibleErrorsInState = updateVisibleErrorsInState.bind(this);
-        this.initialiseErrorsInState = initialiseErrorsInState.bind(this);
+        this.initialiseErrorsInContainer = initialiseErrorsInContainer.bind(this);
         this.updateCurrentErrorsInState = updateCurrentErrorsInState.bind(this);
     }
 
-
+    componentDidMount() {
+        this.setState({ visibleErrors: this.visibleErrors, childrenErrors: this.childrenErrors });
+    }
 
     handleSubmit(e) {
         e.preventDefault();
@@ -77,7 +80,7 @@ class UpdatedTermsAndConditions extends React.Component {
                     onChange={this.onChange}
                     showErrors={this.state.showErrors}
                     visibleErrors={this.state.visibleErrors}
-                    initialiseParentErrors={this.initialiseErrorsInState}
+                    initialiseParentErrors={this.initialiseErrorsInContainer}
                     updateParentErrors={this.updateCurrentErrorsInState} />
             </div>
 

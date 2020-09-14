@@ -1,13 +1,7 @@
 import React from 'react';
 import components from '..';
-import { onError } from '../../helpers/pageUpdatesHandler';
 
 class PageContainer extends React.Component {
-
-    constructor(props) {
-        super(props);
-        this.onError = onError.bind(this);
-    }
 
     componentDidMount() {
         const title = (this.props.pageConfig && this.props.pageConfig.title) || '';

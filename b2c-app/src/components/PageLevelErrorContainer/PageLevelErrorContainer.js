@@ -79,7 +79,7 @@ class PageLevelErrorContainer extends React.Component {
 
     showSummaryText(errorArray) {
         //show error summary if there are errors (not considering B2C errors as they don't show/hide summary text)
-        return this.hasErrorItems() &&
+        return this.hasErrorItems(errorArray) &&
             errorArray.some(item => {
                 return item.showSummaryText;
             });

@@ -20,7 +20,9 @@ class TermsAndConditions extends React.Component {
         this.isValidTsAndCs = this.isValidTsAndCs.bind(this);
 
         //initialise visible errors in parent component
-        this.props.initialiseParentErrors(this.state.errors);
+        if (this.props.initialiseParentErrors) {
+            this.props.initialiseParentErrors(this.state.errors);
+        }
     }
 
     handleChange(e) {

@@ -2,7 +2,14 @@ import React from 'react';
 import { animateScroll } from "react-scroll";
 
 import components from '../../components';
+
 import { onChange } from '../../helpers/pageUpdatesHandler';
+import {
+    updateVisibleErrorsInState,
+    initialiseErrorsInContainer,
+    updateCurrentErrorsInState
+} from '../../helpers/pageErrorHandler';
+
 import { PAGE_IDS } from '../../constants/pageIds';
 
 class ActivateAccount extends React.Component {
@@ -15,10 +22,19 @@ class ActivateAccount extends React.Component {
             tsAndCsAccepted: false,
             showErrors: false,
             showB2CErrors: true,
-            errors: []
+            childrenErrors: {},
+            visibleErrors: {}
         }
+        this.childrenErrors = {};
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onChange = onChange.bind(this);
+        this.updateVisibleErrorsInState = updateVisibleErrorsInState.bind(this);
+        this.initialiseErrorsInContainer = initialiseErrorsInContainer.bind(this);
+        this.updateCurrentErrorsInState = updateCurrentErrorsInState.bind(this);
+    }
+
+    componentDidMount() {
+        this.setState({ visibleErrors: this.visibleErrors, childrenErrors: this.childrenErrors });
     }
 
     handleSubmit(e) {
@@ -26,10 +42,7 @@ class ActivateAccount extends React.Component {
         //hide B2C errors and only show again if we are going to submit the form to B2C
         this.setState({ showB2CErrors: false });
         //update error messages
-        this.state.errors.forEach((error) => {
-            error.visible.text = error.current.text;
-            error.visible.showSummaryText = error.current.showSummaryText;
-        });
+        this.updateVisibleErrorsInState();
         //do something to validate and decide if we submit or show errors
         if (this.state.password &&
             this.state.dob &&
@@ -80,18 +93,24 @@ class ActivateAccount extends React.Component {
                 <components.CreateNewPassword
                     onChange={this.onChange}
                     showErrors={this.state.showErrors}
-                    errors={this.state.errors} />
+                    visibleErrors={this.state.visibleErrors}
+                    initialiseParentErrors={this.initialiseErrorsInContainer}
+                    updateParentErrors={this.updateCurrentErrorsInState} />
                 <components.Paragraph errors={this.state.errors}>
                     As an extra security check, please enter your date of birth.
                 </components.Paragraph>
                 <components.DateOfBirth
                     onChange={this.onChange}
                     showErrors={this.state.showErrors}
-                    errors={this.state.errors} />
+                    visibleErrors={this.state.visibleErrors}
+                    initialiseParentErrors={this.initialiseErrorsInContainer}
+                    updateParentErrors={this.updateCurrentErrorsInState} />
                 <components.TermsAndConditions
                     onChange={this.onChange}
                     showErrors={this.state.showErrors}
-                    errors={this.state.errors} />
+                    visibleErrors={this.state.visibleErrors}
+                    initialiseParentErrors={this.initialiseErrorsInContainer}
+                    updateParentErrors={this.updateCurrentErrorsInState} />
             </div>
 
         const title = 'Activate your account';
@@ -102,7 +121,7 @@ class ActivateAccount extends React.Component {
             formContent: formContent,
             submitButtonText: 'Activate account',
             submitHandler: this.handleSubmit,
-            errors: this.state.errors,
+            errors: this.state.visibleErrors,
             showB2CErrors: this.state.showB2CErrors,
             errorSummaryContent: <components.PasswordHelp />
         };

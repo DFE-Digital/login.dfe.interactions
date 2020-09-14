@@ -3,15 +3,15 @@ export function updateVisibleErrorsInState() {
     let newVisibleErrorState = {};
 
     //do this for each component we have errors for
-    Object.keys(this.state.childrenErrors).forEach((key) => {
+    Object.keys(this.childrenErrors).forEach((key) => {
         //make current error be the visible error now
-        newVisibleErrorState[key] = { ...this.state.childrenErrors[key] };
+        newVisibleErrorState[key] = { ...this.childrenErrors[key] };
     });
 
     this.setState({ visibleErrors: newVisibleErrorState });
 }
 
-export function initialiseErrorsInState(childErrors) {
+export function initialiseErrorsInContainer(childErrors) {
     let initialVisibleErrors = {};
     Object.keys(childErrors).forEach((key) => {
         //initialise visible errors empty
@@ -21,10 +21,14 @@ export function initialiseErrorsInState(childErrors) {
 
     //add errors sent from a child component to the full list of visible errors for a page
     //and initialise all children errors for later use
-    this.setState({
-        visibleErrors: initialVisibleErrors,
-        childrenErrors: { ...this.state.childrenErrors, ...childErrors }
-    });
+    // this.setState({
+    //     visibleErrors: initialVisibleErrors,
+    //     childrenErrors: { ...this.state.childrenErrors, ...childErrors }
+    // });
+
+    //append errors
+    this.visibleErrors = { ...this.visibleErrors, ...initialVisibleErrors };
+    this.childrenErrors = { ...this.childrenErrors, ...childErrors };
 }
 
 export function updateCurrentErrorsInState(childErrors) {

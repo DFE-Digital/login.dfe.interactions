@@ -2,9 +2,16 @@ import React from 'react';
 import { animateScroll } from "react-scroll";
 
 import components from '../components';
+
+import { onChange } from '../helpers/pageUpdatesHandler';
+import {
+    updateVisibleErrorsInState,
+    initialiseErrorsInContainer,
+    updateCurrentErrorsInState
+} from '../helpers/pageErrorHandler';
+
 import { POLICIES } from '../constants/policies';
 import { PAGE_IDS } from '../constants/pageIds';
-import { onChange } from '../helpers/pageUpdatesHandler';
 
 class Login extends React.Component {
 
@@ -15,10 +22,19 @@ class Login extends React.Component {
             password: null,
             showErrors: false,
             showB2CErrors: true,
-            errors: []
+            childrenErrors: {},
+            visibleErrors: {}
         }
+        this.childrenErrors = {};
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onChange = onChange.bind(this);
+        this.updateVisibleErrorsInState = updateVisibleErrorsInState.bind(this);
+        this.initialiseErrorsInContainer = initialiseErrorsInContainer.bind(this);
+        this.updateCurrentErrorsInState = updateCurrentErrorsInState.bind(this);
+    }
+
+    componentDidMount() {
+        this.setState({ visibleErrors: this.visibleErrors, childrenErrors: this.childrenErrors });
     }
 
     handleSubmit(e) {
@@ -26,10 +42,7 @@ class Login extends React.Component {
         //hide B2C errors and only show again if we are going to submit the form to B2C
         this.setState({ showB2CErrors: false });
         //update error messages
-        this.state.errors.forEach((error) => {
-            error.visible.text = error.current.text;
-            error.visible.showSummaryText = true;
-        });
+        this.updateVisibleErrorsInState();
         //do something to validate and decide if we submit or show errors
         if (this.state.email &&
             this.state.password) {
@@ -71,7 +84,9 @@ class Login extends React.Component {
                     onChange={this.onChange}
                     errorMessagePlaceholder='email address'
                     showErrors={this.state.showErrors}
-                    errors={this.state.errors} />
+                    visibleErrors={this.state.visibleErrors}
+                    initialiseParentErrors={this.initialiseErrorsInContainer}
+                    updateParentErrors={this.updateCurrentErrorsInState} />
                 <components.InputField
                     type='password'
                     inputId='password'
@@ -79,7 +94,9 @@ class Login extends React.Component {
                     onChange={this.onChange}
                     errorMessagePlaceholder='password'
                     showErrors={this.state.showErrors}
-                    errors={this.state.errors} />
+                    visibleErrors={this.state.visibleErrors}
+                    initialiseParentErrors={this.initialiseErrorsInContainer}
+                    updateParentErrors={this.updateCurrentErrorsInState} />
                 <components.Paragraph errors={this.state.errors}>
                     <components.Link id="resetPasswordLink" policy={POLICIES.PASSWORD_RESET}>I cannot access my account</components.Link>
                 </components.Paragraph>
@@ -94,7 +111,7 @@ class Login extends React.Component {
             formContent: formContent,
             submitButtonText: 'Sign in',
             submitHandler: this.handleSubmit,
-            errors: this.state.errors,
+            errors: this.state.visibleErrors,
             showB2CErrors: this.state.showB2CErrors,
             errorSummaryContent: <components.Paragraph>Your sign in details are incorrect</components.Paragraph>
         };

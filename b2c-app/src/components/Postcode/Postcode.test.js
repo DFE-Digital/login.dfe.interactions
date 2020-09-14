@@ -46,7 +46,7 @@ it('calls validation, sets errors and calls onChange callback', () => {
 
     //default values set
     expect(wrapper.state().postcode).toBe(null);
-    expect(wrapper.state().errors.postcode.current.text).toEqual('Enter your postcode');
+    expect(wrapper.state().errors.postcode.text).toEqual('Enter your postcode');
 
     //simulate entering valid postcode
     postcodeInput.simulate('change', changeEvent);
@@ -55,7 +55,7 @@ it('calls validation, sets errors and calls onChange callback', () => {
     //state value has been updated
     expect(wrapper.state().postcode).toEqual('RG02 1AB');
     //check error message is empty
-    expect(wrapper.state().errors.postcode.current.text).toEqual('');
+    expect(wrapper.state().errors.postcode.text).toEqual('');
     //onChange callback function passed in has been called with the valid value
     expect(mockOnChangeCallback).toHaveBeenCalledWith({ postcode: 'RG02 1AB' });
 
@@ -69,7 +69,7 @@ it('calls validation, sets errors and calls onChange callback', () => {
     //onChange callback function passed in has been called with null
     expect(mockOnChangeCallback).toHaveBeenCalledWith({ postcode: null });
     //check error message is set
-    expect(wrapper.state().errors.postcode.current.text).toEqual('Enter a valid postcode');
+    expect(wrapper.state().errors.postcode.text).toEqual('Enter a valid postcode');
 
     //simulate entering empty postcode
     changeEvent.target.value = '';
@@ -81,6 +81,6 @@ it('calls validation, sets errors and calls onChange callback', () => {
     //onChange callback function passed in has been called with null
     expect(mockOnChangeCallback).toHaveBeenCalledWith({ postcode: null });
     //check error message is set
-    expect(wrapper.state().errors.postcode.current.text).toEqual('Enter your postcode');
+    expect(wrapper.state().errors.postcode.text).toEqual('Enter your postcode');
 
 });

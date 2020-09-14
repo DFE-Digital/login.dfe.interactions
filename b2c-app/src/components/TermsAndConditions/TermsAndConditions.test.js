@@ -47,7 +47,7 @@ it('calls validation, sets errors and calls onChange callback', () => {
 
     //default values set
     expect(wrapper.state().tsAndCsAccepted).toBe(false);
-    expect(wrapper.state().errors.tsAndCs.current.text).toEqual('You must accept our Terms and Conditions');
+    expect(wrapper.state().errors.tsAndCs.text).toEqual('You must accept our Terms and Conditions');
 
     //simulate checking Ts & Cs
     tsAndCsCheckbox.simulate('change', changeEvent);
@@ -56,7 +56,7 @@ it('calls validation, sets errors and calls onChange callback', () => {
     //state value has been updated
     expect(wrapper.state().tsAndCsAccepted).toBe(true);
     //check error message is empty
-    expect(wrapper.state().errors.tsAndCs.current.text).toEqual('');
+    expect(wrapper.state().errors.tsAndCs.text).toEqual('');
     //callback function passed in has been called
     expect(mockOnChangeCallback).toHaveBeenCalledWith({ tsAndCsAccepted: true });
 
@@ -70,6 +70,6 @@ it('calls validation, sets errors and calls onChange callback', () => {
     //callback function passed in has been called
     expect(mockOnChangeCallback).toHaveBeenCalledWith({ tsAndCsAccepted: false });
     //check error message is empty
-    expect(wrapper.state().errors.tsAndCs.current.text).toEqual('You must accept our Terms and Conditions');
+    expect(wrapper.state().errors.tsAndCs.text).toEqual('You must accept our Terms and Conditions');
 
 });

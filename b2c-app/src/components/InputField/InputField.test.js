@@ -67,7 +67,7 @@ describe('when type is not specified', () => {
 
         //default values set
         expect(wrapper.state()[inputId]).toBe(null);
-        expect(wrapper.state().errors[inputId].current.text).toEqual(`Enter your ${inputId}`);
+        expect(wrapper.state().errors[inputId].text).toEqual(`Enter your ${inputId}`);
 
         //simulate entering value in input
         input.simulate('change', changeEvent);
@@ -77,7 +77,7 @@ describe('when type is not specified', () => {
         expect(wrapper.state()[inputId]).toEqual('something');
 
         //check error message is empty
-        expect(wrapper.state().errors[inputId].current.text).toEqual('');
+        expect(wrapper.state().errors[inputId].text).toEqual('');
         //onChange callback function passed in has been called with the valid value
         expect(mockOnChangeCallback).toHaveBeenCalledWith({ [inputId]: 'something' });
 
@@ -91,7 +91,7 @@ describe('when type is not specified', () => {
         //onChange callback function passed in has been called with null
         expect(mockOnChangeCallback).toHaveBeenCalledWith({ [inputId]: null });
         //check error message is set
-        expect(wrapper.state().errors[inputId].current.text).toEqual(`Enter your ${inputId}`);
+        expect(wrapper.state().errors[inputId].text).toEqual(`Enter your ${inputId}`);
 
     });
 
@@ -132,7 +132,7 @@ describe('when type is email', () => {
 
         //default values set
         expect(wrapper.state()[inputId]).toBe(null);
-        expect(wrapper.state().errors[inputId].current.text).toEqual(`Enter your ${inputId}`);
+        expect(wrapper.state().errors[inputId].text).toEqual(`Enter your ${inputId}`);
 
         //simulate entering an invalid email in input
         input.simulate('change', changeEvent);
@@ -142,7 +142,7 @@ describe('when type is email', () => {
         expect(wrapper.state()[inputId]).toEqual('something');
 
         //check error message is empty
-        expect(wrapper.state().errors[inputId].current.text).toEqual(`Invalid ${inputId}`);
+        expect(wrapper.state().errors[inputId].text).toEqual(`Invalid ${inputId}`);
         //onChange callback function passed in has been called with the valid value
         expect(mockOnChangeCallback).toHaveBeenCalledWith({ [inputId]: null });
 
@@ -156,7 +156,7 @@ describe('when type is email', () => {
         //onChange callback function passed in has been called with null
         expect(mockOnChangeCallback).toHaveBeenCalledWith({ [inputId]: null });
         //check error message is set
-        expect(wrapper.state().errors[inputId].current.text).toEqual(`Enter your ${inputId}`);
+        expect(wrapper.state().errors[inputId].text).toEqual(`Enter your ${inputId}`);
 
         //simulate entering a valid email
         changeEvent.target.value = 'someone@somewhere.com';
@@ -168,7 +168,7 @@ describe('when type is email', () => {
         //onChange callback function passed in has been called with null
         expect(mockOnChangeCallback).toHaveBeenCalledWith({ [inputId]: 'someone@somewhere.com' });
         //check error message is set
-        expect(wrapper.state().errors[inputId].current.text).toEqual('');
+        expect(wrapper.state().errors[inputId].text).toEqual('');
 
     });
 

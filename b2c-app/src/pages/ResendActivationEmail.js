@@ -2,7 +2,13 @@ import React from 'react';
 import { animateScroll } from "react-scroll";
 
 import components from '../components';
+
 import { onChange } from '../helpers/pageUpdatesHandler';
+import {
+    updateVisibleErrorsInState,
+    initialiseErrorsInContainer,
+    updateCurrentErrorsInState
+} from '../helpers/pageErrorHandler';
 
 class ResendActivationEmail extends React.Component {
 
@@ -12,10 +18,19 @@ class ResendActivationEmail extends React.Component {
             email: null,
             showErrors: false,
             showB2CErrors: true,
-            errors: []
+            childrenErrors: {},
+            visibleErrors: {}
         }
+        this.childrenErrors = {};
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onChange = onChange.bind(this);
+        this.updateVisibleErrorsInState = updateVisibleErrorsInState.bind(this);
+        this.initialiseErrorsInContainer = initialiseErrorsInContainer.bind(this);
+        this.updateCurrentErrorsInState = updateCurrentErrorsInState.bind(this);
+    }
+
+    componentDidMount() {
+        this.setState({ visibleErrors: this.visibleErrors, childrenErrors: this.childrenErrors });
     }
 
     handleSubmit(e) {
@@ -23,10 +38,7 @@ class ResendActivationEmail extends React.Component {
         //hide B2C errors and only show again if we are going to submit the form to B2C
         this.setState({ showB2CErrors: false });
         //update error messages
-        this.state.errors.forEach((error) => {
-            error.visible.text = error.current.text;
-            error.visible.showSummaryText = true;
-        });
+        this.updateVisibleErrorsInState();
         //do something to validate and decide if we submit or show errors
         if (this.state.email) {
             //hide our validation errors and prepare to show B2C ones (in case there are any)
@@ -70,7 +82,9 @@ class ResendActivationEmail extends React.Component {
                     onChange={this.onChange}
                     errorMessagePlaceholder='email address'
                     showErrors={this.state.showErrors}
-                    errors={this.state.errors} />
+                    visibleErrors={this.state.visibleErrors}
+                    initialiseParentErrors={this.initialiseErrorsInContainer}
+                    updateParentErrors={this.updateCurrentErrorsInState} />
             </div>
 
         /**
@@ -84,7 +98,7 @@ class ResendActivationEmail extends React.Component {
             formContent: formContent,
             submitButtonText: 'Send activation email',
             submitHandler: this.handleSubmit,
-            errors: this.state.errors,
+            errors: this.state.visibleErrors,
             showB2CErrors: this.state.showB2CErrors
         };
 
