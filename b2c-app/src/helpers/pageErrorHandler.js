@@ -12,22 +12,7 @@ export function updateVisibleErrorsInState() {
 }
 
 export function initialiseErrorsInContainer(childErrors) {
-    let initialVisibleErrors = {};
-    Object.keys(childErrors).forEach((key) => {
-        //initialise visible errors empty
-        initialVisibleErrors[key] = { ...childErrors[key] };
-        initialVisibleErrors[key].text = '';
-    });
-
-    //add errors sent from a child component to the full list of visible errors for a page
-    //and initialise all children errors for later use
-    // this.setState({
-    //     visibleErrors: initialVisibleErrors,
-    //     childrenErrors: { ...this.state.childrenErrors, ...childErrors }
-    // });
-
     //append errors
-    this.visibleErrors = { ...this.visibleErrors, ...initialVisibleErrors };
     this.childrenErrors = { ...this.childrenErrors, ...childErrors };
 }
 

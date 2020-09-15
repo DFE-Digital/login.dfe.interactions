@@ -25,6 +25,7 @@ class ResetPassword extends React.Component {
             visibleErrors: {}
         }
         this.childrenErrors = {};
+        this.visibleErrors = {};
         this.handleSubmit = this.handleSubmit.bind(this);
         this.onChange = onChange.bind(this);
         this.updateVisibleErrorsInState = updateVisibleErrorsInState.bind(this);

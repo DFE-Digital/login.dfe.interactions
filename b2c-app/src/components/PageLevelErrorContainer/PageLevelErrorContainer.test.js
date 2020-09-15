@@ -19,15 +19,11 @@ describe('when there are errors', () => {
 
     const errorItems = [
         {
-            visible: {
-                text: 'test 1'
-            }
+            text: 'test 1'
         },
         {
             id: 'id2',
-            visible: {
-                text: 'test 2'
-            }
+            text: 'test 2'
         }
     ];
 
@@ -43,10 +39,8 @@ describe('when there are errors', () => {
 
         errorItems.push(
             {
-                visible: {
-                    text: 'test 3',
-                    showSummaryText: true
-                }
+                text: 'test 3',
+                showSummaryText: true
             }
         )
 
