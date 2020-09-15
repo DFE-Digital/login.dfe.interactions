@@ -4,6 +4,16 @@ import renderer from 'react-test-renderer';
 
 import components from '..';
 
+const testErrors = {
+    newPassword: {
+        text: 'this is a test'
+    },
+    reenteredPassword: {
+        text: 'this is a test'
+    }
+};
+const updateParentMock = jest.fn();
+
 it('renders without crashing', () => {
     shallow(<components.CreateNewPassword />);
 });
@@ -16,21 +26,8 @@ it('renders correctly without props passed in', () => {
 });
 
 it('renders correctly with errors', () => {
-    const tree = renderer.create(<components.CreateNewPassword showErrors={true} />);
-    tree.root.instance.setState({
-        errors: {
-            newPassword: {
-                visible: {
-                    text: 'this is a test'
-                }
-            },
-            reenteredPassword: {
-                visible: {
-                    text: 'this is a test'
-                }
-            }
-        }
-    });
+    const tree = renderer.create(<components.CreateNewPassword showErrors={true} visibleErrors={testErrors} />);
+
     expect(tree.toJSON()).toMatchSnapshot()
 });
 
@@ -38,7 +35,14 @@ it('calls validation, sets errors and calls onChange callback', () => {
 
     const mockOnChangeCallback = jest.fn();
 
-    const wrapper = mount(<components.CreateNewPassword showErrors={true} onChange={mockOnChangeCallback} />);
+    const wrapper = mount(
+        <components.CreateNewPassword
+            showErrors={true}
+            onChange={mockOnChangeCallback}
+            visibleErrors={testErrors}
+            updateParentErrors={updateParentMock} />
+    );
+
     const newPasswordInput = wrapper.find('#newPasswordCustom');
     const reenteredPasswordInput = wrapper.find('#reenteredPasswordCustom');
     const validationSpy = jest.spyOn(wrapper.instance(), 'isValidPassword');

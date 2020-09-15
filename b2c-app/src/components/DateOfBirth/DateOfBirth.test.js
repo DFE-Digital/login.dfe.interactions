@@ -4,6 +4,13 @@ import renderer from 'react-test-renderer';
 
 import components from '..';
 
+const testErrors = {
+    dob: {
+        text: 'this is a test'
+    }
+};
+const updateParentMock = jest.fn();
+
 it('renders without crashing', () => {
     shallow(<components.DateOfBirth />);
 });
@@ -16,16 +23,7 @@ it('renders correctly without props passed in', () => {
 });
 
 it('renders correctly with errors', () => {
-    const tree = renderer.create(<components.DateOfBirth showErrors={true} />);
-    tree.root.instance.setState({
-        errors: {
-            dob: {
-                visible: {
-                    text: 'this is a test'
-                }
-            }
-        }
-    });
+    const tree = renderer.create(<components.DateOfBirth showErrors={true} visibleErrors={testErrors} />);
     expect(tree.toJSON()).toMatchSnapshot()
 });
 
@@ -33,7 +31,14 @@ it('calls validation, sets errors and calls onChange callback', () => {
 
     const mockOnChangeCallback = jest.fn();
 
-    const wrapper = mount(<components.DateOfBirth showErrors={true} onChange={mockOnChangeCallback} />);
+    const wrapper = mount(
+        <components.DateOfBirth
+            showErrors={true}
+            onChange={mockOnChangeCallback}
+            visibleErrors={testErrors}
+            updateParentErrors={updateParentMock} />
+    );
+
     const dayInput = wrapper.find('#dobDay');
     const monthInput = wrapper.find('#dobMonth');
     const yearInput = wrapper.find('#dobYear');

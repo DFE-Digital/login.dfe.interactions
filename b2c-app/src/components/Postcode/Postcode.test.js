@@ -4,6 +4,13 @@ import renderer from 'react-test-renderer';
 
 import components from '..';
 
+const testErrors = {
+    postcode: {
+        text: 'this is a test'
+    }
+};
+const updateParentMock = jest.fn();
+
 it('renders without crashing', () => {
     shallow(<components.Postcode />);
 });
@@ -16,16 +23,9 @@ it('renders correctly without props passed in', () => {
 });
 
 it('renders correctly with errors', () => {
-    const tree = renderer.create(<components.Postcode showErrors={true} />);
-    tree.root.instance.setState({
-        errors: {
-            postcode: {
-                visible: {
-                    text: 'this is a test'
-                }
-            }
-        }
-    });
+    const tree = renderer.create(
+        <components.Postcode showErrors={true} visibleErrors={testErrors} />);
+
     expect(tree.toJSON()).toMatchSnapshot()
 });
 
@@ -33,7 +33,14 @@ it('calls validation, sets errors and calls onChange callback', () => {
 
     const mockOnChangeCallback = jest.fn();
 
-    const wrapper = mount(<components.Postcode showErrors={true} onChange={mockOnChangeCallback} />);
+    const wrapper = mount(
+        <components.Postcode
+            showErrors={true}
+            onChange={mockOnChangeCallback}
+            visibleErrors={testErrors}
+            updateParentErrors={updateParentMock} />
+    );
+
     const postcodeInput = wrapper.find('#postcodeCustom');
     const validationSpy = jest.spyOn(wrapper.instance(), 'isValidPostcode');
     let changeEvent = {

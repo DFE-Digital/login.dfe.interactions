@@ -5,6 +5,11 @@ import renderer from 'react-test-renderer';
 import components from '..';
 
 const inputId = 'testInput';
+const testErrors = {};
+testErrors[inputId] = {
+    text: 'this is a test'
+};
+const updateParentMock = jest.fn();
 
 describe('when type is not specified', () => {
 
@@ -31,16 +36,12 @@ describe('when type is not specified', () => {
     });
 
     it('renders correctly with errors', () => {
-        const tree = renderer.create(<components.InputField inputId={inputId} showErrors={true} />);
-        tree.root.instance.setState({
-            errors: {
-                postcode: {
-                    visible: {
-                        text: 'this is a test'
-                    }
-                }
-            }
-        });
+        const tree = renderer.create(
+            <components.InputField
+                inputId={inputId}
+                showErrors={true}
+                visibleErrors={testErrors} />
+        );
         expect(tree.toJSON()).toMatchSnapshot()
     });
 
@@ -54,6 +55,8 @@ describe('when type is not specified', () => {
                 showErrors={true}
                 onChange={mockOnChangeCallback}
                 errorMessagePlaceholder={inputId}
+                visibleErrors={testErrors}
+                updateParentErrors={updateParentMock}
             />);
         const input = wrapper.find(`#${inputId}Custom`);
         const validationSpy = jest.spyOn(wrapper.instance(), 'isValidInput');
@@ -119,6 +122,8 @@ describe('when type is email', () => {
                 showErrors={true}
                 onChange={mockOnChangeCallback}
                 errorMessagePlaceholder={inputId}
+                visibleErrors={testErrors}
+                updateParentErrors={updateParentMock}
             />);
         const input = wrapper.find(`#${inputId}Custom`);
         const validationSpy = jest.spyOn(wrapper.instance(), 'isValidInput');
