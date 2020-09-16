@@ -4,6 +4,13 @@ import renderer from 'react-test-renderer';
 
 import components from '..';
 
+const testErrors = {
+    tsAndCs: {
+        text: 'this is a test'
+    }
+};
+const updateParentMock = jest.fn();
+
 it('renders without crashing', () => {
     shallow(<components.TermsAndConditions />);
 });
@@ -16,7 +23,7 @@ it('renders correctly without props passed in', () => {
 });
 
 it('renders correctly with errors', () => {
-    const tree = renderer.create(<components.TermsAndConditions showErrors={true} />);
+    const tree = renderer.create(<components.TermsAndConditions showErrors={true} visibleErrors={testErrors} />);
     tree.root.instance.setState({
         errors: {
             tsAndCs: {
@@ -33,7 +40,13 @@ it('calls validation, sets errors and calls onChange callback', () => {
 
     const mockOnChangeCallback = jest.fn();
 
-    const wrapper = mount(<components.TermsAndConditions showErrors={true} onChange={mockOnChangeCallback} />);
+    const wrapper = mount(
+        <components.TermsAndConditions
+            showErrors={true}
+            onChange={mockOnChangeCallback}
+            visibleErrors={testErrors}
+            updateParentErrors={updateParentMock} />
+    );
     const tsAndCsCheckbox = wrapper.find('#tsAndCsCustom');
     const validationSpy = jest.spyOn(wrapper.instance(), 'isValidTsAndCs');
     let changeEvent = {
@@ -47,7 +60,7 @@ it('calls validation, sets errors and calls onChange callback', () => {
 
     //default values set
     expect(wrapper.state().tsAndCsAccepted).toBe(false);
-    expect(wrapper.state().errors.tsAndCs.current.text).toEqual('You must accept our Terms and Conditions');
+    expect(wrapper.state().errors.tsAndCs.text).toEqual('You must accept our Terms and Conditions');
 
     //simulate checking Ts & Cs
     tsAndCsCheckbox.simulate('change', changeEvent);
@@ -56,7 +69,7 @@ it('calls validation, sets errors and calls onChange callback', () => {
     //state value has been updated
     expect(wrapper.state().tsAndCsAccepted).toBe(true);
     //check error message is empty
-    expect(wrapper.state().errors.tsAndCs.current.text).toEqual('');
+    expect(wrapper.state().errors.tsAndCs.text).toEqual('');
     //callback function passed in has been called
     expect(mockOnChangeCallback).toHaveBeenCalledWith({ tsAndCsAccepted: true });
 
@@ -70,6 +83,6 @@ it('calls validation, sets errors and calls onChange callback', () => {
     //callback function passed in has been called
     expect(mockOnChangeCallback).toHaveBeenCalledWith({ tsAndCsAccepted: false });
     //check error message is empty
-    expect(wrapper.state().errors.tsAndCs.current.text).toEqual('You must accept our Terms and Conditions');
+    expect(wrapper.state().errors.tsAndCs.text).toEqual('You must accept our Terms and Conditions');
 
 });

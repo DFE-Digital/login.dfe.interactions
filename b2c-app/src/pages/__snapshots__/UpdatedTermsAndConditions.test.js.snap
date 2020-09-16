@@ -1,0 +1,133 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  id="updatedTermsAndConditions"
+>
+  <div>
+    <div
+      className="govuk-width-container"
+    >
+      <div
+        className="govuk-breadcrumbs"
+      >
+        <ol
+          className="govuk-breadcrumbs__list"
+        >
+          <li
+            className="govuk-breadcrumbs__list-item"
+          >
+            <a
+              className="govuk-breadcrumbs__link"
+              href="https://nationalcareers.service.gov.uk/"
+            >
+              Home
+            </a>
+          </li>
+        </ol>
+      </div>
+      <main
+        className="govuk-main-wrapper"
+      >
+        <div
+          className="govuk-grid-row"
+        >
+          <div
+            className="govuk-grid-column-two-thirds"
+          >
+            <div
+              className="pageLevelErrorContainer hide"
+            >
+              <div
+                aria-labelledby="error-summary-title"
+                className="govuk-error-summary"
+                data-module="govuk-error-summary"
+                role="alert"
+                tabIndex="-1"
+              >
+                <h2
+                  className="govuk-error-summary__title"
+                  id="error-summary-title"
+                >
+                  There is a problem
+                </h2>
+                <div
+                  className="govuk-error-summary__body"
+                >
+                  <ul
+                    className="govuk-list govuk-error-summary__list"
+                    id="errorSummaryItems"
+                  />
+                </div>
+              </div>
+            </div>
+            <h1
+              className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
+            >
+              Updated terms and conditions
+            </h1>
+            <div>
+              <p
+                className="govuk-body"
+              >
+                You need to accept the updated terms and conditions to access your account.
+              </p>
+            </div>
+            <form
+              id="customForm"
+              noValidate={true}
+              onSubmit={[Function]}
+            >
+              <div>
+                <div>
+                  <h1
+                    className="govuk-heading-m"
+                  >
+                    Terms and conditions
+                  </h1>
+                  <div
+                    className="govuk-form-group "
+                  >
+                    <label
+                      className="block-label"
+                      htmlFor="tsAndCsCustom"
+                    >
+                      <input
+                        aria-invalid="true"
+                        checked={false}
+                        id="tsAndCsCustom"
+                        name="tsAndCsAccepted"
+                        noValidate={true}
+                        onChange={[Function]}
+                        type="checkbox"
+                        value={true}
+                      />
+                      I accept the 
+                      <a
+                        href="https://nationalcareers.service.gov.uk/help/terms-and-conditions"
+                        id="tsAndCsLink"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                      >
+                        terms and conditions
+                      </a>
+                       and I am 13 or over
+                    </label>
+                  </div>
+                </div>
+              </div>
+              <button
+                className="govuk-button"
+                id="preSubmit"
+                type="submit"
+              >
+                Continue to your account
+              </button>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+`;

@@ -5,6 +5,11 @@ import renderer from 'react-test-renderer';
 import components from '..';
 
 const inputId = 'testInput';
+const testErrors = {};
+testErrors[inputId] = {
+    text: 'this is a test'
+};
+const updateParentMock = jest.fn();
 
 describe('when type is not specified', () => {
 
@@ -31,16 +36,12 @@ describe('when type is not specified', () => {
     });
 
     it('renders correctly with errors', () => {
-        const tree = renderer.create(<components.InputField inputId={inputId} showErrors={true} />);
-        tree.root.instance.setState({
-            errors: {
-                postcode: {
-                    visible: {
-                        text: 'this is a test'
-                    }
-                }
-            }
-        });
+        const tree = renderer.create(
+            <components.InputField
+                inputId={inputId}
+                showErrors={true}
+                visibleErrors={testErrors} />
+        );
         expect(tree.toJSON()).toMatchSnapshot()
     });
 
@@ -54,6 +55,8 @@ describe('when type is not specified', () => {
                 showErrors={true}
                 onChange={mockOnChangeCallback}
                 errorMessagePlaceholder={inputId}
+                visibleErrors={testErrors}
+                updateParentErrors={updateParentMock}
             />);
         const input = wrapper.find(`#${inputId}Custom`);
         const validationSpy = jest.spyOn(wrapper.instance(), 'isValidInput');
@@ -67,7 +70,7 @@ describe('when type is not specified', () => {
 
         //default values set
         expect(wrapper.state()[inputId]).toBe(null);
-        expect(wrapper.state().errors[inputId].current.text).toEqual(`Enter your ${inputId}`);
+        expect(wrapper.state().errors[inputId].text).toEqual(`Enter your ${inputId}`);
 
         //simulate entering value in input
         input.simulate('change', changeEvent);
@@ -77,7 +80,7 @@ describe('when type is not specified', () => {
         expect(wrapper.state()[inputId]).toEqual('something');
 
         //check error message is empty
-        expect(wrapper.state().errors[inputId].current.text).toEqual('');
+        expect(wrapper.state().errors[inputId].text).toEqual('');
         //onChange callback function passed in has been called with the valid value
         expect(mockOnChangeCallback).toHaveBeenCalledWith({ [inputId]: 'something' });
 
@@ -91,7 +94,7 @@ describe('when type is not specified', () => {
         //onChange callback function passed in has been called with null
         expect(mockOnChangeCallback).toHaveBeenCalledWith({ [inputId]: null });
         //check error message is set
-        expect(wrapper.state().errors[inputId].current.text).toEqual(`Enter your ${inputId}`);
+        expect(wrapper.state().errors[inputId].text).toEqual(`Enter your ${inputId}`);
 
     });
 
@@ -119,6 +122,8 @@ describe('when type is email', () => {
                 showErrors={true}
                 onChange={mockOnChangeCallback}
                 errorMessagePlaceholder={inputId}
+                visibleErrors={testErrors}
+                updateParentErrors={updateParentMock}
             />);
         const input = wrapper.find(`#${inputId}Custom`);
         const validationSpy = jest.spyOn(wrapper.instance(), 'isValidInput');
@@ -132,7 +137,7 @@ describe('when type is email', () => {
 
         //default values set
         expect(wrapper.state()[inputId]).toBe(null);
-        expect(wrapper.state().errors[inputId].current.text).toEqual(`Enter your ${inputId}`);
+        expect(wrapper.state().errors[inputId].text).toEqual(`Enter your ${inputId}`);
 
         //simulate entering an invalid email in input
         input.simulate('change', changeEvent);
@@ -142,7 +147,7 @@ describe('when type is email', () => {
         expect(wrapper.state()[inputId]).toEqual('something');
 
         //check error message is empty
-        expect(wrapper.state().errors[inputId].current.text).toEqual(`Invalid ${inputId}`);
+        expect(wrapper.state().errors[inputId].text).toEqual(`Invalid ${inputId}`);
         //onChange callback function passed in has been called with the valid value
         expect(mockOnChangeCallback).toHaveBeenCalledWith({ [inputId]: null });
 
@@ -156,7 +161,7 @@ describe('when type is email', () => {
         //onChange callback function passed in has been called with null
         expect(mockOnChangeCallback).toHaveBeenCalledWith({ [inputId]: null });
         //check error message is set
-        expect(wrapper.state().errors[inputId].current.text).toEqual(`Enter your ${inputId}`);
+        expect(wrapper.state().errors[inputId].text).toEqual(`Enter your ${inputId}`);
 
         //simulate entering a valid email
         changeEvent.target.value = 'someone@somewhere.com';
@@ -168,7 +173,7 @@ describe('when type is email', () => {
         //onChange callback function passed in has been called with null
         expect(mockOnChangeCallback).toHaveBeenCalledWith({ [inputId]: 'someone@somewhere.com' });
         //check error message is set
-        expect(wrapper.state().errors[inputId].current.text).toEqual('');
+        expect(wrapper.state().errors[inputId].text).toEqual('');
 
     });
 

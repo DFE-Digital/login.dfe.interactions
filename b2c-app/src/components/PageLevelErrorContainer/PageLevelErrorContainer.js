@@ -77,17 +77,17 @@ class PageLevelErrorContainer extends React.Component {
         }
     }
 
-    showSummaryText() {
+    showSummaryText(errorArray) {
         //show error summary if there are errors (not considering B2C errors as they don't show/hide summary text)
-        return this.hasErrorItems() &&
-            this.props.errorItems.some(item => {
-                return item.visible.showSummaryText;
+        return this.hasErrorItems(errorArray) &&
+            errorArray.some(item => {
+                return item.showSummaryText;
             });
     }
 
-    hasErrorItems() {
-        let hasErrors = this.props.errorItems && this.props.errorItems.some(errorItem => {
-            return !!errorItem.visible.text;
+    hasErrorItems(errorArray) {
+        let hasErrors = errorArray && errorArray.some(errorItem => {
+            return !!errorItem.text;
         });
         return hasErrors;
     }
@@ -98,8 +98,15 @@ class PageLevelErrorContainer extends React.Component {
 
     render() {
         let errorItems;
+        let errorArray = [];
         if (this.props.errorItems) {
-            errorItems = this.props.errorItems.map(error => {
+
+            //turn errors passed in into an array to then map it into link components
+            Object.keys(this.props.errorItems).forEach((key) => {
+                errorArray.push(this.props.errorItems[key]);
+            });
+
+            errorItems = errorArray.map(error => {
                 //render links if there is an id that the link will take user to
                 if (error.id) {
                     return (
@@ -111,7 +118,7 @@ class PageLevelErrorContainer extends React.Component {
                                 smooth={true}
                                 offset={-80}
                                 duration={500}>
-                                {error.visible.text}
+                                {error.text}
                             </Link>
                         </li>
                     )
@@ -119,8 +126,8 @@ class PageLevelErrorContainer extends React.Component {
                 //if there is no id then render as a normal paragraph
                 else {
                     return (
-                        <li key={error.visible.text}>
-                            <p>{error.visible.text}</p>
+                        <li key={error.text}>
+                            <p>{error.text}</p>
                         </li>
                     )
                 }
@@ -142,14 +149,14 @@ class PageLevelErrorContainer extends React.Component {
         }
 
         let errorSummary;
-        if (this.props.summaryTextContent && this.showSummaryText()) {
+        if (this.props.summaryTextContent && this.showSummaryText(errorArray)) {
             errorSummary =
                 <div id="errorSummaryText">
                     {this.props.summaryTextContent}
                 </div>
         }
 
-        const containerClassName = `pageLevelErrorContainer ${this.hasErrorItems() || this.hasB2CErrorItems() ? "show" : "hide"}`;
+        const containerClassName = `pageLevelErrorContainer ${this.hasErrorItems(errorArray) || this.hasB2CErrorItems() ? "show" : "hide"}`;
 
         return (
             <div className={containerClassName}>
