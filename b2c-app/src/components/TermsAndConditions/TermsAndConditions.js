@@ -60,7 +60,7 @@ class TermsAndConditions extends React.Component {
 
     render() {
 
-        let { visibleErrors, showErrors } = this.props;
+        let { visibleErrors, showErrors, showHeader } = this.props;
 
         let tsAndCsErrorElement;
         if (showErrors && visibleErrors.tsAndCs.text.length > 0) {
@@ -71,10 +71,15 @@ class TermsAndConditions extends React.Component {
                 </span>
         }
 
+        let tsAndCsHeader;
+        if (showHeader) {
+            tsAndCsHeader = <h1 className='govuk-heading-m'>Terms and conditions</h1>;
+        }
+
         return (
 
             <div>
-                <h1 className='govuk-heading-m'>Terms and conditions</h1>
+                {tsAndCsHeader}
                 <div className={`govuk-form-group ${showErrors && visibleErrors.tsAndCs.text.length > 0 ? "govuk-form-group--error" : ""}`}>
                     {tsAndCsErrorElement}
                     <label className="block-label" htmlFor="tsAndCsCustom">

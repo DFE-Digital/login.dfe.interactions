@@ -22,6 +22,13 @@ it('renders correctly without props passed in', () => {
     expect(tree).toMatchSnapshot();
 });
 
+it('renders correctly with header', () => {
+    const tree = renderer
+        .create(<components.TermsAndConditions showHeader={true} />)
+        .toJSON();
+    expect(tree).toMatchSnapshot();
+});
+
 it('renders correctly with errors', () => {
     const tree = renderer.create(<components.TermsAndConditions showErrors={true} visibleErrors={testErrors} />);
     tree.root.instance.setState({

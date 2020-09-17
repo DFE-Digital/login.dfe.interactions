@@ -80,11 +80,6 @@ exports[`renders correctly 1`] = `
             >
               <div>
                 <div>
-                  <h1
-                    className="govuk-heading-m"
-                  >
-                    Terms and conditions
-                  </h1>
                   <div
                     className="govuk-form-group "
                   >
