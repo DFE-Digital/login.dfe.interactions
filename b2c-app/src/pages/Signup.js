@@ -131,6 +131,7 @@ class Signup extends React.Component {
                     initialiseParentErrors={this.initialiseErrorsInContainer}
                     updateParentErrors={this.updateCurrentErrorsInState} />
                 <components.TermsAndConditions
+                    showHeader={true}
                     onChange={this.onChange}
                     showErrors={this.state.showErrors}
                     visibleErrors={this.state.visibleErrors}

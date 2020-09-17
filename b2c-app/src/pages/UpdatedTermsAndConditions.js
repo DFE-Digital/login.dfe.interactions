@@ -78,6 +78,7 @@ class UpdatedTermsAndConditions extends React.Component {
         const formContent =
             <div>
                 <components.TermsAndConditions
+                    showHeader={false}
                     onChange={this.onChange}
                     showErrors={this.state.showErrors}
                     visibleErrors={this.state.visibleErrors}

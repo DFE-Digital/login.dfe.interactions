@@ -2,11 +2,6 @@
 
 exports[`renders correctly with errors 1`] = `
 <div>
-  <h1
-    className="govuk-heading-m"
-  >
-    Terms and conditions
-  </h1>
   <div
     className="govuk-form-group govuk-form-group--error"
   >
@@ -52,11 +47,6 @@ exports[`renders correctly with errors 1`] = `
 
 exports[`renders correctly without props passed in 1`] = `
 <div>
-  <h1
-    className="govuk-heading-m"
-  >
-    Terms and conditions
-  </h1>
   <div
     className="govuk-form-group "
   >
