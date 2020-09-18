@@ -42,33 +42,8 @@
     </div>
 </div>
 
-<div class="global-cookie-message-dfe-sign-in column-full">
-    <div class="grid-row global-cookie-message-dfe-sign-in__cookie-message-container">
-        <div class="column-two-thirds">
-            <h2 class="heading-medium heading-medium--govuk">
-                Tell us whether you accept cookies
-            </h2>
-            <p class="govuk-body govuk-body--shim">
-                We use cookies to
-                <a href="/cookies">collect information</a>
-                about how you use DfE Sign in.
-                We use this information to improve our services
-                and to make this website work as efficently as possible.
-            </p>
-            <div class="grid-row">
-                <div class="column-one-half">
-                    <button class="button button--govuk cookie-accept">
-                        Accept all cookies
-                    </button>
-                </div>
-                <div class="column-one-half">
-                    <a class="button button--govuk" href="/cookies">
-                        Set cookie preferences
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
+<div id="global-cookie-message">
+    <p>GOV.UK uses cookies to make the site simpler. <a href="https://www.gov.uk/help/cookies">Find out more about cookies</a></p>
 </div>
 
 <div class="wrapper">
@@ -171,7 +146,6 @@
 </footer>
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
-<script type="text/javascript" src="<%= locals.urls.assets %>/javascript/vendors/vendors.min.js"></script>
 <script src="<%= locals.urls.assets %>/javascript/app.min.js"></script>
 
 </body>
