@@ -2,7 +2,8 @@ import React from 'react';
 import { animateScroll } from "react-scroll";
 
 import components from '../components';
-import { ACTIONS } from '../constants/actions';
+import { POLICIES } from '../constants/policies';
+import { PAGE_IDS } from '../constants/pageIds';
 import { onChange } from '../helpers/pageUpdatesHandler';
 
 class Login extends React.Component {
@@ -61,9 +62,6 @@ class Login extends React.Component {
 
     render() {
 
-        /**
-         * Column 1 in Login page
-         */
         const formContent =
             <div>
                 <components.InputField
@@ -83,48 +81,28 @@ class Login extends React.Component {
                     showErrors={this.state.showErrors}
                     errors={this.state.errors} />
                 <components.Paragraph errors={this.state.errors}>
-                    <components.Link action={ACTIONS.RESET_PASSWORD}>I cannot access my account</components.Link>
+                    <components.Link id="resetPasswordLink" policy={POLICIES.PASSWORD_RESET}>I cannot access my account</components.Link>
                 </components.Paragraph>
             </div>
-
-        /**
-         * Column 2 in Login page
-         */
-        const additionalColumnContent =
-            <components.Paragraph key='paragraph'>
-                <components.Link action={ACTIONS.SIGNUP}>Creating an account</components.Link>
-                &nbsp;allows you to access and save your skills health check reports.
-            </components.Paragraph>
 
         /**
          * Page configuration
          */
         const pageConfig = {
-            title: "Sign in to your account",
+            title: 'Sign in to your account',
+            header: 'Sign in',
+            formContent: formContent,
+            submitButtonText: 'Sign in',
+            submitHandler: this.handleSubmit,
             errors: this.state.errors,
             showB2CErrors: this.state.showB2CErrors,
             errorSummaryContent: <components.Paragraph>Your sign in details are incorrect</components.Paragraph>
         };
 
-        /**
-         * Column object to pass to page container
-         */
-        const columns = [
-            {
-                header: 'Sign in',
-                formContent: formContent,
-                submitButtonText: 'Sign in',
-                submitHandler: this.handleSubmit
-            },
-            {
-                header: 'Create an account',
-                aboveFormContent: additionalColumnContent
-            }
-        ];
 
         return (
-            <div id="login">
-                <components.PageContainer pageConfig={pageConfig} columns={columns} />
+            <div id={PAGE_IDS.LOGIN}>
+                <components.PageContainer pageConfig={pageConfig} />
             </div>
         )
     }

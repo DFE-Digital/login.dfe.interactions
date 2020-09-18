@@ -70,7 +70,11 @@ class InputField extends React.Component {
             }
         }
 
-        this.setState({ errors: this.errors });
+        this.setState({
+            errors: {
+                [this.props.inputId]: this.errors
+            }
+        });
 
         return isValid;
     }
@@ -80,7 +84,7 @@ class InputField extends React.Component {
         let inputErrorElement;
         if (this.props.showErrors && this.errors.visible.text.length > 0)
             inputErrorElement =
-                <span id="inputError" className="govuk-error-message">
+                <span id={`${this.elementUniqueId}Error`} className="govuk-error-message">
                     <span className="govuk-visually-hidden">Error:</span>
                     {this.errors.visible.text}
                 </span>

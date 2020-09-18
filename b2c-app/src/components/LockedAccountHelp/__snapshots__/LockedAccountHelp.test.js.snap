@@ -1,0 +1,41 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <p
+    className="govuk-body"
+  >
+    You have entered invalid details too many times. Your account has been locked for 
+    1 hour
+    .
+  </p>
+  <p
+    className="govuk-body"
+  >
+    You can:
+  </p>
+  <ul
+    className="govuk-list govuk-list--bullet"
+  >
+    <li>
+      wait 
+      1 hour
+       and try again
+    </li>
+  </ul>
+  or
+  <ul
+    className="govuk-list govuk-list--bullet"
+  >
+    <li>
+      <a
+        className="govuk-link"
+        id="resetPasswordLink"
+        onClick={null}
+      >
+        reset your password now
+      </a>
+    </li>
+  </ul>
+</div>
+`;

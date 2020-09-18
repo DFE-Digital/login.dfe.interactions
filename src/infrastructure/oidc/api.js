@@ -1,6 +1,6 @@
-const config = require('./../Config')();
 const rp = require('login.dfe.request-promise-retry');
 const jwtStrategy = require('login.dfe.jwt-strategies');
+const config = require('./../Config')();
 
 const callApi = async (opts) => {
   const defaultOpts = {
@@ -8,7 +8,7 @@ const callApi = async (opts) => {
     method: 'GET',
     body: undefined,
   };
-  const patchedOpts = Object.assign({}, defaultOpts, opts);
+  const patchedOpts = { ...defaultOpts, ...opts };
   const { route, method, body } = patchedOpts;
 
   let token;
@@ -18,8 +18,10 @@ const callApi = async (opts) => {
     throw new Error(`Error getting bearer token to call oidc - ${e.message}`);
   }
 
+  const { url } = config.oidcService;
+
   try {
-    const uri = `${config.oidcService.url}${route}`;
+    const uri = `${url}${route}`;
     return await rp({
       method: method || 'GET',
       uri,
@@ -38,11 +40,10 @@ const callApi = async (opts) => {
 };
 
 
-const getInteractionById = async (id) => {
-  return await callApi({
-    route: `/${id}/check`,
-  });
-};
+const getInteractionById = async (id, isGateway) => await callApi({
+  route: `/${id}/check`,
+  isGateway,
+});
 
 module.exports = {
   getInteractionById,

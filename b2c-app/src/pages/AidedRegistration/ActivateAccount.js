@@ -3,6 +3,7 @@ import { animateScroll } from "react-scroll";
 
 import components from '../../components';
 import { onChange } from '../../helpers/pageUpdatesHandler';
+import { PAGE_IDS } from '../../constants/pageIds';
 
 class ActivateAccount extends React.Component {
 
@@ -74,13 +75,6 @@ class ActivateAccount extends React.Component {
 
     render() {
 
-        const pageConfig = {
-            title: "Activate your account",
-            errors: this.state.errors,
-            showB2CErrors: this.state.showB2CErrors,
-            errorSummaryContent: <components.PasswordHelp />
-        };
-
         const formContent =
             <div>
                 <components.CreateNewPassword
@@ -88,7 +82,7 @@ class ActivateAccount extends React.Component {
                     showErrors={this.state.showErrors}
                     errors={this.state.errors} />
                 <components.Paragraph errors={this.state.errors}>
-                    As an extra security check, enter your date of birth.
+                    As an extra security check, please enter your date of birth.
                 </components.Paragraph>
                 <components.DateOfBirth
                     onChange={this.onChange}
@@ -100,18 +94,23 @@ class ActivateAccount extends React.Component {
                     errors={this.state.errors} />
             </div>
 
-        const columns = [
-            {
-                header: pageConfig.title,
-                formContent: formContent,
-                submitButtonText: 'Activate account',
-                submitHandler: this.handleSubmit
-            }
-        ];
+        const title = 'Activate your account';
+
+        const pageConfig = {
+            title: title,
+            header: title,
+            formContent: formContent,
+            submitButtonText: 'Activate account',
+            submitHandler: this.handleSubmit,
+            errors: this.state.errors,
+            showB2CErrors: this.state.showB2CErrors,
+            errorSummaryContent: <components.PasswordHelp />
+        };
+
 
         return (
-            <div id="activateAccount">
-                <components.PageContainer pageConfig={pageConfig} columns={columns} />
+            <div id={PAGE_IDS.ACTIVATE_ACCOUNT}>
+                <components.PageContainer pageConfig={pageConfig} />
             </div>
         )
     }

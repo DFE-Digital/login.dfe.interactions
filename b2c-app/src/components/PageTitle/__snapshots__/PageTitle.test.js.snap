@@ -1,0 +1,13 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly on extra-large size 1`] = `
+<h1
+  className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
+/>
+`;
+
+exports[`renders correctly with unspecified size 1`] = `
+<h1
+  className="govuk-heading-l"
+/>
+`;

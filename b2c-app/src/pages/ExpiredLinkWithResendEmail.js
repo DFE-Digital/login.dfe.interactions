@@ -1,5 +1,6 @@
 import React from 'react';
 import components from '../components';
+import { PAGE_IDS } from '../constants/pageIds';
 
 class ExpiredLinkWithResendEmail extends React.Component {
 
@@ -22,35 +23,32 @@ class ExpiredLinkWithResendEmail extends React.Component {
 
     render() {
 
-        const pageConfig = {
-            title: "Activation link expired",
-            showB2CErrors: this.state.showB2CErrors,
-            errors: this.state.errors
-        };
+        const submitButtonText = 'Request new activation link';
 
-        const linkExpiredParagraph =
+        const formContent = <div></div>
+
+        const content =
             <components.Paragraph>
                 This activation link has expired.
             </components.Paragraph>
 
-        const formContent = <div></div>
+        const title = 'Activation link expired';
 
-        const content = linkExpiredParagraph;
+        const pageConfig = {
+            title: title,
+            header: title,
+            aboveFormContent: content,
+            formContent: formContent,
+            submitButtonText: submitButtonText,
+            submitHandler: this.handleSubmit,
+            showB2CErrors: this.state.showB2CErrors,
+            errors: this.state.errors
+        };
 
-        const columns = [
-            {
-                header: pageConfig.title,
-                aboveFormContent: content,
-                formContent: formContent,
-                submitButtonText: 'Request new activation link',
-                submitHandler: this.handleSubmit
-            }
-        ];
 
         return (
-
-            <div id="expiredLink" >
-                <components.PageContainer pageConfig={pageConfig} columns={columns} />
+            <div id={PAGE_IDS.EXPIRED_LINK_WITH_RESEND}>
+                <components.PageContainer pageConfig={pageConfig} />
             </div>
         )
     }

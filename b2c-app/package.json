@@ -4,13 +4,9 @@
   "private": true,
   "homepage": "__--b2cPath--__/b2c/assets/",
   "dependencies": {
-    "@testing-library/jest-dom": "^4.2.4",
-    "@testing-library/react": "^9.5.0",
-    "@testing-library/user-event": "^7.2.1",
+    "@babel/runtime": "^7.10.4",
     "classnames": "^2.2.6",
-    "dexie": "^3.0.1",
     "govuk-frontend": "^3.6.0",
-    "jwt-decode": "^2.2.0",
     "node-sass": "^4.14.0",
     "react": "^16.13.1",
     "react-app-polyfill": "^1.0.6",
@@ -22,6 +18,7 @@
     "start": "PUBLIC_URL=/b2c/assets/ react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
+    "coverage": "react-scripts test --coverage --watchAll",
     "eject": "react-scripts eject",
     "build-local": "PUBLIC_URL=/b2c/assets/ react-scripts build",
     "build-local-static": "PUBLIC_URL=/b2c/assets/ react-scripts build && node ./src/post-build.js build"
@@ -42,6 +39,17 @@
     ]
   },
   "devDependencies": {
-    "react-scripts": "^3.4.1"
+    "@babel/plugin-proposal-class-properties": "^7.10.4",
+    "@babel/plugin-proposal-decorators": "^7.10.4",
+    "@babel/plugin-transform-runtime": "^7.10.4",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.5.0",
+    "@testing-library/user-event": "^7.2.1",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "enzyme": "^3.11.0",
+    "enzyme-adapter-react-16": "^1.15.2",
+    "mutation-observer": "^1.0.3",
+    "react-scripts": "^3.4.1",
+    "react-test-renderer": "^16.13.1"
   }
 }

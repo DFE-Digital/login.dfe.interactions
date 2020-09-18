@@ -3,6 +3,7 @@ import { animateScroll } from "react-scroll";
 
 import components from '../components';
 import { onChange } from '../helpers/pageUpdatesHandler';
+import { PAGE_IDS } from '../constants/pageIds';
 
 class Signup extends React.Component {
 
@@ -78,13 +79,6 @@ class Signup extends React.Component {
 
     render() {
 
-        const pageConfig = {
-            title: "Create an account",
-            errors: this.state.errors,
-            showB2CErrors: this.state.showB2CErrors,
-            errorSummaryContent: <components.PasswordHelp />
-        };
-
         const formContent =
             <div>
                 <components.InputField
@@ -120,18 +114,23 @@ class Signup extends React.Component {
                     errors={this.state.errors} />
             </div>
 
-        const columns = [
-            {
-                header: pageConfig.title,
-                formContent: formContent,
-                submitButtonText: 'Create an account',
-                submitHandler: this.handleSubmit
-            }
-        ];
+        const title = 'Create an account';
+
+        const pageConfig = {
+            title: title,
+            header: title,
+            formContent: formContent,
+            submitButtonText: title,
+            submitHandler: this.handleSubmit,
+            errors: this.state.errors,
+            showB2CErrors: this.state.showB2CErrors,
+            errorSummaryContent: <components.PasswordHelp />
+        };
+
 
         return (
-            <div id="activateAccount">
-                <components.PageContainer pageConfig={pageConfig} columns={columns} />
+            <div id={PAGE_IDS.SIGNUP}>
+                <components.PageContainer pageConfig={pageConfig} />
             </div>
         )
     }

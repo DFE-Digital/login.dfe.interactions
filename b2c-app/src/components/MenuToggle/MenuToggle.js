@@ -11,6 +11,7 @@ function MenuToggle(props) {
 
     return (
         <button
+            id="menuToggle"
             type="button"
             onClick={props.toggleFunction}
             className={toggleClasses}

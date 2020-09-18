@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link, animateScroll } from "react-scroll";
+import * as B2CErrorParserService from '../../services/B2CErrorParserService';
 
 class PageLevelErrorContainer extends React.Component {
 
@@ -26,15 +27,15 @@ class PageLevelErrorContainer extends React.Component {
             let pageErrors = document.getElementsByClassName('error pageLevel');
 
             // find out how many of these errors are visible
-            let numVisibleItems = Array.from(pageErrors).filter(function (item) {
+            let numVisibleItems = Array.from(pageErrors).filter((item) => {
                 return item.style.display !== 'none';
             }).length;
 
             // add the visible errors if there are any
             if (numVisibleItems > 0) {
-                let errors = Array.from(pageErrors).reduce(function (result, error) {
+                let errors = Array.from(pageErrors).reduce((result, error) => {
                     if (error.style.display !== 'none') {
-                        result.push(error.innerText);
+                        result.push(B2CErrorParserService.parseB2CErrors(error.innerText));
                     }
                     return result;
                 }, []);
@@ -43,6 +44,8 @@ class PageLevelErrorContainer extends React.Component {
                 this.setState({ b2cErrors: Array.from(errors) });
                 //scroll to the top of the page to show the errors
                 animateScroll.scrollToTop({ duration: 500 });
+            } else {
+                this.setState({ b2cErrors: [] });
             }
         }
 
@@ -83,7 +86,7 @@ class PageLevelErrorContainer extends React.Component {
     }
 
     hasErrorItems() {
-        let hasErrors = this.props.errorItems.some(errorItem => {
+        let hasErrors = this.props.errorItems && this.props.errorItems.some(errorItem => {
             return !!errorItem.visible.text;
         });
         return hasErrors;
@@ -130,7 +133,7 @@ class PageLevelErrorContainer extends React.Component {
                 if (error) {
                     return (
                         <li key={error}>
-                            <p>{error}</p>
+                            {error}
                         </li>
                     )
                 }

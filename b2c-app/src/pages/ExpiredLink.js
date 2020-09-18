@@ -1,61 +1,58 @@
 import React from 'react';
 import components from '../components';
-import { ACTIONS } from '../constants/actions';
+import { POLICIES } from '../constants/policies';
 import { LINK_TYPES } from '../constants/linkTypes';
+import { PAGE_IDS } from '../constants/pageIds';
 
 class ExpiredLink extends React.Component {
 
     render() {
 
-        const pageConfig = {
-            title: "Expired link"
-        };
+        let paragraphText;
+        let link;
 
-        let linkExpiredParagraph;
-        let requestAgainLink;
+        if (this.props.policy === POLICIES.SIGNUP_INVITATION ||
+            this.props.policy === POLICIES.ACCOUNT_SIGNUP ||
+            this.props.policy === POLICIES.SIGNUP_CONFIRMATION ||
+            this.props.policy === POLICIES.RESEND_EMAIL) {
 
-        if (this.props.action === ACTIONS.RESET_PASSWORD) {
-            linkExpiredParagraph =
-                <components.Paragraph>
-                    The link in your password reset email has expired.
-                </components.Paragraph>
+            paragraphText = 'The link in your account activation email has expired.';
+            link =
+                <components.Link id="resendEmailLink" type={LINK_TYPES.BUTTON} policy={POLICIES.RESEND_EMAIL}>
+                    Resend activation email
+                </components.Link>
 
-            requestAgainLink =
-                <components.Link type={LINK_TYPES.BUTTON} action={ACTIONS.RESET_PASSWORD}>Resend password reset email</components.Link>
+        } else if (this.props.policy === POLICIES.PASSWORD_RESET ||
+            this.props.policy === POLICIES.PASSWORD_RESET_CONFIRMATION) {
 
-        }
-        else if (this.props.action === ACTIONS.SIGNUP) {
-            linkExpiredParagraph =
-                <components.Paragraph>
-                    The link in your account activation email has expired.
-                </components.Paragraph>
-
-            //TODO split this into two versions if self registration and aided registration have different pages to resend email
-            requestAgainLink =
-                <components.Link type={LINK_TYPES.BUTTON} action={ACTIONS.RESEND_ACTIVATION_EMAIL}>Resend activation email</components.Link>
+            paragraphText = 'The link in your password reset email has expired.';
+            link =
+                <components.Link id="resendEmailLink" type={LINK_TYPES.BUTTON} policy={POLICIES.PASSWORD_RESET}>
+                    Resend password reset email
+                </components.Link>
         }
 
 
         const content =
             <div>
-                {linkExpiredParagraph}
                 <components.Paragraph>
-                    Request another email.
+                    {paragraphText}
                 </components.Paragraph>
-                {requestAgainLink}
+                {link}
             </div>
 
-        const columns = [
-            {
-                header: pageConfig.title,
-                aboveFormContent: content
-            }
-        ];
+        const title = 'Expired link';
+
+        const pageConfig = {
+            title: title,
+            header: title,
+            aboveFormContent: content
+        };
+
 
         return (
-
-            <div id="expiredLink">
-                <components.PageContainer pageConfig={pageConfig} columns={columns} />
+            <div id={PAGE_IDS.EXPIRED_LINK}>
+                <components.PageContainer pageConfig={pageConfig} />
             </div>
         )
     }

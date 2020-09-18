@@ -1,54 +1,35 @@
-import { ACTIONS } from '../constants/actions';
 import { POLICIES } from '../constants/policies';
 import { QUERY_PARAMS } from '../constants/queryParams';
-import QueryParamsService from '../services/QueryParamsService';
+import * as ServerSideQueryParamsService from '../services/ServerSideQueryParamsService';
+import { getInnerTextById } from '../helpers/dom';
 
-async function getB2CParameters() {
+export function getB2CLink(policy) {
 
-    const b2cParams = {
-        clientId: await QueryParamsService.getQueryParam(QUERY_PARAMS.CLIENT_ID),
-        redirectURI: await QueryParamsService.getQueryParam(QUERY_PARAMS.REDIRECT_URI)
-    };
+    //link to policy passed in or sign in by default
+    const _policy = policy || POLICIES.SIGNIN_INVITATION;
 
-    return b2cParams;
-}
+    //get parameters required to build URL from query params (server side request)
+    const tenantId = ServerSideQueryParamsService.getQueryParam(QUERY_PARAMS.TENANT_ID);
+    const clientId = ServerSideQueryParamsService.getQueryParam(QUERY_PARAMS.CLIENT_ID);
+    const redirectURI = ServerSideQueryParamsService.getQueryParam(QUERY_PARAMS.REDIRECT_URI);
+    //try to get token from either server side query params or from the DOM
+    const token = ServerSideQueryParamsService.getQueryParam(QUERY_PARAMS.ID_TOKEN_HINT) ||
+        getInnerTextById(QUERY_PARAMS.ID_TOKEN_HINT);
 
-export async function getB2CLink(action) {
+    let relativeUrl;
 
-    const { clientId, redirectURI } = await getB2CParameters();
+    if (tenantId && clientId && redirectURI) {
 
-    let b2cTenant = window.location.host.slice(0, window.location.host.indexOf('.'));
+        relativeUrl = `/${tenantId}/oauth2/v2.0/` +
+            `authorize?p=${_policy}&client_id=${clientId}&nonce=defaultNonce` +
+            `&redirect_uri=${redirectURI}&scope=openid&response_type=id_token&prompt=login`;
 
-    let actionURL;
-
-    switch (action) {
-        case ACTIONS.SIGNUP:
-            actionURL = POLICIES.ACCOUNT_SIGNUP;
-            break;
-        case ACTIONS.LOGIN:
-            actionURL = POLICIES.SIGNIN_INVITATION;
-            break;
-        case ACTIONS.RESET_PASSWORD:
-            actionURL = POLICIES.PASSWORD_RESET;
-            break;
-        case ACTIONS.FIND_EMAIL:
-            actionURL = POLICIES.FIND_EMAIL;
-            break;
-        case ACTIONS.RESEND_ACTIVATION_EMAIL:
-            //TODO this parameter will need to be updated to final value (when B2C-100 is done)
-            actionURL = 'B2C_1A_resendEmail';
-            break;
-        default:
-            //point to login page by default
-            actionURL = POLICIES.SIGNIN_INVITATION;
-            break;
+        if (_policy === POLICIES.RESEND_EMAIL && token) {
+            relativeUrl += `&id_token_hint=${token}&idtokenhint=${token}`;
+        }
     }
 
-    let absolutePath = `https://${b2cTenant}.b2clogin.com/${b2cTenant}.onmicrosoft.com/oauth2/v2.0/` +
-        `authorize?p=${actionURL}&client_id=${clientId}&nonce=defaultNonce` +
-        `&redirect_uri=${redirectURI}&scope=openid&response_type=id_token&prompt=login`;
-
-    return absolutePath;
+    return relativeUrl;
 
 }
 

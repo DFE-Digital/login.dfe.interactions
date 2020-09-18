@@ -20,6 +20,7 @@ import InputField from './InputField/InputField';
 import PageContainer from './PageContainer/PageContainer';
 import MenuToggle from './MenuToggle/MenuToggle';
 import Spinner from './Spinner/Spinner';
+import LockedAccountHelp from './LockedAccountHelp/LockedAccountHelp';
 
 export default {
     Header: Header,
@@ -43,5 +44,6 @@ export default {
     Postcode: Postcode,
     InputField: InputField,
     PageContainer: PageContainer,
-    Spinner: Spinner
+    Spinner: Spinner,
+    LockedAccountHelp: LockedAccountHelp
 }

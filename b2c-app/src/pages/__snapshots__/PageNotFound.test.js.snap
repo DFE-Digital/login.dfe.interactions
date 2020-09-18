@@ -1,0 +1,75 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div
+  id="pageNotFound"
+>
+  <div>
+    <div
+      className="govuk-width-container"
+    >
+      <div
+        className="govuk-breadcrumbs"
+      >
+        <ol
+          className="govuk-breadcrumbs__list"
+        >
+          <li
+            className="govuk-breadcrumbs__list-item"
+          >
+            <a
+              className="govuk-breadcrumbs__link"
+              href="https://nationalcareers.service.gov.uk/"
+            >
+              Home
+            </a>
+          </li>
+        </ol>
+      </div>
+      <main
+        className="govuk-main-wrapper"
+      >
+        <div
+          className="govuk-grid-row"
+        >
+          <div
+            className="govuk-grid-column-two-thirds"
+          >
+            <h1
+              className="govuk-heading-xl govuk-!-margin-top-6 govuk-!-margin-bottom-9"
+            >
+              Page not found
+            </h1>
+            <div>
+              <p
+                className="govuk-body"
+              >
+                If you typed the web address or used a bookmark, check it is correct.
+              </p>
+              <p
+                className="govuk-body"
+              >
+                If you pasted the web address, check you copied the whole address.
+              </p>
+              <p
+                className="govuk-body"
+              >
+                If the web address is correct you can 
+                <a
+                  className="govuk-link"
+                  href="https://nationalcareers.service.gov.uk/contact-us"
+                  id="contactUsLink"
+                  onClick={null}
+                >
+                  contact us
+                </a>
+                 to get help using this service or call 0800 100 900, 8am to 10pm, 7 days a week.
+              </p>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>
+`;

@@ -1,12 +1,6 @@
 import React from 'react';
 
-import QueryParamsService from './services/QueryParamsService';
-
-import { ACTIONS } from './constants/actions';
-import { POLICIES } from './constants/policies';
-
-import { domHasElementWithId } from './helpers/dom';
-import { matchesPath, hasSearchParam } from './helpers/urls';
+import * as ServerSideQueryParamsService from './services/ServerSideQueryParamsService';
 
 import Signup from './pages/Signup';
 import Login from './pages/Login';
@@ -22,6 +16,9 @@ import EnterNewPassword from './pages/EnterNewPassword';
 import ActivateAccount from './pages/AidedRegistration/ActivateAccount';
 import ExpiredLink from './pages/ExpiredLink';
 import ExpiredLinkWithResendEmail from './pages/ExpiredLinkWithResendEmail';
+import ResendActivationEmail from './pages/ResendActivationEmail';
+import PageNotFound from './pages/PageNotFound';
+import AccountNotActivated from './pages/AccountNotActivated';
 
 import components from './components';
 
@@ -31,102 +28,96 @@ import {
 } from "react-router-dom";
 
 import { withRouter } from "react-router";
+import { QUERY_PARAMS } from './constants/queryParams';
+import { PAGE_IDS } from './constants/pageIds';
 
 class App extends React.Component {
 
-  componentDidMount() {
-    //retrieve query param values and store for later use
-    QueryParamsService.init();
-  }
-
   getComponentByLocation() {
-    const { location } = this.props;
 
-    //Ids in B2C dom that we will be looking for
-    const ERROR_MESSAGE = 'errorMessage';
-    const SUCCESS_MESSAGE = 'successMessage';
+    const page = ServerSideQueryParamsService.getQueryParam(QUERY_PARAMS.PAGE);
+    let policy = ServerSideQueryParamsService.getQueryParam(QUERY_PARAMS.POLICY);
 
-    //Login page
-    if (matchesPath(location, POLICIES.SIGNIN_INVITATION) || hasSearchParam(location.search, 'p', POLICIES.SIGNIN_INVITATION)) {
-      return <Login />;
-    }
-    //Activation email sent after sign up
-    if (matchesPath(location, `${POLICIES.ACCOUNT_SIGNUP}/api`)) {
-      return <EmailSent action={ACTIONS.SIGNUP} />;
-    }
-    //Sign up page
-    if (matchesPath(location, POLICIES.ACCOUNT_SIGNUP) || hasSearchParam(location.search, 'p', POLICIES.ACCOUNT_SIGNUP)) {
-      return <Signup />;
-    }
-    //Reset password email sent
-    if (matchesPath(location, `${POLICIES.PASSWORD_RESET}/api`)) {
-      return <EmailSent action={ACTIONS.RESET_PASSWORD} />;
-    }
-    //Request email to reset your password
-    if (matchesPath(location, POLICIES.PASSWORD_RESET) || hasSearchParam(location.search, 'p', POLICIES.PASSWORD_RESET)) {
-      return <ResetPassword />;
-    }
-    //Password has been changed
-    if (matchesPath(location, `${POLICIES.PASSWORD_RESET_CONFIRMATION}/api`)) {
-      return <PasswordChanged />;
-    }
-    //Enter new password page
-    if (matchesPath(location, POLICIES.PASSWORD_RESET_CONFIRMATION)) {
-      //Error - link has expired
-      if (domHasElementWithId(ERROR_MESSAGE)) {
-        return <ExpiredLink action={ACTIONS.RESET_PASSWORD} />;
+    if (page && policy) {
+
+      let result;
+
+      switch (page) {
+
+        case PAGE_IDS.LOGIN:
+          result = <Login />;
+          break;
+
+        case PAGE_IDS.SIGNUP:
+          result = <Signup />;
+          break;
+
+        case PAGE_IDS.EMAIL_SENT:
+          result = <EmailSent policy={policy} />;
+          break;
+
+        case PAGE_IDS.EXPIRED_LINK:
+          result = <ExpiredLink policy={policy} />;
+          break;
+
+        case PAGE_IDS.EXPIRED_LINK_WITH_RESEND:
+          result = <ExpiredLinkWithResendEmail policy={policy} />;
+          break;
+
+        case PAGE_IDS.ACCOUNT_ACTIVATED:
+          result = <AccountActivated />;
+          break;
+
+        case PAGE_IDS.ACTIVATE_ACCOUNT:
+          result = <ActivateAccount />;
+          break;
+
+        case PAGE_IDS.RESET_PASSWORD:
+          result = <ResetPassword />;
+          break;
+
+        case PAGE_IDS.ENTER_NEW_PASSWORD:
+          result = <EnterNewPassword />;
+          break;
+
+        case PAGE_IDS.PASSWORD_CHANGED:
+          result = <PasswordChanged />;
+          break;
+
+        case PAGE_IDS.FORGOTTEN_EMAIL:
+          result = <ForgottenEmail />;
+          break;
+
+        case PAGE_IDS.ACCOUNT_FOUND:
+          result = <AccountFound />;
+          break;
+
+        case PAGE_IDS.ACCOUNT_NOT_FOUND:
+          result = <AccountNotFound />;
+          break;
+
+        case PAGE_IDS.NOT_FOUND:
+          result = <PageNotFound />;
+          break;
+
+        case PAGE_IDS.RESEND_ACTIVATION_EMAIL:
+          result = <ResendActivationEmail />;
+          break;
+
+        case PAGE_IDS.ACCOUNT_NOT_ACTIVATED:
+          result = <AccountNotActivated />;
+          break;
+
+        default:
+          result = <PageNotFound />;
+          break;
       }
-      return <EnterNewPassword />;
+
+      return result;
     }
-    //Results for forgotten email page
-    if (matchesPath(location, `${POLICIES.FIND_EMAIL}/api`)) {
-      //Success - account was found
-      if (domHasElementWithId(SUCCESS_MESSAGE)) {
-        return <AccountFound />;
-      }
-      //Error - account was not found
-      if (domHasElementWithId(ERROR_MESSAGE)) {
-        return <AccountNotFound />;
-      }
-    }
-    //Forgotten email
-    if (matchesPath(location, POLICIES.FIND_EMAIL) || hasSearchParam(location.search, 'p', POLICIES.FIND_EMAIL)) {
-      return <ForgottenEmail />;
-    }
-    //Account activated from Self Registration
-    if (matchesPath(location, POLICIES.SIGNUP_CONFIRMATION)) {
-      //Error - link has expired
-      if (domHasElementWithId(ERROR_MESSAGE)) {
-        return <ExpiredLink action={ACTIONS.SIGNUP} />;
-      }
-      return <AccountActivated />;
-    }
-    //Account activated from Aided Registration
-    if (matchesPath(location, `${POLICIES.SIGNUP_INVITATION}/api`)) {
-      return <AccountActivated />;
-    }
-    //Activate account from Aided Registration
-    if (matchesPath(location, POLICIES.SIGNUP_INVITATION)) {
-      //Error - link has expired
-      if (domHasElementWithId(ERROR_MESSAGE)) {
-        return <ExpiredLink action={ACTIONS.SIGNUP} />;
-      }
-      return <ActivateAccount />;
-    }
-    //Change email address - email sent from expired link page
-    if (matchesPath(location, `${POLICIES.CHANGE_EMAIL}/api`)) {
-      return <EmailSent action={ACTIONS.CHANGE_EMAIL} />;
-    }
-    //Change email address
-    if (matchesPath(location, POLICIES.CHANGE_EMAIL)) {
-      //Error - link has expired
-      if (domHasElementWithId(ERROR_MESSAGE)) {
-        return <ExpiredLinkWithResendEmail />;
-      }
-      return <AccountActivated />;
-    }
-    //default
+
     return <Placeholder />;
+
   }
 
   render() {
