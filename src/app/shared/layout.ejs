@@ -19,18 +19,6 @@
     <link rel="apple-touch-icon" href="<%= locals.urls.assets %>/images/apple-icon.png">
 
     <meta property="og:image" content="<%= locals.urls.assets %>/images/opengraph-image.png">
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114739594-1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', '<%=locals.gaTrackingId || 'UA-114739594-1'%>', {
-        cookie_flags: 'secure'
-      });
-    </script>
 </head>
 <body>
 
@@ -42,9 +30,13 @@
     </div>
 </div>
 
+<<<<<<< HEAD
 <div id="global-cookie-message">
     <p>GOV.UK uses cookies to make the site simpler. <a href="https://www.gov.uk/help/cookies">Find out more about cookies</a></p>
 </div>
+=======
+<%-include(process.cwd()+'/node_modules/dfe-frontend-toolkit/app/views/concepts/components/cookie-banner.html') %>
+>>>>>>> 32c53201f74520b272c9fe1e18721413e52d1d3c
 
 <div class="wrapper">
     <%if(app.environmentBannerMessage) {%>
@@ -146,7 +138,15 @@
 </footer>
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+<<<<<<< HEAD
+=======
+<script type="text/javascript" src="<%= locals.urls.assets %>/javascript/vendors/vendors.min.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script>
+    window.gaTrackingId = '<%=locals.gaTrackingId || 'UA-114739594-1'%>';
+</script>
+>>>>>>> 32c53201f74520b272c9fe1e18721413e52d1d3c
 <script src="<%= locals.urls.assets %>/javascript/app.min.js"></script>
-
+<script async src="https://www.googletagmanager.com/gtag/js?id=<%=locals.gaTrackingId || 'UA-114739594-1'%>"></script>
 </body>
 </html>
