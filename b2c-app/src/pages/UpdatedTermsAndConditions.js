@@ -10,16 +10,12 @@ import {
     updateCurrentErrorsInState
 } from '../helpers/pageErrorHandler';
 
-import { POLICIES } from '../constants/policies';
-import { PAGE_IDS } from '../constants/pageIds';
-
-class Login extends React.Component {
+class UpdatedTermsAndConditions extends React.Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            email: null,
-            password: null,
+            tsAndCsAccepted: false,
             showErrors: false,
             showB2CErrors: true,
             childrenErrors: {},
@@ -42,11 +38,11 @@ class Login extends React.Component {
         e.preventDefault();
         //hide B2C errors and only show again if we are going to submit the form to B2C
         this.setState({ showB2CErrors: false });
-        //update error messages
+
         this.updateVisibleErrorsInState();
+
         //do something to validate and decide if we submit or show errors
-        if (this.state.email &&
-            this.state.password) {
+        if (this.state.tsAndCsAccepted) {
             //hide our validation errors and prepare to show B2C ones (in case there are any)
             this.setState({ showErrors: false, showB2CErrors: true });
             //everything is valid, set data and submit B2C form
@@ -62,13 +58,11 @@ class Login extends React.Component {
 
     setDataAndSubmit() {
         //retrieve all elements we will need and set their values
-        let b2cEmail = document.getElementById('email');
-        let b2cPassword = document.getElementById('password');
-        let b2cSubmitButton = document.getElementById('next');
+        let b2cTermsAndConditions = document.getElementById('tncCheckbox_true');
+        let b2cSubmitButton = document.getElementById('continue');
 
-        if (b2cEmail && b2cPassword && b2cSubmitButton) {
-            b2cEmail.value = this.state.email;
-            b2cPassword.value = this.state.password;
+        if (b2cTermsAndConditions && b2cSubmitButton) {
+            b2cTermsAndConditions.checked = this.state.tsAndCsAccepted;
             //submit B2C form
             b2cSubmitButton.click();
         }
@@ -76,54 +70,45 @@ class Login extends React.Component {
 
     render() {
 
+        const content =
+            <div>
+                <components.Paragraph>You need to accept the updated terms and conditions to access your account.</components.Paragraph>
+            </div>
+
         const formContent =
             <div>
-                <components.InputField
-                    type='email'
-                    inputId='email'
-                    inputLabel='Email address'
+                <components.TermsAndConditions
+                    showHeader={false}
                     onChange={this.onChange}
-                    errorMessagePlaceholder='email address'
                     showErrors={this.state.showErrors}
                     visibleErrors={this.state.visibleErrors}
                     initialiseParentErrors={this.initialiseErrorsInContainer}
                     updateParentErrors={this.updateCurrentErrorsInState} />
-                <components.InputField
-                    type='password'
-                    inputId='password'
-                    inputLabel='Password'
-                    onChange={this.onChange}
-                    errorMessagePlaceholder='password'
-                    showErrors={this.state.showErrors}
-                    visibleErrors={this.state.visibleErrors}
-                    initialiseParentErrors={this.initialiseErrorsInContainer}
-                    updateParentErrors={this.updateCurrentErrorsInState} />
-                <components.Paragraph errors={this.state.errors}>
-                    <components.Link id="resetPasswordLink" policy={POLICIES.PASSWORD_RESET}>I cannot access my account</components.Link>
-                </components.Paragraph>
             </div>
 
         /**
          * Page configuration
          */
+        const title = 'Updated terms and conditions';
+
         const pageConfig = {
-            title: 'Sign in to your account',
-            header: 'Sign in',
+            title: title,
+            header: title,
+            aboveFormContent: content,
             formContent: formContent,
-            submitButtonText: 'Sign in',
+            submitButtonText: 'Continue to your account',
             submitHandler: this.handleSubmit,
             errors: this.state.visibleErrors,
-            showB2CErrors: this.state.showB2CErrors,
-            errorSummaryContent: <components.Paragraph>Your sign in details are incorrect</components.Paragraph>
+            showB2CErrors: this.state.showB2CErrors
         };
 
 
         return (
-            <div id={PAGE_IDS.LOGIN}>
+            <div id="updatedTermsAndConditions">
                 <components.PageContainer pageConfig={pageConfig} />
             </div>
         )
     }
 }
 
-export default Login;
+export default UpdatedTermsAndConditions;

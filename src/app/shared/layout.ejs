@@ -19,18 +19,6 @@
     <link rel="apple-touch-icon" href="<%= locals.urls.assets %>/images/apple-icon.png">
 
     <meta property="og:image" content="<%= locals.urls.assets %>/images/opengraph-image.png">
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-114739594-1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-
-      gtag('config', '<%=locals.gaTrackingId || 'UA-114739594-1'%>', {
-        cookie_flags: 'secure'
-      });
-    </script>
 </head>
 <body>
 
@@ -42,34 +30,7 @@
     </div>
 </div>
 
-<div class="global-cookie-message-dfe-sign-in column-full">
-    <div class="grid-row global-cookie-message-dfe-sign-in__cookie-message-container">
-        <div class="column-two-thirds">
-            <h2 class="heading-medium heading-medium--govuk">
-                Tell us whether you accept cookies
-            </h2>
-            <p class="govuk-body govuk-body--shim">
-                We use cookies to
-                <a href="/cookies">collect information</a>
-                about how you use DfE Sign in.
-                We use this information to improve our services
-                and to make this website work as efficently as possible.
-            </p>
-            <div class="grid-row">
-                <div class="column-one-half">
-                    <button class="button button--govuk cookie-accept">
-                        Accept all cookies
-                    </button>
-                </div>
-                <div class="column-one-half">
-                    <a class="button button--govuk" href="/cookies">
-                        Set cookie preferences
-                    </a>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
+<%-include(process.cwd()+'/node_modules/dfe-frontend-toolkit/app/views/concepts/components/cookie-banner.html') %>
 
 <div class="wrapper">
     <%if(app.environmentBannerMessage) {%>
@@ -172,7 +133,11 @@
 
 <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
 <script type="text/javascript" src="<%= locals.urls.assets %>/javascript/vendors/vendors.min.js"></script>
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script>
+    window.gaTrackingId = '<%=locals.gaTrackingId || 'UA-114739594-1'%>';
+</script>
 <script src="<%= locals.urls.assets %>/javascript/app.min.js"></script>
-
+<script async src="https://www.googletagmanager.com/gtag/js?id=<%=locals.gaTrackingId || 'UA-114739594-1'%>"></script>
 </body>
 </html>

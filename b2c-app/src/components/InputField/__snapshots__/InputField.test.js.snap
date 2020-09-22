@@ -29,12 +29,23 @@ exports[`when type is email renders correctly with props passed in 1`] = `
 
 exports[`when type is not specified renders correctly with errors 1`] = `
 <div
-  className="govuk-form-group "
+  className="govuk-form-group govuk-form-group--error"
 >
   <label
     className="govuk-label"
     htmlFor="testInputCustom"
   />
+  <span
+    className="govuk-error-message"
+    id="testInputCustomError"
+  >
+    <span
+      className="govuk-visually-hidden"
+    >
+      Error:
+    </span>
+    this is a test
+  </span>
   <input
     className="govuk-input govuk-!-width-one-half"
     id="testInputCustom"
