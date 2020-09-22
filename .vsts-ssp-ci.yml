@@ -15,6 +15,10 @@ trigger:
     include:
     - develop
     - master
+pr:
+  branches:
+    exclude:
+    - develop
 
 variables:
 - group: platform-global
