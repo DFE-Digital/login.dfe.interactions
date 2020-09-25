@@ -34,6 +34,7 @@ exports[`renders correctly with errors 1`] = `
     noValidate={true}
     onChange={[Function]}
     type="text"
+    value=""
   />
 </div>
 `;
@@ -61,6 +62,7 @@ exports[`renders correctly without props passed in 1`] = `
     noValidate={true}
     onChange={[Function]}
     type="text"
+    value=""
   />
 </div>
 `;

@@ -233,6 +233,7 @@ exports[`renders correctly 1`] = `
                     noValidate={true}
                     onChange={[Function]}
                     type="text"
+                    value=""
                   />
                 </div>
               </div>

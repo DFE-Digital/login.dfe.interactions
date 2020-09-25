@@ -66,13 +66,25 @@ it('calls validation, sets errors and calls onChange callback', () => {
     //onChange callback function passed in has been called with the valid value
     expect(mockOnChangeCallback).toHaveBeenCalledWith({ postcode: 'RG02 1AB' });
 
-    //simulate entering invalid postcode (no space in it should make it fail validation)
+    //simulate entering valid postcode without space
     changeEvent.target.value = 'RG021AB';
     postcodeInput.simulate('change', changeEvent);
     //validation called
     expect(validationSpy).toHaveBeenCalled();
+    //state value has been updated and the space is added to the postcode
+    expect(wrapper.state().postcode).toEqual('RG02 1AB');
+    //check error message is empty
+    expect(wrapper.state().errors.postcode.text).toEqual('');
+    //onChange callback function passed in has been called with the valid value
+    expect(mockOnChangeCallback).toHaveBeenCalledWith({ postcode: 'RG02 1AB' });
+
+    //simulate entering invalid postcode (no space in it should make it fail validation)
+    changeEvent.target.value = 'invalid';
+    postcodeInput.simulate('change', changeEvent);
+    //validation called
+    expect(validationSpy).toHaveBeenCalled();
     //state value has been updated
-    expect(wrapper.state().postcode).toEqual('RG021AB');
+    expect(wrapper.state().postcode).toEqual('invalid');
     //onChange callback function passed in has been called with null
     expect(mockOnChangeCallback).toHaveBeenCalledWith({ postcode: null });
     //check error message is set
