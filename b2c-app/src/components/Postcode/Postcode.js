@@ -49,9 +49,19 @@ class Postcode extends React.Component {
             isValid = false;
             newErrorState.postcode.text = 'Enter your postcode';
         }
-        else if (!postcode.match(/([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z]))))\s[0-9][A-Za-z]{2})$/)) {
+        else if (!postcode.match(/^([Gg][Ii][Rr]\s?0[Aa]{2})|^((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z]))))\s?[0-9][A-Za-z]{2})$/)) {
             isValid = false;
             newErrorState.postcode.text = 'Enter a valid postcode';
+        } else if (postcode.indexOf(' ') === -1) {
+            //we have a valid postcode but it does not have space in it, so we add it (4th character from the end)
+            const indexToAddSpace = postcode.length - 3;
+            postcode = postcode.substring(0, indexToAddSpace) + ' ' + postcode.substring(indexToAddSpace);
+            //update state in component and parent
+            this.setState({ postcode: postcode }, () => {
+                this.props.onChange({
+                    postcode: postcode
+                });
+            });
         }
 
         this.setState({ errors: newErrorState }, () => {
@@ -84,7 +94,13 @@ class Postcode extends React.Component {
                 <span id="postcode-hint" className="govuk-hint">
                     For example, SW1A 1AA
                 </span>
-                <input className="govuk-input govuk-input--width-10" id="postcodeCustom" name="postcode" type="text" onChange={this.handleChange} noValidate />
+                <input name="postcode"
+                    className="govuk-input govuk-input--width-10"
+                    id="postcodeCustom"
+                    type="text"
+                    value={this.state.postcode || ''}
+                    onChange={this.handleChange}
+                    noValidate />
             </div>
         )
     }
