@@ -7,6 +7,7 @@ resources:
       name: DFE-Digital/operations-devops-pipeline-templates
     - repository: config
       type: github
+      ref: master
       endpoint: DfE-Digital
       name: DFE-Digital/login.dfe.config
 
@@ -15,6 +16,7 @@ trigger:
     include:
     - develop
     - master
+    
 pr:
   branches:
     exclude:
