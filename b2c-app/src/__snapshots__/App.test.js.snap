@@ -3741,6 +3741,7 @@ exports[`when page is set in server side query params renders forgotten email ch
                         noValidate={true}
                         onChange={[Function]}
                         type="text"
+                        value=""
                       />
                     </div>
                   </div>
