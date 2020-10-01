@@ -19,6 +19,7 @@ import ExpiredLinkWithResendEmail from './pages/ExpiredLinkWithResendEmail';
 import ResendActivationEmail from './pages/ResendActivationEmail';
 import PageNotFound from './pages/PageNotFound';
 import AccountNotActivated from './pages/AccountNotActivated';
+import UpdatedTermsAndConditions from './pages/UpdatedTermsAndConditions';
 
 import components from './components';
 
@@ -106,6 +107,10 @@ class App extends React.Component {
 
         case PAGE_IDS.ACCOUNT_NOT_ACTIVATED:
           result = <AccountNotActivated />;
+          break;
+
+        case PAGE_IDS.UPDATED_TERMS_AND_CONDITIONS:
+          result = <UpdatedTermsAndConditions />;
           break;
 
         default:

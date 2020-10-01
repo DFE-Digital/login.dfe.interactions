@@ -4,6 +4,13 @@ import renderer from 'react-test-renderer';
 
 import components from '..';
 
+const testErrors = {
+    dob: {
+        text: 'this is a test'
+    }
+};
+const updateParentMock = jest.fn();
+
 it('renders without crashing', () => {
     shallow(<components.DateOfBirth />);
 });
@@ -16,16 +23,7 @@ it('renders correctly without props passed in', () => {
 });
 
 it('renders correctly with errors', () => {
-    const tree = renderer.create(<components.DateOfBirth showErrors={true} />);
-    tree.root.instance.setState({
-        errors: {
-            dob: {
-                visible: {
-                    text: 'this is a test'
-                }
-            }
-        }
-    });
+    const tree = renderer.create(<components.DateOfBirth showErrors={true} visibleErrors={testErrors} />);
     expect(tree.toJSON()).toMatchSnapshot()
 });
 
@@ -33,7 +31,14 @@ it('calls validation, sets errors and calls onChange callback', () => {
 
     const mockOnChangeCallback = jest.fn();
 
-    const wrapper = mount(<components.DateOfBirth showErrors={true} onChange={mockOnChangeCallback} />);
+    const wrapper = mount(
+        <components.DateOfBirth
+            showErrors={true}
+            onChange={mockOnChangeCallback}
+            visibleErrors={testErrors}
+            updateParentErrors={updateParentMock} />
+    );
+
     const dayInput = wrapper.find('#dobDay');
     const monthInput = wrapper.find('#dobMonth');
     const yearInput = wrapper.find('#dobYear');
@@ -70,7 +75,7 @@ it('calls validation, sets errors and calls onChange callback', () => {
     expect(wrapper.state().dobDay).toBe(null);
     expect(wrapper.state().dobMonth).toBe(null);
     expect(wrapper.state().dobYear).toBe(null);
-    expect(wrapper.state().errors.dob.current.text).toEqual('Enter date of birth');
+    expect(wrapper.state().errors.dob.text).toEqual('Enter date of birth');
 
     //simulate entering day
     dayInput.simulate('change', dayChangeEvent);
@@ -79,7 +84,7 @@ it('calls validation, sets errors and calls onChange callback', () => {
     //state value has been updated
     expect(wrapper.state().dobDay).toEqual(testDay);
     //check error message is set as date is still not complete
-    expect(wrapper.state().errors.dob.current.text).toEqual('Enter a valid date of birth');
+    expect(wrapper.state().errors.dob.text).toEqual('Enter a valid date of birth');
     //onChange callback function passed in has been called with null
     expect(mockOnChangeCallback).toHaveBeenCalledWith({ dob: null });
 
@@ -90,7 +95,7 @@ it('calls validation, sets errors and calls onChange callback', () => {
     //state value has been updated
     expect(wrapper.state().dobMonth).toEqual(testMonth);
     //check error message is set as date is still not complete
-    expect(wrapper.state().errors.dob.current.text).toEqual('Enter a valid date of birth');
+    expect(wrapper.state().errors.dob.text).toEqual('Enter a valid date of birth');
     //onChange callback function passed in has been called with null
     expect(mockOnChangeCallback).toHaveBeenCalledWith({ dob: null });
 
@@ -101,7 +106,7 @@ it('calls validation, sets errors and calls onChange callback', () => {
     //state value has been updated
     expect(wrapper.state().dobYear).toEqual(testYear);
     //check error message is cleared as date is valid
-    expect(wrapper.state().errors.dob.current.text).toEqual('');
+    expect(wrapper.state().errors.dob.text).toEqual('');
     //onChange callback function passed in has been called with date object
     expect(mockOnChangeCallback).toHaveBeenCalledWith({ dob: new Date(testYear, testMonth - 1, testDay) });
 
@@ -113,7 +118,7 @@ it('calls validation, sets errors and calls onChange callback', () => {
     //state value has been updated
     expect(wrapper.state().dobYear).toEqual('2019');
     //check error message is set as date is still not complete
-    expect(wrapper.state().errors.dob.current.text).toEqual('Enter a valid date of birth');
+    expect(wrapper.state().errors.dob.text).toEqual('Enter a valid date of birth');
     //onChange callback function passed in has been called with null
     expect(mockOnChangeCallback).toHaveBeenCalledWith({ dob: null });
 
@@ -125,7 +130,7 @@ it('calls validation, sets errors and calls onChange callback', () => {
     //state value has been updated
     expect(wrapper.state().dobYear).toEqual('1950');
     //check error message is set as date is still not complete
-    expect(wrapper.state().errors.dob.current.text).toEqual('Enter a valid date of birth');
+    expect(wrapper.state().errors.dob.text).toEqual('Enter a valid date of birth');
     //onChange callback function passed in has been called with null
     expect(mockOnChangeCallback).toHaveBeenCalledWith({ dob: null });
 
@@ -137,7 +142,7 @@ it('calls validation, sets errors and calls onChange callback', () => {
     //state value has been updated
     expect(wrapper.state().dobYear).toEqual('200');
     //check error message is set as date is still not complete
-    expect(wrapper.state().errors.dob.current.text).toEqual('Enter a valid date of birth');
+    expect(wrapper.state().errors.dob.text).toEqual('Enter a valid date of birth');
     //onChange callback function passed in has been called with null
     expect(mockOnChangeCallback).toHaveBeenCalledWith({ dob: null });
 
@@ -155,7 +160,7 @@ it('calls validation, sets errors and calls onChange callback', () => {
     expect(wrapper.state().dobMonth).toEqual('');
     expect(wrapper.state().dobYear).toEqual('');
     //check error message is set as date is still not complete
-    expect(wrapper.state().errors.dob.current.text).toEqual('Enter date of birth');
+    expect(wrapper.state().errors.dob.text).toEqual('Enter date of birth');
     //onChange callback function passed in has been called with null
     expect(mockOnChangeCallback).toHaveBeenCalledWith({ dob: null });
 

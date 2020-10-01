@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { onError } from '../../helpers/pageUpdatesHandler';
-
 class Postcode extends React.Component {
 
     constructor(props) {
@@ -10,24 +8,19 @@ class Postcode extends React.Component {
             postcode: null,
             errors: {
                 postcode: {
-                    current: {
-                        text: 'Enter your postcode',
-                        showSummaryText: false
-                    },
-                    visible: {
-                        text: '',
-                        showSummaryText: false
-                    },
+                    text: 'Enter your postcode',
+                    showSummaryText: false,
                     id: 'postcodeCustom'
                 }
             }
         };
         this.handleChange = this.handleChange.bind(this);
-        this.onError = onError.bind(this);
         this.isValidPostcode = this.isValidPostcode.bind(this);
 
-        //initialise errors in parent component, which will contain a reference to them
-        this.onError(this.props.errors);
+        //initialise visible errors in parent component
+        if (this.props.initialiseParentErrors) {
+            this.props.initialiseParentErrors(this.state.errors);
+        }
     }
 
     handleChange(e) {
@@ -45,40 +38,45 @@ class Postcode extends React.Component {
     isValidPostcode() {
         let isValid = true;
         let postcode = this.state.postcode;
-        let errors = this.state.errors;
 
-        //clear errors
-        errors.postcode.current.text = '';
+        //build new error state with empty value for text
+        const newErrorState = { ...this.state.errors }
+        newErrorState.postcode.text = '';
+
+        //now update value for the text if invalid
 
         if (!postcode) {
             isValid = false;
-            errors.postcode.current.text = 'Enter your postcode';
+            newErrorState.postcode.text = 'Enter your postcode';
         }
         else if (!postcode.match(/([Gg][Ii][Rr] 0[Aa]{2})|((([A-Za-z][0-9]{1,2})|(([A-Za-z][A-Ha-hJ-Yj-y][0-9]{1,2})|(([A-Za-z][0-9][A-Za-z])|([A-Za-z][A-Ha-hJ-Yj-y][0-9]?[A-Za-z]))))\s?[0-9][A-Za-z]{2})$/)) {
             isValid = false;
-            errors.postcode.current.text = 'Enter a valid postcode';
+            newErrorState.postcode.text = 'Enter a valid postcode';
         }
 
-        this.setState({ errors });
+        this.setState({ errors: newErrorState }, () => {
+            //call parent to update its state
+            this.props.updateParentErrors(this.state.errors);
+        });
 
         return isValid;
     }
 
     render() {
 
-        const { errors } = this.state;
+        const { visibleErrors, showErrors } = this.props;
 
         let postcodeErrorElement;
-        if (this.props.showErrors && errors.postcode.visible.text.length > 0) {
+        if (showErrors && visibleErrors.postcode.text.length > 0) {
             postcodeErrorElement =
                 <span id="postcodeError" className="govuk-error-message">
                     <span className="govuk-visually-hidden">Error:</span>
-                    {errors.postcode.visible.text}
+                    {visibleErrors.postcode.text}
                 </span>
         }
 
         return (
-            <div className={`govuk-form-group ${this.props.showErrors && errors.postcode.visible.text.length > 0 ? "govuk-form-group--error" : ""}`}>
+            <div className={`govuk-form-group ${showErrors && visibleErrors.postcode.text.length > 0 ? "govuk-form-group--error" : ""}`}>
                 <label className="govuk-label" htmlFor="postcodeCustom">
                     Enter your postcode
                 </label>

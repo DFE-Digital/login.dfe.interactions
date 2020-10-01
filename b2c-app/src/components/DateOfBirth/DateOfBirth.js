@@ -1,7 +1,5 @@
 import React from 'react';
 
-import { onError } from '../../helpers/pageUpdatesHandler';
-
 class DateOfBirth extends React.Component {
 
     constructor(props) {
@@ -12,24 +10,19 @@ class DateOfBirth extends React.Component {
             dobYear: null,
             errors: {
                 dob: {
-                    current: {
-                        text: 'Enter date of birth',
-                        showSummaryText: false
-                    },
-                    visible: {
-                        text: '',
-                        showSummaryText: false
-                    },
+                    text: 'Enter date of birth',
+                    showSummaryText: false,
                     id: 'dobFieldset'
                 }
             }
         };
         this.handleChange = this.handleChange.bind(this);
-        this.onError = onError.bind(this);
         this.isValidDob = this.isValidDob.bind(this);
 
-        //initialise errors in parent component, which will contain a reference to them
-        this.onError(this.props.errors);
+        //initialise visible errors in parent component
+        if (this.props.initialiseParentErrors) {
+            this.props.initialiseParentErrors(this.state.errors);
+        }
     }
 
     handleChange(e) {
@@ -61,18 +54,19 @@ class DateOfBirth extends React.Component {
         let day = this.state.dobDay;
         let month = this.state.dobMonth;
         let year = this.state.dobYear;
-        let errors = this.state.errors;
 
-        //clear errors
-        errors.dob.current.text = '';
+        //build new error state with empty value for text
+        const newErrorState = { ...this.state.errors }
+        newErrorState.dob.text = '';
 
+        //now update values if invalid
         if (!day && !month && !year) {
             isValid = false;
-            errors.dob.current.text = 'Enter date of birth';
+            newErrorState.dob.text = 'Enter date of birth';
         }
         else if (!day || !month || !year || year.length !== 4) {
             isValid = false;
-            errors.dob.current.text = 'Enter a valid date of birth';
+            newErrorState.dob.text = 'Enter a valid date of birth';
         }
         else {
             //get value for month ready to be used by Date functions
@@ -88,30 +82,33 @@ class DateOfBirth extends React.Component {
                 age < 13 || age > 65) {
                 //failed validation, show an error and prevent submit
                 isValid = false;
-                errors.dob.current.text = 'Enter a valid date of birth';
+                newErrorState.dob.text = 'Enter a valid date of birth';
             }
         }
 
-        this.setState({ errors });
+        this.setState({ errors: newErrorState }, () => {
+            //call parent to update its state
+            this.props.updateParentErrors(this.state.errors);
+        });
 
         return isValid;
     }
 
     render() {
 
-        const { errors } = this.state;
+        const { visibleErrors, showErrors } = this.props;
 
         let dobErrorElement;
-        if (this.props.showErrors && errors.dob.visible.text.length > 0) {
+        if (showErrors && visibleErrors.dob.text.length > 0) {
             dobErrorElement =
                 <span id="dobError" className="govuk-error-message">
                     <span className="govuk-visually-hidden">Error:</span>
-                    {errors.dob.visible.text}
+                    {visibleErrors.dob.text}
                 </span>
         }
 
         return (
-            <div className={`govuk-form-group ${this.props.showErrors && errors.dob.visible.text.length > 0 ? "govuk-form-group--error" : ""}`}>
+            <div className={`govuk-form-group ${this.props.showErrors && visibleErrors.dob.text.length > 0 ? "govuk-form-group--error" : ""}`}>
                 <fieldset className="govuk-fieldset" role="group" aria-describedby="date-of-birth-hint" id="dobFieldset">
                     <legend className="govuk-fieldset__legend govuk-fieldset__legend--l">
                         <label className="govuk-label">

@@ -4,6 +4,16 @@ import renderer from 'react-test-renderer';
 
 import components from '..';
 
+const testErrors = {
+    newPassword: {
+        text: 'this is a test'
+    },
+    reenteredPassword: {
+        text: 'this is a test'
+    }
+};
+const updateParentMock = jest.fn();
+
 it('renders without crashing', () => {
     shallow(<components.CreateNewPassword />);
 });
@@ -16,21 +26,8 @@ it('renders correctly without props passed in', () => {
 });
 
 it('renders correctly with errors', () => {
-    const tree = renderer.create(<components.CreateNewPassword showErrors={true} />);
-    tree.root.instance.setState({
-        errors: {
-            newPassword: {
-                visible: {
-                    text: 'this is a test'
-                }
-            },
-            reenteredPassword: {
-                visible: {
-                    text: 'this is a test'
-                }
-            }
-        }
-    });
+    const tree = renderer.create(<components.CreateNewPassword showErrors={true} visibleErrors={testErrors} />);
+
     expect(tree.toJSON()).toMatchSnapshot()
 });
 
@@ -38,7 +35,14 @@ it('calls validation, sets errors and calls onChange callback', () => {
 
     const mockOnChangeCallback = jest.fn();
 
-    const wrapper = mount(<components.CreateNewPassword showErrors={true} onChange={mockOnChangeCallback} />);
+    const wrapper = mount(
+        <components.CreateNewPassword
+            showErrors={true}
+            onChange={mockOnChangeCallback}
+            visibleErrors={testErrors}
+            updateParentErrors={updateParentMock} />
+    );
+
     const newPasswordInput = wrapper.find('#newPasswordCustom');
     const reenteredPasswordInput = wrapper.find('#reenteredPasswordCustom');
     const validationSpy = jest.spyOn(wrapper.instance(), 'isValidPassword');
@@ -64,8 +68,8 @@ it('calls validation, sets errors and calls onChange callback', () => {
     //default values set
     expect(wrapper.state().newPassword).toBe(null);
     expect(wrapper.state().reenteredPassword).toBe(null);
-    expect(wrapper.state().errors.newPassword.current.text).toEqual('Enter your password');
-    expect(wrapper.state().errors.reenteredPassword.current.text).toEqual('');
+    expect(wrapper.state().errors.newPassword.text).toEqual('Enter your password');
+    expect(wrapper.state().errors.reenteredPassword.text).toEqual('');
 
     //simulate entering a password too short
     newPasswordInput.simulate('change', newPasswordChangeEvent);
@@ -74,8 +78,8 @@ it('calls validation, sets errors and calls onChange callback', () => {
     //state value has been updated
     expect(wrapper.state().newPassword).toEqual(shortPassword);
     //check error message is set because reentered password is still not set
-    expect(wrapper.state().errors.newPassword.current.text).toEqual('Enter a password between 8 and 16 characters');
-    expect(wrapper.state().errors.reenteredPassword.current.text).toEqual('');
+    expect(wrapper.state().errors.newPassword.text).toEqual('Enter a password between 8 and 16 characters');
+    expect(wrapper.state().errors.reenteredPassword.text).toEqual('');
     //onChange callback function passed in has been called with the valid value
     expect(mockOnChangeCallback).toHaveBeenCalledWith({ password: null });
 
@@ -87,8 +91,8 @@ it('calls validation, sets errors and calls onChange callback', () => {
     //state value has been updated
     expect(wrapper.state().newPassword).toEqual(invalidPassword);
     //check error message is set because reentered password is still not set
-    expect(wrapper.state().errors.newPassword.current.text).toEqual('Invalid password');
-    expect(wrapper.state().errors.reenteredPassword.current.text).toEqual('');
+    expect(wrapper.state().errors.newPassword.text).toEqual('Invalid password');
+    expect(wrapper.state().errors.reenteredPassword.text).toEqual('');
     //onChange callback function passed in has been called with the valid value
     expect(mockOnChangeCallback).toHaveBeenCalledWith({ password: null });
 
@@ -100,8 +104,8 @@ it('calls validation, sets errors and calls onChange callback', () => {
     //state value has been updated
     expect(wrapper.state().newPassword).toEqual(validPassword);
     //check error message is set because reentered password is still not set
-    expect(wrapper.state().errors.newPassword.current.text).toEqual('');
-    expect(wrapper.state().errors.reenteredPassword.current.text).toEqual('Re-enter your password');
+    expect(wrapper.state().errors.newPassword.text).toEqual('');
+    expect(wrapper.state().errors.reenteredPassword.text).toEqual('Re-enter your password');
     //onChange callback function passed in has been called with the valid value
     expect(mockOnChangeCallback).toHaveBeenCalledWith({ password: null });
 
@@ -112,8 +116,8 @@ it('calls validation, sets errors and calls onChange callback', () => {
     //state value has been updated
     expect(wrapper.state().reenteredPassword).toEqual(validPassword);
     //check error messages are cleared
-    expect(wrapper.state().errors.newPassword.current.text).toEqual('');
-    expect(wrapper.state().errors.reenteredPassword.current.text).toEqual('');
+    expect(wrapper.state().errors.newPassword.text).toEqual('');
+    expect(wrapper.state().errors.reenteredPassword.text).toEqual('');
     //onChange callback function passed in has been called with the valid value
     expect(mockOnChangeCallback).toHaveBeenCalledWith({ password: validPassword });
 
@@ -125,8 +129,8 @@ it('calls validation, sets errors and calls onChange callback', () => {
     //state value has been updated
     expect(wrapper.state().reenteredPassword).toEqual('something');
     //check error message is set
-    expect(wrapper.state().errors.newPassword.current.text).toEqual('');
-    expect(wrapper.state().errors.reenteredPassword.current.text).toEqual('Your passwords do not match');
+    expect(wrapper.state().errors.newPassword.text).toEqual('');
+    expect(wrapper.state().errors.reenteredPassword.text).toEqual('Your passwords do not match');
     //onChange callback function passed in has been called with null
     expect(mockOnChangeCallback).toHaveBeenCalledWith({ password: null });
 
