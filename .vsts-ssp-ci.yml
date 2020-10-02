@@ -10,6 +10,7 @@ resources:
       ref: master
       endpoint: DfE-Digital
       name: DFE-Digital/login.dfe.config
+      ref: master
 
 trigger:
   branches:
