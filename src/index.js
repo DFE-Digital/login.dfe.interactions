@@ -136,7 +136,7 @@ if (config.hostingEnvironment.useDevViews) {
   app.use('/dev/', devLauncher(csrf));
 }
 
-let assetsUrl = config.hostingEnvironment.assetsUrl || 'https://rawgit.com/DFE-Digital/dfe.ui.toolkit/master/dist/';
+let assetsUrl = config.assets.url;
 assetsUrl = assetsUrl.endsWith('/') ? assetsUrl.substr(0, assetsUrl.length - 1) : assetsUrl;
 // Setup global locals for layouts and views
 Object.assign(app.locals, {
@@ -153,6 +153,9 @@ Object.assign(app.locals, {
   },
   gaTrackingId: config.hostingEnvironment.gaTrackingId,
   useSelfRegister: config.toggles ? config.toggles.useSelfRegister : false,
+  assets: {
+    version: config.assets.version
+  },
 });
 
 app.use((err, req, res, next) => {
