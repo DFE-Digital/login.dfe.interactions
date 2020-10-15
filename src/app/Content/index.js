@@ -22,6 +22,11 @@ module.exports = () => {
       title: 'Cookies',
     });
   });
+  router.get('/privacy', (req, res) => {
+    res.render('Content/views/privacy', {
+      title: 'Privacy Notice',
+    });
+  });
 
   return router;
 };
