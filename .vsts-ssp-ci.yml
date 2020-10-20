@@ -7,11 +7,10 @@ resources:
       name: DFE-Digital/operations-devops-pipeline-templates
     - repository: config
       type: github
-      ref: master
       endpoint: DfE-Digital
       name: DFE-Digital/login.dfe.config
       ref: master
-      
+
 trigger:
   branches:
     include:
@@ -27,7 +26,7 @@ variables:
 - group: platform-global
 
 stages:
-- template: /Application/node/stages/signin-master-stage.yml@devopsTemplates
+- template: /Application/node/stages/signin-master-gateway-stage.yml@devopsTemplates
   parameters:
     applicationName: interactions
     resourceGroupSuffix: int-failover
