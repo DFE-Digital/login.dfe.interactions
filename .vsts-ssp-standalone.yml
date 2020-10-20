@@ -5,32 +5,28 @@ resources:
       type: github
       endpoint: DfE-Digital
       name: DFE-Digital/operations-devops-pipeline-templates
+      ref: feature/stanalone-refactor
     - repository: config
       type: github
-      ref: master
       endpoint: DfE-Digital
       name: DFE-Digital/login.dfe.config
       ref: master
-      
+
 trigger:
   branches:
-    include:
-    - develop
-    - master
-    
-pr:
-  branches:
     exclude:
+    - master
     - develop
+    - release/*
+    - feature/*
 
 variables:
 - group: platform-global
 
 stages:
-- template: /Application/node/stages/signin-master-stage.yml@devopsTemplates
+- template: /Application/node/stages/signin-master-standalone-stage.yml@devopsTemplates
   parameters:
     applicationName: interactions
-    resourceGroupSuffix: int-failover
-    armTemplateName: template-failover.json
+    resourceGroupSuffix: int
     additionalFoldersForBuild: 
-    - 'b2c-app//**' 
+    - 'b2c-app//**'
