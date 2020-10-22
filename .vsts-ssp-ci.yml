@@ -5,6 +5,7 @@ resources:
       type: github
       endpoint: DfE-Digital
       name: DFE-Digital/operations-devops-pipeline-templates
+      ref: master
     - repository: config
       type: github
       endpoint: DfE-Digital
