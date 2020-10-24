@@ -22,7 +22,7 @@ export function getB2CLink(policy) {
 
         relativeUrl = `/${tenantId}/oauth2/v2.0/` +
             `authorize?p=${_policy}&client_id=${clientId}&nonce=defaultNonce` +
-            `&redirect_uri=${redirectURI}&scope=openid&response_type=id_token&prompt=login`;
+            `&redirect_uri=${redirectURI}&scope=openid&response_type=id_token&prompt=login&response_mode=query`;
 
         if (_policy === POLICIES.RESEND_EMAIL && token) {
             relativeUrl += `&id_token_hint=${token}&idtokenhint=${token}`;
