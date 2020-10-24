@@ -89,12 +89,6 @@
             "metadata": {
                 "description": "ASB Subscription Name"
             }
-        },
-        "environmentId": {
-            "type": "string",
-            "metadata": {
-                "description": "Environment Identifier"
-            }
         }
     },
     "variables": {
