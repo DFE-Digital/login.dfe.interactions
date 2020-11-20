@@ -28,11 +28,10 @@
         },
         "nodeVersion": {
             "type": "string",
-            "defaultValue": "10.16.0",
+            "defaultValue": "12.9.0",
             "metadata": {
                 "description": "The default NodeJS version that the App Service will run"
             }
-
         },
         "minTlsVersion": {
             "type": "string",
@@ -74,8 +73,7 @@
             }
         }
     },
-    "variables": {
-    },
+    "variables": {},
     "resources": [
         {
             "apiVersion": "2017-05-10",
