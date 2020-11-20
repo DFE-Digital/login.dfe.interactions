@@ -9,7 +9,7 @@ fs.readFile(indexFile, 'utf8', (err, data) => {
         console.error('Something went wrong:', err);
     }
 
-    let newFile = data.replace(/rel="stylesheet"/g, 'rel="stylesheet"');// data-preload="true"');
+    let newFile = data.replace(/rel="stylesheet"/g, 'rel="preload" as="style">');
 
     fs.writeFile(filename, newFile, (err) => {
         if (err) {
