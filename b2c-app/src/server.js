@@ -38,7 +38,7 @@ function getHTML(app, req) {
 
     let reqURL = url.format({
         protocol: req.protocol,
-        host: req.get('host')
+        host: req.header('X-Forwarded-Host') || req.get('host')
     });
 
     return new Promise((resolve, reject) => {
