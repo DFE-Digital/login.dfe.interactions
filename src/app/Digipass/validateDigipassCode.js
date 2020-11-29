@@ -1,6 +1,7 @@
 const { getDevices } = require('./../../infrastructure/Users');
 const { validateDigipassToken } = require('./../../infrastructure/devices');
 const logger = require('./../../infrastructure/logger');
+const config = require('./../../infrastructure/Config')();
 const InteractionComplete = require('./../InteractionComplete');
 
 const validateInput = (code) => {
@@ -25,12 +26,15 @@ const validateToken = async (uid, code, reqId) => {
   const devices = await getDevices(uid, reqId);
   if (!devices || devices.length === 0) {
     logger.info(`No devices for ${uid}`);
-    logger.audit(`Failed digipass challenge/response for ${uid} - no devices`, {
+    logger.audit({
       type: 'sign-in',
       subType: 'digipass',
       success: false,
       userId: uid,
       reqId,
+      application: config.loggerSettings.applicationName,
+      env: config.hostingEnvironment.env,
+      message: `Failed digipass challenge/response for ${uid} - no devices`,
     });
     return false;
   }
@@ -38,34 +42,44 @@ const validateToken = async (uid, code, reqId) => {
   const digipass = devices.find(d => d.type === 'digipass');
   if (!digipass) {
     logger.info(`No digipass devices for ${uid}`);
-    logger.audit(`Failed digipass challenge/response for ${uid} - no digipass`, {
+    logger.audit({
       type: 'sign-in',
       subType: 'digipass',
       success: false,
       userId: uid,
       reqId,
+      application: config.loggerSettings.applicationName,
+      env: config.hostingEnvironment.env,
+      message: `Failed digipass challenge/response for ${uid} - no digipass`,
     });
     return false;
   }
 
   const valid = await validateDigipassToken(digipass.serialNumber, code, reqId);
   if (valid) {
-    logger.audit(`Successful digipass challenge/response for ${uid} using device ${digipass.serialNumber}`, {
+    logger.audit({
       type: 'sign-in',
       subType: 'digipass',
       success: true,
       userId: uid,
       deviceSerialNumber: digipass.serialNumber,
       reqId,
+      application: config.loggerSettings.applicationName,
+      env: config.hostingEnvironment.env,
+      message: `Successful digipass challenge/response for ${uid} using device ${digipass.serialNumber}`,
     });
+
   } else {
-    logger.audit(`Failed digipass challenge/response for ${uid} using device ${digipass.serialNumber}`, {
+    logger.audit({
       type: 'sign-in',
       subType: 'digipass',
       success: false,
       userId: uid,
       deviceSerialNumber: digipass.serialNumber,
       reqId,
+      application: config.loggerSettings.applicationName,
+      env: config.hostingEnvironment.env,
+      message: `Failed digipass challenge/response for ${uid} using device ${digipass.serialNumber}`,
     });
   }
   return valid;

@@ -7,6 +7,7 @@ const userCodes = require('./../../../infrastructure/UserCodes');
 const logger = require('./../../../infrastructure/logger');
 const org = require('./../../../infrastructure/Organisations');
 const osa = require('./../../../infrastructure/osa');
+const config = require('./../../../infrastructure/Config')();
 
 const createOrUpdateUser = async (email, password, firstName, lastName, emailConfId, saUsername, correlationId) => {
   const invitation = await users.findInvitationByEmail(email, correlationId);
@@ -90,23 +91,28 @@ const migrate = async (emailConfId, email, password, firstName, lastName, saOrga
   const servicesResult = await addUserToService(user.userId, organisation, saOrganisation, serviceId,
     serviceRoles, saUserId, saUsername, correlationId);
   if (!servicesResult) {
-    logger.audit(`Unsuccessful migration for ${saUsername} to ${email} (id: ${user.userId}) - unable to link user to organisation ${organisation.id} and to service id ${serviceId}`, {
+    logger.audit({
       type: 'sign-in',
       subType: 'migration',
       success: false,
       userId: user.userId,
       userEmail: email,
+      application: config.loggerSettings.applicationName,
+      env: config.hostingEnvironment.env,
+      message: `Unsuccessful migration for ${saUsername} to ${email} (id: ${user.userId}) - unable to link user to organisation ${organisation.id} and to service id ${serviceId}`,
     });
     throw new Error('Error occurred migrating user services');
   }
 
-
-  logger.audit(`Successful migration for ${saUsername} to ${email} (id: ${user.userId})`, {
+  logger.audit({
     type: 'sign-in',
     subType: 'migration',
     success: true,
     userId: user.userId,
     userEmail: email,
+    application: config.loggerSettings.applicationName,
+    env: config.hostingEnvironment.env,
+    message: `Successful migration for ${saUsername} to ${email} (id: ${user.userId})`,
   });
 
   await completeMigration(emailConfId, saUsername, correlationId);

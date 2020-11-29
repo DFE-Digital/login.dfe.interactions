@@ -2,6 +2,8 @@
 
 const userCodes = require('./../../infrastructure/UserCodes');
 const logger = require('./../../infrastructure/logger');
+const config = require('./../../infrastructure/Config')();
+
 
 const validate = (code) => {
   const messages = {};
@@ -49,11 +51,14 @@ const action = async (req, res) => {
     return;
   }
 
-  logger.audit(`Failed attempt to reset password id: ${req.body.uid} - Invalid code`, {
+  logger.audit({
     type: 'reset-password',
     success: false,
     userId: req.body.uid,
     reqId: req.id,
+    application: config.loggerSettings.applicationName,
+    env: config.hostingEnvironment.env,
+    message: `Failed attempt to reset password id: ${req.body.uid} - Invalid code`,
   });
 
   validationResult.messages.code = 'The code you entered is incorrect. Please check and try again.';

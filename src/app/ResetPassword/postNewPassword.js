@@ -3,6 +3,7 @@
 const users = require('./../../infrastructure/Users');
 const userCodes = require('./../../infrastructure/UserCodes');
 const logger = require('./../../infrastructure/logger');
+const config = require('./../../infrastructure/Config')();
 const { validate } = require('./../utils/validatePassword');
 
 const action = async (req, res) => {
@@ -25,10 +26,14 @@ const action = async (req, res) => {
 
   await userCodes.deleteCode(req.session.uid);
 
-  logger.audit(`Successful reset password for user id: ${req.session.uid}`, {
+  logger.audit({
     type: 'reset-password',
+    subType: 'reset-password',
     success: true,
     userId: req.session.uid,
+    application: config.loggerSettings.applicationName,
+    env: config.hostingEnvironment.env,
+    message: `Successful reset password for user id: ${req.session.uid}`,
   });
 
   req.session.redirectUri = userCode.userCode.redirectUri;

@@ -16,7 +16,13 @@ jest.mock('./../../src/infrastructure/logger', () => {
 });
 jest.mock('login.dfe.audit.winston-sequelize-transport');
 jest.mock('./../../src/app/InteractionComplete');
-
+jest.mock('./../../src/infrastructure/config', () => {
+  return {
+    loggerSettings: {
+      applicationName: 'test',
+    },
+  };
+});
 const validateDigipassCode = require('./../../src/app/Digipass/validateDigipassCode');
 const utils = require('./../utils');
 

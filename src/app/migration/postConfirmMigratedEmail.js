@@ -3,6 +3,8 @@
 const userCodes = require('./../../infrastructure/UserCodes');
 const users = require('./../../infrastructure/Users');
 const logger = require('./../../infrastructure/logger');
+const config = require('./../../infrastructure/Config')();
+
 
 const validate = (code) => {
   const messages = {
@@ -57,11 +59,14 @@ const action = async (req, res) => {
   const userToMigrate = JSON.parse(userCode.userCode.contextData);
   const alreadyMigratedUser = await users.findByLegacyUsername(userToMigrate.userName, req.id);
   if (alreadyMigratedUser) {
-    logger.audit(`Attempt login to already migrated account for ${userToMigrate.userName}`, {
+    logger.audit({
       type: 'sign-in',
       subType: 'username-password',
       success: false,
       userEmail: userToMigrate.userName,
+      application: config.loggerSettings.applicationName,
+      env: config.hostingEnvironment.env,
+      message: `Attempt login to already migrated account for ${userToMigrate.userName}`,
     });
     req.migrationUser = {
       redirectUri: req.query.redirect_uri,
