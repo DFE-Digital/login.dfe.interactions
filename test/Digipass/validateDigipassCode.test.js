@@ -16,13 +16,20 @@ jest.mock('./../../src/infrastructure/logger', () => {
 });
 jest.mock('login.dfe.audit.winston-sequelize-transport');
 jest.mock('./../../src/app/InteractionComplete');
-jest.mock('./../../src/infrastructure/config', () => {
-  return {
-    loggerSettings: {
-      applicationName: 'test',
-    },
-  };
+
+jest.mock('./../../src/infrastructure/Config', () => {
+  return jest.fn().mockImplementation(() => {
+    return {
+      loggerSettings: {
+        applicationName: 'test',
+      },
+      hostingEnvironment: {
+        env: 'test',
+      },
+    };
+  });
 });
+
 const validateDigipassCode = require('./../../src/app/Digipass/validateDigipassCode');
 const utils = require('./../utils');
 
@@ -190,14 +197,8 @@ describe('when validating the user entered digipass code', () => {
     await validateDigipassCode(req, res);
 
     expect(logger.audit.mock.calls).toHaveLength(1);
-    expect(logger.audit.mock.calls[0][0]).toBe('Successful digipass challenge/response for user-1 using device 567890');
-    expect(logger.audit.mock.calls[0][1]).toMatchObject({
-      type: 'sign-in',
-      subType: 'digipass',
-      success: true,
-      userId: 'user-1',
-      deviceSerialNumber: '567890',
-    });
+    expect(logger.audit.mock.calls[0][0].message).toBe('Successful digipass challenge/response for user-1 using device 567890');
+    expect(logger.audit.mock.calls[0][0]).toMatchObject({application: "test", deviceSerialNumber: "567890", env: "test", message: "Successful digipass challenge/response for user-1 using device 567890", reqId: "123", subType: "digipass", success: true, type: "sign-in", userId: "user-1"});
   });
 
   it('then it should audit failure if code not valid', async () => {
@@ -206,14 +207,8 @@ describe('when validating the user entered digipass code', () => {
     await validateDigipassCode(req, res);
 
     expect(logger.audit.mock.calls).toHaveLength(1);
-    expect(logger.audit.mock.calls[0][0]).toBe('Failed digipass challenge/response for user-1 using device 567890');
-    expect(logger.audit.mock.calls[0][1]).toMatchObject({
-      type: 'sign-in',
-      subType: 'digipass',
-      success: false,
-      userId: 'user-1',
-      deviceSerialNumber: '567890',
-    });
+    expect(logger.audit.mock.calls[0][0].message).toBe('Failed digipass challenge/response for user-1 using device 567890');
+    expect(logger.audit.mock.calls[0][0].deviceSerialNumber).toBe('567890');
   });
 
   it('then it should audit failure if user has no digipass device registered', async () => {
@@ -224,13 +219,8 @@ describe('when validating the user entered digipass code', () => {
     await validateDigipassCode(req, res);
 
     expect(logger.audit.mock.calls).toHaveLength(1);
-    expect(logger.audit.mock.calls[0][0]).toBe('Failed digipass challenge/response for user-1 - no digipass');
-    expect(logger.audit.mock.calls[0][1]).toMatchObject({
-      type: 'sign-in',
-      subType: 'digipass',
-      success: false,
-      userId: 'user-1',
-    });
+    expect(logger.audit.mock.calls[0][0].message).toBe('Failed digipass challenge/response for user-1 - no digipass');
+    expect(logger.audit.mock.calls[0][0].reqId).toBe('123');
   });
 
   it('then it should audit failure if user has no devices registered', async () => {
@@ -239,12 +229,7 @@ describe('when validating the user entered digipass code', () => {
     await validateDigipassCode(req, res);
 
     expect(logger.audit.mock.calls).toHaveLength(1);
-    expect(logger.audit.mock.calls[0][0]).toBe('Failed digipass challenge/response for user-1 - no devices');
-    expect(logger.audit.mock.calls[0][1]).toMatchObject({
-      type: 'sign-in',
-      subType: 'digipass',
-      success: false,
-      userId: 'user-1',
-    });
+    expect(logger.audit.mock.calls[0][0].message).toBe('Failed digipass challenge/response for user-1 - no devices');
+    expect(logger.audit.mock.calls[0][0].subType).toBe('digipass');
   });
 });

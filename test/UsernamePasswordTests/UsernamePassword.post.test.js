@@ -16,7 +16,11 @@ jest.mock('./../../src/infrastructure/applications', () => ({
 jest.mock('./../../src/infrastructure/Config', () => {
   return jest.fn().mockImplementation(() => {
     return {
+      loggerSettings: {
+        applicationName: 'test',
+      },
       hostingEnvironment: {
+        env: 'test',
       },
       notifications: {
         connectionString: {},
@@ -183,13 +187,8 @@ describe('When user submits username/password', () => {
       await postHandler(req, res);
 
       expect(loggerAudit.mock.calls).toHaveLength(1);
-      expect(loggerAudit.mock.calls[0][0]).toBe(`Failed login attempt for ${req.body.username}`);
-      expect(loggerAudit.mock.calls[0][1]).toMatchObject({
-        type: 'sign-in',
-        subType: 'username-password',
-        success: false,
-        userEmail: req.body.username,
-      });
+      expect(loggerAudit.mock.calls[0][0].message).toBe(`Failed login attempt for ${req.body.username}`);
+      expect(loggerAudit.mock.calls[0][0].subType).toBe('username-password');
     });
   });
 
@@ -320,14 +319,8 @@ describe('When user submits username/password', () => {
       await postHandler(req, res);
 
       expect(loggerAudit.mock.calls).toHaveLength(1);
-      expect(loggerAudit.mock.calls[0][0]).toBe(`Successful login attempt for ${req.body.username} (id: user1)`);
-      expect(loggerAudit.mock.calls[0][1]).toMatchObject({
-        type: 'sign-in',
-        subType: 'username-password',
-        success: true,
-        userId: 'user1',
-        userEmail: req.body.username,
-      });
+      expect(loggerAudit.mock.calls[0][0].message).toBe(`Successful login attempt for ${req.body.username} (id: user1)`);
+      expect(loggerAudit.mock.calls[0][0].subType).toBe('username-password');
     });
   });
 

@@ -7,7 +7,11 @@ jest.mock('./../../src/infrastructure/logger', () => {
 jest.mock('./../../src/infrastructure/Config', () => {
   return jest.fn().mockImplementation(() => {
     return {
+      loggerSettings: {
+        applicationName: 'test',
+      },
       hostingEnvironment: {
+        env: 'test',
       },
     };
   });
@@ -110,12 +114,8 @@ describe('when posting new password', () => {
       await postNewPassword(req, res);
 
       expect(loggerAudit.mock.calls).toHaveLength(1);
-      expect(loggerAudit.mock.calls[0][0]).toBe('Successful reset password for user id: user1');
-      expect(loggerAudit.mock.calls[0][1]).toMatchObject({
-        type: 'reset-password',
-        success: true,
-        userId: 'user1',
-      });
+      expect(loggerAudit.mock.calls[0][0].message).toBe('Successful reset password for user id: user1');
+      expect(loggerAudit.mock.calls[0][0].type).toBe('reset-password');
     });
   });
 

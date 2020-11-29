@@ -11,7 +11,11 @@ jest.mock('./../../src/infrastructure/logger', () => {
 jest.mock('./../../src/infrastructure/Config', () => {
   return jest.fn().mockImplementation(() => {
     return {
+      loggerSettings: {
+        applicationName: 'test',
+      },
       hostingEnvironment: {
+        env: 'test',
       },
     };
   });
@@ -152,12 +156,8 @@ describe('When posting the confirm password reset view', () => {
       await postConfirmPasswordReset(req, res);
 
       expect(loggerAudit.audit.mock.calls.length).toBe(1);
-      expect(loggerAudit.audit.mock.calls[0][0]).toBe('Failed attempt to reset password id: 12345EDC - Invalid code');
-      expect(loggerAudit.audit.mock.calls[0][1]).toMatchObject({
-        type: 'reset-password',
-        success: false,
-        userId: '12345EDC',
-      });
+      expect(loggerAudit.audit.mock.calls[0][0].message).toBe('Failed attempt to reset password id: 12345EDC - Invalid code');
+      expect(loggerAudit.audit.mock.calls[0][0].type).toBe('reset-password');
     });
   });
 
