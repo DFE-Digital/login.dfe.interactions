@@ -14,7 +14,6 @@ jest.mock('./../../src/infrastructure/logger', () => {
     info: jest.fn(),
   };
 });
-jest.mock('login.dfe.audit.winston-sequelize-transport');
 jest.mock('./../../src/app/InteractionComplete');
 
 jest.mock('./../../src/infrastructure/Config', () => {
