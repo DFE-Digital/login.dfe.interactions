@@ -7,7 +7,11 @@ jest.mock('./../../src/infrastructure/access', () => ({
 }));
 jest.mock('./../../src/infrastructure/Organisations');
 jest.mock('./../../src/infrastructure/Config', () => jest.fn().mockImplementation(() => ({
+  loggerSettings: {
+    applicationName: 'test',
+  },
   hostingEnvironment: {
+    env: 'test',
   },
 })));
 jest.mock('./../../src/infrastructure/logger', () => ({
