@@ -2,7 +2,6 @@ jest.mock('login.dfe.request-promise-retry');
 
 const rp = require('login.dfe.request-promise-retry');
 
-jest.mock('login.dfe.audit.winston-sequelize-transport');
 jest.mock('login.dfe.jwt-strategies', () => {
   return jest.fn().mockImplementation(() => {
     return {

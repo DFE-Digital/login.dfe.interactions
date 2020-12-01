@@ -1,5 +1,4 @@
 const utils = require('./../utils');
-jest.mock('login.dfe.audit.winston-sequelize-transport');
 jest.mock('./../../src/infrastructure/UserCodes');
 jest.mock('./../../src/infrastructure/Users');
 jest.mock('./../../src/infrastructure/osa');

@@ -3,6 +3,7 @@ const InteractionComplete = require('./../InteractionComplete');
 const applicationsApi = require('./../../infrastructure/applications');
 const Users = require('./../../infrastructure/Users');
 const logger = require('./../../infrastructure/logger');
+const config = require('./../../infrastructure/Config')();
 const { sendRedirect, sendResult } = require('./../../infrastructure/utils');
 const osaApi = require('./../../infrastructure/osa');
 const oidc = require('./../../infrastructure/oidc');
@@ -53,11 +54,14 @@ const authenticateWithUsername = async (req) => {
 };
 
 const handleInvalidCredentials = (req, res, validation, client, legacyUser) => {
-  logger.audit(`Failed login attempt for ${req.body.username}`, {
+   logger.audit({
     type: 'sign-in',
     subType: 'username-password',
     success: false,
     userEmail: req.body.username,
+    application: config.loggerSettings.applicationName,
+    env: config.hostingEnvironment.env,
+    message: `Failed login attempt for ${req.body.username}`,
   });
 
   if (Object.keys(validation.validationMessages).length === 0 && validation.validationMessages.constructor === Object) {
@@ -82,11 +86,14 @@ const handleInvalidCredentials = (req, res, validation, client, legacyUser) => {
   });
 };
 const handleDeactivated = (req, res, validation, client) => {
-  logger.audit(`Attempt login to deactivated account for ${req.body.username}`, {
+  logger.audit({
     type: 'sign-in',
     subType: 'username-password',
     success: false,
     userEmail: req.body.username,
+    application: config.loggerSettings.applicationName,
+    env: config.hostingEnvironment.env,
+    message: `Attempt login to deactivated account for ${req.body.username}`,
   });
 
   if (Object.keys(validation.validationMessages).length === 0 && validation.validationMessages.constructor === Object) {
@@ -136,12 +143,15 @@ const handleValidLegacyUser = (req, res, user, client) => {
   }
 };
 const handleValidSigninUser = (req, res, user) => {
-  logger.audit(`Successful login attempt for ${req.body.username} (id: ${user.id})`, {
+  logger.audit({
     type: 'sign-in',
     subType: 'username-password',
     success: true,
     userId: user.id,
     userEmail: req.body.username,
+    application: config.loggerSettings.applicationName,
+    env: config.hostingEnvironment.env,
+    message: `Successful login attempt for ${req.body.username} (id: ${user.id})`,
   });
   InteractionComplete.process(req.params.uuid, {
     status: 'success',
@@ -190,11 +200,14 @@ const post = async (req, res) => {
     user = result.user;
     legacyUser = result.legacyUser;
     if (result.migrationComplete) {
-      logger.audit(`Attempt login to already migrated account for ${req.body.username}`, {
+      logger.audit({
         type: 'sign-in',
         subType: 'username-password',
         success: false,
         userEmail: req.body.username,
+        application: config.loggerSettings.applicationName,
+        env: config.hostingEnvironment.env,
+        message: `Attempt login to already migrated account for ${req.body.username}`,
       });
       req.migrationUser = {
         redirectUri: req.query.redirect_uri,
