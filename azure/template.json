@@ -183,11 +183,8 @@
                     },
                     "certificateThumbprint": {
                         "value": "[reference(concat(parameters('appServiceName'), '-certificate')).outputs.certificateThumbprint.value]"
-                    },
-                    
-                     "healthCheckPath": {
-                        "value": "/healthCheck"
                     }
+                   
                 }
             },
             "dependsOn": [
