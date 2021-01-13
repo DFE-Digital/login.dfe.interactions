@@ -189,13 +189,16 @@
                     "minTlsVersion": {
                         "value": "[parameters('minTlsVersion')]"
                     },
+                    
                     "customHostName": {
                         "value": "[parameters('customHostName')]"
                     },
                     "certificateThumbprint": {
                         "value": "[reference(concat(parameters('appServiceName'), '-certificate')).outputs.certificateThumbprint.value]"
                     },
-                    
+                    "WEBSITE_HEALTHCHECK_MAXPINGFAILURES": {
+                        "value": "4"
+                    },
                      "healthCheckPath": {
                         "value": "/healthCheck"
                     }
