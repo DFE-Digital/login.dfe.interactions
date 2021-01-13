@@ -92,6 +92,7 @@
         }
     },
     "variables": {
+        
       
     },
     "resources": [
@@ -120,14 +121,10 @@
                     }
                 },
                 "withAppServiceSettings": {
-                      "value": {
-                           "WEBSITE_HEALTHCHECK_MAXPINGFAILURES": "4"
-                     }
+                     
                  },
                 "withoutAppServiceSettings": {
-                     "value": {
-                           "WEBSITE_HEALTHCHECK_MAXPINGFAILURES": "4"
-                     }
+                   
                 }
             }
         },
@@ -196,9 +193,14 @@
                     "certificateThumbprint": {
                         "value": "[reference(concat(parameters('appServiceName'), '-certificate')).outputs.certificateThumbprint.value]"
                     },
-                    "WEBSITE_HEALTHCHECK_MAXPINGFAILURES": {
-                        "value": "4"
-                    },
+                    "appServiceSettings": [
+            
+                         {
+                             "name": "WEBSITE_HEALTHCHECK_MAXPINGFAILURES",
+                             "value": "4"
+                         }
+                ],
+                
                      "healthCheckPath": {
                         "value": "/healthCheck"
                     }
