@@ -193,15 +193,15 @@
                     "certificateThumbprint": {
                         "value": "[reference(concat(parameters('appServiceName'), '-certificate')).outputs.certificateThumbprint.value]"
                     },
-                    "appServiceSettings":     
-                         {
-                             "name": "WEBSITE_HEALTHCHECK_MAXPINGFAILURES",
-                             "value": "4"
-                         },
-                
-                
+                   
                      "healthCheckPath": {
                         "value": "/healthCheck"
+                    },
+                     "additionalAppSettings": {
+                        "value": {
+                           
+                            "WEBSITE_HEALTHCHECK_MAXPINGFAILURES": "4"
+                        }
                     }
                 }
             },
