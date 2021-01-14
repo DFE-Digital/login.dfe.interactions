@@ -92,6 +92,8 @@
         }
     },
     "variables": {
+        
+      
     },
     "resources": [
         {
@@ -117,6 +119,12 @@
                     "appServicePlanIsLinux": {
                         "value": true
                     }
+                },
+                "withAppServiceSettings": {
+                     
+                 },
+                "withoutAppServiceSettings": {
+                   
                 }
             }
         },
@@ -153,7 +161,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/DFE-Digital/login.dfe.infrastructure/develop/Shared/app-service.json",
+                    "uri": "https://raw.githubusercontent.com/DFE-Digital/login.dfe.infrastructure/master/Shared/app-service.json",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
@@ -178,11 +186,22 @@
                     "minTlsVersion": {
                         "value": "[parameters('minTlsVersion')]"
                     },
+                    
                     "customHostName": {
                         "value": "[parameters('customHostName')]"
                     },
                     "certificateThumbprint": {
                         "value": "[reference(concat(parameters('appServiceName'), '-certificate')).outputs.certificateThumbprint.value]"
+                    },
+                   
+                     "healthCheckPath": {
+                        "value": "/healthCheck"
+                    },
+                     "additionalAppSettings": {
+                        "value": {
+                           
+                            "WEBSITE_HEALTHCHECK_MAXPINGFAILURES": "4"
+                        }
                     }
                 }
             },
