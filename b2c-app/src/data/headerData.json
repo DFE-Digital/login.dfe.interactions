@@ -1,0 +1,29 @@
+{
+    "title": "National Careers Service",
+    "navigationItems" : [
+        {
+            "title": "Explore careers",
+            "link": "https://nationalcareers.service.gov.uk/job-profiles"
+        },
+        {
+            "title": "Skills assessment",
+            "link": "https://nationalcareers.service.gov.uk/skills-health-check"
+        },
+        {
+            "title": "Find a course",
+            "link": "https://nationalcareers.service.gov.uk/course-directory"
+        },
+        {
+            "title": "Contact us",
+            "link": "https://nationalcareers.service.gov.uk/contact-us"
+        },
+        {
+            "title": "About us",
+            "link": "https://nationalcareers.service.gov.uk/about-us"
+        },
+        {
+            "title": "Help to get a job",
+            "link": "https://nationalcareers.service.gov.uk/get-a-job"
+        }
+    ]
+}
