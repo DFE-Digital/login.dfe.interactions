@@ -1,0 +1,119 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly with errors 1`] = `
+<div>
+  <div
+    className="govuk-form-group govuk-form-group--error"
+  >
+    <span
+      className="govuk-error-message"
+      id="tsAndCsError"
+    >
+      <span
+        className="govuk-visually-hidden"
+      >
+        Error:
+      </span>
+      this is a test
+    </span>
+    <label
+      className="block-label"
+      htmlFor="tsAndCsCustom"
+    >
+      <input
+        aria-invalid="true"
+        checked={false}
+        id="tsAndCsCustom"
+        name="tsAndCsAccepted"
+        noValidate={true}
+        onChange={[Function]}
+        type="checkbox"
+        value={true}
+      />
+      I accept the 
+      <a
+        href="https://nationalcareers.service.gov.uk/help/terms-and-conditions"
+        id="tsAndCsLink"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        terms and conditions
+      </a>
+       and I am 13 or over
+    </label>
+  </div>
+</div>
+`;
+
+exports[`renders correctly with header 1`] = `
+<div>
+  <h1
+    className="govuk-heading-m"
+  >
+    Terms and conditions
+  </h1>
+  <div
+    className="govuk-form-group "
+  >
+    <label
+      className="block-label"
+      htmlFor="tsAndCsCustom"
+    >
+      <input
+        aria-invalid="true"
+        checked={false}
+        id="tsAndCsCustom"
+        name="tsAndCsAccepted"
+        noValidate={true}
+        onChange={[Function]}
+        type="checkbox"
+        value={true}
+      />
+      I accept the 
+      <a
+        href="https://nationalcareers.service.gov.uk/help/terms-and-conditions"
+        id="tsAndCsLink"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        terms and conditions
+      </a>
+       and I am 13 or over
+    </label>
+  </div>
+</div>
+`;
+
+exports[`renders correctly without props passed in 1`] = `
+<div>
+  <div
+    className="govuk-form-group "
+  >
+    <label
+      className="block-label"
+      htmlFor="tsAndCsCustom"
+    >
+      <input
+        aria-invalid="true"
+        checked={false}
+        id="tsAndCsCustom"
+        name="tsAndCsAccepted"
+        noValidate={true}
+        onChange={[Function]}
+        type="checkbox"
+        value={true}
+      />
+      I accept the 
+      <a
+        href="https://nationalcareers.service.gov.uk/help/terms-and-conditions"
+        id="tsAndCsLink"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+        terms and conditions
+      </a>
+       and I am 13 or over
+    </label>
+  </div>
+</div>
+`;

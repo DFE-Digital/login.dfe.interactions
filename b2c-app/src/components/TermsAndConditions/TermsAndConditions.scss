@@ -1,0 +1,44 @@
+//Style for the Ts & Cs checkbox area
+//copied from NCS styles
+//TODO remove when integrated with their CSS
+
+.block-label {
+    display: block;
+    float: none;
+    clear: left;
+    position: relative;
+    background: #dee0e2;
+    border: 1px solid #dee0e2;
+    padding: 18px 30px 15px 54px;
+    margin-bottom: 10px;
+    cursor: pointer;
+  }
+  
+  @media (min-width: 641px) {
+    .block-label {
+      float: left;
+    }
+  }
+  
+  .block-label input {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    cursor: pointer;
+    margin: 0;
+    width: 29px;
+    height: 29px;
+  }
+  
+  .block-label:hover {
+    border-color: #0b0c0c;
+  }
+  
+  .block-label:last-child {
+    margin-bottom: 0;
+  }
+  
+  .inline .block-label {
+    clear: none;
+    margin-right: 10px;
+  }
