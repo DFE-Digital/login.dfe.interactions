@@ -21,10 +21,10 @@ const get = async (req, res) => {
   if(service && service.clientId === clientId){
     const redirecturi = service.redirects.find((uri)=>uri.redirectUrl === req.query.redirect_uri);
     if(!redirecturi){
-      throw new Error('Invalid redirect uri');
+      throw new Error('Invalid redirect uri provided in the request');
     }
   }else{
-    throw new Error('The request contains incorrect client details');
+    throw new Error('Invalid client configuration provided in the request');
   }
   if (!interactionDetails) {
     return res.redirect(`${req.query.redirect_uri}?error=sessionexpired`);
