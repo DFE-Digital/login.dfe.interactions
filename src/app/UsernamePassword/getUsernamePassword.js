@@ -4,6 +4,8 @@ const applicationsApi = require('./../../infrastructure/applications');
 const oidc = require('./../../infrastructure/oidc');
 const moment = require('moment');
 const { markdown } = require('markdown');
+const { services } = require('login.dfe.dao');
+
 
 const convertMarkdownToHtml = (content) => {
   return markdown.toHTML(content);
@@ -11,14 +13,23 @@ const convertMarkdownToHtml = (content) => {
 
 const get = async (req, res) => {
   const interactionDetails = await oidc.getInteractionById(req.params.uuid);
-  if (!interactionDetails) {
-    return res.redirect(`${req.query.redirect_uri}?error=sessionexpired`);
-  }
-
   let clientId = req.query.clientid;
   if(!clientId){
     clientId = interactionDetails.client_id;
   }
+  const service = await services.getServiceWithRedirectUris(clientId);
+  if(service && service.clientId === clientId){
+    const redirecturi = service.redirects.find((uri)=>uri.redirectUrl === req.query.redirect_uri);
+    if(!redirecturi){
+      throw new Error('Invalid redirect uri');
+    }
+  }else{
+    throw new Error('The request contains incorrect client details');
+  }
+  if (!interactionDetails) {
+    return res.redirect(`${req.query.redirect_uri}?error=sessionexpired`);
+  }
+
   const client = await applicationsApi.getServiceById(clientId, req.id);
   if (!client) {
     let details = `Invalid redirect_uri (clientid: ${req.query.clientid}, redirect_uri: ${req.query.redirect_uri}) - `;
