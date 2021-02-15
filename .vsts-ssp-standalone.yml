@@ -26,7 +26,7 @@ variables:
 stages:
 - template: /Application/node/stages/signin-master-standalone-stage.yml@devopsTemplates
   parameters:
-    applicationName: interactions
+    applicationName: int
     resourceGroupSuffix: int
     additionalFoldersForBuild: 
     - 'b2c-app//**'
