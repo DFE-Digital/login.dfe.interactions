@@ -5,6 +5,7 @@ const oidc = require('./../../infrastructure/oidc');
 const moment = require('moment');
 const { markdown } = require('markdown');
 const { services } = require('login.dfe.dao');
+const logger = require('./../../infrastructure/logger');
 
 
 const convertMarkdownToHtml = (content) => {
@@ -17,13 +18,18 @@ const get = async (req, res) => {
   if(!clientId){
     clientId = interactionDetails.client_id;
   }
+  logger.info('In getUsernamePassword :: check for client and redirect');
+
   const service = await services.getServiceWithRedirectUris(clientId);
   if(service && service.clientId === clientId){
+    logger.info('In getUsernamePassword :: inside service check');
     const redirecturi = service.redirects.find((uri)=>uri.redirectUrl === req.query.redirect_uri);
     if(!redirecturi){
+      logger.info('In getUsernamePassword :: wrong redirecr uri');
       throw new Error('Invalid redirect uri provided in the request');
     }
   }else{
+    logger.info('In getUsernamePassword :: invalid client');
     throw new Error('Invalid client configuration provided in the request');
   }
   if (!interactionDetails) {
