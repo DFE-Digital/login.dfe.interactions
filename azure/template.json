@@ -92,6 +92,8 @@
         }
     },
     "variables": {
+        
+      
     },
     "resources": [
         {
@@ -117,6 +119,12 @@
                     "appServicePlanIsLinux": {
                         "value": true
                     }
+                },
+                "withAppServiceSettings": {
+                     
+                 },
+                "withoutAppServiceSettings": {
+                   
                 }
             }
         },
@@ -178,20 +186,19 @@
                     "minTlsVersion": {
                         "value": "[parameters('minTlsVersion')]"
                     },
+                    
                     "customHostName": {
                         "value": "[parameters('customHostName')]"
                     },
                     "certificateThumbprint": {
                         "value": "[reference(concat(parameters('appServiceName'), '-certificate')).outputs.certificateThumbprint.value]"
                     },
+                   
                      "healthCheckPath": {
                         "value": "/healthCheck"
                     },
-                    "additionalAppSettings": {
+                     "additionalAppSettings": {
                         "value": {
-                            "QUEUE_CONNECTION_STRING": "[parameters('auditServiceBusConnectionString')]",
-                            "TOPIC_NAME": "[parameters('auditServiceBusTopicName')]",
-                            "SUBSCRIPTION_NAME": "[parameters('auditServiceBusSubscriptionName')]",
                             "WEBSITE_HEALTHCHECK_MAXPINGFAILURES": "4"
                         }
                     }
