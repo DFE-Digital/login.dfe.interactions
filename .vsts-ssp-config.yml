@@ -1,0 +1,34 @@
+name: $(BuildDefinitionName)_tag-$(BuildID)_at-$(Date:yyyyMMdd)$(Rev:.r)
+resources:
+  repositories:
+    - repository: devopsTemplates
+      type: github
+      endpoint: DfE-Digital
+      name: DFE-Digital/operations-devops-pipeline-templates
+    - repository: config
+      type: github
+      endpoint: DfE-Digital
+      name: DFE-Digital/login.dfe.config
+      ref: master
+
+trigger:
+  branches:
+    include:
+    - develop
+    - master
+    
+pr:
+  branches:
+    exclude:
+    - develop
+
+variables:
+- group: platform-global
+
+stages:
+- template: /Application/node/config/signin-master-gateway-stage.yml@devopsTemplates
+  parameters:
+    applicationName: interactions
+    resourceGroupSuffix: int-failover
+    armTemplateName: template-failover.json
+    hostNameComponent: int
