@@ -3,6 +3,8 @@
 const fs = require('fs');
 const Path = require('path');
 
+const PROJECT_NAME = 'login.dfe.interactions';
+
 const getSettingsObject = (settings) => {
   try {
     return JSON.parse(settings);
@@ -38,8 +40,9 @@ const fetchConfig = () => {
       }
     }
   }
-
-  return null;
+  const localConfig = require('login.dfe.config')[PROJECT_NAME];
+  process.env.settings = JSON.stringify(localConfig);
+  return localConfig;
 };
 
 module.exports = fetchConfig;
