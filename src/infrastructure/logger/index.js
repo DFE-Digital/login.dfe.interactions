@@ -35,7 +35,7 @@ const loggerConfig = {
 loggerConfig.transports.push(new (winston.transports.Console)({ level: logLevel, colorize: true }));
 
 const opts = { application: config.loggerSettings.applicationName, level: 'audit' };
-const auditTransport = AuditTransporter(opts);
+const auditTransport = config.auditTransportDisabled ? null : AuditTransporter(opts);
 
 if (auditTransport) {
   loggerConfig.transports.push(auditTransport);
