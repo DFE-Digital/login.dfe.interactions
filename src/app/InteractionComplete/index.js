@@ -1,8 +1,7 @@
 const Config = require('./../../infrastructure/Config')();
-const logger = require('../../../../login.dfe.oidc/src/infrastructure/logger');
 const { sendResult } = require('./../../infrastructure/utils');
 const { signData } = require('./../../infrastructure/utils');
-
+const logger = require('../../infrastructure/logger');
 
 const buildPostbackData = (uuid, data) => {
   const postbackData = { uuid };
@@ -17,7 +16,6 @@ const buildPostbackData = (uuid, data) => {
 
   return postbackData;
 };
-
 
 class InteractionComplete {
   static getPostbackDetails(uuid, data) {
