@@ -1,8 +1,7 @@
-const Config = require('./../../infrastructure/Config')();
+const Config = require('../../infrastructure/Config')();
 const logger = require('../../../../login.dfe.oidc/src/infrastructure/logger');
-const { sendResult } = require('./../../infrastructure/utils');
-const { signData } = require('./../../infrastructure/utils');
-
+const { sendResult } = require('../../infrastructure/utils');
+const { signData } = require('../../infrastructure/utils');
 
 const buildPostbackData = (uuid, data) => {
   const postbackData = { uuid };
@@ -18,7 +17,6 @@ const buildPostbackData = (uuid, data) => {
   return postbackData;
 };
 
-
 class InteractionComplete {
   static getPostbackDetails(uuid, data) {
     const postbackData = { uuid };
@@ -29,9 +27,9 @@ class InteractionComplete {
       });
     }
     logger.info('About to sign signature and sSignature');
+    postbackData.sSig = signData(validateUser);
     logger.debug(`postBack Data is + ${JSON.stringify(postbackData)}`);
     postbackData.sig = signData(postbackData);
-    postbackData.sSig = signData(validateUser);
 
     return {
       destination: `${Config.oidcService.url}/${uuid}/complete`,
@@ -41,7 +39,7 @@ class InteractionComplete {
 
   static process(uuid, data, req, res) {
     const postbackDetails = InteractionComplete.getPostbackDetails(uuid, data);
-    logger.info('Process after interaction Complete')
+    logger.info('Process after interaction Complete');
     sendResult(req, res, 'InteractionComplete/views/index', {
       destination: postbackDetails.destination,
       postbackData: postbackDetails.data,
