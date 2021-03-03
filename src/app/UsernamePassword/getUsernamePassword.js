@@ -6,7 +6,7 @@ const moment = require('moment');
 const { markdown } = require('markdown');
 const { services } = require('login.dfe.dao');
 const logger = require('./../../infrastructure/logger');
-
+const config = require('./../../infrastructure/Config')();
 
 const convertMarkdownToHtml = (content) => {
   return markdown.toHTML(content);
@@ -47,21 +47,58 @@ const get = async (req, res) => {
     throw new Error(details);
   }
 
-  const allBannersForService = await applicationsApi.listAllBannersForService(client.id, req.id);
-  let header;
-  let headerMessage;
-  if (allBannersForService) {
-    const now = moment();
-    const timeLimitedBanner = allBannersForService.find(x => moment(now).isBetween(x.validFrom, x.validTo) === true);
-    const alwaysOnBanner = allBannersForService.find(x => x.isActive === true);
-    if (timeLimitedBanner) {
-      header = timeLimitedBanner.title;
-      headerMessage = convertMarkdownToHtml(timeLimitedBanner.message);
-    } else if (alwaysOnBanner) {
-      header = alwaysOnBanner.title;
-      headerMessage = convertMarkdownToHtml(alwaysOnBanner.message);
+  const dsiClient = await applicationsApi.getServiceById(config.hostingEnvironment.servicesClient, req.id);
+  if (!dsiClient) {
+    let details = 'Invalid redirect_uri (clientid: services)';
+    if (!dsiClient) {
+      details += 'no client by that id';
+    } else {
+      details += 'redirect_uri not in list of specified redirect_uris';
     }
+    throw new Error(details);
   }
+
+  let header1;
+  let header2;
+  let headerMessage1;
+  let headerMessage2;
+  let now;
+  let timeLimitedBannerServices;
+  let alwaysOnBannerServices;
+  let timeLimitedBannerEndService;
+  let alwaysOnBannerEndService;
+
+  const allBannersForService = await applicationsApi.listAllBannersForService(client.id, req.id);
+  const allBannersForDSI = await applicationsApi.listAllBannersForService(dsiClient.id, req.id);
+
+  if (allBannersForDSI && client.id !== dsiClient.id) {
+    now = moment();
+    timeLimitedBannerServices = allBannersForDSI.find((banner) => moment(now).isBetween(banner.validFrom, banner.validTo) === true);
+    alwaysOnBannerServices = allBannersForDSI.find((banner) => banner.isActive === true);
+  }
+
+  if (allBannersForService) {
+    now = moment();
+    timeLimitedBannerEndService = allBannersForService.find((banner) => moment(now).isBetween(banner.validFrom, banner.validTo) === true);
+    alwaysOnBannerEndService = allBannersForService.find((banner) => banner.isActive === true);
+  }
+
+  if (timeLimitedBannerServices && timeLimitedBannerServices !== null) {
+    header1 = timeLimitedBannerServices.title;
+    headerMessage1 = convertMarkdownToHtml(timeLimitedBannerServices.message);
+  } else if (alwaysOnBannerServices && alwaysOnBannerServices !== null) {
+    header1 = alwaysOnBannerServices.title;
+    headerMessage1 = convertMarkdownToHtml(alwaysOnBannerServices.message);
+  }
+
+  if (timeLimitedBannerEndService && timeLimitedBannerEndService !== null) {
+    header2 = timeLimitedBannerEndService.title;
+    headerMessage2 = convertMarkdownToHtml(timeLimitedBannerEndService.message);
+  } else if (alwaysOnBannerEndService && alwaysOnBannerEndService !== null) {
+    header2 = alwaysOnBannerEndService.title;
+    headerMessage2 = convertMarkdownToHtml(alwaysOnBannerEndService.message);
+  }
+
   req.migrationUser = null;
   req.session.redirectUri = null;
 
@@ -74,8 +111,10 @@ const get = async (req, res) => {
     csrfToken: req.csrfToken(),
     redirectUri: req.query.redirect_uri,
     validationMessages: {},
-    header,
-    headerMessage,
+    header1,
+    headerMessage1,
+    header2,
+    headerMessage2,
     supportsUsernameLogin: !client.relyingParty.params || client.relyingParty.params.supportsUsernameLogin,
   });
 };
