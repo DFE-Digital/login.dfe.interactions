@@ -1,16 +1,16 @@
 
-    <% if(locals.header1) { %>
+    <% if(locals.headerInternal) { %>
         <div class="notification notification-information" tabindex="-1">
-            <h2><%=locals.header1%></h2>
-            <% if(locals.headerMessage1) { %>
-                <p><%-locals.headerMessage1.replace('__helplink__',locals.urls.help)%></p>
+            <h2><%=locals.headerInternal%></h2>
+            <% if(locals.headerMessageInternal) { %>
+                <p><%-locals.headerMessageInternal.replace('__helplink__',locals.urls.help)%></p>
             <%}%>
         </div>
-    <%} if (locals.header2) { %>
+    <%} if (locals.headerExternal) { %>
         <div class="notification notification-information" tabindex="-1">
-            <h2><%=locals.header2%></h2>
-            <% if(locals.headerMessage2) { %>
-                <p><%-locals.headerMessage2.replace('__helplink__',locals.urls.help)%></p>
+            <h2><%=locals.headerExternal%></h2>
+            <% if(locals.headerMessageExternal) { %>
+                <p><%-locals.headerMessageExternal.replace('__helplink__',locals.urls.help)%></p>
             <%}%>
         </div>
     <%} else if (locals.showDefaultMessage) { %>
