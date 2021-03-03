@@ -7,6 +7,63 @@ jest.mock('./../../src/infrastructure/Config', () => jest.fn().mockImplementatio
   },
 })));
 
+jest.mock('./../../src/infrastructure/config', () => {
+  return {
+    directories: {
+      service: {
+        url: 'http://unit.test.local',
+      },
+    },
+    hostingEnvironment: {},
+    adapter: {
+      type: 'sequelize',
+      directories: {
+        host: 'host',
+        username: 'user',
+        password: 'pass',
+        dialect: 'mssql',
+        name: 'db-name',
+        encrypt: true,
+        schema: 'dbo',
+        pool: {
+          max: 100,
+          min: 0,
+          acquire: 30000,
+          idle: 10000,
+        },
+      },
+      organisation: {
+        host: 'host',
+        username: 'user',
+        password: 'pass',
+        dialect: 'mssql',
+        name: 'db-name',
+        encrypt: true,
+        schema: 'dbo',
+        pool: {
+          max: 100,
+          min: 0,
+          acquire: 30000,
+          idle: 10000,
+        },
+      },
+    },
+  };
+});
+
+jest.mock('login.dfe.dao', () => {
+  return {
+    services: {
+      getServiceWithRedirectUris: async (clientId) => {
+        return (
+          {
+            clientId: 'test',
+            redirects:[ {redirectUrl:'http://test'}],
+          });
+      },
+    },
+  };
+});
 
 jest.mock('./../../src/infrastructure/oidc', () => ({
   getInteractionById: jest.fn(),

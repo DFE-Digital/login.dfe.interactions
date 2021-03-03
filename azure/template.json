@@ -199,7 +199,6 @@
                     },
                      "additionalAppSettings": {
                         "value": {
-                           
                             "WEBSITE_HEALTHCHECK_MAXPINGFAILURES": "4"
                         }
                     }

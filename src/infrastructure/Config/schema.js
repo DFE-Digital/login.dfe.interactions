@@ -132,6 +132,20 @@ const coronaVirusFormSchema = new SimpleSchema({
   redirect: String,
 });
 
+const adapterSchema = new SimpleSchema({
+  type: {
+    type: String,
+    allowedValues: ['file', 'redis', 'mongo', 'azuread', 'sequelize'],
+  },
+  directories: {
+    type: schemas.sequelizeConnection,
+    optional: true,
+  },
+  organisation: {
+    type: schemas.sequelizeConnection,
+    optional: true,
+  },
+});
 
 const schema = new SimpleSchema({
   loggerSettings: schemas.loggerSettings,
@@ -150,6 +164,7 @@ const schema = new SimpleSchema({
   notifications: notificationsSchema,
   toggles: togglesSchema,
   coronaVirusForm: coronaVirusFormSchema,
+  adapter: adapterSchema,
   assets: schemas.assets
 });
 
