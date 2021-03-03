@@ -6,6 +6,7 @@ const logger = require('./../logger');
 const hostingEnvironmentSchema = new SimpleSchema({
   rateLimitUrl: patterns.redis,
   giasApplicationId: patterns.uuid,
+  servicesClient: String,
 });
 
 const oidcServiceSchema = new SimpleSchema({
