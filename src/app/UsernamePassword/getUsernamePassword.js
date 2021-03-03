@@ -12,6 +12,30 @@ const convertMarkdownToHtml = (content) => {
   return markdown.toHTML(content);
 };
 
+const buildBanner = async (serviceId, correlationId) => {
+  let header;
+  let headerMessage;
+  let timeLimitedBanner;
+  let alwaysOnBanner;
+
+  const allBannersForService = await applicationsApi.listAllBannersForService(serviceId, correlationId);
+
+  if (allBannersForService) {
+    const now = moment();
+    timeLimitedBanner = allBannersForService.find((banner) => moment(now).isBetween(banner.validFrom, banner.validTo) === true);
+    alwaysOnBanner = allBannersForService.find((banner) => banner.isActive === true);
+  }
+
+  if (timeLimitedBanner && timeLimitedBanner !== null) {
+    header = timeLimitedBanner.title;
+    headerMessage = convertMarkdownToHtml(timeLimitedBanner.message);
+  } else if (alwaysOnBanner && alwaysOnBanner !== null) {
+    header = alwaysOnBanner.title;
+    headerMessage = convertMarkdownToHtml(alwaysOnBanner.message);
+  }
+  return { header, headerMessage };
+};
+
 const get = async (req, res) => {
   const interactionDetails = await oidc.getInteractionById(req.params.uuid);
   let clientId = req.query.clientid;
@@ -38,65 +62,27 @@ const get = async (req, res) => {
 
   const client = await applicationsApi.getServiceById(clientId, req.id);
   if (!client) {
-    let details = `Invalid redirect_uri (clientid: ${req.query.clientid}, redirect_uri: ${req.query.redirect_uri}) - `;
-    if (!client) {
-      details += 'no client by that id';
-    } else {
-      details += 'redirect_uri not in list of specified redirect_uris';
-    }
+    const details = `Invalid redirect_uri (clientid: ${req.query.clientid}, redirect_uri: ${req.query.redirect_uri}) - `;
     throw new Error(details);
   }
 
   const dsiClient = await applicationsApi.getServiceById(config.hostingEnvironment.servicesClient, req.id);
   if (!dsiClient) {
-    let details = 'Invalid redirect_uri (clientid: services)';
-    if (!dsiClient) {
-      details += 'no client by that id';
-    } else {
-      details += 'redirect_uri not in list of specified redirect_uris';
-    }
+    const details = 'Invalid redirect_uri (clientid: services)';
     throw new Error(details);
   }
 
-  let header1;
-  let header2;
-  let headerMessage1;
-  let headerMessage2;
-  let now;
-  let timeLimitedBannerServices;
-  let alwaysOnBannerServices;
-  let timeLimitedBannerEndService;
-  let alwaysOnBannerEndService;
+  const headersInternal = await buildBanner(dsiClient.id, req.id);
+  const headersExternal = await buildBanner(client.id, req.id);
 
-  const allBannersForService = await applicationsApi.listAllBannersForService(client.id, req.id);
-  const allBannersForDSI = await applicationsApi.listAllBannersForService(dsiClient.id, req.id);
+  let headerInternal = headersInternal.header;
+  let headerMessageInternal = headersInternal.headerMessage;
+  const headerExternal = headersExternal.header;
+  const headerMessageExternal = headersExternal.headerMessage;
 
-  if (allBannersForDSI && client.id !== dsiClient.id) {
-    now = moment();
-    timeLimitedBannerServices = allBannersForDSI.find((banner) => moment(now).isBetween(banner.validFrom, banner.validTo) === true);
-    alwaysOnBannerServices = allBannersForDSI.find((banner) => banner.isActive === true);
-  }
-
-  if (allBannersForService) {
-    now = moment();
-    timeLimitedBannerEndService = allBannersForService.find((banner) => moment(now).isBetween(banner.validFrom, banner.validTo) === true);
-    alwaysOnBannerEndService = allBannersForService.find((banner) => banner.isActive === true);
-  }
-
-  if (timeLimitedBannerServices && timeLimitedBannerServices !== null) {
-    header1 = timeLimitedBannerServices.title;
-    headerMessage1 = convertMarkdownToHtml(timeLimitedBannerServices.message);
-  } else if (alwaysOnBannerServices && alwaysOnBannerServices !== null) {
-    header1 = alwaysOnBannerServices.title;
-    headerMessage1 = convertMarkdownToHtml(alwaysOnBannerServices.message);
-  }
-
-  if (timeLimitedBannerEndService && timeLimitedBannerEndService !== null) {
-    header2 = timeLimitedBannerEndService.title;
-    headerMessage2 = convertMarkdownToHtml(timeLimitedBannerEndService.message);
-  } else if (alwaysOnBannerEndService && alwaysOnBannerEndService !== null) {
-    header2 = alwaysOnBannerEndService.title;
-    headerMessage2 = convertMarkdownToHtml(alwaysOnBannerEndService.message);
+  if (client.id === dsiClient.id) {
+    headerInternal = null;
+    headerMessageInternal = null;
   }
 
   req.migrationUser = null;
@@ -111,10 +97,10 @@ const get = async (req, res) => {
     csrfToken: req.csrfToken(),
     redirectUri: req.query.redirect_uri,
     validationMessages: {},
-    header1,
-    headerMessage1,
-    header2,
-    headerMessage2,
+    headerInternal,
+    headerMessageInternal,
+    headerExternal,
+    headerMessageExternal,
     supportsUsernameLogin: !client.relyingParty.params || client.relyingParty.params.supportsUsernameLogin,
   });
 };
