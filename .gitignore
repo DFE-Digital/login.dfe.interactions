@@ -74,3 +74,6 @@ access.log
 !/config/login.dfe.interactions.dev.json
 .vscode/
 certs/
+
+# formatter
+.prettierrc
