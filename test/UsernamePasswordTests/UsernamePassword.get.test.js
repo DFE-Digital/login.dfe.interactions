@@ -6,7 +6,6 @@ jest.mock('./../../src/infrastructure/Config', () => jest.fn().mockImplementatio
     type: 'static',
   },
 })));
-
 jest.mock('./../../src/infrastructure/config', () => {
   return {
     directories: {
@@ -93,8 +92,8 @@ describe('When user is shown username/password', () => {
       relyingParty: {
         client_id: 'test',
         params: {
-          header: 'Custom header message',
-          headerMessage: 'New message',
+          headerInternal: 'Custom header message',
+          headerMessageInternal: 'New message',
           supportsUsernameLogin: true,
         },
       },
@@ -138,10 +137,13 @@ describe('When user is shown username/password', () => {
     it('then the client message is shown', async () => {
       await getHandler(req, res);
 
-      expect(clientsGet.mock.calls).toHaveLength(1);
+      console.log(res.render.mock.calls);
+      expect(clientsGet.mock.calls).toHaveLength(2);
       expect(res.render.mock.calls[0][1]).toMatchObject({
-        header: 'Custom header message',
-        headerMessage: '<p>New message</p>',
+        headerInternal: null,
+        headerMessageInternal: null,
+        headerExternal: 'Custom header message',
+        headerMessageExternal: '<p>New message</p>',
         supportsUsernameLogin: true,
       });
     });
