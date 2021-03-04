@@ -20,8 +20,7 @@ const buildPostbackData = (uuid, data) => {
 
 class InteractionComplete {
   static getPostbackDetails(uuid, data) {
-    const postbackData = { uuid };
-    const validateUser = { uuid, uid: data.uid };
+    const postbackData = {};
 
     if (data !== null) {
       Object.keys(data).forEach((key) => {
@@ -30,6 +29,8 @@ class InteractionComplete {
     }
 
     postbackData.sig = signData(postbackData);
+
+    const validateUser = { uuid, uid: data.uid };
     postbackData.sSig = signData(validateUser);
 
     return {
