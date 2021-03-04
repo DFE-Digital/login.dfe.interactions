@@ -1,16 +1,23 @@
 
-    <% if(locals.showDefaultMessage) { %>
+    <% if(locals.headerInternal) { %>
+        <div class="notification notification-information" tabindex="-1">
+            <h2><%=locals.headerInternal%></h2>
+            <% if(locals.headerMessageInternal) { %>
+                <p><%-locals.headerMessageInternal.replace('__helplink__',locals.urls.help)%></p>
+            <%}%>
+        </div>
+    <%} if (locals.headerExternal) { %>
+        <div class="notification notification-information" tabindex="-1">
+            <h2><%=locals.headerExternal%></h2>
+            <% if(locals.headerMessageExternal) { %>
+                <p><%-locals.headerMessageExternal.replace('__helplink__',locals.urls.help)%></p>
+            <%}%>
+        </div>
+    <%} else if (locals.showDefaultMessage) { %>
         <div class="notification notification-information" tabindex="-1">
             <h2>Department for Education Sign-in</h2>
         </div>
-    <%} else if(locals.header) { %>
-        <div class="notification notification-information" tabindex="-1">
-            <h2><%=locals.header%></h2>
-            <% if(locals.headerMessage) { %>
-                <p><%-locals.headerMessage.replace('__helplink__',locals.urls.help)%></p>
-            <%}%>
-        </div>
-    <%}%>
+    <% } %>
 
 
     <div class="grid-row">
