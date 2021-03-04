@@ -137,7 +137,6 @@ describe('When user is shown username/password', () => {
     it('then the client message is shown', async () => {
       await getHandler(req, res);
 
-      console.log(res.render.mock.calls);
       expect(clientsGet.mock.calls).toHaveLength(2);
       expect(res.render.mock.calls[0][1]).toMatchObject({
         headerInternal: null,
