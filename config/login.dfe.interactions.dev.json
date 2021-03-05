@@ -28,8 +28,8 @@
     }
   },
   "session": {
-    "secret": "super-secret",
-    "encryptionSecret": "another-super-secret-for-encrypting"
+    "secret": "faab1fac-afe4-4ff3-957f-a95baf2f64b0",
+    "encryptionSecret": "faab1fac-afe4-4ff3-957f-a95baf2f64b0"
   },
   "userCodes": {
     "type": "static"
