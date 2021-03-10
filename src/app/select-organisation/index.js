@@ -11,6 +11,7 @@ const { getRolesOfService, listUserServices } = require('./../../infrastructure/
 const router = express.Router({ mergeParams: true });
 const config = require('./../../infrastructure/Config')();
 
+
 const getNaturalIdentifiers = (orgsForUser) => {
   for (let i = 0; i < orgsForUser.length; i++) {
     const org = orgsForUser[i];
@@ -84,9 +85,9 @@ const getAction = async (req, res) => {
 
 const postAction = async (req, res) => {
   const uid = req.query.uid;
+  let orgsForUser = await organisationApi.associatedWithUserV2(uid);
+  const userOrgs = orgsForUser;
   if (!req.body['selected-organisation']) {
-    let orgsForUser = await organisationApi.associatedWithUserV2(uid);
-
     const coronaVirusFormRedirectUri = config.coronaVirusForm? config.coronaVirusForm.redirect : null;
     logger.info('corona virus form redirect_uri =' + req.query.redirect_uri +' config.coronaVirusForm.redirect::' + coronaVirusFormRedirectUri);
     if(req.query.redirect_uri !== coronaVirusFormRedirectUri) {
@@ -116,7 +117,10 @@ const postAction = async (req, res) => {
     });
   }
   const organisation = req.body['selected-organisation'];
-
+  const validUserOrg = userOrgs.filter(f => f.organisation.id === organisation.id);
+  if(!validUserOrg){
+    return res.redirect(`${req.query.redirect_uri}?error=consent_denied`);
+  }
   return InteractionComplete.process(req.params.uuid, { status: 'success', uid: req.query.uid, type: 'select-organisation', organisation }, req, res);
 };
 
