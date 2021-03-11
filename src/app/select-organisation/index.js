@@ -117,11 +117,19 @@ const postAction = async (req, res) => {
     });
   }
   const organisation = req.body['selected-organisation'];
-  const validUserOrg = userOrgs.filter(f => f.organisation.id === organisation.id);
-  if(!validUserOrg){
+  const decOrg = JSON.parse(decodeURIComponent(organisation));
+  const validUserOrg = userOrgs.find(f => f.organisation.id === decOrg.id);
+  if (validUserOrg && validUserOrg.organisation) {
+    const orgToPass = encodeURIComponent(JSON.stringify(validUserOrg.organisation));
+    return InteractionComplete.process(req.params.uuid, {
+      status: 'success',
+      uid: req.query.uid,
+      type: 'select-organisation',
+      organisation: orgToPass
+    }, req, res);
+  } else {
     return res.redirect(`${req.query.redirect_uri}?error=consent_denied`);
   }
-  return InteractionComplete.process(req.params.uuid, { status: 'success', uid: req.query.uid, type: 'select-organisation', organisation }, req, res);
 };
 
 const registerRoutes = (csrf) => {
