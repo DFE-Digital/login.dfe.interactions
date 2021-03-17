@@ -8,7 +8,8 @@
   "scripts": {
     "test": "./node_modules/.bin/jest --coverage",
     "test-watcher": "./node_modules/.bin/jest --watch --coverage",
-    "dev": "settings='./config/login.dfe.interactions.dev.json' node src/index.js"
+    "dev": "node src/index.js",
+    "link-config": "npm link login.dfe.config"
   },
   "repository": {
     "type": "git",
@@ -45,7 +46,7 @@
     "ioredis": "^3.2.2",
     "lodash": "^4.17.15",
     "login.dfe.audit.transporter": "^1.1.5",
-    "login.dfe.config.schema.common": "git+https://github.com/DFE-Digital/login.dfe.config.schema.common.git#v1.8.1",
+    "login.dfe.config.schema.common": "git+https://github.com/DFE-Digital/login.dfe.config.schema.common.git#v1.9.1",
     "login.dfe.dao": "^1.0.51",
     "login.dfe.express-error-handling": "git+https://github.com/DFE-Digital/login.dfe.express-error-handling.git#v1.6",
     "login.dfe.healthcheck": "git+https://github.com/DFE-Digital/login.dfe.healthcheck.git#v1.8",

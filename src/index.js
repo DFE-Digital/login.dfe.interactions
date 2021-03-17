@@ -148,7 +148,7 @@ Object.assign(app.locals, {
   },
   app: {
     title: 'DfE Sign-in',
-    environmentBannerMessage: config.hostingEnvironment.environmentBannerMessage,
+    environmentBannerMessage: config.hostingEnvironment.environmentBannerMessage !== 'null' ? config.hostingEnvironment.environmentBannerMessage : null,
   },
   gaTrackingId: config.hostingEnvironment.gaTrackingId,
   useSelfRegister: config.toggles ? config.toggles.useSelfRegister : false,

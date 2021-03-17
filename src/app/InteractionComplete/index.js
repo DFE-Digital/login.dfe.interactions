@@ -20,7 +20,7 @@ const buildPostbackData = (uuid, data) => {
 
 class InteractionComplete {
   static getPostbackDetails(uuid, data) {
-    const postbackData = { uuid };
+    const postbackData = {};
     const validateUser = { uuid, uid: data.uid };
 
     if (data !== null) {

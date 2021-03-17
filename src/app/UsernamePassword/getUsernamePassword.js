@@ -6,10 +6,34 @@ const moment = require('moment');
 const { markdown } = require('markdown');
 const { services } = require('login.dfe.dao');
 const logger = require('./../../infrastructure/logger');
-
+const config = require('./../../infrastructure/Config')();
 
 const convertMarkdownToHtml = (content) => {
   return markdown.toHTML(content);
+};
+
+const buildBanner = async (serviceId, correlationId) => {
+  let header;
+  let headerMessage;
+  let timeLimitedBanner;
+  let alwaysOnBanner;
+
+  const allBannersForService = await applicationsApi.listAllBannersForService(serviceId, correlationId);
+
+  if (allBannersForService) {
+    const now = moment();
+    timeLimitedBanner = allBannersForService.find((banner) => moment(now).isBetween(banner.validFrom, banner.validTo) === true);
+    alwaysOnBanner = allBannersForService.find((banner) => banner.isActive === true);
+  }
+
+  if (timeLimitedBanner && timeLimitedBanner !== null) {
+    header = timeLimitedBanner.title;
+    headerMessage = convertMarkdownToHtml(timeLimitedBanner.message);
+  } else if (alwaysOnBanner && alwaysOnBanner !== null) {
+    header = alwaysOnBanner.title;
+    headerMessage = convertMarkdownToHtml(alwaysOnBanner.message);
+  }
+  return { header, headerMessage };
 };
 
 const get = async (req, res) => {
@@ -38,30 +62,29 @@ const get = async (req, res) => {
 
   const client = await applicationsApi.getServiceById(clientId, req.id);
   if (!client) {
-    let details = `Invalid redirect_uri (clientid: ${req.query.clientid}, redirect_uri: ${req.query.redirect_uri}) - `;
-    if (!client) {
-      details += 'no client by that id';
-    } else {
-      details += 'redirect_uri not in list of specified redirect_uris';
-    }
+    const details = `Invalid redirect_uri (clientid: ${req.query.clientid}, redirect_uri: ${req.query.redirect_uri}) - `;
     throw new Error(details);
   }
 
-  const allBannersForService = await applicationsApi.listAllBannersForService(client.id, req.id);
-  let header;
-  let headerMessage;
-  if (allBannersForService) {
-    const now = moment();
-    const timeLimitedBanner = allBannersForService.find(x => moment(now).isBetween(x.validFrom, x.validTo) === true);
-    const alwaysOnBanner = allBannersForService.find(x => x.isActive === true);
-    if (timeLimitedBanner) {
-      header = timeLimitedBanner.title;
-      headerMessage = convertMarkdownToHtml(timeLimitedBanner.message);
-    } else if (alwaysOnBanner) {
-      header = alwaysOnBanner.title;
-      headerMessage = convertMarkdownToHtml(alwaysOnBanner.message);
-    }
+  const dsiClient = await applicationsApi.getServiceById(config.hostingEnvironment.servicesClient, req.id);
+  if (!dsiClient) {
+    const details = 'Invalid redirect_uri (clientid: services)';
+    throw new Error(details);
   }
+
+  const headersInternal = await buildBanner(dsiClient.id, req.id);
+  const headersExternal = await buildBanner(client.id, req.id);
+
+  let headerInternal = headersInternal.header;
+  let headerMessageInternal = headersInternal.headerMessage;
+  const headerExternal = headersExternal.header;
+  const headerMessageExternal = headersExternal.headerMessage;
+
+  if (client.id === dsiClient.id) {
+    headerInternal = null;
+    headerMessageInternal = null;
+  }
+
   req.migrationUser = null;
   req.session.redirectUri = null;
 
@@ -74,8 +97,10 @@ const get = async (req, res) => {
     csrfToken: req.csrfToken(),
     redirectUri: req.query.redirect_uri,
     validationMessages: {},
-    header,
-    headerMessage,
+    headerInternal,
+    headerMessageInternal,
+    headerExternal,
+    headerMessageExternal,
     supportsUsernameLogin: !client.relyingParty.params || client.relyingParty.params.supportsUsernameLogin,
   });
 };
