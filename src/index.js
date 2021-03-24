@@ -54,6 +54,10 @@ app.use(helmet({
   frameguard: {
     action: 'deny',
   },
+  hsts:{
+    maxAge: 31536000,
+    preload: true,
+  }
 }));
 app.use(setCorrelationId(true));
 
