@@ -49,16 +49,25 @@ const expiryInMilliseconds = 60000 * expiryInMinutes;
 
 const app = express();
 
-app.use(helmet({
-  noCache: true,
-  frameguard: {
-    action: 'deny',
-  },
-  hsts:{
-    maxAge: 31536000,
-    preload: true,
-  }
-}));
+if(config.hostingEnvironment.hstsMaxAge){
+  app.use(helmet({
+    noCache: true,
+    frameguard: {
+      action: 'deny',
+    },
+    hsts: {
+      maxAge: config.hostingEnvironment.hstsMaxAge,
+      preload: true,
+    }
+  }));
+}else {
+  app.use(helmet({
+    noCache: true,
+    frameguard: {
+      action: 'deny',
+    }
+  }));
+}
 app.use(setCorrelationId(true));
 
 const csrf = csurf({
