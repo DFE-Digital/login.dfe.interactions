@@ -94,12 +94,14 @@ const migrate = async (emailConfId, email, password, firstName, lastName, saOrga
     logger.audit({
       type: 'sign-in',
       subType: 'migration',
-      success: false,
       userId: user.userId,
-      userEmail: email,
       application: config.loggerSettings.applicationName,
       env: config.hostingEnvironment.env,
       message: `Unsuccessful migration for ${saUsername} to ${email} (id: ${user.userId}) - unable to link user to organisation ${organisation.id} and to service id ${serviceId}`,
+      meta: {
+        success: false,
+        userEmail: email,
+      },
     });
     throw new Error('Error occurred migrating user services');
   }
@@ -107,12 +109,14 @@ const migrate = async (emailConfId, email, password, firstName, lastName, saOrga
   logger.audit({
     type: 'sign-in',
     subType: 'migration',
-    success: true,
     userId: user.userId,
-    userEmail: email,
     application: config.loggerSettings.applicationName,
     env: config.hostingEnvironment.env,
     message: `Successful migration for ${saUsername} to ${email} (id: ${user.userId})`,
+    meta: {
+      success: true,
+      userEmail: email,
+    },
   });
 
   await completeMigration(emailConfId, saUsername, correlationId);
