@@ -57,11 +57,13 @@ const handleInvalidCredentials = (req, res, validation, client, legacyUser) => {
    logger.audit({
     type: 'sign-in',
     subType: 'username-password',
-    success: false,
-    userEmail: req.body.username,
     application: config.loggerSettings.applicationName,
     env: config.hostingEnvironment.env,
     message: `Failed login attempt for ${req.body.username}`,
+     meta: {
+       success: false,
+       userEmail: req.body.username,
+     },
   });
 
   if (Object.keys(validation.validationMessages).length === 0 && validation.validationMessages.constructor === Object) {
@@ -89,11 +91,13 @@ const handleDeactivated = (req, res, validation, client) => {
   logger.audit({
     type: 'sign-in',
     subType: 'username-password',
-    success: false,
-    userEmail: req.body.username,
     application: config.loggerSettings.applicationName,
     env: config.hostingEnvironment.env,
     message: `Attempt login to deactivated account for ${req.body.username}`,
+    meta: {
+      success: false,
+      userEmail: req.body.username,
+    },
   });
 
   if (Object.keys(validation.validationMessages).length === 0 && validation.validationMessages.constructor === Object) {
@@ -146,12 +150,14 @@ const handleValidSigninUser = (req, res, user) => {
   logger.audit({
     type: 'sign-in',
     subType: 'username-password',
-    success: true,
     userId: user.id,
-    userEmail: req.body.username,
     application: config.loggerSettings.applicationName,
     env: config.hostingEnvironment.env,
     message: `Successful login attempt for ${req.body.username} (id: ${user.id})`,
+    meta: {
+      success: true,
+      userEmail: req.body.username,
+    },
   });
   InteractionComplete.process(req.params.uuid, {
     status: 'success',
@@ -203,11 +209,13 @@ const post = async (req, res) => {
       logger.audit({
         type: 'sign-in',
         subType: 'username-password',
-        success: false,
-        userEmail: req.body.username,
         application: config.loggerSettings.applicationName,
         env: config.hostingEnvironment.env,
         message: `Attempt login to already migrated account for ${req.body.username}`,
+        meta: {
+          success: false,
+          userEmail: req.body.username,
+        },
       });
       req.migrationUser = {
         redirectUri: req.query.redirect_uri,

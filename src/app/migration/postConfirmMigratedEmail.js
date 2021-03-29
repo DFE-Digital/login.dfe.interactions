@@ -62,11 +62,13 @@ const action = async (req, res) => {
     logger.audit({
       type: 'sign-in',
       subType: 'username-password',
-      success: false,
-      userEmail: userToMigrate.userName,
       application: config.loggerSettings.applicationName,
       env: config.hostingEnvironment.env,
       message: `Attempt login to already migrated account for ${userToMigrate.userName}`,
+      meta: {
+        success: false,
+        userEmail: userToMigrate.userName,
+      },
     });
     req.migrationUser = {
       redirectUri: req.query.redirect_uri,
