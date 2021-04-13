@@ -1,18 +1,18 @@
-<div class="grid-row">
-    <div class="col-8">
-        <h1 class="heading-xlarge">
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl">
             Enter your token code
         </h1>
-        <p class="lede">For additional security please enter your 8-digit token code.</p>
+        <p class="govuk-body-l">For additional security please enter your 8-digit token code.</p>
     </div>
 </div>
-<div class="grid-row">
+<div class="govuk-grid-row">
 
 
 
-    <div class="col-6">
-        <h2 class="heading-medium">Token instructions</h2>
-        <ol class="list list-number">
+    <div class="govuk-grid-column-one-half">
+        <h2 class="govuk-heading-m">Token instructions</h2>
+        <ol class="govuk-list govuk-list--number">
             <li>Press the arrow on the token</li>
             <li>Enter your PIN</li>
             <li>Enter the 8-digit code that appears on your token in the Token code text field</li>
@@ -20,9 +20,9 @@
         <form method="post" id="form-reset-your-password">
             <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
 
-                <div class="form-group <%= locals.validationMessages.code !== undefined ? "form-group-error" : "" %>">
+                <div class="govuk-form-group <%= locals.validationMessages.code !== undefined ? "govuk-form-group-error" : "" %>">
 
-                    <label class="form-label" for="code">Token code</label>
+                    <label class="govuk-label" for="code">Token code</label>
 
                     <% if (locals.validationMessages.code !== undefined) { %>
                         <p class="error-message" id="validation-code"><%= locals.validationMessages.code %></p>
@@ -34,17 +34,17 @@
 
                 </div>
                 <div class="form-submit">
-                    <button type="submit" class="button">Continue</button>
+                    <button type="submit" class="govuk-button">Continue</button>
                 </div>
 
         </form>
     </div>
-    <div class="col-6">
+    <div class="govuk-grid-column-one-half">
         <img src="<%= locals.urls.assets %>/images/token.svg" class="responsive spacing" alt="Illustration of the token">
     </div>
 </div>
 <div class="row">
-    <div class="col-8">
+    <div class="govuk-grid-column-two-thirds">
         <%- include('../../includes/helpdesk'); %>
     </div>
 </div>

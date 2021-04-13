@@ -1,25 +1,25 @@
 
 <% if (locals.failedValidation) { %>
-    <a class="link-back" href="<%=locals.user.redirectUri%>">Back</a>
+    <a class="govuk-link" class="link-back" href="<%=locals.user.redirectUri%>">Back</a>
     <div class="notification notification-information with-icon">
         <h2>Your organisation details do not exist </h2>
-        <p>We have found your account details from Secure Access.
+        <p class="govuk-body">We have found your account details from Secure Access.
             Unfortunately the details of the organisation you work for have not been created in our system
-            so we cannot continue with your DfE Sign-in account setup. <a href="<%=locals.urls.help%>/contact">Contact the help desk</a> for assistance.</p>
+            so we cannot continue with your DfE Sign-in account setup. <a class="govuk-link" href="<%=locals.urls.help%>/contact">Contact the help desk</a> for assistance.</p>
     </div>
 <%} else {%>
     <div class="js-back-link"></div>
 <%} %>
-<div class="grid-row">
-    <div class="col-8">
-        <h1 class="heading-xlarge">
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl">
             Your details
         </h1>
     </div>
 </div>
-<div class="grid-row">
-    <div class="col-6">
-        <p>We have identified your account from Secure Access.</p>
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-one-half">
+        <p class="govuk-body">We have identified your account from Secure Access.</p>
         <dl class="rows spacer la">
             <dt>Name</dt>
             <dd><%=locals.user.firstName%> <%=locals.user.lastName%></dd>
@@ -40,7 +40,7 @@
             </dd>
         </dl>
         <% if (!locals.failedValidation) { %>
-            <p><a href="/<%=locals.uuid%>/migration/email" class="button">Continue</a> </p>
+            <p class="govuk-body"><a href="/<%=locals.uuid%>/migration/email" class="govuk-button">Continue</a> </p>
         <%}%>
     </div>
 </div>

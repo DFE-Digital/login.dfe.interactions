@@ -9,8 +9,8 @@
 </style>
 
 <div class="row">
-    <div class="col-8">
-        <h1 class="heading-xlarge">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl">
             <span class="heading-secondary">DfE sign-in</span>
             Front-end styles and examples
         </h1>
@@ -18,18 +18,18 @@
 </div>
 
 <div class="row">
-    <div class="col-8">
-        <h2 class="heading-small">Contents</h2>
-        <ol class="list list-number">
-            <li><a href="#grid">Grid</a></li>
-            <li><a href="#typography">Typography</a></li>
-            <li><a href="#forms">Forms</a></li>
-            <li><a href="#notifications">Notifications</a></li>
+    <div class="govuk-grid-column-two-thirds">
+        <h2 class="govuk-heading-s">Contents</h2>
+        <ol class="govuk-list govuk-list--number">
+            <li><a class="govuk-link" href="#grid">Grid</a></li>
+            <li><a class="govuk-link" href="#typography">Typography</a></li>
+            <li><a class="govuk-link" href="#forms">Forms</a></li>
+            <li><a class="govuk-link" href="#notifications">Notifications</a></li>
         </ol>
     </div>
 </div>
 
-<h2 class="heading-large" id="grid">Grid</h2>
+<h2 class="govuk-heading-l" id="grid">Grid</h2>
 
 <div class="row">
     <div class="col-1">
@@ -59,7 +59,7 @@
     <div class="col-5">
         <span>5</span>
     </div>
-    <div class="col-6">
+    <div class="govuk-grid-column-one-half">
         <span>6</span>
     </div>
 </div>
@@ -67,7 +67,7 @@
     <div class="col-4">
         <span>4</span>
     </div>
-    <div class="col-8">
+    <div class="govuk-grid-column-two-thirds">
         <span>8</span>
     </div>
 </div>
@@ -78,110 +78,110 @@
 &lt;/div></code></pre>
 
 
-<h2 class="heading-large" id="typography">Typography</h2>
+<h2 class="govuk-heading-l" id="typography">Typography</h2>
 
-<h3 class="heading-medium">Headings</h3>
+<h3 class="govuk-heading-m">Headings</h3>
 
-<h1 class="heading-xlarge">A 48px Bold heading</h1>
-<h2 class="heading-large">A 36px Bold heading</h2>
-<h3 class="heading-medium">A 24px Bold heading</h3>
-<h4 class="heading-small">A 19px Bold heading</h4>
+<h1 class="govuk-heading-xl">A 48px Bold heading</h1>
+<h2 class="govuk-heading-l">A 36px Bold heading</h2>
+<h3 class="govuk-heading-m">A 24px Bold heading</h3>
+<h4 class="govuk-heading-s">A 19px Bold heading</h4>
 
-<pre><code class="language-markup">&lt;h1 class="heading-xlarge">A 48px Bold heading&lt;/h1>
-&lt;h2 class="heading-large">A 36px Bold heading&lt;/h2>
-&lt;h3 class="heading-medium">A 24px Bold heading&lt;/h3>
-&lt;h4 class="heading-small">A 19px Bold heading&lt;/h4></code></pre>
+<pre><code class="language-markup">&lt;h1 class="govuk-heading-xl">A 48px Bold heading&lt;/h1>
+&lt;h2 class="govuk-heading-l">A 36px Bold heading&lt;/h2>
+&lt;h3 class="govuk-heading-m">A 24px Bold heading&lt;/h3>
+&lt;h4 class="govuk-heading-s">A 19px Bold heading&lt;/h4></code></pre>
 
-<h3 class="heading-medium">Lists</h3>
-<ul class="list list-bullet">
+<h3 class="govuk-heading-m">Lists</h3>
+<ul class="govuk-list govuk-list--bullet">
     <li>here is a bulleted list</li>
     <li>vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor</li>
     <li>vestibulum id ligula porta felis euismod semper</li>
     <li>integer posuere erat a ante venenatis dapibus posuere velit aliquet</li>
 </ul>
-<pre><code class="language-markup">&lt;ul class="list list-bullet">
+<pre><code class="language-markup">&lt;ul class="govuk-list govuk-list--bullet">
     &lt;li>here is a bulleted list</li>
     &lt;li>vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor</li>
     &lt;li>vestibulum id ligula porta felis euismod semper</li>
     &lt;li>integer posuere erat a ante venenatis dapibus posuere velit aliquet</li>
 &lt;/ul></code></pre>
-<ol class="list list-number">
+<ol class="govuk-list govuk-list--number">
     <li>This is a numbered list.</li>
     <li>This is the second step in a numbered list.</li>
     <li>The third step is to make sure each item is a full sentence ending with a full stop.</li>
 </ol>
-<pre><code class="language-markup">&lt;ol class="list list-number">
+<pre><code class="language-markup">&lt;ol class="govuk-list govuk-list--number">
     &lt;li>This is a numbered list.</li>
     &lt;li>This is the second step in a numbered list.</li>
     &lt;li>The third step is to make sure each item is a full sentence ending with a full stop.</li>
 &lt;/ol></code></pre>
 
-<h2 class="heading-large" id="forms">Forms</h2>
-<h3 class="heading-medium">Text field with form hint</h3>
+<h2 class="govuk-heading-l" id="forms">Forms</h2>
+<h3 class="govuk-heading-m">Text field with form hint</h3>
 
-<div class="form-group">
-    <label class="form-label-bold" for="email">Email address</label>
-    <p class="form-hint">Enter your work email address</p>
+<div class="govuk-form-group">
+    <label class="govuk-label--s" for="email">Email address</label>
+    <p class="govuk-label__hint">Enter your work email address</p>
     <input class="form-control" id="email" type="text" name="email">
 </div>
 
-<pre><code class="language-markup">&lt;div class="form-group">
-    &lt;label class="form-label-bold" for="email">Email address&lt;/label>
-    &lt;p class="form-hint">Enter your work email address&lt;/p>
+<pre><code class="language-markup">&lt;div class="govuk-form-group">
+    &lt;label class="govuk-label--s" for="email">Email address&lt;/label>
+    &lt;p class="govuk-label__hint">Enter your work email address&lt;/p>
     &lt;input class="form-control" id="email" type="text" name="email">
 &lt;/div></code></pre>
 
 
-<h3 class="heading-medium">Text fields widths</h3>
-<p>To shorten text fields to match character limits</p>
-<div class="form-group">
+<h3 class="govuk-heading-m">Text fields widths</h3>
+<p class="govuk-body">To shorten text fields to match character limits</p>
+<div class="govuk-form-group">
 <input class="form-control char-width-12" id="email" type="text" name="email" placeholder=".char-width-12" maxlength="12">
 </div>
-<div class="form-group">
+<div class="govuk-form-group">
 <input class="form-control char-width-11" id="email" type="text" name="email" placeholder=".char-width-11" maxlength="11">
 </div>
-<div class="form-group">
+<div class="govuk-form-group">
 <input class="form-control char-width-10" id="email" type="text" name="email" placeholder=".char-width-10" maxlength="10">
 </div>
-<div class="form-group">
+<div class="govuk-form-group">
 <input class="form-control char-width-9" id="email" type="text" name="email" placeholder=".char-width-9" maxlength="9">
 </div>
-<div class="form-group">
+<div class="govuk-form-group">
 <input class="form-control char-width-8" id="email" type="text" name="email" placeholder=".char-width-8" maxlength="8">
 </div>
-<div class="form-group">
+<div class="govuk-form-group">
 <input class="form-control char-width-7" id="email" type="text" name="email" placeholder=".char-width-7" maxlength="7">
 </div>
-<div class="form-group">
+<div class="govuk-form-group">
 <input class="form-control char-width-6" id="email" type="text" name="email" placeholder=".char-width-6" maxlength="6">
 </div>
-<div class="form-group">
+<div class="govuk-form-group">
 <input class="form-control char-width-5" id="email" type="text" name="email" placeholder=".char-width-5" maxlength="5">
 </div>
-<div class="form-group">
+<div class="govuk-form-group">
 <input class="form-control char-width-4" id="email" type="text" name="email" placeholder=".char-width-4" maxlength="4">
 </div>
 
-<pre><code class="language-markup">&lt;div class="form-group">
-    &lt;label class="form-label-bold" for="code">Enter your 6 digit unlock code&lt;/label>
+<pre><code class="language-markup">&lt;div class="govuk-form-group">
+    &lt;label class="govuk-label--s" for="code">Enter your 6 digit unlock code&lt;/label>
     &lt;input class="form-control char-width-6" id="code" type="text" name="code" maxlength="6">
 &lt;/div></code></pre>
 
-<h3 class="heading-medium">Password field</h3>
-<div class="form-group ">
-    <label class="form-label-bold" for="confirmPassword">Confirm your new password</label>
+<h3 class="govuk-heading-m">Password field</h3>
+<div class="govuk-form-group ">
+    <label class="govuk-label--s" for="confirmPassword">Confirm your new password</label>
     <div class="show-password">
         <input class="form-control" id="confirmPassword" name="confirmPassword" type="password">
     </div>
 </div>
-<pre><code class="language-markup">&lt;div class="form-group ">
-    &lt;label class="form-label-bold" for="confirmPassword">Confirm your new password&lt;/label>
+<pre><code class="language-markup">&lt;div class="govuk-form-group ">
+    &lt;label class="govuk-label--s" for="confirmPassword">Confirm your new password&lt;/label>
     &lt;div class="show-password">
         &lt;input class="form-control" id="confirmPassword" name="confirmPassword" type="password">
     &lt;/div>
 &lt;/div></code></pre>
 
-<h3 class="heading-medium">Checkbox field</h3>
+<h3 class="govuk-heading-m">Checkbox field</h3>
 
 <div class="multiple-choice">
     <input id="something" name="something" type="checkbox" value="yes">
@@ -193,7 +193,7 @@
     &lt;label for="something">Do something?&lt;/label>
 &lt;/div></code></pre>
 
-<h3 class="heading-medium">Loading spinner</h3>
+<h3 class="govuk-heading-m">Loading spinner</h3>
 
 <div class="spinner">
     <div class="spinner-circle1 spinner-child"></div>
@@ -226,11 +226,11 @@
 &lt;/div></code></pre>
 
 
-<h2 class="heading-large" id="notifications">Notifications</h2>
+<h2 class="govuk-heading-l" id="notifications">Notifications</h2>
 
 <div class="notification notification-success" tabindex="0">
     <h2>Success</h2>
-    <p>Your password has been reset</p>
+    <p class="govuk-body">Your password has been reset</p>
 </div>
 <pre><code class="language-markup">&lt;div class="notification notification-success" tabindex="0">
     &lt;h2>Success&lt;/h2>
@@ -239,7 +239,7 @@
 
 <div class="notification notification-warning" tabindex="0">
     <h2>You need to activate your account</h2>
-    <p>You will have limited access to your account until its activated. Follow the instructions that have been emailed to you </p>
+    <p class="govuk-body">You will have limited access to your account until its activated. Follow the instructions that have been emailed to you </p>
 </div>
 <pre><code class="language-markup">&lt;div class="notification notification-warning" tabindex="0">
     &lt;h2>You need to activate your account&lt;/h2>
@@ -248,7 +248,7 @@
 
 <div class="notification notification-error" tabindex="0">
     <h2>Error saving your account</h2>
-    <p>The passwords you entered did not match</p>
+    <p class="govuk-body">The passwords you entered did not match</p>
 </div>
 <pre><code class="language-markup">&lt;div class="notification notification-error" tabindex="0">
     &lt;h2>Error saving your account&lt;/h2>

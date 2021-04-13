@@ -1,33 +1,33 @@
 <a href="<%=locals.redirectUri%>" class="link-back">Back</a>
-<div class="grid-row">
-    <div class="col-8">
-        <h1 class="heading-xlarge">
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl">
             Forgotten your password?
         </h1>
-        <p class="lede">Enter the email address you have registered for DfE Sign-in.</p>
+        <p class="govuk-body-l">Enter the email address you have registered for DfE Sign-in.</p>
     </div>
 </div>
-<div class="grid-row">
-    <div class="col-12">
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
         <form method="post" id="form-reset-password">
             <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
             <input type="hidden" name="clientId" value="<%=locals.clientId%>" />
             <input type="hidden" name="redirectUri" value="<%=locals.redirectUri%>" />
-            <div class="form-group <%=  locals.validationMessages.email !== undefined ? "form-group-error" : "" %>">
-                <label class="form-label" for="email">Email address</label>
+            <div class="govuk-form-group <%=  locals.validationMessages.email !== undefined ? "govuk-form-group-error" : "" %>">
+                <label class="govuk-label" for="email">Email address</label>
                 <% if (locals.validationMessages.email !== undefined) { %>
                 <p class="error-message" id="validation-email"><%= locals.validationMessages.email %></p>
                 <% } %>
                 <input class="form-control" id="email" name="email" type="email" value="<%=email%>" <% if (locals.validationMessages.email !== undefined) { %> aria-invalid="true" aria-describedby="validation-email" <% } %>>
             </div>
             <div class="form-submit submit-buttons">
-                <button type="submit" class="button">Continue</button>
+                <button type="submit" class="govuk-button">Continue</button>
             </div>
         </form>
     </div>
 </div>
 <div class="row">
-    <div class="col-8">
+    <div class="govuk-grid-column-two-thirds">
         <%- include('../../includes/helpdesk'); %>
     </div>
 </div>

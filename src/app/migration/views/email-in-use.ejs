@@ -1,17 +1,17 @@
-<div class="grid-row">
-    <div class="col-8">
-        <h1 class="heading-xlarge">
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl">
             Account already exists
         </h1>
-        <p class="lede">A DfE Sign-in account already exists with the email address <b><%=locals.user.newEmail%></b>.</p>
+        <p class="govuk-body-l">A DfE Sign-in account already exists with the email address <b><%=locals.user.newEmail%></b>.</p>
         <form method="post">
             <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
             <input type="hidden" name="viewToDisplay" value="<%=locals.viewToDisplay%>" />
-            <div class="form-group">
+            <div class="govuk-form-group">
                 <fieldset>
 
                     <legend>
-                        <p>You have a couple of options:</p>
+                        <p class="govuk-body">You have a couple of options:</p>
                     </legend>
 
                     <div class="multiple-choice">
@@ -27,7 +27,7 @@
                 </fieldset>
             </div>
             <div class="form-submit">
-                <button type="submit" class="button">Continue</button>
+                <button type="submit" class="govuk-button">Continue</button>
             </div>
         </form>
     </div>

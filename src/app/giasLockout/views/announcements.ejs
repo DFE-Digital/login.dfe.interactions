@@ -1,4 +1,4 @@
-<h2 class="heading-large">
+<h2 class="govuk-heading-l">
     <%= organisation.name %>
     <% if(organisation.identifiers.length > 0) { %>
         (<%= organisation.identifiers.map(i => `${i.type}: ${i.value}`).join(', ') %>)
@@ -8,38 +8,38 @@
 <% announcements.forEach((announcement) => { %>
     <div class="notification notification-<%= (announcement.level === 2 ? 'error' : 'warning') %>">
         <h2><%= announcement.title %></h2>
-        <p><%= announcement.message %></p>
+        <p class="govuk-body"><%= announcement.message %></p>
         <%if(announcement.level === 1 && hasAccessToGias) {%>
-            <p>You must confirm the GIAS record to prevent your access to some DfE services being suspended.</p>
+            <p class="govuk-body">You must confirm the GIAS record to prevent your access to some DfE services being suspended.</p>
         <%}%>
         <%if(announcement.level === 1 && !hasAccessToGias) {%>
-            <p>A user at your organisation must confirm the GIAS record to prevent your access to some DfE services being restricted.</p>
+            <p class="govuk-body">A user at your organisation must confirm the GIAS record to prevent your access to some DfE services being restricted.</p>
         <%}%>
         <%if(announcement.level === 2 && hasAccessToGias) {%>
-            <p>You will not have access to these DfE services until GIAS is updated to confirm all details are correct.</p>
+            <p class="govuk-body">You will not have access to these DfE services until GIAS is updated to confirm all details are correct.</p>
         <%}%>
         <%if(announcement.level === 2 && !hasAccessToGias) {%>
-            <p>Your organisation will not have access to these DfE services until GIAS is updated to confirm all details are correct.</p>
+            <p class="govuk-body">Your organisation will not have access to these DfE services until GIAS is updated to confirm all details are correct.</p>
         <%}%>
-        <p class="small"><a href="https://get-information-schools.service.gov.uk/Faq">More information about GIAS and service restrictions</a></p>
+        <p class="small"><a class="govuk-link" href="https://get-information-schools.service.gov.uk/Faq">More information about GIAS and service restrictions</a></p>
     </div>
 <% }) %>
 
 <div class="row">
-    <div class="col-12 submit-buttons">
+    <div class="govuk-grid-column-full submit-buttons">
         <% if(canContinue) { %>
             <form id="main" method="post" action="<%= postbackDetails.destination %>" style="display: inline-block;">
                 <% Object.keys(postbackDetails.data).forEach((key) => { %>
                     <input type="hidden" name="<%= key %>" value="<%= postbackDetails.data[key] %>"/>
                 <% }); %>
-                <button class="button" type="submit">Continue</button>
+                <button class="govuk-button" type="submit">Continue</button>
             </form>
         <% } else { %>
-            <a href="<%= urls.services %>/my-services" class="button <%= (hasAccessToGias ? 'button-secondary' : '') %>">Go to Services</a>
+            <a href="<%= urls.services %>/my-services" class="govuk-button <%= (hasAccessToGias ? 'button-secondary' : '') %>">Go to Services</a>
         <% } %>
 
         <% if (hasAccessToGias) { %>
-            <a href="<%= giasServiceHome %>" class="button <%= (canContinue ? 'button-secondary' : '') %>">Go to GIAS</a>
+            <a href="<%= giasServiceHome %>" class="govuk-button <%= (canContinue ? 'button-secondary' : '') %>">Go to GIAS</a>
         <% } %>
     </div>
 </div>
@@ -47,19 +47,19 @@
 <% if (!hasAccessToGias) { %>
     <div class="row row-spacer"></div>
     <div class="row">
-        <div class="col-12">
-            <dl class="simple condensed small-dt font-xsmall">
+        <div class="govuk-grid-column-full">
+            <dl class="simple condensed small-dt govuk-body-s">
                 <dt>Users with access to update GIAS</dt>
                 <dd>
 
             <% if(giasUserDetails.length > 0) { %>
                 <ul>
                     <% giasUserDetails.forEach((user) => { %>
-                        <li><%=user.given_name%> <%=user.family_name%> <a href="mailto:<%=user.email%>"><%=user.email%></a></li>
+                        <li><%=user.given_name%> <%=user.family_name%> <a class="govuk-link" href="mailto:<%=user.email%>"><%=user.email%></a></li>
                     <% }) %>
                 </ul>
             <% } else { %>
-                <p>There are no users of GIAS at this organisation - <a href="https://get-information-schools.service.gov.uk/Faq">view GIAS FAQs</a></p>
+                <p class="govuk-body">There are no users of GIAS at this organisation - <a class="govuk-link" href="https://get-information-schools.service.gov.uk/Faq">view GIAS FAQs</a></p>
             <% } %>
                 </dd>
             </dl>

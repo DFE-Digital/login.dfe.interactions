@@ -1,18 +1,18 @@
-<div class="grid-row">
-    <div class="col-8">
-        <h1 class="heading-xlarge">
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl">
             Your email address
         </h1>
-        <p class="lede">To access your services through DfE Sign-in your email address will become your username.</p>
-        <p>If your email address is not private or you don't have access to it you will need to change it. </p>
+        <p class="govuk-body-l">To access your services through DfE Sign-in your email address will become your username.</p>
+        <p class="govuk-body">If your email address is not private or you don't have access to it you will need to change it. </p>
         <form method="post" action="email">
             <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
             <input type="hidden" name="viewToDisplay" value="<%=locals.viewToDisplay%>" />
-            <div class="form-group">
+            <div class="govuk-form-group">
                 <fieldset>
 
                     <legend>
-                        <h1 class="heading-medium">
+                        <h1 class="govuk-heading-m">
                             Which email address do you want to use?
                         </h1>
                     </legend>
@@ -27,9 +27,9 @@
                         <label for="new-email">Use a different email address</label>
                     </div>
 
-                    <div class="panel panel-border-narrow js-hidden form-group  <%= locals.validationMessages.email !== undefined ? "form-group-error" : "" %>" id="new-email-address">
-                        <label class="form-label" for="email">New email address</label>
-                        <p class="form-hint">We will send you an email to confirm your new address </p>
+                    <div class="panel panel-border-narrow js-hidden govuk-form-group  <%= locals.validationMessages.email !== undefined ? "govuk-form-group-error" : "" %>" id="new-email-address">
+                        <label class="govuk-label" for="email">New email address</label>
+                        <p class="govuk-label__hint">We will send you an email to confirm your new address </p>
                         <% if (locals.validationMessages.email !== undefined) { %>
                         <p class="error-message" id="validation-code"><%= locals.validationMessages.email %></p>
                         <% } %>
@@ -39,7 +39,7 @@
                 </fieldset>
             </div>
             <div class="form-submit">
-                <button type="submit" class="button">Continue</button>
+                <button type="submit" class="govuk-button">Continue</button>
             </div>
         </form>
 
