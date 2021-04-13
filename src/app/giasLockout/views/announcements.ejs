@@ -25,7 +25,7 @@
     </div>
 <% }) %>
 
-<div class="row">
+<div class="govuk-grid-row">
     <div class="govuk-grid-column-full submit-buttons">
         <% if(canContinue) { %>
             <form id="main" method="post" action="<%= postbackDetails.destination %>" style="display: inline-block;">
@@ -46,7 +46,7 @@
 
 <% if (!hasAccessToGias) { %>
     <div class="row row-spacer"></div>
-    <div class="row">
+    <div class="govuk-grid-row">
         <div class="govuk-grid-column-full">
             <dl class="simple condensed small-dt govuk-body-s">
                 <dt>Users with access to update GIAS</dt>

@@ -1,4 +1,4 @@
-<a href="<%=locals.redirectUri%>" class="link-back">Back</a>
+<a href="<%=locals.redirectUri%>" class="govuk-back-link">Back</a>
 <div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         <h1 class="govuk-heading-xl">
@@ -18,7 +18,7 @@
                 <% if (locals.validationMessages.email !== undefined) { %>
                 <p class="error-message" id="validation-email"><%= locals.validationMessages.email %></p>
                 <% } %>
-                <input class="form-control" id="email" name="email" type="email" value="<%=email%>" <% if (locals.validationMessages.email !== undefined) { %> aria-invalid="true" aria-describedby="validation-email" <% } %>>
+                <input class="govuk-input govuk-!-width-one-half" id="email" name="email" type="email" value="<%=email%>" <% if (locals.validationMessages.email !== undefined) { %> aria-invalid="true" aria-describedby="validation-email" <% } %>>
             </div>
             <div class="form-submit submit-buttons">
                 <button type="submit" class="govuk-button">Continue</button>
@@ -26,7 +26,7 @@
         </form>
     </div>
 </div>
-<div class="row">
+<div class="govuk-grid-row">
     <div class="govuk-grid-column-two-thirds">
         <%- include('../../includes/helpdesk'); %>
     </div>
