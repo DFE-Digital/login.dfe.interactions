@@ -55,22 +55,26 @@
                 <input type="hidden" name="redirectUri" value="<%=locals.redirectUri%>"/>
 
                 <legend class="govuk-heading-m">Sign-in</legend>
-                <div class="govuk-form-group <%= (locals.validationMessages.username !== undefined) ? 'govuk-form-group-error' : '' %>">
+                <div class="govuk-form-group <%= (locals.validationMessages.username !== undefined) ? 'govuk-form-group--error' : '' %>">
                     <% if(locals.supportsUsernameLogin) {%>
                         <label class="govuk-label" for="username">Email address or Secure Access username</label>
                     <%} else {%>
                         <label class="govuk-label" for="username">Email address</label>
                     <%}%>
-                    <% if (locals.validationMessages.username !== undefined) { %>
-                        <p class="error-message" id="validation-email"><%=locals.validationMessages.username %></p>
-                    <% } %>
+                    <!-- <% if (locals.validationMessages.username !== undefined) { %>
+                        <span id="validation-email" class="govuk-error-message">
+                            <span class="govuk-visually-hidden">Error:</span> <%=locals.validationMessages.username %>
+                        </span>
+                    <% } %> -->
                     <input class="govuk-input govuk-!-width-full" id="username" name="username" type="text" <% if (locals.validationMessages.username !== undefined) { %> aria-invalid="true" aria-describedby="validation-email" <% } %> value="<%=locals.username%>">
                 </div>
-                <div class="govuk-form-group <%= (locals.validationMessages.password !== undefined) ? 'govuk-form-group-error' : '' %>">
+                <div class="govuk-form-group <%= (locals.validationMessages.password !== undefined) ? 'govuk-form-group--error' : '' %>">
                     <label class="govuk-label" for="password">Password</label>
-                    <% if(locals.validationMessages.password !== undefined) { %>
-                        <p class="error-message" id="validation-password"><%=locals.validationMessages.password%></p>
-                    <% } %>
+                    <!-- <% if(locals.validationMessages.password !== undefined) { %>
+                        <span id="validation-password" class="govuk-error-message">
+                            <span class="govuk-visually-hidden">Error:</span> <%=locals.validationMessages.password %>
+                        </span>
+                    <% } %> -->
                     <div class="show-password full-width">
                         <input class="govuk-input govuk-!-width-full" id="password" name="password" type="password" <% if (locals.validationMessages.password !== undefined) { %> aria-invalid="true" aria-describedby="validation-password" <% } %>>
                     </div>
