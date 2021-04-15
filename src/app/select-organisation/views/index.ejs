@@ -1,54 +1,62 @@
 <!-- <main class="elements-index" id="content" tabindex="-1"> -->
-<main class="govuk-main-wrapper" id="content" tabindex="-1">
-
+<main id="content" class="govuk-width-container govuk-!-margin-bottom-9" tabindex="-1">
 
     <div class="govuk-grid-row">
+
         <div class="govuk-grid-column-two-thirds">
+
             <h1 class="govuk-heading-xl">
                 Select your organisation
             </h1>
+
             <p class="govuk-body">You are associated with more than one organisation, please select the one you wish to sign-in with.</p>
+            
             <form method="post">
                 <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
-            <div class="govuk-form-group">
+            
+                <legend>
+                    <h1 class="govuk-heading-s">Your organisations</h1>
+                </legend>
 
-                <fieldset>
-                    <legend>
-                        <h1 class="govuk-heading-s">Your organisations</h1>
-                    </legend>
+                <div class="govuk-form-group">
+
+                    <div class="govuk-radios">
 
                     <% locals.orgsForUser.forEach((org) => { %>
-                    <div class="multiple-choice">
-                        <input id="<%= org.organisation.id %>" type="radio" name="selected-organisation" value="<%= encodeURIComponent(JSON.stringify(org.organisation))%>">
-                        <label for="<%= org.organisation.id %>">
-                            <span class="govuk-label--s">
-                                <%- org.organisation.name %>
-                                <%= org.organisation.status ? `(${org.organisation.status.name})` : ''%>
-                            </span>
+
+                        <div class="govuk-radios__item">
+                            <input class="govuk-radios__input" id="cookie-radio-settings-false" type="radio" name="cookie.settings" value="">
+                            <label class="govuk-label govuk-radios__label" for="cookie-radio-settings-false">
+                                <span class="govuk-label--s">
+                                    <%- org.organisation.name %>
+                                    <%= org.organisation.status ? `(${org.organisation.status.name})` : ''%>
+                                </span>
+                            </label>
                             <% if (org.naturalIdentifiers.length > 0) { %>
-                            <span class="govuk-label__hint">
-                                <%= org.naturalIdentifiers.join(', ') %>
-                            </span>
+                                <span class="govuk-hint govuk-radios__hint">
+                                    <%= org.naturalIdentifiers.join(', ') %>
+                                </span>
                             <% } %>
                             <% if (org.organisation.address && org.organisation.address !== 'Not recorded') { %>
-                                <span class="govuk-label__hint">
+                                <span class="govuk-hint govuk-radios__hint">
                                 <%= org.organisation.address %>
-                            </span>
+                                </span>
                             <% } %>
-                        </label>
-                    </div>
+                        </div>
 
                     <% })%>
 
-                </fieldset>
+                    </div>
 
-            </div>
-            <div class="govuk-form-group">
-                <input type="submit" class="govuk-button" value="Continue" />
-            </div>
+                </div>
+
+                <div class="govuk-form-group">
+                    <input type="submit" class="govuk-button" value="Continue" />
+                </div>
             </form>
         </div>
-        <div class="col-4">
+
+        <div class="govuk-grid-column-one-third">
             <aside>
                 <h2 class="govuk-heading-m">Actions</h2>
                 <ul class="govuk-list">
@@ -56,5 +64,6 @@
                 </ul>
             </aside>
         </div>
+
     </div>
 </main>
