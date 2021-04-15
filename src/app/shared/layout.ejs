@@ -27,7 +27,8 @@
 
 <a href="#content" class="govuk-skip-link">Skip to main content</a>
 
-<%-include(process.cwd()+'/node_modules/dfe-frontend-toolkit/app/views/concepts/components/cookie-banner.html') %>
+<!-- <%-include(process.cwd()+'/node_modules/dfe-frontend-toolkit/app/views/concepts/components/cookie-banner.html') %> -->
+<%-include('/Users/jlgarcia/development/DfE/dfe.ui.toolkit/app/views/concepts/components/cookie-banner.html') %>
 
 <div class="wrapper">
     <%if(app.environmentBannerMessage) {%>
@@ -90,10 +91,11 @@
     <main id="content" class="govuk-width-container govuk-!-margin-bottom-9">
 
         <% if (locals.backLink !== undefined) { %>
-        <a href="#" class="govuk-back-link">Back</a>
+        <span class="js-back-link"></span>
+
         <% } %>
 
-        <!-- <% if (locals.validationMessages !== undefined) { %>
+        <% if (locals.validationMessages !== undefined) { %>
 
             <% const validationKeys = Object.keys(locals.validationMessages)  %>
 
@@ -112,7 +114,7 @@
                     </div>
                 </div>
             <% } %>
-        <% } %> -->
+        <% } %>
 
         <%-body%>
 
