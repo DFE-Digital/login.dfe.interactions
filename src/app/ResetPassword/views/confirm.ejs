@@ -38,7 +38,7 @@
                 <input type="hidden" value="<%=locals.uid%>" name="uid" id="uid"/>
                 <input type="hidden" name="clientId" id="clientId" value="<%=locals.clientId%>" />
                 <input type="hidden" name="redirectUri" id="redirectUri" value="<%=locals.redirectUri%>" />
-                <div class="govuk-form-group <%= locals.validationMessages.code !== undefined ? "govuk-form-group-error" : "" %>">
+                <div class="govuk-form-group <%= locals.validationMessages.code !== undefined ? 'govuk-form-group--error' : '' %>">
                     <label class="govuk-label" for="code">Verification code</label>
                     <% if (locals.validationMessages.code !== undefined) { %>
                     <p class="error-message" id="validation-code"><%= locals.validationMessages.code %></p>

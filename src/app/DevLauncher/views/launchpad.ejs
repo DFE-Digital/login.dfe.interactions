@@ -1,4 +1,4 @@
-    <div class="row row-intro">
+    <div class="govuk-grid-row">
         <div class="govuk-grid-column-one-half">
             <p class="govuk-body">
                 UUID is <%= uuid %>
@@ -10,47 +10,47 @@
     </div>
     <div class="cards">
         <a class="card" href="/<%= uuid %>/usernamepassword?clientid=local&redirect_uri=https://localhost:4431">
-            <h2>Start username/password</h2>
+            <h2 class="govuk-heading-m">Start username/password</h2>
             <p class="govuk-body">Start the default username and password login journey</p>
         </a>
         <a class="card" href="/dev/complete?clientid=local&redirect_uri=https://localhost:4431">
-            <h2>Interaction Complete</h2>
+            <h2 class="govuk-heading-m">Interaction Complete</h2>
             <p class="govuk-body">Show the Interaction Complete page</p>
         </a>
         <a class="card" href="/<%= uuid %>/resetpassword/request?clientid=local&redirect_uri=https://localhost:4431">
-            <h2>Start reset password</h2>
+            <h2 class="govuk-heading-m">Start reset password</h2>
             <p class="govuk-body">Start the reset password journey</p>
         </a>
         <a class="card" href="/<%= uuid %>/resetpassword/11d62132-6570-4e63-9dcb-137cc35e7543/confirm?clientid=local&redirect_uri=https://localhost:4431">
-            <h2>Confirm reset password</h2>
+            <h2 class="govuk-heading-m">Confirm reset password</h2>
             <p class="govuk-body">Enter code and continue with password reset</p>
         </a>
         <a class="card" href="/dev/passwordresetnewpassword?uuid=<%=uuid%>">
-            <h2>Set new password</h2>
+            <h2 class="govuk-heading-m">Set new password</h2>
             <p class="govuk-body">Set new password as part of reset journey</p>
         </a>
         <a class="card" href="/dev/passwordresetcomplete?uuid=<%=uuid%>">
-            <h2>Password has been reset</h2>
+            <h2 class="govuk-heading-m">Password has been reset</h2>
             <p class="govuk-body">Completion of reset password</p>
         </a>
         <a class="card" href="/<%= uuid %>/digipass?clientid=local&uid=23121d3c-84df-44ac-b458-3d63a9a05497">
-            <h2>Digipass token</h2>
+            <h2 class="govuk-heading-m">Digipass token</h2>
             <p class="govuk-body">Auth with digipass token</p>
         </a>
         <a class="card" href="/<%= uuid %>/select-organisation?clientid=local&uid=23121d3c-84df-44ac-b458-3d63a9a05497">
-            <h2>Select Organisation</h2>
+            <h2 class="govuk-heading-m">Select Organisation</h2>
             <p class="govuk-body">Select org during login flow</p>
         </a>
         <a class="card" href="/<%= uuid %>/sms?clientid=local&uid=23121d3c-84df-44ac-b458-3d63a9a05497">
-            <h2>Start SMS</h2>
+            <h2 class="govuk-heading-m">Start SMS</h2>
             <p class="govuk-body">Enter SMS code during login flow</p>
         </a>
         <a class="card" href="/<%= uuid %>/gias-lockout?redirect_uri=https://localhost:4431">
-            <h2>GIAS Lockout</h2>
+            <h2 class="govuk-heading-m">GIAS Lockout</h2>
             <p class="govuk-body">Show GIAS Lockout announcements</p>
         </a>
         <a class="card" href="/<%= uuid %>/consent?redirect_uri=https://localhost:4431">
-            <h2>Consent</h2>
+            <h2 class="govuk-heading-m">Consent</h2>
             <p class="govuk-body">Show user grant consent</p>
         </a>
     </div>
