@@ -31,7 +31,7 @@
     "cookies": "^0.7.2",
     "csurf": "^1.9.0",
     "debug": "^3.1.0",
-    "dfe-frontend-toolkit": "github:DFE-Digital/dfe.ui.toolkit#1.0.0",
+    "dfe-frontend-toolkit": "github:DFE-Digital/dfe.ui.toolkit#1.1.0",
     "ejs": "^2.5.7",
     "email-validator": "^1.1.1",
     "express": "^4.16.2",
