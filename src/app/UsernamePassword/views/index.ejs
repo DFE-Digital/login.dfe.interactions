@@ -45,7 +45,7 @@
     <div class="govuk-grid-row">
         <div class="govuk-grid-column-one-half">
             <% if (locals.useSelfRegister) { %>
-                <p class="govuk-body">DfE Sign-in allows you to access several important services in the education sector, such as COLLECT.</p>
+                <p class="govuk-body">DfE Sign-in is your gateway to several important services in the education sector.</p>
             <% } else { %>
                 <p class="govuk-body">DfE Sign-in is the new way to access some specific education sector services. To use DfE Sign-in you will need to <a class="govuk-link" href="<%=locals.urls.help%>/contact/create-account">create an account</a>.</p>
             <% } %>
@@ -54,7 +54,6 @@
                 <input type="hidden" name="clientId" value="<%=locals.clientId%>"/>
                 <input type="hidden" name="redirectUri" value="<%=locals.redirectUri%>"/>
 
-                <legend class="govuk-heading-m">Sign-in</legend>
                 <div class="govuk-form-group <%= (locals.validationMessages.username !== undefined) ? 'govuk-form-group--error' : '' %>">
                     <% if(locals.supportsUsernameLogin) {%>
                         <label class="govuk-label" for="username">Email address or Secure Access username</label>
@@ -78,11 +77,11 @@
                     <div class="show-password full-width">
                         <input class="govuk-input govuk-!-width-full" id="password" name="password" type="password" <% if (locals.validationMessages.password !== undefined) { %> aria-invalid="true" aria-describedby="validation-password" <% } %>>
                     </div>
-                    <p class="govuk-body"><a class="govuk-link" href="/<%=locals.uuid%>/resetpassword/request?clientid=<%=locals.clientId%>&redirect_uri=<%=locals.redirectUri%>">Forgotten your password?</a></p>
+                    <p class="govuk-body"><a class="govuk-link govuk-!-font-weight-bold" href="/<%=locals.uuid%>/resetpassword/request?clientid=<%=locals.clientId%>&redirect_uri=<%=locals.redirectUri%>">Forgotten your password?</a></p>
                 </div>
 
                 <div class="govuk-inset-text">
-                    <p class="govuk-body">By continuing you accept the <a class="govuk-link" href="/terms">terms and conditions</a>.</p>
+                    <p class="govuk-body">By signing in you accept the <a class="govuk-link govuk-!-font-weight-bold" href="/terms">terms and conditions</a>.</p>
                 </div>
                 <div class="form-submit submit-buttons">
                     <button type="submit" class="govuk-button">
@@ -94,7 +93,7 @@
                         </span>
                     </button>
                     <% if (locals.useSelfRegister) { %>
-                        <span><a class="govuk-button govuk-button--secondary" href="<%= locals.urls.profile %>/register" role="button">Create Account</a></span>
+                        <span><a class="govuk-button govuk-button--secondary" href="<%= locals.urls.profile %>/register" role="button">Create account</a></span>
                     <% } %>
                 </div>
             </form>
@@ -105,10 +104,6 @@
             <div class="govuk-grid-column-two-thirds">
                 <%- include('../../includes/helpdesk'); %>
             </div>
-        <%} else {%>
-            <div class="govuk-grid-column-one-half"> 
-                <p class="govuk-body"><b class="govuk-!-font-size-19 govuk-!-font-weight-bold">Need help? </b><a class="govuk-link" href="<%=locals.urls.help%>/contact">See our DfE Sign-in help guides</a></p>
-            </div>
-        <%}%>
+        <% } %>
     </div>
 
