@@ -15,7 +15,7 @@
             <input type="hidden" name="clientId" value="<%=locals.clientId%>" />
             <input type="hidden" name="redirectUri" value="<%=locals.redirectUri%>" />
             <div class="govuk-form-group <%=  locals.validationMessages.email !== undefined ? 'govuk-form-group--error' : '' %>">
-                <label class="govuk-label--s" for="email">Email address</label>
+                <label class="govuk-label govuk-label--s" for="email">Email address</label>
                 <% if (locals.validationMessages.email !== undefined) { %>
                 <p class="error-message" id="validation-email"><%= locals.validationMessages.email %></p>
                 <% } %>

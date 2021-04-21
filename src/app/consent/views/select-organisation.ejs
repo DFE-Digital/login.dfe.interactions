@@ -21,7 +21,7 @@
                             <div class="multiple-choice">
                                 <input id="<%= org.organisation.id %>" type="radio" name="selected-organisation" value="<%= org.organisation.id%>">
                                 <label for="<%= org.organisation.id %>">
-                            <span class="govuk-label--s">
+                            <span class="govuk-label govuk-label--s">
                                 <%- org.organisation.name %>
                                 <%= org.organisation.status ? `(${org.organisation.status.name})` : ''%>
                             </span>
