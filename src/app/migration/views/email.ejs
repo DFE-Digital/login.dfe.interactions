@@ -31,7 +31,9 @@
                         <label class="govuk-label govuk-label--s" for="email">New email address</label>
                         <p class="govuk-label__hint">We will send you an email to confirm your new address </p>
                         <% if (locals.validationMessages.email !== undefined) { %>
-                        <p class="error-message" id="validation-code"><%= locals.validationMessages.email %></p>
+                            <span id="validation-code" class="govuk-error-message">
+                                <span class="govuk-visually-hidden">Error:</span> <%=locals.validationMessages.email %>
+                            </span>
                         <% } %>
                         <input class="form-control" name="email" type="text" id="email">
                     </div>
