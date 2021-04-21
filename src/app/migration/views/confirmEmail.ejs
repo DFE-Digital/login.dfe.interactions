@@ -33,7 +33,7 @@
         <div class="govuk-grid-column-one-half">
             <p class="govuk-body-l">Enter your verification code to confirm your email address.</p>
             <div class="govuk-form-group <%= locals.validationMessages.code !== undefined ? 'govuk-form-group--error' : '' %>">
-                <label class="govuk-label" for="code">Verification code</label>
+                <label class="govuk-label--s" for="code">Verification code</label>
                 <% if (locals.validationMessages.code !== undefined) { %>
                 <p class="error-message" id="validation-code"><%= locals.validationMessages.code %></p>
                 <% } %>
