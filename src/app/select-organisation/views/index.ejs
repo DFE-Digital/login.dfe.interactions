@@ -24,8 +24,8 @@
                     <% locals.orgsForUser.forEach((org) => { %>
 
                         <div class="govuk-radios__item">
-                            <input class="govuk-radios__input" id="cookie-radio-settings-false" type="radio" name="cookie.settings" value="">
-                            <label class="govuk-label govuk-radios__label" for="cookie-radio-settings-false">
+                            <input class="govuk-radios__input" id="<%= org.organisation.id %>" type="radio" name="selected-organisation" value="<%= encodeURIComponent(JSON.stringify(org.organisation))%>">
+                            <label class="govuk-label govuk-radios__label" for="<%= org.organisation.id %>">
                                 <span class="govuk-label govuk-label--s">
                                     <%- org.organisation.name %>
                                     <%= org.organisation.status ? `(${org.organisation.status.name})` : ''%>
