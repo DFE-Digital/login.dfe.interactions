@@ -47,9 +47,8 @@
                     <% } %>
                     <input class="govuk-input govuk-!-width-one-half" id="code" name="code" type="text" value="<%=code%>" maxlength="8" <% if (locals.validationMessages.code !== undefined) { %> aria-invalid="true" aria-describedby="validation-code" <% } %>>
                 </div>
-                <div class="form-submit submit-buttons">
-                    <button type="submit" class="govuk-button">Continue</button>
-                </div>
+
+                <button type="submit" class="govuk-button">Continue</button>
 
         </form>
     </div>
