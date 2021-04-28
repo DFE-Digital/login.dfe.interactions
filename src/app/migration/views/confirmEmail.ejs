@@ -6,7 +6,7 @@
 <% if (locals.email) { %>
 <div class="notification notification-success" tabindex="0">
     <h2>Email confirmation sent</h2>
-    <p>We've sent you an email to <%=locals.email%> containing a verification code.</p>
+    <p class="govuk-body">We've sent you an email to <%=locals.email%> containing a verification code.</p>
 
     <form method="post" class="inline" id="form-resend-migration-email" action="/<%= locals.uuid %>/migration/email/">
         <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
@@ -14,35 +14,37 @@
         <input type="hidden" name="email" id="email" value="<%=locals.email%>"/>
         <input type="hidden" name="resend" id="resend" value="true" />
         <input type="hidden" name="emailConfId" value="<%=locals.emailConfId%>" />
-        <button type="submit" class="button-text">Resend email</button>
+        <button type="submit" class="govuk-button-text">Resend email</button>
     </form>
 </div>
 <% } %>
 
 
-<div class="row">
-    <div class="col-8">
-        <h1 class="heading-xlarge">Confirm your email address</h1>
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl">Confirm your email address</h1>
     </div>
 </div>
-<div class="grid-row">
+<div class="govuk-grid-row">
     <form method="post">
         <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
         <input type="hidden" name="emailConfId" value="<%=locals.emailConfId%>" />
         <input type="hidden" name="email" value="<%=locals.email%>" />
-        <div class="col-6">
-            <p class="lede">Enter your verification code to confirm your email address.</p>
-            <div class="form-group <%= locals.validationMessages.code !== undefined ? "form-group-error" : "" %>">
-                <label class="form-label" for="code">Verification code</label>
+        <div class="govuk-grid-column-one-half">
+            <p class="govuk-body-l">Enter your verification code to confirm your email address.</p>
+            <div class="govuk-form-group <%= locals.validationMessages.code !== undefined ? 'govuk-form-group--error' : '' %>">
+                <label class="govuk-label govuk-label--s" for="code">Verification code</label>
                 <% if (locals.validationMessages.code !== undefined) { %>
-                <p class="error-message" id="validation-code"><%= locals.validationMessages.code %></p>
+                    <span id="validation-code" class="govuk-error-message">
+                        <span class="govuk-visually-hidden">Error:</span> <%= locals.validationMessages.code %>
+                    </span>
                 <% } %>
                 <input type="text" class="form-control char-width-8" name="code" id="code"
                         <% if (locals.validationMessages.code !== undefined) { %> aria-invalid="true" aria-describedby="validation-code" <% } %>>
             </div>
-            <div class="form-submit">
-                <button type="submit" class="button">Continue</button>
-            </div>
+
+            <button type="submit" class="govuk-button">Continue</button>
+
         </div>
     </form>
 </div>

@@ -1,95 +1,107 @@
 
     <% if(locals.headerInternal) { %>
         <div class="notification notification-information" tabindex="-1">
-            <h2><%=locals.headerInternal%></h2>
+            <h2 class="govuk-heading-m"><%=locals.headerInternal%></h2>
             <% if(locals.headerMessageInternal) { %>
-                <p><%-locals.headerMessageInternal.replace('__helplink__',locals.urls.help)%></p>
+                <span class="govuk-body"><%-locals.headerMessageInternal.replace('__helplink__',locals.urls.help)%></span>
             <%}%>
         </div>
     <%} if (locals.headerExternal) { %>
         <div class="notification notification-information" tabindex="-1">
-            <h2><%=locals.headerExternal%></h2>
+            <h2 class="govuk-heading-m"><%=locals.headerExternal%></h2>
             <% if(locals.headerMessageExternal) { %>
-                <p><%-locals.headerMessageExternal.replace('__helplink__',locals.urls.help)%></p>
+                <span class="govuk-body"><%-locals.headerMessageExternal.replace('__helplink__',locals.urls.help)%></span>
             <%}%>
         </div>
     <%} else if (locals.showDefaultMessage) { %>
         <div class="notification notification-information" tabindex="-1">
-            <h2>Department for Education Sign-in</h2>
+            <h2 class="govuk-heading-m">Department for Education Sign-in</h2>
         </div>
     <% } %>
 
+    
+    <!-- <div class="govuk-notification-banner" role="region" aria-labelledby="govuk-notification-banner-title" data-module="govuk-notification-banner">
+        <div class="govuk-notification-banner__header">
+            <h2 class="govuk-notification-banner__title" id="govuk-notification-banner-title">
+            Important
+            </h2>
+        </div>
+        <div class="govuk-notification-banner__content">
+            <p class="govuk-notification-banner__heading">
+            You have 7 days left to send your application.
+            <a class="govuk-notification-banner__link" href="#">View application</a>.
+            </p>
+        </div>
+    </div> -->
 
-    <div class="grid-row">
-        <div class="col-8">
-            <h1 class="heading-xlarge">
+
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
+            <h1 class="govuk-heading-xl">
                 Department for Education Sign-in
             </h1>
         </div>
     </div>
-    <div class="row">
-        <div class="col-6">
+    <div class="govuk-grid-row">
+        <div class="govuk-grid-column-two-thirds">
             <% if (locals.useSelfRegister) { %>
-                <p>DfE Sign-in allows you to access several important services in the education sector, such as COLLECT.</p>
+                <p class="govuk-body">DfE Sign-in is your gateway to several important services in the education sector.</p>
             <% } else { %>
-                <p>DfE Sign-in is the new way to access some specific education sector services. To use DfE Sign-in you will need to <a href="<%=locals.urls.help%>/contact/create-account">create an account</a>.</p>
+                <p class="govuk-body">DfE Sign-in is the new way to access some specific education sector services. To use DfE Sign-in you will need to <a class="govuk-link" href="<%=locals.urls.help%>/contact/create-account">create an account</a>.</p>
             <% } %>
             <form method="post" id="form-signin" class="form-signin">
                 <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
                 <input type="hidden" name="clientId" value="<%=locals.clientId%>"/>
                 <input type="hidden" name="redirectUri" value="<%=locals.redirectUri%>"/>
-                <fieldset>
-                    <legend class="heading-medium">Sign-in</legend>
-                    <div class="form-group <%= (locals.validationMessages.username !== undefined) ? 'form-group-error' : '' %>">
-                        <% if(locals.supportsUsernameLogin) {%>
-                            <label class="form-label" for="username">Email address or Secure Access username</label>
-                        <%} else {%>
-                            <label class="form-label" for="username">Email address</label>
-                        <%}%>
-                        <% if (locals.validationMessages.username !== undefined) { %>
-                            <p class="error-message" id="validation-email"><%=locals.validationMessages.username %></p>
-                        <% } %>
-                        <input class="form-control full-width" id="username" name="username" type="text" <% if (locals.validationMessages.username !== undefined) { %> aria-invalid="true" aria-describedby="validation-email" <% } %> value="<%=locals.username%>">
-                    </div>
-                    <div class="form-group <%= (locals.validationMessages.password !== undefined) ? 'form-group-error' : '' %>">
-                        <label class="form-label" for="password">Password</label>
-                        <% if(locals.validationMessages.password !== undefined) { %>
-                            <p class="error-message" id="validation-password"><%=locals.validationMessages.password%></p>
-                        <% } %>
-                        <div class="show-password full-width">
-                            <input class="form-control" id="password" name="password" type="password" <% if (locals.validationMessages.password !== undefined) { %> aria-invalid="true" aria-describedby="validation-password" <% } %>>
-                        </div>
-                        <p class="form-help"><a href="/<%=locals.uuid%>/resetpassword/request?clientid=<%=locals.clientId%>&redirect_uri=<%=locals.redirectUri%>">Forgotten your password?</a></p>
-                    </div>
-                </fieldset>
-                <div class="panel panel-border-wide">
-                    <p>By continuing you accept the <a href="/terms">terms and conditions</a>.</p>
-                </div>
-                <div class="form-submit submit-buttons">
-                    <button type="submit" class="button">
-                        Sign in
-                        <span class="loader spinner-inline vh">
-                            <span class="ball b-1"></span>
-                            <span class="ball b-2"></span>
-                            <span class="ball b-3"></span>
+
+                <div class="govuk-form-group <%= (locals.validationMessages.username !== undefined) ? 'govuk-form-group--error' : '' %>">
+                    <% if(locals.supportsUsernameLogin) {%>
+                        <label class="govuk-label govuk-label--s" for="username">Email address or Secure Access username</label>
+                    <%} else {%>
+                        <label class="govuk-label govuk-label--s" for="username">Email address</label>
+                    <%}%>
+                    <% if (locals.validationMessages.username !== undefined) { %>
+                        <span id="validation-email" class="govuk-error-message">
+                            <span class="govuk-visually-hidden">Error:</span> <%=locals.validationMessages.username %>
                         </span>
-                    </button>
-                    <% if (locals.useSelfRegister) { %>
-                        <span><a class="button button-secondary" href="<%= locals.urls.profile %>/register" role="button">Create Account</a></span>
                     <% } %>
+                    <input class="govuk-input govuk-!-width-three-quarters" id="username" name="username" type="text"
+                            <% if (locals.validationMessages.username !== undefined) { %> aria-invalid="true" aria-describedby="validation-email" <% } %> value="<%=locals.username%>">
                 </div>
+                <div class="govuk-form-group <%= (locals.validationMessages.password !== undefined) ? 'govuk-form-group--error' : '' %>">
+                    <label class="govuk-label govuk-label--s" for="password">Password</label>
+                    <% if(locals.validationMessages.password !== undefined) { %>
+                        <span id="validation-password" class="govuk-error-message">
+                            <span class="govuk-visually-hidden">Error:</span> <%=locals.validationMessages.password %>
+                        </span>
+                    <% } %>
+                    <input class="password-input govuk-input govuk-!-width-three-quarters govuk-!-margin-right-1" id="password" name="password" type="password"
+                            <% if (locals.validationMessages.password !== undefined) { %> aria-invalid="true" aria-describedby="validation-password" <% } %>>
+                    
+                    <p class="govuk-body">
+                        <a class="govuk-link govuk-!-font-weight-bold"
+                            href="/<%=locals.uuid%>/resetpassword/request?clientid=<%=locals.clientId%>&redirect_uri=<%=locals.redirectUri%>">
+                            Forgotten your password?
+                        </a>    
+                </p>
+                </div>
+
+                <div class="govuk-inset-text">
+                    <p class="govuk-body">By signing in you accept our <a class="govuk-link govuk-!-font-weight-bold" href="/terms">terms and conditions</a>.</p>
+                </div>
+
+                <button type="submit" class="govuk-button govuk-!-margin-right-3">
+                    Sign in
+                    <span class="loader spinner-inline vh">
+                        <span class="ball b-1"></span>
+                        <span class="ball b-2"></span>
+                        <span class="ball b-3"></span>
+                    </span>
+                </button>
+                <% if (locals.useSelfRegister) { %>
+                    <span><a class="govuk-button govuk-button--secondary" href="<%= locals.urls.profile %>/register" role="button">Create account</a></span>
+                <% } %>
+
             </form>
         </div>
     </div>
-    <div class="row">
-        <% if (!locals.useSelfRegister) { %>
-            <div class="col-8">
-                <%- include('../../includes/helpdesk'); %>
-            </div>
-        <%} else {%>
-            <div class="col-6"> 
-                <p><b class="bold-small">Need help? </b><a href="<%=locals.urls.help%>/contact">See our DfE Sign-in help guides</a></p>
-            </div>
-        <%}%>
-    </div>
-

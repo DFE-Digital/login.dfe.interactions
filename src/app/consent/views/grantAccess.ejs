@@ -1,36 +1,35 @@
-<div class="row">
-    <div class="col-12">
-        <h1 class="heading-xlarge">
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
+        <h1 class="govuk-heading-xl">
             <% if (locals.consentTitle) { %>
                 <%= locals.consentTitle %>
             <% } else { %>
             Do you want to use <%= application.name -%> to send us your <%= roleScope -%> data?
             <% } %>
         </h1>
-        <p class="lede">Send Data to DfE is a secure new way to send your data.</p>
+        <p class="govuk-body-l">Send Data to DfE is a secure new way to send your data.</p>
 
         <% if (locals.consentBody) { %>
             <%- locals.consentBody %>
         <% } else { %>
-        <p>The service is currently being tested. Please note that all schools must complete their census
+        <p class="govuk-body">The service is currently being tested. Please note that all schools must complete their census
             returns as normal using COLLECT.</p>
-        <p>On completion of the trial we will contact you to confirm your data has been deleted.</p>
+        <p class="govuk-body">On completion of the trial we will contact you to confirm your data has been deleted.</p>
         <% } %>
     </div>
 </div>
 
-<div class="row">
-    <div class="col-12">
-
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
 
         <form id="main" method="post" style="display: inline-block;">
-            <div class="form-group">
+            <div class="govuk-form-group">
                 <input type="hidden" name="_csrf" value="<%= csrfToken %>"/>
                 <div class="multiple-choice">
                     <input checked="checked" type="radio" name="consent-choice"
                            value="yes" id="yes-consent">
                     <label for="yes-consent">
-                    <span class="form-label-bold">
+                    <span class="govuk-label govuk-label--s">
                         Yes, I want to use <%= application.name %>
                     </span>
                     </label>
@@ -39,14 +38,14 @@
                     <input type="radio" name="consent-choice"
                            value="no" id="no-consent">
                     <label for="no-consent">
-                    <span class="form-label-bold">
+                    <span class="govuk-label govuk-label--s">
                         Not now
                     </span>
                     </label>
                 </div>
             </div>
-            <div class="form-group">
-                <button class="button" type="submit">Save and continue</button>
+            <div class="govuk-form-group">
+                <button class="govuk-button" type="submit">Save and continue</button>
             </div>
         </form>
     </div>
