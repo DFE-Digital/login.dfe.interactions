@@ -24,7 +24,7 @@
             to use or share data about how you use this site.
         </p>
 
-        <form id="dsi-cookie-form">
+        <form id="dsi-cookie-form" class="hidden-when-js-disabled">
             <h2 class="govuk-heading-m">
                 Cookie settings
             </h2>
@@ -73,7 +73,7 @@
             </button>
         </form>
 
-        <div class="no-js-message">
+        <div id="no-js-message" class="hidden-when-js-enabled">
             <h2 class="govuk-heading-m">Cookie settings</h2>
             <p class="govuk-body">We use Javascript to set most of our cookies. Unfortunately Javascript is 
                 not running on your browser, so you cannot change your settings. You can try:
