@@ -90,17 +90,19 @@
                     <p class="govuk-body">By signing in you accept our <a class="govuk-link govuk-!-font-weight-bold" href="/terms">terms and conditions</a>.</p>
                 </div>
 
-                <button type="submit" class="govuk-button govuk-!-margin-right-3">
-                    Sign in
-                    <span class="loader spinner-inline vh">
-                        <span class="ball b-1"></span>
-                        <span class="ball b-2"></span>
-                        <span class="ball b-3"></span>
-                    </span>
-                </button>
-                <% if (locals.useSelfRegister) { %>
-                    <span><a class="govuk-button govuk-button--secondary" href="<%= locals.urls.profile %>/register" role="button">Create account</a></span>
-                <% } %>
+                <div class="submit-buttons">
+                    <button type="submit" class="govuk-button">
+                        Sign in
+                        <span class="loader spinner-inline vh">
+                            <span class="ball b-1"></span>
+                            <span class="ball b-2"></span>
+                            <span class="ball b-3"></span>
+                        </span>
+                    </button>
+                    <% if (locals.useSelfRegister) { %>
+                        <span><a class="govuk-button govuk-button--secondary" href="<%= locals.urls.profile %>/register" role="button">Create account</a></span>
+                    <% } %>
+                </div>
 
             </form>
         </div>
