@@ -16,6 +16,7 @@ const config = require('./infrastructure/Config')();
 const helmet = require('helmet');
 const sanitization = require('login.dfe.sanitization');
 const healthCheck = require('login.dfe.healthcheck');
+const { version } = require('../package.json');
 const { getErrorHandler, ejsErrorPages } = require('login.dfe.express-error-handling');
 const migratingUserMiddleware = require('./app/utils/migratingUserMiddleware');
 const configSchema = require('./infrastructure/Config/schema');
@@ -35,7 +36,6 @@ const content = require('./app/Content');
 const setCorrelationId = require('express-mw-correlation-id');
 
 https.globalAgent.maxSockets = http.globalAgent.maxSockets = config.hostingEnvironment.agentKeepAlive.maxSockets || 50;
-
 
 configSchema.validate();
 
@@ -105,7 +105,6 @@ app.use(sanitization({
 
 process.env.NODE_ENV = config.NODE_ENV || 'development';
 
-
 // Set view engine
 app.set('view engine', 'ejs');
 app.use('/assets', express.static(path.join(__dirname, 'app/assets')));
@@ -117,7 +116,7 @@ app.use(expressLayouts);
 app.set('layout', 'shared/layout');
 
 // Setup routes
-app.use('/healthcheck', healthCheck({ config }));
+app.use('/healthcheck', healthCheck({ config, version }));
 
 app.get('/', (req, res) => res.redirect(config.hostingEnvironment.servicesUrl || '/welcome'));
 app.use('/', content(csrf));
@@ -153,7 +152,7 @@ Object.assign(app.locals, {
   gaTrackingId: config.hostingEnvironment.gaTrackingId,
   useSelfRegister: config.toggles ? config.toggles.useSelfRegister : false,
   assets: {
-    version: config.assets.version
+    version: config.assets.version,
   },
 });
 
