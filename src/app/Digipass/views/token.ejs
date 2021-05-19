@@ -19,23 +19,25 @@
         <form method="post" id="form-reset-your-password">
             <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
 
-                <div class="govuk-form-group <%= locals.validationMessages.code !== undefined ? 'govuk-form-group--error' : '' %>">
+            <div class="govuk-form-group <%= locals.validationMessages.code !== undefined ? 'govuk-form-group--error' : '' %>">
 
-                    <label class="govuk-label govuk-label--s" for="code">Token code</label>
+                <label class="govuk-label govuk-label--s" for="code">Token code</label>
 
-                    <% if (locals.validationMessages.code !== undefined) { %>
-                        <span id="validation-code" class="govuk-error-message">
-                            <span class="govuk-visually-hidden">Error:</span> <%=locals.validationMessages.code %>
-                        </span>
-                    <% } %>
+                <% if (locals.validationMessages.code !== undefined) { %>
+                    <span id="validation-code" class="govuk-error-message">
+                        <span class="govuk-visually-hidden">Error:</span> <%=locals.validationMessages.code %>
+                    </span>
+                <% } %>
 
-                    <input class="govuk-input govuk-!-width-two-thirds" id="code" name="code" type="text"
-                           pattern="[0-9]{8}" required aria-required="true" maxlength="8" autocomplete="off"
-                            <% if (locals.validationMessages.code !== undefined) { %> aria-invalid="true" aria-describedby="validation-code" <% } %>>
-   
-                </div>
+                <input class="govuk-input govuk-!-width-two-thirds" id="code" name="code" type="text"
+                        pattern="[0-9]{8}" required aria-required="true" maxlength="8" autocomplete="off"
+                        <% if (locals.validationMessages.code !== undefined) { %> aria-invalid="true" aria-describedby="validation-code" <% } %>>
 
+            </div>
+
+            <div class="govuk-button-group">
                 <button type="submit" class="govuk-button">Continue</button>
+            </div>
 
         </form>
     </div>

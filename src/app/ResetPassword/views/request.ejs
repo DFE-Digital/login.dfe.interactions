@@ -24,7 +24,9 @@
                 <input class="govuk-input govuk-!-width-one-half" id="email" name="email" type="email" value="<%=email%>" <% if (locals.validationMessages.email !== undefined) { %> aria-invalid="true" aria-describedby="validation-email" <% } %>>
             </div>
 
-            <button type="submit" class="govuk-button">Continue</button>
+            <div class="govuk-button-group">
+                <button type="submit" class="govuk-button">Continue</button>
+            </div>
 
         </form>
     </div>
