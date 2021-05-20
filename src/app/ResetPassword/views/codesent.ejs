@@ -6,25 +6,23 @@
 
 <% } %>
 
-<div class="grid-row">
-    <div class="col-8">
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
         <div class="govuk-box-highlight">
-            <h1 class="heading-xlarge">
+            <h1 class="govuk-heading-xl">
                 Email sent
             </h1>
-            <p class="font-medium">
+            <p class="govuk-!-font-size-24">
                 Please check your email for a verification code.
             </p>
         </div>
 
-        <p>A password reset code has been sent to <strong><%=locals.email%></strong>. If you do not receive it in 10 to 15 minutes, please make sure you entered the correct email address for the account.</p>
+        <p class="govuk-body">A password reset code has been sent to <strong><%=locals.email%></strong>. If you do not receive it in 10 to 15 minutes, please make sure you entered the correct email address for the account.</p>
         <form method="post" id="form-resend-reset-password">
             <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
             <input type="hidden" name="email" id="email" value="<%=locals.email%>"/>
             <input type="hidden" name="resend" id="resend" value="true" />
-            <div class="form-submit">
-                <button type="submit" class="button">Resend code</button>
-            </div>
+            <button type="submit" class="govuk-button">Resend code</button>
         </form>
     </div>
 </div>

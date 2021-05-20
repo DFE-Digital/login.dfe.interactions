@@ -5,11 +5,11 @@
 </head>
 <body>
     <h1>Interaction complete</h1>
-    <p>Received the following data from interaction</p>
+    <p class="govuk-body">Received the following data from interaction</p>
     <% Object.keys(data).forEach((key) => { %>
     <div><%=key%> = <%=data[key]%></div>
     <% }); %>
 
-    <a href="/dev">Return to launchpad</a>
+    <a class="govuk-link" href="/dev">Return to launchpad</a>
 </body>
 </html>

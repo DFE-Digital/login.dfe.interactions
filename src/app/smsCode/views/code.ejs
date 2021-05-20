@@ -1,48 +1,50 @@
 <div class="notification notification-success" tabindex="0">
     <h2>Check your phone <%=locals.resend ? 'again' : ''%></h2>
     <div class="inline-wrap">
-        <p>We have <%=locals.resend ? 're-sent' : 'sent'%> you a text message containing an authentication code &dash;</p>
+        <p class="govuk-body">We have <%=locals.resend ? 're-sent' : 'sent'%> you a text message containing an authentication code &dash;</p>
         <form method="post" class="inline" id="form-resend-sms-code">
             <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
             <input type="hidden" name="resend" id="resend" value="true" />
-            <button type="submit" class="button-text">Resend code <%=locals.resend ? 'again' : ''%></button>
+            <button type="submit" class="govuk-button-text">Resend code <%=locals.resend ? 'again' : ''%></button>
         </form>
     </div>
 </div>
-<div class="grid-row">
-    <div class="col-8">
-        <h1 class="heading-xlarge">
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl">
             Enter your authentication code
         </h1>
-        <p class="lede">We have sent you a text message with your authentication code. Enter the code below to verify your identity.</p>
+        <p class="govuk-body-l">We have sent you a text message with your authentication code. Enter the code below to verify your identity.</p>
     </div>
 </div>
-<div class="grid-row">
-    <div class="col-12">
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
         <form method="post" id="form-sms-code">
             <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
 
-                <div class="form-group <%= locals.validationMessages.code !== undefined ? "form-group-error" : "" %>">
+            <div class="govuk-form-group <%= locals.validationMessages.code !== undefined ? 'govuk-form-group--error' : '' %>">
 
-                    <label class="form-label" for="code">Authentication code</label>
+                <label class="govuk-label govuk-label--s" for="code">Authentication code</label>
 
-                    <% if (locals.validationMessages.code !== undefined) { %>
-                        <p class="error-message" id="validation-code"><%= locals.validationMessages.code %></p>
-                    <% } %>
+                <% if (locals.validationMessages.code !== undefined) { %>
+                    <span id="validation-code" class="govuk-error-message">
+                        <span class="govuk-visually-hidden">Error:</span> <%=locals.validationMessages.code %>
+                    </span>
+                <% } %>
 
-                    <input class="form-control char-width-6" id="code" name="code" type="text"
-                           required aria-required="true" maxlength="6" autocomplete="off"
-                            <% if (locals.validationMessages.code !== undefined) { %> aria-invalid="true" aria-describedby="validation-code" <% } %>>
+                <input class="form-control char-width-6" id="code" name="code" type="text"
+                        required aria-required="true" maxlength="6" autocomplete="off"
+                        <% if (locals.validationMessages.code !== undefined) { %> aria-invalid="true" aria-describedby="validation-code" <% } %>>
 
-                </div>
-                <div class="form-submit">
-                    <button type="submit" class="button">Continue</button>
-                </div>
+            </div>
+
+            <button type="submit" class="govuk-button">Continue</button>
+
         </form>
     </div>
 </div>
-<div class="row">
-    <div class="col-8">
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
         <%- include('../../includes/helpdesk'); %>
     </div>
 </div>

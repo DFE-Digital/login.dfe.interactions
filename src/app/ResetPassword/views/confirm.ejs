@@ -1,14 +1,14 @@
-<a href="/<%= locals.uid %>/resetpassword/request?clientid=<%= locals.clientId %>&redirect_uri=<%= locals.redirectUri %>" class="link-back">Back</a>
+<a href="/<%= locals.uid %>/resetpassword/request?clientid=<%= locals.clientId %>&redirect_uri=<%= locals.redirectUri %>" class="govuk-back-link-bold">Back</a>
 
 <% if (locals.resend) { %>
-<div class="notification notification-success" tabindex="0">
-    <h2>Password reset code email resent</h2>
+    <div class="notification notification-success" tabindex="0">
+    <h2 class="notification-header govuk-!-font-size-24">Password reset code email resent</h2>
 </div>
 <% } %>
 <% if (locals.email) { %>
 <div class="notification notification-success" tabindex="0">
-    <h2>Please confirm your email address</h2>
     <div class="inline-wrap">
+        <h2 class="notification-header govuk-!-font-size-24">Please confirm your email address</h2>
         <p>If there is a DfE Sign-in account associated with the email address <b><%=locals.email%></b>, then we will have sent you an email containing a verification code &ndash;</p>
         <form method="post" class="inline" id="form-resend-reset-password" action="/<%= locals.uid %>/resetpassword/request?clientid=<%= locals.clientId %>&redirect_uri=<%= locals.redirectUri %>">
             <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
@@ -16,44 +16,40 @@
             <input type="hidden" name="resend" id="resend" value="true" />
             <input type="hidden" name="clientId" id="clientId" value="<%=locals.clientId%>" />
             <input type="hidden" name="redirectUri" id="redirectUri" value="<%=locals.redirectUri%>" />
-            <button type="submit" class="button-text">Resend code</button>
+            <button type="submit" class="button-text govuk-!-font-size-19">Resend code</button>
         </form>
     </div>
 </div>
 <% } %>
 
-<div class="grid-row">
-    <div class="col-8">
-        <h1 class="heading-xlarge">
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl">
             Enter your verification code
         </h1>
-        <p class="lede">Enter the verification code included in the email we've sent you and then you can continue on to create a new password. </p>
+        <p class="govuk-body-l">Enter the verification code included in the email we've sent you and then you can continue on to create a new password. </p>
     </div>
 </div>
-<div class="grid-row">
-    <div class="col-12">
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
         <form method="post" id="form-confirm-reset-password">
             <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
 
                 <input type="hidden" value="<%=locals.uid%>" name="uid" id="uid"/>
                 <input type="hidden" name="clientId" id="clientId" value="<%=locals.clientId%>" />
                 <input type="hidden" name="redirectUri" id="redirectUri" value="<%=locals.redirectUri%>" />
-                <div class="form-group <%= locals.validationMessages.code !== undefined ? "form-group-error" : "" %>">
-                    <label class="form-label" for="code">Verification code</label>
+                <div class="govuk-form-group <%= locals.validationMessages.code !== undefined ? 'govuk-form-group--error' : '' %>">
+                    <label class="govuk-label govuk-label--s" for="code">Verification code</label>
                     <% if (locals.validationMessages.code !== undefined) { %>
-                    <p class="error-message" id="validation-code"><%= locals.validationMessages.code %></p>
+                        <span id="validation-code" class="govuk-error-message">
+                            <span class="govuk-visually-hidden">Error:</span> <%=locals.validationMessages.code %>
+                        </span>
                     <% } %>
-                    <input class="form-control char-width-8" id="code" name="code" type="text" value="<%=code%>" maxlength="8" <% if (locals.validationMessages.code !== undefined) { %> aria-invalid="true" aria-describedby="validation-code" <% } %>>
-                </div>
-                <div class="form-submit submit-buttons">
-                    <button type="submit" class="button">Continue</button>
+                    <input class="govuk-input govuk-!-width-one-half" id="code" name="code" type="text" value="<%=code%>" maxlength="8" <% if (locals.validationMessages.code !== undefined) { %> aria-invalid="true" aria-describedby="validation-code" <% } %>>
                 </div>
 
+                <button type="submit" class="govuk-button">Continue</button>
+
         </form>
-    </div>
-</div>
-<div class="row">
-    <div class="col-8">
-        <%- include('../../includes/helpdesk'); %>
     </div>
 </div>

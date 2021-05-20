@@ -1,15 +1,15 @@
-<div class="grid-row">
-    <div class="col-8">
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
 
-        <h1 class="heading-xlarge">Sign in with your new details</h1>
+        <h1 class="govuk-heading-xl">Sign in with your new details</h1>
 
-        <p class="lede">You have already created a DfE Sign-in Account</p>
+        <p class="govuk-body-l">You have already created a DfE Sign-in Account</p>
 
-        <p>Please sign-in with the email address and password you gave when creating your new DfE Sign-in account.
+        <p class="govuk-body">Please sign-in with the email address and password you gave when creating your new DfE Sign-in account.
             If you have forgotten your password, use the link provided on the sign-in screen.</p>
 
         <% if (locals.user) {%>
-        <p><a href="<%=locals.user.redirectUri%>" class="button">Back to sign-in screen</a></p>
+        <p class="govuk-body"><a href="<%=locals.user.redirectUri%>" class="govuk-button">Back to sign-in screen</a></p>
         <% } %>
     </div>
 </div>

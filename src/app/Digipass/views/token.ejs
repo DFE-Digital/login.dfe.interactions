@@ -1,50 +1,50 @@
-<div class="grid-row">
-    <div class="col-8">
-        <h1 class="heading-xlarge">
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl">
             Enter your token code
         </h1>
-        <p class="lede">For additional security please enter your 8-digit token code.</p>
+        <p class="govuk-body-l">For additional security please enter your 8-digit token code.</p>
     </div>
 </div>
-<div class="grid-row">
+<div class="govuk-grid-row">
 
-
-
-    <div class="col-6">
-        <h2 class="heading-medium">Token instructions</h2>
-        <ol class="list list-number">
+    <div class="govuk-grid-column-one-half">
+        <h2 class="govuk-heading-m">Token instructions</h2>
+        <ol class="govuk-list govuk-list--number">
             <li>Press the arrow on the token</li>
             <li>Enter your PIN</li>
             <li>Enter the 8-digit code that appears on your token in the Token code text field</li>
         </ol>
+
         <form method="post" id="form-reset-your-password">
             <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
 
-                <div class="form-group <%= locals.validationMessages.code !== undefined ? "form-group-error" : "" %>">
+                <div class="govuk-form-group <%= locals.validationMessages.code !== undefined ? 'govuk-form-group--error' : '' %>">
 
-                    <label class="form-label" for="code">Token code</label>
+                    <label class="govuk-label govuk-label--s" for="code">Token code</label>
 
                     <% if (locals.validationMessages.code !== undefined) { %>
-                        <p class="error-message" id="validation-code"><%= locals.validationMessages.code %></p>
+                        <span id="validation-code" class="govuk-error-message">
+                            <span class="govuk-visually-hidden">Error:</span> <%=locals.validationMessages.code %>
+                        </span>
                     <% } %>
 
-                    <input class="form-control char-width-8" id="code" name="code" type="text"
+                    <input class="govuk-input govuk-!-width-two-thirds" id="code" name="code" type="text"
                            pattern="[0-9]{8}" required aria-required="true" maxlength="8" autocomplete="off"
                             <% if (locals.validationMessages.code !== undefined) { %> aria-invalid="true" aria-describedby="validation-code" <% } %>>
+   
+                </div>
 
-                </div>
-                <div class="form-submit">
-                    <button type="submit" class="button">Continue</button>
-                </div>
+                <button type="submit" class="govuk-button">Continue</button>
 
         </form>
     </div>
-    <div class="col-6">
-        <img src="<%= locals.urls.assets %>/images/token.svg" class="responsive spacing" alt="Illustration of the token">
+    <div class="govuk-grid-column-one-half">
+        <img src="<%= locals.urls.assets %>/gds-upgrade/images/token.svg" class="responsive spacing" alt="Illustration of the token">
     </div>
 </div>
-<div class="row">
-    <div class="col-8">
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
         <%- include('../../includes/helpdesk'); %>
     </div>
 </div>

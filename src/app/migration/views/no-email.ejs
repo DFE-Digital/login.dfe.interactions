@@ -1,25 +1,25 @@
-<div class="grid-row">
-    <div class="col-8">
-        <h1 class="heading-xlarge">
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-two-thirds">
+        <h1 class="govuk-heading-xl">
             Enter an email address
         </h1>
-        <p class="lede">To access your services through DfE Sign-in your email address will become your username.</p>
+        <p class="govuk-body-l">To access your services through DfE Sign-in your email address will become your username.</p>
     </div>
 </div>
-<div class="grid-row">
-    <div class="col-12">
+<div class="govuk-grid-row">
+    <div class="govuk-grid-column-full">
         <form method="post" action="email">
-            <div class="form-group">
+            <div class="govuk-form-group">
                 <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
                 <input type="hidden" name="viewToDisplay" value="<%=locals.viewToDisplay%>" />
-                <label class="form-label" for="email">New email address</label>
-                <p class="form-hint">We will send you an email to confirm your new address </p>
+                <label class="govuk-label govuk-label--s" for="email">New email address</label>
+                <p class="govuk-label__hint">We will send you an email to confirm your new address </p>
                 <input class="form-control" name="email" type="text" id="email">
 
             </div>
-            <div class="form-submit">
-                <button type="submit" class="button">Continue</button>
-            </div>
+
+            <button type="submit" class="govuk-button">Continue</button>
+
         </form>
     </div>
 </div>
