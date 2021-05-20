@@ -22,7 +22,9 @@
             <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
             <input type="hidden" name="email" id="email" value="<%=locals.email%>"/>
             <input type="hidden" name="resend" id="resend" value="true" />
-            <button type="submit" class="govuk-button">Resend code</button>
+            <div class="govuk-button-group">
+                <button type="submit" class="govuk-button">Resend code</button>
+            </div>
         </form>
     </div>
 </div>

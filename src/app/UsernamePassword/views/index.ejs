@@ -53,54 +53,62 @@
                 <input type="hidden" name="_csrf" value="<%=csrfToken%>" />
                 <input type="hidden" name="clientId" value="<%=locals.clientId%>"/>
                 <input type="hidden" name="redirectUri" value="<%=locals.redirectUri%>"/>
+                
+                <fieldset class="govuk-fieldset">
+                    <legend class="govuk-visually-hidden">Sign-in</legend>
 
-                <div class="govuk-form-group <%= (locals.validationMessages.username !== undefined) ? 'govuk-form-group--error' : '' %>">
-                    <% if(locals.supportsUsernameLogin) {%>
-                        <label class="govuk-label govuk-label--s" for="username">Email address or Secure Access username</label>
-                    <%} else {%>
-                        <label class="govuk-label govuk-label--s" for="username">Email address</label>
-                    <%}%>
-                    <% if (locals.validationMessages.username !== undefined) { %>
-                        <span id="validation-email" class="govuk-error-message">
-                            <span class="govuk-visually-hidden">Error:</span> <%=locals.validationMessages.username %>
+                    <div class="govuk-form-group <%= (locals.validationMessages.username !== undefined) ? 'govuk-form-group--error' : '' %>">
+                        <% if(locals.supportsUsernameLogin) {%>
+                            <label class="govuk-label govuk-label--s" for="username">Email address or Secure Access username</label>
+                        <%} else {%>
+                            <label class="govuk-label govuk-label--s" for="username">Email address</label>
+                        <%}%>
+                        <% if (locals.validationMessages.username !== undefined) { %>
+                            <span id="validation-email" class="govuk-error-message">
+                                <span class="govuk-visually-hidden">Error:</span> <%=locals.validationMessages.username %>
+                            </span>
+                        <% } %>
+                        <input class="govuk-input govuk-!-width-three-quarters" id="username" name="username" type="text"
+                                <% if (locals.validationMessages.username !== undefined) { %> aria-invalid="true" aria-describedby="validation-email" <% } %> value="<%=locals.username%>">
+                    </div>
+
+                    <div class="govuk-form-group <%= (locals.validationMessages.password !== undefined) ? 'govuk-form-group--error' : '' %>">
+                        <label class="govuk-label govuk-label--s" for="password">Password</label>
+                        <% if(locals.validationMessages.password !== undefined) { %>
+                            <span id="validation-password" class="govuk-error-message">
+                                <span class="govuk-visually-hidden">Error:</span> <%=locals.validationMessages.password %>
+                            </span>
+                        <% } %>
+                        <input class="password-input govuk-input govuk-!-width-three-quarters govuk-!-margin-right-1" id="password" name="password" type="password"
+                                <% if (locals.validationMessages.password !== undefined) { %> aria-invalid="true" aria-describedby="validation-password" <% } %>>
+                        
+                        <p class="govuk-body">
+                            <a class="govuk-link govuk-!-font-weight-bold"
+                                href="/<%=locals.uuid%>/resetpassword/request?clientid=<%=locals.clientId%>&redirect_uri=<%=locals.redirectUri%>">
+                                Forgotten your password?
+                            </a>    
+                        </p>
+                    </div>
+
+                    <div class="govuk-inset-text">
+                        <p class="govuk-body">By signing in you accept our <a class="govuk-link govuk-!-font-weight-bold" href="/terms">terms and conditions</a>.</p>
+                    </div>
+
+                </fieldset>
+
+                <div class="govuk-button-group">
+                    <button type="submit" class="govuk-button">
+                        Sign in
+                        <span class="loader spinner-inline vh">
+                            <span class="ball b-1"></span>
+                            <span class="ball b-2"></span>
+                            <span class="ball b-3"></span>
                         </span>
+                    </button>
+                    <% if (locals.useSelfRegister) { %>
+                        <a class="govuk-button govuk-button--secondary" href="<%= locals.urls.profile %>/register" role="button">Create account</a>
                     <% } %>
-                    <input class="govuk-input govuk-!-width-three-quarters" id="username" name="username" type="text"
-                            <% if (locals.validationMessages.username !== undefined) { %> aria-invalid="true" aria-describedby="validation-email" <% } %> value="<%=locals.username%>">
                 </div>
-                <div class="govuk-form-group <%= (locals.validationMessages.password !== undefined) ? 'govuk-form-group--error' : '' %>">
-                    <label class="govuk-label govuk-label--s" for="password">Password</label>
-                    <% if(locals.validationMessages.password !== undefined) { %>
-                        <span id="validation-password" class="govuk-error-message">
-                            <span class="govuk-visually-hidden">Error:</span> <%=locals.validationMessages.password %>
-                        </span>
-                    <% } %>
-                    <input class="password-input govuk-input govuk-!-width-three-quarters govuk-!-margin-right-1" id="password" name="password" type="password"
-                            <% if (locals.validationMessages.password !== undefined) { %> aria-invalid="true" aria-describedby="validation-password" <% } %>>
-                    
-                    <p class="govuk-body">
-                        <a class="govuk-link govuk-!-font-weight-bold"
-                            href="/<%=locals.uuid%>/resetpassword/request?clientid=<%=locals.clientId%>&redirect_uri=<%=locals.redirectUri%>">
-                            Forgotten your password?
-                        </a>    
-                </p>
-                </div>
-
-                <div class="govuk-inset-text">
-                    <p class="govuk-body">By signing in you accept our <a class="govuk-link govuk-!-font-weight-bold" href="/terms">terms and conditions</a>.</p>
-                </div>
-
-                <button type="submit" class="govuk-button govuk-!-margin-right-3">
-                    Sign in
-                    <span class="loader spinner-inline vh">
-                        <span class="ball b-1"></span>
-                        <span class="ball b-2"></span>
-                        <span class="ball b-3"></span>
-                    </span>
-                </button>
-                <% if (locals.useSelfRegister) { %>
-                    <span><a class="govuk-button govuk-button--secondary" href="<%= locals.urls.profile %>/register" role="button">Create account</a></span>
-                <% } %>
 
             </form>
         </div>
