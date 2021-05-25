@@ -77,3 +77,6 @@ certs/
 
 # formatter
 .prettierrc
+
+# npmrc
+.npmrc
