@@ -56,6 +56,7 @@ const action = async (req, res) => {
       res.redirect(`/${req.params.uuid}/resetpassword/${user.sub}/confirm?clientid=${req.body.clientId}&redirect_uri=${req.body.redirectUri}`);
       logger.audit({
         type: 'password-reset',
+        subType: 'request-email',
         userId: user.sub,
         application: config.loggerSettings.applicationName,
         env: config.hostingEnvironment.env,
