@@ -16,6 +16,7 @@ const action = async (req, res) => {
       confirmPassword: '',
       validationFailed: true,
       validationMessages: validationResult.messages,
+      redirectUri: req.query.redirect_uri,
     });
     return;
   }

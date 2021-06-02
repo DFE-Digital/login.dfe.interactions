@@ -49,12 +49,11 @@ describe('When posting the confirm password reset view', () => {
       req.body = {
         uid: userId,
         code: '123456',
+        redirectUri: 'test_redirect',
       };
       req.query = {
         clientid: 'client1',
       };
-
-
     });
     it('then a user code is validated for that user id', async () => {
       await postConfirmPasswordReset(req, res);
@@ -67,7 +66,7 @@ describe('When posting the confirm password reset view', () => {
     it('then it should redirect to newpassword view', async () => {
       await postConfirmPasswordReset(req, res);
 
-      expect(res.redirect.mock.calls[0][0]).toBe('/123-abc/resetpassword/newpassword');
+      expect(res.redirect.mock.calls[0][0]).toBe('/123-abc/resetpassword/newpassword?redirect_uri=test_redirect');
     });
   });
   describe('and the code is missing', () => {

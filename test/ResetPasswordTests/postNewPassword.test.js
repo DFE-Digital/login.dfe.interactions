@@ -34,6 +34,9 @@ describe('when posting new password', () => {
       clientId: 'UnitTests',
       uid: 'user1',
     },
+    query: {
+      redirect_uri: 'test_redirect',
+    },
     csrfToken: () => 'token',
   };
 
