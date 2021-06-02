@@ -8,6 +8,7 @@ const action = (req, res) => {
     confirmPassword: '',
     validationFailed: false,
     validationMessages: {},
+    redirectUri: req.query.redirect_uri,
   });
 };
 
