@@ -78,8 +78,8 @@ const action = async (req, res) => {
     }
     res.redirect(`/${req.params.uuid}/resetpassword/${uuid()}/confirm?clientid=${req.body.clientId}&redirect_uri=${req.body.redirectUri}`);
   } catch (e) {
-    logger.info(`Password reset requested for ${email} and failed correlationId: ${req.id}`);
-    logger.info(e);
+    logger.error(`Password reset requested for ${email} and failed correlationId: ${req.id}`);
+    logger.error(e);
   }
 };
 
