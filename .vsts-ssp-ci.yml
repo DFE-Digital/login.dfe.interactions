@@ -5,6 +5,7 @@ resources:
       type: github
       endpoint: DfE-Digital
       name: DFE-Digital/operations-devops-pipeline-templates
+      ref: feature/DSI-3601-ArmTemplateOverride
     - repository: config
       type: github
       endpoint: DfE-Digital
@@ -32,3 +33,4 @@ stages:
     resourceGroupSuffix: int-failover
     armTemplateName: template-failover.json
     hostNameComponent: int
+    armParameterOverrideString: ' -appServiceName "$(applicationBaseName)"  -appServicePlanName "$(applicationBaseName)-asp"  -environmentId "${{parameters.environmentId}}" -appServiceConfigPath "$(appServiceConfigPath)"  -appServicePlanRG "$(applicationResourceGroupName)"  -minTlsVersion "$(platformGlobalMinTlsVersion)"  -certificateName "${{parameters.certificateName}}" -appServicePlanSku "$(appServiceSku)" -numberOfWorkers "$(numberOfWorkers)" -keyVaultName "$(globalKeyVaultName)"  -keyVaultResourceGroup "$(globalResourceGroupName)" -auditServiceBusConnectionString "$(auditServiceBusConnectionString)"  -auditServiceBusTopicName "$(auditServiceBusTopicName)"  -auditServiceBusSubscriptionName "$(auditServiceBusSubscriptionName)"'
