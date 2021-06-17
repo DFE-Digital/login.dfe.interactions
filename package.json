@@ -1,6 +1,6 @@
 {
   "name": "login.dfe.interactions",
-  "version": "1.0.9",
+  "version": "1.0.11",
   "description": "",
   "engines": {
     "node": "12.x.x"
@@ -23,7 +23,7 @@
   "homepage": "https://github.com/DFE-Digital/login.dfe.interactions#readme",
   "dependencies": {
     "agentkeepalive": "^3.4.1",
-    "applicationinsights": "^1.0.1",
+    "applicationinsights": "^2.0.0",
     "async-lock": "^1.1.0",
     "body-parser": "^1.18.2",
     "cookie-parser": "^1.4.3",
@@ -45,17 +45,17 @@
     "ignore-styles": "^5.0.1",
     "ioredis": "^3.2.2",
     "lodash": "^4.17.15",
-    "login.dfe.audit.transporter": "^1.1.7",
+    "login.dfe.audit.transporter": "^1.1.14",
     "login.dfe.config.schema.common": "git+https://github.com/DFE-Digital/login.dfe.config.schema.common.git#v1.9.2",
     "login.dfe.dao": "^1.0.51",
-    "login.dfe.express-error-handling": "git+https://github.com/DFE-Digital/login.dfe.express-error-handling.git#v1.6",
+    "login.dfe.express-error-handling": "git+https://github.com/DFE-Digital/login.dfe.express-error-handling.git#v2.0.0",
     "login.dfe.healthcheck": "git+https://github.com/DFE-Digital/login.dfe.healthcheck.git#v2.1.0",
     "login.dfe.jwt-strategies": "github:DFE-Digital/login.dfe.jwt-strategies#v3.0",
     "login.dfe.notifications.client": "github:DFE-Digital/login.dfe.notifications.client#v3.3",
     "login.dfe.request-promise-retry": "git+https://github.com/DFE-Digital/login.dfe.request-promise-retry.git#v2.1",
     "login.dfe.sanitization": "git+https://github.com/DFE-Digital/login.dfe.sanitization.git#v2.0.0",
     "login.dfe.validation": "github:DFE-Digital/login.dfe.validation#v1.0.0",
-    "login.dfe.winston-appinsights": "git+https://github.com/DFE-Digital/login.dfe.winston-appinsights.git#v3.0",
+    "login.dfe.winston-appinsights": "git+https://github.com/DFE-Digital/login.dfe.winston-appinsights.git#4.0",
     "markdown": "^0.5.0",
     "moment": "^2.20.1",
     "on-headers": "^1.0.1",

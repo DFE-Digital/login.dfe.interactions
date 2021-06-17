@@ -47,7 +47,7 @@ const action = async (req, res) => {
   if (userCode) {
     req.session.uid = req.body.uid;
     req.session.clientId = req.body.clientId;
-    res.redirect(`/${req.params.uuid}/resetpassword/newpassword`);
+    res.redirect(`/${req.params.uuid}/resetpassword/newpassword?redirect_uri=${req.body.redirectUri}`);
     return;
   }
 
