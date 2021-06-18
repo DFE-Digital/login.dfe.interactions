@@ -33,6 +33,7 @@ stages:
     resourceGroupSuffix: int-failover
     armTemplateName: template-failover.json
     hostNameComponent: int
-    virtualNetworkEnvironments:
+    enableVirtualNetworkIntegration:
       - dev
-      - test
+    enablePrivateEndpoint:
+      - dev
