@@ -35,3 +35,4 @@ stages:
     hostNameComponent: int
     virtualNetworkEnvironments:
       - dev
+      - test
