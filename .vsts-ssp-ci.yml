@@ -33,4 +33,5 @@ stages:
     resourceGroupSuffix: int-failover
     armTemplateName: template-failover.json
     hostNameComponent: int
-    armParameterOverrideString: ' -appServiceName "$(applicationBaseName)"  -appServicePlanName "$(applicationBaseName)-asp"  -environmentId "${{parameters.environmentId}}" -appServiceConfigPath "$(appServiceConfigPath)"  -appServicePlanRG "$(applicationResourceGroupName)"  -minTlsVersion "$(platformGlobalMinTlsVersion)"  -certificateName "${{parameters.certificateName}}" -appServicePlanSku "$(appServiceSku)" -numberOfWorkers "$(numberOfWorkers)" -keyVaultName "$(globalKeyVaultName)"  -keyVaultResourceGroup "$(globalResourceGroupName)" -auditServiceBusConnectionString "$(auditServiceBusConnectionString)"  -auditServiceBusTopicName "$(auditServiceBusTopicName)"  -auditServiceBusSubscriptionName "$(auditServiceBusSubscriptionName)"'
+    virtualNetworkEnvironments:
+      - dev

@@ -1,7 +1,11 @@
 {
-    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+        "templatesBaseUri": {
+            "type": "string",
+            "defaultValue": "https://raw.githubusercontent.com/DFE-Digital/login.dfe.infrastructure/master/"
+        },
         "appServiceName": {
             "type": "string",
             "metadata": {
@@ -95,9 +99,34 @@
             "metadata": {
                 "description": "Environment Identifier"
             }
+        },
+        "virtualNetworkResourceGroupName": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "Resource group of the virtual network"
+            }
+        },
+        "virtualNetworkName": {
+            "type": "string",
+            "defaultValue": "",
+            "metadata": {
+                "description": "Name of the virtual network"
+            }
+        },
+        "enablePrivateEndpointSupport": {
+            "type": "bool",
+            "defaultValue": false,
+            "metadata": {
+                "description": "Add app settings to support virtual network private endpoints"
+            }
         }
     },
     "variables": {
+        "subnetPrefix": "int-sn",
+        "enableVirtualNetworkIntegration": "[if(and(not(empty(parameters('virtualNetworkResourceGroupName'))), not(empty(parameters('virtualNetworkName')))), true(), false())]",
+        "serviceSubnetResourceId1": "[if(variables('enableVirtualNetworkIntegration'), resourceId(parameters('virtualNetworkResourceGroupName'),'Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), concat(variables('subnetPrefix'), '-1')), '')]",
+        "serviceSubnetResourceId2": "[if(variables('enableVirtualNetworkIntegration'), resourceId(parameters('virtualNetworkResourceGroupName'),'Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), concat(variables('subnetPrefix'), '-2')), '')]",
         "resourceNames": {
             "certName": "[concat(parameters('appServicePlanName'), '-shared-crt')]",
             "asp1": "[concat(parameters('appServicePlanName'), '-1')]",
@@ -114,7 +143,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/DFE-Digital/login.dfe.infrastructure/master/Shared/app-service-plan.json",
+                    "uri": "[concat(parameters('templatesBaseUri'),'Shared/app-service-plan.json')]",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
@@ -140,7 +169,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/DFE-Digital/login.dfe.infrastructure/master/Shared/app-service-plan.json",
+                    "uri": "[concat(parameters('templatesBaseUri'),'Shared/app-service-plan.json')]",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
@@ -166,7 +195,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/DFE-Digital/login.dfe.infrastructure/master/Shared/app-service-certificate.json",
+                    "uri": "[concat(parameters('templatesBaseUri'),'Shared/app-service-certificate.json')]",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
@@ -189,7 +218,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/DFE-Digital/login.dfe.infrastructure/master/Shared/app-service-azure-config.json",
+                    "uri": "[concat(parameters('templatesBaseUri'),'Shared/app-service-azure-config.json')]",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
@@ -227,6 +256,12 @@
                             "TOPIC_NAME": "[parameters('auditServiceBusTopicName')]",
                             "SUBSCRIPTION_NAME": "[parameters('auditServiceBusSubscriptionName')]"
                         }
+                    },
+                    "subnetResourceId": {
+                        "value": "[variables('serviceSubnetResourceId1')]"
+                    },
+                    "enablePrivateEndpointSupport": {
+                        "value": "[parameters('enablePrivateEndpointSupport')]"
                     }
                 }
             },
@@ -241,7 +276,7 @@
             "properties": {
                 "mode": "Incremental",
                 "templateLink": {
-                    "uri": "https://raw.githubusercontent.com/DFE-Digital/login.dfe.infrastructure/master/Shared/app-service-azure-config.json",
+                    "uri": "[concat(parameters('templatesBaseUri'),'Shared/app-service-azure-config.json')]",
                     "contentVersion": "1.0.0.0"
                 },
                 "parameters": {
@@ -280,8 +315,14 @@
                             "WEBSITE_HEALTHCHECK_MAXPINGFAILURES": "4"
                         }
                     },
-                     "healthCheckPath": {
+                    "healthCheckPath": {
                         "value": "/healthCheck"
+                    },
+                    "subnetResourceId": {
+                        "value": "[variables('serviceSubnetResourceId2')]"
+                    },
+                    "enablePrivateEndpointSupport": {
+                        "value": "[parameters('enablePrivateEndpointSupport')]"
                     }
                 }
             },
