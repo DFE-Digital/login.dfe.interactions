@@ -114,6 +114,13 @@
                 "description": "Name of the virtual network"
             }
         },
+        "subnetPrefix": {
+            "type": "string",
+            "defaultValue": "int-sn",
+            "metadata": {
+                "description": "Prefix of the subnet to integrate the app service with"
+            }
+        },
         "enablePrivateEndpoint": {
             "type": "bool",
             "defaultValue": false,
@@ -123,10 +130,9 @@
         }
     },
     "variables": {
-        "subnetPrefix": "int-sn",
         "enableVirtualNetworkIntegration": "[if(and(not(empty(parameters('virtualNetworkResourceGroupName'))), not(empty(parameters('virtualNetworkName')))), true(), false())]",
-        "serviceSubnetResourceId1": "[if(variables('enableVirtualNetworkIntegration'), resourceId(parameters('virtualNetworkResourceGroupName'),'Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), concat(variables('subnetPrefix'), '-1')), '')]",
-        "serviceSubnetResourceId2": "[if(variables('enableVirtualNetworkIntegration'), resourceId(parameters('virtualNetworkResourceGroupName'),'Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), concat(variables('subnetPrefix'), '-2')), '')]",
+        "serviceSubnetResourceId1": "[if(variables('enableVirtualNetworkIntegration'), resourceId(parameters('virtualNetworkResourceGroupName'),'Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), concat(parameters('subnetPrefix'), '-1')), '')]",
+        "serviceSubnetResourceId2": "[if(variables('enableVirtualNetworkIntegration'), resourceId(parameters('virtualNetworkResourceGroupName'),'Microsoft.Network/virtualNetworks/subnets', parameters('virtualNetworkName'), concat(parameters('subnetPrefix'), '-2')), '')]",
         "resourceNames": {
             "certName": "[concat(parameters('appServicePlanName'), '-shared-crt')]",
             "asp1": "[concat(parameters('appServicePlanName'), '-1')]",
