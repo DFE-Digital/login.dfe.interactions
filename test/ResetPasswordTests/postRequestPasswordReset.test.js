@@ -1,7 +1,6 @@
 const utils = require('./../utils');
 jest.mock('./../../src/infrastructure/UserCodes');
 jest.mock('./../../src/infrastructure/Users');
-jest.mock('./../../src/infrastructure/osa');
 jest.mock('./../../src/infrastructure/logger', () => {
   return {
     info: jest.fn(),
@@ -49,10 +48,6 @@ describe('when handling a password reset request for an activated user', () => {
     const users = require('./../../src/infrastructure/Users');
     users.find = usersFind;
     users.findInvitationByEmail = invitationsFind;
-
-    saUsersFind = jest.fn().mockReset().mockReturnValue(null);
-    const saUsers = require('./../../src/infrastructure/osa');
-    saUsers.getSaUser = saUsersFind;
 
     postRequestPasswordReset = require('./../../src/app/ResetPassword/postRequestPasswordReset');
   });

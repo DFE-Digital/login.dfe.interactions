@@ -154,7 +154,6 @@ const schema = new SimpleSchema({
   directories: schemas.apiClient,
   oidcService: oidcServiceSchema,
   devices: schemas.apiClient,
-  osaApi: schemas.apiClient,
   organisations: schemas.apiClient,
   access: schemas.apiClient,
   applications: schemas.apiClient,

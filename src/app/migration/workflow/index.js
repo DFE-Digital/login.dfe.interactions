@@ -6,7 +6,6 @@ const access = require('./../../../infrastructure/access');
 const userCodes = require('./../../../infrastructure/UserCodes');
 const logger = require('./../../../infrastructure/logger');
 const org = require('./../../../infrastructure/Organisations');
-const osa = require('./../../../infrastructure/osa');
 const config = require('./../../../infrastructure/Config')();
 
 const createOrUpdateUser = async (email, password, firstName, lastName, emailConfId, saUsername, correlationId) => {
@@ -79,8 +78,6 @@ const addUserToService = async (userId, organisation, saOrganisation, currentSer
 };
 const completeMigration = async (emailConfId, saUserName, correlationId) => {
   await userCodes.deleteCode(emailConfId, correlationId, 'ConfirmMigratedEmail');
-
-  await osa.requestSync(saUserName, correlationId);
 };
 
 const migrate = async (emailConfId, email, password, firstName, lastName, saOrganisation, serviceId, serviceRoles, saUserId, saUsername, correlationId) => {
