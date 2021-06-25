@@ -221,3 +221,4 @@ if (config.hostingEnvironment.env === 'dev') {
     logger.info(`Server listening on http://${config.hostingEnvironment.host}:${config.hostingEnvironment.port}/dev`);
   });
 }
+
