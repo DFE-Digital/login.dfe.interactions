@@ -5,7 +5,6 @@ resources:
       type: github
       endpoint: DfE-Digital
       name: DFE-Digital/operations-devops-pipeline-templates
-      ref: feature/DSI-3601-ArmTemplateOverride
     - repository: config
       type: github
       endpoint: DfE-Digital
