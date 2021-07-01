@@ -6,7 +6,7 @@
     "node": "12.x.x"
   },
   "scripts": {
-    "test": "./node_modules/.bin/jest --coverage",
+    "test": "settings=./config/login.dfe.interactions.dev.json jest --coverage",
     "test-watcher": "./node_modules/.bin/jest --watch --coverage",
     "dev": "node src/index.js",
     "link-config": "npm link login.dfe.config"
