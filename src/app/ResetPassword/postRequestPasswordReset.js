@@ -76,10 +76,13 @@ const action = async (req, res) => {
       res.redirect(`${config.hostingEnvironment.profileUrl}/register/${invitation.id}?clientid=${req.body.clientId}&redirect_uri=${req.body.redirectUri}`);
       return;
     }
+    logger.warn('Could not find an active user or incomplete invitaton. So redirecting to confirmation page');
     res.redirect(`/${req.params.uuid}/resetpassword/${uuid()}/confirm?clientid=${req.body.clientId}&redirect_uri=${req.body.redirectUri}`);
+
   } catch (e) {
     logger.error(`Password reset requested for ${email} and failed correlationId: ${req.id}`);
-    logger.error(e);
+    logger.error(`Password reset failed due to error. Error - ${e}`);
+    throw e
   }
 };
 
