@@ -34,7 +34,13 @@ stages:
     hostNameComponent: int
     customTemplateBaseUri:
       - dev
+      - test
+      - int
     enableVirtualNetworkIntegration:
       - dev
+      - test
+      - int
     enablePrivateEndpoint:
       - dev
+      - test
+      - int 
