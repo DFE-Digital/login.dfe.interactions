@@ -2,9 +2,6 @@ jest.mock('./../../src/infrastructure/logger', () => ({}));
 jest.mock('./../../src/infrastructure/Config', () => jest.fn().mockImplementation(() => ({
   hostingEnvironment: {
   },
-  osaApi: {
-    type: 'static',
-  },
 })));
 jest.mock('./../../src/infrastructure/oidc', () => ({
   getInteractionById: jest.fn(),
@@ -37,11 +34,9 @@ describe('When user submits username/password', () => {
   let res;
   let interactionCompleteProcess;
   let usersAuthenticate;
-  let osaAuthenticate;
   let findByLegacyUsername;
   let clientsGet;
   let loggerAudit;
-  let saUsersFind;
   let getInteractionById;
 
   let postHandler;
@@ -67,13 +62,6 @@ describe('When user submits username/password', () => {
     users.authenticate = usersAuthenticate;
     users.findByLegacyUsername = findByLegacyUsername;
     findByLegacyUsername.mockReset().mockReturnValue(null);
-
-    osaAuthenticate = jest.fn();
-    const osaAuth = require('./../../src/infrastructure/osa');
-    osaAuth.authenticate = osaAuthenticate;
-
-    saUsersFind = jest.fn().mockReturnValue(null);
-    osaAuth.getSaUser = saUsersFind;
 
     clientsGet = jest.fn().mockReturnValue({
       relyingParty: {
@@ -196,16 +184,6 @@ describe('When user submits username/password', () => {
       usersAuthenticate.mockReturnValue({
         id: 'user1',
       });
-      osaAuthenticate.mockReturnValue({
-        email: 'test@test.com',
-        firstName: 'Test',
-        lastName: 'Tester',
-        services: [
-          {
-            id: 'service1',
-          },
-        ],
-      });
     });
 
     it('then it should process interaction complete for uuid', async () => {
@@ -234,84 +212,6 @@ describe('When user submits username/password', () => {
 
       expect(interactionCompleteProcess.mock.calls[0][1]).not.toBeNull();
       expect(interactionCompleteProcess.mock.calls[0][1].status).toBe('success');
-    });
-
-    it('then it validates against the OSA api if client is configured and the username is not an email', async () => {
-      req.body.username = 'foo';
-      clientsGet.mockReset().mockReturnValue({
-        id: 'service1',
-        relyingParty: {
-          client_id: 'test',
-          params: {
-            supportsUsernameLogin: true,
-            serviceId: 'service1',
-          },
-        },
-      });
-
-      await postHandler(req, res);
-
-      expect(osaAuthenticate.mock.calls).toHaveLength(1);
-      expect(osaAuthenticate.mock.calls[0][0]).toBe('foo');
-      expect(osaAuthenticate.mock.calls[0][1]).toBe('IAmIronman!');
-    });
-
-    it('then it checks to see if the username is already migrated if successfully authenticated', async () => {
-      req.body.username = 'foo';
-      clientsGet.mockReset().mockReturnValue({
-        id: 'service1',
-        relyingParty: {
-          client_id: 'test',
-          params: {
-            supportsUsernameLogin: true,
-            serviceId: 'service1',
-          },
-        },
-      });
-
-      await postHandler(req, res);
-
-      expect(findByLegacyUsername.mock.calls).toHaveLength(1);
-      expect(findByLegacyUsername.mock.calls[0][0]).toBe('foo');
-    });
-
-    it('then if the username has been authenticated and user has migrated an audit record is created and the user is redirected', async () => {
-      findByLegacyUsername.mockReset().mockReturnValue({ sub: '1234' });
-      req.body.username = 'foo';
-      clientsGet.mockReset().mockReturnValue({
-        relyingParty: {
-          client_id: 'test',
-          params: {
-            supportsUsernameLogin: true,
-          },
-        }
-      });
-
-      await postHandler(req, res);
-
-      expect(loggerAudit.mock.calls).toHaveLength(1);
-      expect(res.redirect.mock.calls).toHaveLength(1);
-      expect(res.redirect.mock.calls[0][0]).toBe('/some-uuid/migration/already-migrated');
-
-    });
-
-    it('then it redirects to the migration page if the login is successful through osa API', async () => {
-      req.body.username = 'foo';
-      clientsGet.mockReset().mockReturnValue({
-        id: 'service1',
-        relyingParty: {
-          client_id: 'test',
-          params: {
-            supportsUsernameLogin: true,
-            serviceId: 'service1',
-          },
-        },
-      });
-
-      await postHandler(req, res);
-
-      expect(res.redirect.mock.calls).toHaveLength(1);
-      expect(res.redirect.mock.calls[0][0]).toBe('/some-uuid/migration');
     });
 
     it('then it should audit a successful login attempt', async () => {

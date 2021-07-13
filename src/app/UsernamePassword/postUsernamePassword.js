@@ -5,7 +5,6 @@ const Users = require('./../../infrastructure/Users');
 const logger = require('./../../infrastructure/logger');
 const config = require('./../../infrastructure/Config')();
 const { sendRedirect, sendResult } = require('./../../infrastructure/utils');
-const osaApi = require('./../../infrastructure/osa');
 const oidc = require('./../../infrastructure/oidc');
 
 const validateBody = (body, allowUserName) => {
@@ -42,14 +41,12 @@ const authenticateWithEmail = async (req) => {
     migrationComplete: false,
   };
 };
-const authenticateWithUsername = async (req) => {
-  const user = await osaApi.authenticate(req.body.username, req.body.password, req.id);
-  const migrationComplete = user ? await Users.findByLegacyUsername(req.body.username, req.id) : false;
 
+const authenticateWithUsername = async (req) => {
   return {
-    user,
+    user: null,
     legacyUser: true,
-    migrationComplete,
+    migrationComplete: false,
   };
 };
 
